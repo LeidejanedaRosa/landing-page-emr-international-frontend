@@ -5,6 +5,7 @@ import prettierConfig from 'eslint-config-prettier'
 import prettier from 'eslint-plugin-prettier'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import unusedImports from 'eslint-plugin-unused-imports'
 import globals from 'globals'
 
 export default [
@@ -37,6 +38,7 @@ export default [
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       prettier: prettier,
+      'unused-imports': unusedImports,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -48,9 +50,16 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        { argsIgnorePattern: '^_' },
+      '@typescript-eslint/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
       ],
       '@typescript-eslint/no-explicit-any': 'warn',
     },
