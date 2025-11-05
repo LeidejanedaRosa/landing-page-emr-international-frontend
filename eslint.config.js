@@ -1,37 +1,34 @@
-import js from '@eslint/js'
-import tseslint from '@typescript-eslint/eslint-plugin'
-import tsParser from '@typescript-eslint/parser'
-import prettierConfig from 'eslint-config-prettier'
-import prettier from 'eslint-plugin-prettier'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import unusedImports from 'eslint-plugin-unused-imports'
-import globals from 'globals'
+import js from '@eslint/js';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import prettierConfig from 'eslint-config-prettier';
+import prettier from 'eslint-plugin-prettier';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import unusedImports from 'eslint-plugin-unused-imports';
+import react from 'eslint-plugin-react';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import sonarjs from 'eslint-plugin-sonarjs';
+import unicorn from 'eslint-plugin-unicorn';
+import security from 'eslint-plugin-security';
+import globals from 'globals';
 
 export default [
   {
-    ignores: [
-      'dist/**',
-      'node_modules/**',
-      'vite.config.ts',
-      'vite.config.d.ts',
-    ],
+    ignores: ['dist/**', 'node_modules/**', 'vite.config.ts', 'vite.config.d.ts'],
   },
   {
     files: ['src/**/*.{ts,tsx}'],
     languageOptions: {
-      ecmaVersion: 2024,
-      sourceType: 'module',
       parser: tsParser,
       parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
         project: './tsconfig.json',
+        ecmaFeatures: { jsx: true },
       },
-      globals: {
-        ...globals.browser,
-      },
+      globals: globals.browser,
+    },
+    settings: {
+      react: { version: 'detect' },
     },
     plugins: {
       '@typescript-eslint': tseslint,
@@ -39,29 +36,65 @@ export default [
       'react-refresh': reactRefresh,
       prettier: prettier,
       'unused-imports': unusedImports,
+      react: react,
+      'jsx-a11y': jsxA11y,
+      sonarjs: sonarjs,
+      unicorn: unicorn,
+      security: security,
     },
     rules: {
+      // Base & Prettier
       ...js.configs.recommended.rules,
-      ...tseslint.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
       ...prettierConfig.rules,
       'prettier/prettier': 'error',
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      
+      // TypeScript
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': [
-        'warn',
-        {
-          vars: 'all',
-          varsIgnorePattern: '^_',
-          args: 'after-used',
-          argsIgnorePattern: '^_',
-        },
-      ],
-      '@typescript-eslint/no-explicit-any': 'warn',
+      'unused-imports/no-unused-vars': 'warn',
+      
+      // React
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react/jsx-no-useless-fragment': 'error',
+      'react/self-closing-comp': 'error',
+      
+      // Accessibility ♿
+      'jsx-a11y/alt-text': 'error',
+      'jsx-a11y/aria-props': 'error',
+      'jsx-a11y/html-has-lang': 'error',
+      'jsx-a11y/label-has-associated-control': 'error',
+      
+      // Code Quality 🔍 (SonarJS)
+      'sonarjs/cognitive-complexity': ['error', 15],
+      'sonarjs/no-duplicate-string': ['error', { threshold: 3 }],
+      'sonarjs/no-identical-expressions': 'error',
+      'sonarjs/prefer-immediate-return': 'error',
+      'sonarjs/no-redundant-boolean': 'error',
+      
+      // Clean Code 🦄 (Unicorn)
+      'unicorn/better-regex': 'error',
+      'unicorn/no-for-loop': 'error',
+      'unicorn/prefer-array-find': 'error',
+      'unicorn/throw-new-error': 'error',
+      'unicorn/prefer-includes': 'error',
+      'unicorn/prefer-modern-math-apis': 'error',
+      
+      // Security 🔒
+      'security/detect-object-injection': 'warn',
+      'security/detect-unsafe-regex': 'warn',
+      'security/detect-buffer-noassert': 'error',
+      
+      // SOLID Principles & Clean Architecture 🏗️
+      'max-lines': ['error', 300],
+      'max-lines-per-function': ['error', 50],
+      'max-params': ['error', 4],
+      'complexity': ['error', 10],
+      'max-depth': ['error', 4],
+      'max-nested-callbacks': ['error', 3],
+      'no-duplicate-imports': 'error',
+      'no-console': 'warn',
+      'prefer-const': 'error',
+      'no-var': 'error',
     },
   },
-]
+];
