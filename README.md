@@ -38,6 +38,10 @@ npm run dev
 - `npm run build` - Gera a build de produção
 - `npm run preview` - Visualiza a build de produção localmente
 - `npm run lint` - Executa o linter ESLint
+- `npm run lint:fix` - Correção automática ESLint
+- `npm run format` - Formatação Prettier
+- `npm run format:check` - Verificação Prettier
+- `npm run preview` - Preview da build
 
 ## 📁 Estrutura do Projeto
 
