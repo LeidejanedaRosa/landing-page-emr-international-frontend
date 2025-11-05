@@ -138,7 +138,7 @@ const Contact: React.FC = () => {
                   rows={4}
                   className='w-full px-4 py-3 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-white text-white placeholder-primary-100 resize-none'
                   placeholder='Como podemos ajudá-lo?'
-                ></textarea>
+                />
               </div>
 
               <button

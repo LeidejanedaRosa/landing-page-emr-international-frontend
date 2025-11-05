@@ -65,8 +65,8 @@ const About: React.FC = () => {
                 />
               </svg>
             </div>
-            <div className='absolute -top-4 -right-4 w-24 h-24 bg-secondary-500 rounded-full opacity-20'></div>
-            <div className='absolute -bottom-4 -left-4 w-16 h-16 bg-primary-600 rounded-full opacity-20'></div>
+            <div className='absolute -top-4 -right-4 w-24 h-24 bg-secondary-500 rounded-full opacity-20' />
+            <div className='absolute -bottom-4 -left-4 w-16 h-16 bg-primary-600 rounded-full opacity-20' />
           </div>
         </div>
       </div>
