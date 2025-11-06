@@ -1,0 +1,21 @@
+# robots.txt para EMR Internacional
+#
+# Permite o acesso a todos os robôs (User-agent: *)
+#
+User-agent: *
+Allow: /
+
+# Diretório para desabilitar (Exemplo: se você tivesse um painel de administração)
+# Disallow: /admin/
+# Disallow: /painel/
+
+# Arquivos/Diretórios que o Google deve ignorar (Otimização do Vite/React)
+Disallow: /vite.svg
+Disallow: /src/
+
+# URLs de teste (Se existirem, use para evitar indexação acidental)
+# Disallow: /testes/
+# Disallow: /demo/
+
+# Indica a localização do seu SITEMAP (Essencial!)
+Sitemap: https://www.emrinternacional.com/sitemap.xml
