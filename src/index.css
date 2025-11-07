@@ -2,25 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Configurações de acessibilidade e tipografia */
 @layer base {
-  /* Fonte Arial como padrão */
   * {
     font-family: Arial, sans-serif;
   }
 
   html {
-    /* Scroll suave para navegação */
     scroll-behavior: smooth;
   }
 
-  /* Melhor legibilidade e acessibilidade */
   body {
     @apply font-sans antialiased;
     @apply text-primary bg-secondary;
     @apply leading-relaxed;
 
-    /* Suporte para movimento reduzido */
     @media (prefers-reduced-motion: reduce) {
       * {
         animation-duration: 0.01ms !important;
@@ -31,29 +26,24 @@
     }
   }
 
-  /* Foco visível para acessibilidade */
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-primary;
   }
 
-  /* Remove outline padrão apenas se focus-visible for suportado */
   *:focus:not(:focus-visible) {
     outline: none;
   }
 
-  /* Links acessíveis */
   a {
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
     @apply rounded-sm;
   }
 
-  /* Botões acessíveis */
   button {
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
     @apply rounded-sm;
   }
 
-  /* Inputs acessíveis */
   input,
   select,
   textarea {
@@ -61,7 +51,6 @@
     @apply rounded-sm;
   }
 
-  /* Melhor contraste para texto selecionado */
   ::selection {
     @apply bg-primary text-secondary;
   }
@@ -72,7 +61,6 @@
 }
 
 @layer components {
-  /* Classe para elementos visíveis apenas para screen readers */
   .sr-only {
     position: absolute;
     width: 1px;
@@ -85,7 +73,6 @@
     border: 0;
   }
 
-  /* Reverter sr-only quando focado */
   .sr-only:focus,
   .focus\:not-sr-only:focus {
     position: static;
@@ -98,28 +85,24 @@
     white-space: normal;
   }
 
-  /* Botões primários */
   .btn-primary {
     @apply bg-cta hover:bg-cta-800 text-secondary font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl;
     @apply focus:outline-none focus:ring-2 focus:ring-cta-500 focus:ring-offset-2;
     @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
   }
 
-  /* Botões secundários */
   .btn-secondary {
     @apply bg-secondary hover:bg-gray-50 text-primary font-medium py-3 px-6 rounded-lg border-2 border-primary transition-colors duration-200;
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
     @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
   }
 
-  /* Botões ghost */
   .btn-ghost {
     @apply bg-transparent hover:bg-gray-100 text-primary font-medium py-3 px-6 rounded-lg transition-colors duration-200;
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
     @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
   }
 
-  /* Skip links */
   .skip-link {
     @apply sr-only focus:not-sr-only;
     @apply absolute top-0 left-0 z-[1600];
@@ -128,20 +111,41 @@
     @apply focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2;
   }
 
-  /* Cards responsivos */
   .card {
     @apply bg-secondary rounded-lg shadow-md border border-gray-200;
     @apply hover:shadow-lg transition-shadow duration-200;
   }
 
-  /* Container responsivo */
   .container-responsive {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-success {
+    @apply bg-success hover:bg-success-600 text-secondary font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl;
+    @apply focus:outline-none focus:ring-2 focus:ring-success focus:ring-offset-2;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
+  }
+
+  .btn-error {
+    @apply bg-error hover:bg-error-600 text-secondary font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl;
+    @apply focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-2;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
+  }
+
+  .btn-warning {
+    @apply bg-warning hover:bg-warning-600 text-primary font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl;
+    @apply focus:outline-none focus:ring-2 focus:ring-warning focus:ring-offset-2;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
+  }
+
+  .btn-info {
+    @apply bg-info hover:bg-info-600 text-secondary font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl;
+    @apply focus:outline-none focus:ring-2 focus:ring-info focus:ring-offset-2;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none;
   }
 }
 
 @layer utilities {
-  /* Utilitários de espaçamento responsivo */
   .spacing-section-sm {
     @apply py-8 sm:py-12;
   }
@@ -155,7 +159,6 @@
     @apply py-20 sm:py-24 lg:py-32;
   }
 
-  /* Utilitários para texto */
   .text-pretty {
     text-wrap: pretty;
   }
@@ -164,7 +167,6 @@
     text-wrap: balance;
   }
 
-  /* Animações com preferência por movimento reduzido */
   .animate-fade-in {
     animation: fadeIn 0.3s ease-in-out;
   }
@@ -186,7 +188,6 @@
   }
 }
 
-/* Keyframes para animações */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -216,20 +217,4 @@
     opacity: 1;
     transform: scale(1);
   }
-}
-
-.btn-success {
-  @apply bg-success hover:bg-success-600 text-secondary font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl;
-}
-
-.btn-error {
-  @apply bg-error hover:bg-error-600 text-secondary font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl;
-}
-
-.btn-warning {
-  @apply bg-warning hover:bg-warning-600 text-primary font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl;
-}
-
-.btn-info {
-  @apply bg-info hover:bg-info-600 text-secondary font-medium py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl;
 }
