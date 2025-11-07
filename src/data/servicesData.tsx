@@ -1,5 +1,15 @@
-export const servicesData = [
+import React from 'react'
+
+export interface ServiceData {
+  id: string
+  title: string
+  description: string
+  icon: React.ReactNode
+}
+
+export const servicesData: ServiceData[] = [
   {
+    id: 'consultoria-internacional',
     title: 'Consultoria Internacional',
     description:
       'Assessoria especializada para expansão de negócios no mercado internacional com estratégias personalizadas.',
@@ -20,6 +30,7 @@ export const servicesData = [
     ),
   },
   {
+    id: 'logistica-global',
     title: 'Logística Global',
     description:
       'Soluções completas de logística para importação e exportação com eficiência e segurança.',
@@ -40,6 +51,7 @@ export const servicesData = [
     ),
   },
   {
+    id: 'compliance-internacional',
     title: 'Compliance Internacional',
     description:
       'Garantia de conformidade com regulamentações internacionais e normas de qualidade.',

@@ -9,6 +9,8 @@ export const servicesData = [
         fill='none'
         stroke='currentColor'
         viewBox='0 0 24 24'
+        role='img'
+        aria-label='Ícone de globo representando consultoria internacional'
       >
         <path
           strokeLinecap='round'
@@ -29,6 +31,8 @@ export const servicesData = [
         fill='none'
         stroke='currentColor'
         viewBox='0 0 24 24'
+        role='img'
+        aria-label='Ícone de cubo representando logística global'
       >
         <path
           strokeLinecap='round'
@@ -49,6 +53,8 @@ export const servicesData = [
         fill='none'
         stroke='currentColor'
         viewBox='0 0 24 24'
+        role='img'
+        aria-label='Ícone de escudo com marca de verificação representando compliance internacional'
       >
         <path
           strokeLinecap='round'
