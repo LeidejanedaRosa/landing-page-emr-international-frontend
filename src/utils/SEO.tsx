@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+
+import { Helmet } from 'react-helmet-async'
 
 interface SEOProps {
   title?: string
@@ -14,76 +16,51 @@ interface SEOProps {
   canonical?: string
 }
 
-const updateMetaTag = (name: string, content: string, property = false) => {
-  const attribute = property ? 'property' : 'name'
-  let element = document.querySelector(`meta[${attribute}="${name}"]`)
-
-  if (element) {
-    element.setAttribute('content', content)
-  } else {
-    element = document.createElement('meta')
-    element.setAttribute(property ? 'property' : 'name', name)
-    element.setAttribute('content', content)
-    document.head.appendChild(element)
-  }
-}
-
-const updateCanonicalUrl = (canonical: string) => {
-  let canonicalElement = document.querySelector('link[rel="canonical"]')
-  if (canonicalElement) {
-    canonicalElement.setAttribute('href', canonical)
-  } else {
-    canonicalElement = document.createElement('link')
-    canonicalElement.setAttribute('rel', 'canonical')
-    canonicalElement.setAttribute('href', canonical)
-    document.head.appendChild(canonicalElement)
-  }
-}
+const DEFAULT_TITLE =
+  'EMR Internacional | APH Tático e Emergência em Áreas Remotas'
+const DEFAULT_DESCRIPTION =
+  'A EMR Internacional oferece cursos de Atendimento Pré-Hospitalar Tático (APH Tático) e Emergência em Áreas Remotas. Treinamentos onde o convencional não alcança.'
+const DEFAULT_KEYWORDS =
+  'APH Tático, Emergência, Áreas Remotas, Atendimento Pré-Hospitalar, Treinamento Tático, EMR Internacional'
+const DEFAULT_IMAGE = 'https://www.emrinternacional.com/social-image.jpg'
+const DEFAULT_URL = 'https://www.emrinternacional.com/'
 
 const SEO: React.FC<SEOProps> = ({
-  title = 'EMR Internacional | APH Tático e Emergência em Áreas Remotas',
-  description = 'A EMR Internacional oferece cursos de Atendimento Pré-Hospitalar Tático (APH Tático) e Emergência em Áreas Remotas. Treinamentos onde o convencional não alcança.',
-  keywords = 'APH Tático, Emergência, Áreas Remotas, Atendimento Pré-Hospitalar, Treinamento Tático, EMR Internacional',
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  keywords = DEFAULT_KEYWORDS,
   ogTitle,
   ogDescription,
-  ogImage = 'https://www.emrinternacional.com/social-image.jpg',
-  ogUrl = 'https://www.emrinternacional.com/',
+  ogImage = DEFAULT_IMAGE,
+  ogUrl = DEFAULT_URL,
   twitterTitle,
   twitterDescription,
   twitterImage,
-  canonical = 'https://www.emrinternacional.com/',
-}) => {
-  useEffect(() => {
-    document.title = title
+  canonical = DEFAULT_URL,
+  // eslint-disable-next-line complexity
+}) => (
+  <Helmet>
+    <title>{title}</title>
 
-    updateMetaTag('description', description)
-    updateMetaTag('keywords', keywords)
+    <meta name='description' content={description} />
+    <meta name='keywords' content={keywords} />
 
-    updateMetaTag('og:title', ogTitle || title, true)
-    updateMetaTag('og:description', ogDescription || description, true)
-    updateMetaTag('og:image', ogImage, true)
-    updateMetaTag('og:url', ogUrl, true)
+    <meta property='og:type' content='website' />
+    <meta property='og:title' content={ogTitle || title} />
+    <meta property='og:description' content={ogDescription || description} />
+    <meta property='og:image' content={ogImage} />
+    <meta property='og:url' content={ogUrl} />
 
-    updateMetaTag('twitter:title', twitterTitle || title)
-    updateMetaTag('twitter:description', twitterDescription || description)
-    updateMetaTag('twitter:image', twitterImage || ogImage)
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:title' content={twitterTitle || title} />
+    <meta
+      name='twitter:description'
+      content={twitterDescription || description}
+    />
+    <meta name='twitter:image' content={twitterImage || ogImage} />
 
-    updateCanonicalUrl(canonical)
-  }, [
-    title,
-    description,
-    keywords,
-    ogTitle,
-    ogDescription,
-    ogImage,
-    ogUrl,
-    twitterTitle,
-    twitterDescription,
-    twitterImage,
-    canonical,
-  ])
-
-  return null
-}
+    <link rel='canonical' href={canonical} />
+  </Helmet>
+)
 
 export default SEO
