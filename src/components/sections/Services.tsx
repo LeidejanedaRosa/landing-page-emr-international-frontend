@@ -16,9 +16,9 @@ const Services: React.FC = () => (
         </p>
       </div>
       <div className='grid md:grid-cols-3 gap-8'>
-        {servicesData.map((service, index) => (
+        {servicesData.map(service => (
           <ServiceCard
-            key={index}
+            key={service.id}
             title={service.title}
             description={service.description}
             icon={service.icon}
