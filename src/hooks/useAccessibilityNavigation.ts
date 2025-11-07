@@ -1,4 +1,3 @@
-// Hooks para navegação e skip links
 import { useCallback, useState } from 'react'
 
 import { KEYBOARD_KEYS } from '../types/accessibility'
@@ -7,9 +6,6 @@ import {
   isKeyPressed,
 } from '../utils/accessibility/helpers'
 
-/**
- * Navegar em lista
- */
 const navigateInList = <T extends HTMLElement>(
   currentIndex: number,
   items: T[],
@@ -39,9 +35,6 @@ const navigateInList = <T extends HTMLElement>(
   return newIndex
 }
 
-/**
- * Hook para navegação em listas
- */
 export const useListNavigation = <T extends HTMLElement>(items: T[]) => {
   const [currentIndex, setCurrentIndex] = useState(-1)
 
@@ -87,15 +80,13 @@ export const useListNavigation = <T extends HTMLElement>(items: T[]) => {
   }
 }
 
-/**
- * Hook para gerenciar skip links
- */
 export const useSkipLinks = () => {
   const skipToContent = useCallback(() => {
     const mainContent = document.querySelector(
       '#main-content, main, [role="main"]'
     ) as HTMLElement
     if (mainContent) {
+      mainContent.setAttribute('tabindex', '-1')
       mainContent.focus()
       mainContent.scrollIntoView({ behavior: 'smooth' })
     }
