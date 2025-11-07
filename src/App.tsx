@@ -1,10 +1,12 @@
-import About from './components/About'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-import Header from './components/Header'
-import Hero from './components/Hero'
-import SEO from './components/SEO'
-import Services from './components/Services'
+import Footer from './components/layout/Footer'
+import Header from './components/layout/Header'
+// Importando os componentes simples para demonstração
+
+import About from './components/sections/About'
+import Contact from './components/sections/Contact'
+import Hero from './components/sections/Hero'
+import Services from './components/sections/Services'
+import SEO from './utils/SEO'
 
 function App() {
   return (
