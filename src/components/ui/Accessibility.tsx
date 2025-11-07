@@ -1,4 +1,3 @@
-// Componentes de acessibilidade
 import React, { forwardRef } from 'react'
 
 import type {
@@ -6,9 +5,6 @@ import type {
   SkipLinkProps,
 } from '../../types/accessibility'
 
-/**
- * Componente para skip links (pular para conteúdo principal)
- */
 export const SkipLink = forwardRef<HTMLAnchorElement, SkipLinkProps>(
   ({ href, children, ...props }, ref) => (
     <a
@@ -24,9 +20,6 @@ export const SkipLink = forwardRef<HTMLAnchorElement, SkipLinkProps>(
 
 SkipLink.displayName = 'SkipLink'
 
-/**
- * Wrapper para área de conteúdo principal
- */
 interface MainContentProps extends AccessibilityProps {
   children: React.ReactNode
   className?: string
@@ -48,9 +41,6 @@ export const MainContent = forwardRef<HTMLElement, MainContentProps>(
 
 MainContent.displayName = 'MainContent'
 
-/**
- * Componente para texto visível apenas para screen readers
- */
 interface ScreenReaderOnlyProps {
   children: React.ReactNode
   asChild?: boolean
@@ -61,15 +51,15 @@ export const ScreenReaderOnly = ({
   asChild = false,
 }: ScreenReaderOnlyProps) => {
   if (asChild) {
-    return children
+    const child = children as React.ReactElement<{ className?: string }>
+    return React.cloneElement(child, {
+      className: `sr-only ${child.props.className || ''}`.trim(),
+    })
   }
 
   return <span className='sr-only'>{children}</span>
 }
 
-/**
- * Botão acessível com suporte completo a teclado
- */
 interface AccessibleButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> {
   children: React.ReactNode
@@ -163,9 +153,6 @@ export const AccessibleButton = forwardRef<
 
 AccessibleButton.displayName = 'AccessibleButton'
 
-/**
- * Spinner de carregamento acessível
- */
 const LoadingSpinner = () => (
   <svg
     className='animate-spin h-4 w-4'
@@ -190,14 +177,53 @@ const LoadingSpinner = () => (
   </svg>
 )
 
-/**
- * Link acessível com suporte a teclado
- */
+const getVariantClasses = (
+  variant: 'primary' | 'secondary' | 'ghost',
+  isCurrentPage: boolean
+) => {
+  const variantClasses = {
+    primary: isCurrentPage
+      ? 'text-primary-700 font-semibold'
+      : 'text-primary hover:text-primary-700',
+    secondary: isCurrentPage
+      ? 'text-gray-800 font-semibold'
+      : 'text-gray-600 hover:text-gray-800',
+    ghost: isCurrentPage
+      ? 'text-gray-600 font-semibold'
+      : 'text-gray-400 hover:text-gray-600',
+  }
+  return variantClasses[variant]
+}
+
+const filterSecurityProps = (props: Record<string, unknown>) => {
+  const propsToRemove = ['rel', 'target']
+  return Object.fromEntries(
+    Object.entries(props).filter(([key]) => !propsToRemove.includes(key))
+  )
+}
+
+const computeAriaLabel = (
+  external: boolean,
+  ariaLabel: string | undefined,
+  children: React.ReactNode
+) => {
+  return external ? ariaLabel || `${children} (abre em nova aba)` : ariaLabel
+}
+
 interface AccessibleLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode
   external?: boolean
   variant?: 'primary' | 'secondary' | 'ghost'
+  isCurrent?: boolean
+  ariaCurrent?:
+    | boolean
+    | 'page'
+    | 'step'
+    | 'location'
+    | 'date'
+    | 'time'
+    | 'true'
 }
 
 export const AccessibleLink = forwardRef<
@@ -213,31 +239,27 @@ export const AccessibleLink = forwardRef<
       className = '',
       href,
       onKeyDown,
+      isCurrent,
+      ariaCurrent,
       ...props
     },
     ref
   ) => {
+    const currentValue =
+      ariaCurrent !== undefined ? ariaCurrent : isCurrent ? 'page' : undefined
+
+    const isCurrentPage = Boolean(currentValue)
+
     const baseClasses = [
       'inline-flex items-center font-medium rounded',
       'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
       'focus:ring-primary hover:underline',
     ]
 
-    const variantClasses = {
-      primary: 'text-primary hover:text-primary-700',
-      secondary: 'text-gray-600 hover:text-gray-800',
-      ghost: 'text-gray-400 hover:text-gray-600',
-    }
+    const variantClass = getVariantClasses(variant, isCurrentPage)
 
-    const externalProps = external
-      ? {
-          target: '_blank',
-          rel: 'noopener noreferrer',
-          'aria-label': ariaLabel || `${children} (abre em nova aba)`,
-        }
-      : {
-          'aria-label': ariaLabel,
-        }
+    const safeProps = filterSecurityProps(props)
+    const computedAriaLabel = computeAriaLabel(external, ariaLabel, children)
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLAnchorElement>) => {
       if (onKeyDown) {
@@ -249,12 +271,15 @@ export const AccessibleLink = forwardRef<
       <a
         ref={ref}
         href={href}
-        className={[...baseClasses, variantClasses[variant], className].join(
-          ' '
-        )}
+        className={[...baseClasses, variantClass, className].join(' ')}
         onKeyDown={handleKeyDown}
-        {...externalProps}
-        {...props}
+        aria-current={currentValue || undefined}
+        {...safeProps}
+        {...(external && {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        })}
+        aria-label={computedAriaLabel}
       >
         {children}
         {external && (
@@ -269,9 +294,6 @@ export const AccessibleLink = forwardRef<
 
 AccessibleLink.displayName = 'AccessibleLink'
 
-/**
- * Ícone de link externo
- */
 const ExternalLinkIcon = () => (
   <svg
     className='h-4 w-4'
@@ -285,9 +307,6 @@ const ExternalLinkIcon = () => (
   </svg>
 )
 
-/**
- * Container com anúncios para screen readers
- */
 interface LiveRegionProps extends AccessibilityProps {
   children: React.ReactNode
   priority?: 'polite' | 'assertive'
