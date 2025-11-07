@@ -1,0 +1,315 @@
+// Componentes de acessibilidade
+import React, { forwardRef } from 'react'
+
+import type {
+  AccessibilityProps,
+  SkipLinkProps,
+} from '../../types/accessibility'
+
+/**
+ * Componente para skip links (pular para conteúdo principal)
+ */
+export const SkipLink = forwardRef<HTMLAnchorElement, SkipLinkProps>(
+  ({ href, children, ...props }, ref) => (
+    <a
+      ref={ref}
+      href={href}
+      className='sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-[1600] focus:bg-primary focus:text-secondary focus:px-4 focus:py-2 focus:text-base focus:font-medium focus:rounded-br focus:shadow-lg'
+      {...props}
+    >
+      {children}
+    </a>
+  )
+)
+
+SkipLink.displayName = 'SkipLink'
+
+/**
+ * Wrapper para área de conteúdo principal
+ */
+interface MainContentProps extends AccessibilityProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export const MainContent = forwardRef<HTMLElement, MainContentProps>(
+  ({ children, className = '', id = 'main-content', ...props }, ref) => (
+    <main
+      ref={ref}
+      id={id}
+      className={`focus:outline-none ${className}`}
+      tabIndex={-1}
+      {...props}
+    >
+      {children}
+    </main>
+  )
+)
+
+MainContent.displayName = 'MainContent'
+
+/**
+ * Componente para texto visível apenas para screen readers
+ */
+interface ScreenReaderOnlyProps {
+  children: React.ReactNode
+  asChild?: boolean
+}
+
+export const ScreenReaderOnly = ({
+  children,
+  asChild = false,
+}: ScreenReaderOnlyProps) => {
+  if (asChild) {
+    return children
+  }
+
+  return <span className='sr-only'>{children}</span>
+}
+
+/**
+ * Botão acessível com suporte completo a teclado
+ */
+interface AccessibleButtonProps
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> {
+  children: React.ReactNode
+  variant?: 'primary' | 'secondary' | 'ghost'
+  size?: 'sm' | 'md' | 'lg'
+  loading?: boolean
+  loadingText?: string
+  disabled?: boolean
+}
+
+export const AccessibleButton = forwardRef<
+  HTMLButtonElement,
+  AccessibleButtonProps
+>(
+  (
+    {
+      children,
+      variant = 'primary',
+      size = 'md',
+      loading = false,
+      loadingText = 'Carregando...',
+      disabled,
+      'aria-label': ariaLabel,
+      className = '',
+      onClick,
+      onKeyDown,
+      ...props
+    },
+    ref
+  ) => {
+    const baseClasses = [
+      'inline-flex items-center justify-center font-medium rounded-lg',
+      'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
+      'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+    ]
+
+    const variantClasses = {
+      primary: 'bg-cta hover:bg-cta-800 text-secondary focus:ring-cta-500',
+      secondary:
+        'bg-secondary hover:bg-gray-50 text-primary border-2 border-primary focus:ring-primary',
+      ghost: 'bg-transparent hover:bg-gray-100 text-primary focus:ring-primary',
+    }
+
+    const sizeClasses = {
+      sm: 'px-3 py-2 text-sm',
+      md: 'px-4 py-3 text-base',
+      lg: 'px-6 py-4 text-lg',
+    }
+
+    const isDisabled = disabled || loading
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (!isDisabled && onClick) {
+        onClick(event)
+      }
+    }
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (onKeyDown) {
+        onKeyDown(event)
+      }
+    }
+
+    return (
+      <button
+        ref={ref}
+        type='button'
+        className={[
+          ...baseClasses,
+          variantClasses[variant],
+          sizeClasses[size],
+          className,
+        ].join(' ')}
+        disabled={isDisabled}
+        aria-label={loading ? loadingText : ariaLabel}
+        aria-disabled={isDisabled}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        {...props}
+      >
+        {loading && (
+          <span className='mr-2' aria-hidden='true'>
+            <LoadingSpinner />
+          </span>
+        )}
+        {loading ? loadingText : children}
+      </button>
+    )
+  }
+)
+
+AccessibleButton.displayName = 'AccessibleButton'
+
+/**
+ * Spinner de carregamento acessível
+ */
+const LoadingSpinner = () => (
+  <svg
+    className='animate-spin h-4 w-4'
+    xmlns='http://www.w3.org/2000/svg'
+    fill='none'
+    viewBox='0 0 24 24'
+    aria-hidden='true'
+  >
+    <circle
+      className='opacity-25'
+      cx='12'
+      cy='12'
+      r='10'
+      stroke='currentColor'
+      strokeWidth='4'
+    />
+    <path
+      className='opacity-75'
+      fill='currentColor'
+      d='m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+    />
+  </svg>
+)
+
+/**
+ * Link acessível com suporte a teclado
+ */
+interface AccessibleLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  children: React.ReactNode
+  external?: boolean
+  variant?: 'primary' | 'secondary' | 'ghost'
+}
+
+export const AccessibleLink = forwardRef<
+  HTMLAnchorElement,
+  AccessibleLinkProps
+>(
+  (
+    {
+      children,
+      external = false,
+      variant = 'primary',
+      'aria-label': ariaLabel,
+      className = '',
+      href,
+      onKeyDown,
+      ...props
+    },
+    ref
+  ) => {
+    const baseClasses = [
+      'inline-flex items-center font-medium rounded',
+      'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
+      'focus:ring-primary hover:underline',
+    ]
+
+    const variantClasses = {
+      primary: 'text-primary hover:text-primary-700',
+      secondary: 'text-gray-600 hover:text-gray-800',
+      ghost: 'text-gray-400 hover:text-gray-600',
+    }
+
+    const externalProps = external
+      ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          'aria-label': ariaLabel || `${children} (abre em nova aba)`,
+        }
+      : {
+          'aria-label': ariaLabel,
+        }
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLAnchorElement>) => {
+      if (onKeyDown) {
+        onKeyDown(event)
+      }
+    }
+
+    return (
+      <a
+        ref={ref}
+        href={href}
+        className={[...baseClasses, variantClasses[variant], className].join(
+          ' '
+        )}
+        onKeyDown={handleKeyDown}
+        {...externalProps}
+        {...props}
+      >
+        {children}
+        {external && (
+          <span className='ml-1' aria-hidden='true'>
+            <ExternalLinkIcon />
+          </span>
+        )}
+      </a>
+    )
+  }
+)
+
+AccessibleLink.displayName = 'AccessibleLink'
+
+/**
+ * Ícone de link externo
+ */
+const ExternalLinkIcon = () => (
+  <svg
+    className='h-4 w-4'
+    xmlns='http://www.w3.org/2000/svg'
+    viewBox='0 0 20 20'
+    fill='currentColor'
+    aria-hidden='true'
+  >
+    <path d='M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z' />
+    <path d='M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z' />
+  </svg>
+)
+
+/**
+ * Container com anúncios para screen readers
+ */
+interface LiveRegionProps extends AccessibilityProps {
+  children: React.ReactNode
+  priority?: 'polite' | 'assertive'
+  atomic?: boolean
+  className?: string
+}
+
+export const LiveRegion = forwardRef<HTMLDivElement, LiveRegionProps>(
+  (
+    { children, priority = 'polite', atomic = true, className = '', ...props },
+    ref
+  ) => (
+    <div
+      ref={ref}
+      aria-live={priority}
+      aria-atomic={atomic}
+      className={`sr-only ${className}`}
+      {...props}
+    >
+      {children}
+    </div>
+  )
+)
+
+LiveRegion.displayName = 'LiveRegion'
