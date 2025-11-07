@@ -1,10 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import { AccessibleLink } from '../ui/Accessibility'
 
 interface HeaderProps {
   className?: string
+  currentSection?: 'home' | 'sobre' | 'servicos' | 'contato'
 }
 
-const Header: React.FC<HeaderProps> = ({ className = '' }) => {
+const MobileMenu: React.FC<{
+  onLinkClick: () => void
+  currentSection?: string
+}> = ({ onLinkClick, currentSection }) => (
+  <div id='mobile-menu' className='md:hidden'>
+    <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200'>
+      <AccessibleLink
+        href='#sobre'
+        className='block px-3 py-2 rounded-md transition-colors duration-200'
+        variant='ghost'
+        ariaCurrent={currentSection === 'sobre' ? 'page' : undefined}
+        onClick={onLinkClick}
+      >
+        Sobre
+      </AccessibleLink>
+      <AccessibleLink
+        href='#servicos'
+        className='block px-3 py-2 rounded-md transition-colors duration-200'
+        variant='ghost'
+        ariaCurrent={currentSection === 'servicos' ? 'page' : undefined}
+        onClick={onLinkClick}
+      >
+        Serviços
+      </AccessibleLink>
+      <AccessibleLink
+        href='#contato'
+        className='block px-3 py-2 rounded-md transition-colors duration-200'
+        variant='ghost'
+        ariaCurrent={currentSection === 'contato' ? 'page' : undefined}
+        onClick={onLinkClick}
+      >
+        Contato
+      </AccessibleLink>
+    </div>
+  </div>
+)
+
+const Header: React.FC<HeaderProps> = ({ className = '', currentSection }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(prev => !prev)
+  }
   return (
     <header className={`bg-white shadow-sm ${className}`}>
       <nav className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -15,28 +60,37 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
             </h1>
           </div>
           <div className='hidden md:flex space-x-8'>
-            <a
+            <AccessibleLink
               href='#sobre'
-              className='text-gray-700 hover:text-primary-600 transition-colors duration-200'
+              variant='ghost'
+              ariaCurrent={currentSection === 'sobre' ? 'page' : undefined}
             >
               Sobre
-            </a>
-            <a
+            </AccessibleLink>
+            <AccessibleLink
               href='#servicos'
-              className='text-gray-700 hover:text-primary-600 transition-colors duration-200'
+              variant='ghost'
+              ariaCurrent={currentSection === 'servicos' ? 'page' : undefined}
             >
               Serviços
-            </a>
-            <a
+            </AccessibleLink>
+            <AccessibleLink
               href='#contato'
-              className='text-gray-700 hover:text-primary-600 transition-colors duration-200'
+              variant='ghost'
+              ariaCurrent={currentSection === 'contato' ? 'page' : undefined}
             >
               Contato
-            </a>
+            </AccessibleLink>
           </div>
           {/* Mobile menu button */}
           <div className='md:hidden'>
-            <button className='text-gray-700 hover:text-primary-600'>
+            <button
+              className='text-gray-700 hover:text-primary-600'
+              onClick={toggleMobileMenu}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls='mobile-menu'
+              aria-label='Toggle mobile menu'
+            >
               <svg
                 className='w-6 h-6'
                 fill='none'
@@ -53,6 +107,13 @@ const Header: React.FC<HeaderProps> = ({ className = '' }) => {
             </button>
           </div>
         </div>
+
+        {isMobileMenuOpen && (
+          <MobileMenu
+            onLinkClick={toggleMobileMenu}
+            currentSection={currentSection}
+          />
+        )}
       </nav>
     </header>
   )

@@ -1,4 +1,3 @@
-// Layout responsivo base com Mobile-First
 import type { ReactNode } from 'react'
 import * as React from 'react'
 
@@ -9,9 +8,6 @@ interface LayoutProps {
   className?: string
 }
 
-/**
- * Container principal com largura máxima e padding responsivo
- */
 export const Container = ({ children, className = '' }: LayoutProps) => (
   <div
     className={`
@@ -24,9 +20,6 @@ export const Container = ({ children, className = '' }: LayoutProps) => (
   </div>
 )
 
-/**
- * Grid responsivo para layout principal
- */
 interface GridProps extends LayoutProps {
   cols?: {
     xs?: number
@@ -38,6 +31,81 @@ interface GridProps extends LayoutProps {
   gap?: string
 }
 
+const GRID_COLS_MAP: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-2',
+  3: 'grid-cols-3',
+  4: 'grid-cols-4',
+  5: 'grid-cols-5',
+  6: 'grid-cols-6',
+  7: 'grid-cols-7',
+  8: 'grid-cols-8',
+  9: 'grid-cols-9',
+  10: 'grid-cols-10',
+  11: 'grid-cols-11',
+  12: 'grid-cols-12',
+}
+
+const SM_GRID_COLS_MAP: Record<number, string> = {
+  1: 'sm:grid-cols-1',
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-3',
+  4: 'sm:grid-cols-4',
+  5: 'sm:grid-cols-5',
+  6: 'sm:grid-cols-6',
+  7: 'sm:grid-cols-7',
+  8: 'sm:grid-cols-8',
+  9: 'sm:grid-cols-9',
+  10: 'sm:grid-cols-10',
+  11: 'sm:grid-cols-11',
+  12: 'sm:grid-cols-12',
+}
+
+const MD_GRID_COLS_MAP: Record<number, string> = {
+  1: 'md:grid-cols-1',
+  2: 'md:grid-cols-2',
+  3: 'md:grid-cols-3',
+  4: 'md:grid-cols-4',
+  5: 'md:grid-cols-5',
+  6: 'md:grid-cols-6',
+  7: 'md:grid-cols-7',
+  8: 'md:grid-cols-8',
+  9: 'md:grid-cols-9',
+  10: 'md:grid-cols-10',
+  11: 'md:grid-cols-11',
+  12: 'md:grid-cols-12',
+}
+
+const LG_GRID_COLS_MAP: Record<number, string> = {
+  1: 'lg:grid-cols-1',
+  2: 'lg:grid-cols-2',
+  3: 'lg:grid-cols-3',
+  4: 'lg:grid-cols-4',
+  5: 'lg:grid-cols-5',
+  6: 'lg:grid-cols-6',
+  7: 'lg:grid-cols-7',
+  8: 'lg:grid-cols-8',
+  9: 'lg:grid-cols-9',
+  10: 'lg:grid-cols-10',
+  11: 'lg:grid-cols-11',
+  12: 'lg:grid-cols-12',
+}
+
+const XL_GRID_COLS_MAP: Record<number, string> = {
+  1: 'xl:grid-cols-1',
+  2: 'xl:grid-cols-2',
+  3: 'xl:grid-cols-3',
+  4: 'xl:grid-cols-4',
+  5: 'xl:grid-cols-5',
+  6: 'xl:grid-cols-6',
+  7: 'xl:grid-cols-7',
+  8: 'xl:grid-cols-8',
+  9: 'xl:grid-cols-9',
+  10: 'xl:grid-cols-10',
+  11: 'xl:grid-cols-11',
+  12: 'xl:grid-cols-12',
+}
+
 export const ResponsiveGrid = ({
   children,
   cols = { xs: 1, sm: 2, md: 3, lg: 4, xl: 6 },
@@ -45,11 +113,11 @@ export const ResponsiveGrid = ({
   className = '',
 }: GridProps) => {
   const gridCols = [
-    cols.xs && `grid-cols-${cols.xs}`,
-    cols.sm && `sm:grid-cols-${cols.sm}`,
-    cols.md && `md:grid-cols-${cols.md}`,
-    cols.lg && `lg:grid-cols-${cols.lg}`,
-    cols.xl && `xl:grid-cols-${cols.xl}`,
+    cols.xs && GRID_COLS_MAP[cols.xs],
+    cols.sm && SM_GRID_COLS_MAP[cols.sm],
+    cols.md && MD_GRID_COLS_MAP[cols.md],
+    cols.lg && LG_GRID_COLS_MAP[cols.lg],
+    cols.xl && XL_GRID_COLS_MAP[cols.xl],
   ]
     .filter(Boolean)
     .join(' ')
@@ -59,9 +127,6 @@ export const ResponsiveGrid = ({
   )
 }
 
-/**
- * Seção com espaçamento vertical consistente
- */
 interface SectionProps extends LayoutProps {
   id?: string
   as?: keyof React.JSX.IntrinsicElements
@@ -104,9 +169,6 @@ export const Section = ({
   )
 }
 
-/**
- * Header responsivo com navegação
- */
 interface HeaderProps {
   logo?: ReactNode
   navigation?: ReactNode
@@ -150,9 +212,6 @@ export const ResponsiveHeader = ({
   </header>
 )
 
-/**
- * Footer responsivo
- */
 interface FooterProps {
   children: ReactNode
   className?: string
@@ -170,9 +229,6 @@ export const ResponsiveFooter = ({ children, className = '' }: FooterProps) => (
   </footer>
 )
 
-/**
- * Layout principal da aplicação
- */
 interface AppLayoutProps {
   children: ReactNode
   header?: ReactNode
@@ -189,9 +245,6 @@ export const AppLayout = ({ children, header, footer }: AppLayoutProps) => (
   </div>
 )
 
-/**
- * Card responsivo para conteúdo
- */
 interface CardProps extends LayoutProps {
   padding?: 'sm' | 'md' | 'lg'
   shadow?: boolean
@@ -226,9 +279,6 @@ export const Card = ({
   )
 }
 
-/**
- * Stack layout para organizar elementos verticalmente
- */
 interface StackProps extends LayoutProps {
   spacing?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   align?: 'start' | 'center' | 'end' | 'stretch'
@@ -269,9 +319,6 @@ export const Stack = ({
   )
 }
 
-/**
- * Flex layout responsivo
- */
 interface FlexProps extends LayoutProps {
   direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse'
   wrap?: boolean

@@ -23,7 +23,8 @@ const Footer: React.FC = () => (
 
       <div className='border-t border-gray-800 pt-8 text-center'>
         <p className='text-gray-300'>
-          &copy; 2024 EMR Internacional. Todos os direitos reservados.
+          &copy; {new Date().getFullYear()} EMR Internacional. Todos os direitos
+          reservados.
         </p>
       </div>
     </div>

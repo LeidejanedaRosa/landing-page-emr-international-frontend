@@ -1,9 +1,67 @@
-// Layout responsivo simples e funcional
 import React from 'react'
 
 import { MainContent, SkipLink } from '../ui/SimpleAccessibility'
 
-// Container responsivo básico
+const GRID_COLS_MAP: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-2',
+  3: 'grid-cols-3',
+  4: 'grid-cols-4',
+  5: 'grid-cols-5',
+  6: 'grid-cols-6',
+  7: 'grid-cols-7',
+  8: 'grid-cols-8',
+  9: 'grid-cols-9',
+  10: 'grid-cols-10',
+  11: 'grid-cols-11',
+  12: 'grid-cols-12',
+}
+
+const SM_GRID_COLS_MAP: Record<number, string> = {
+  1: 'sm:grid-cols-1',
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-3',
+  4: 'sm:grid-cols-4',
+  5: 'sm:grid-cols-5',
+  6: 'sm:grid-cols-6',
+  7: 'sm:grid-cols-7',
+  8: 'sm:grid-cols-8',
+  9: 'sm:grid-cols-9',
+  10: 'sm:grid-cols-10',
+  11: 'sm:grid-cols-11',
+  12: 'sm:grid-cols-12',
+}
+
+const MD_GRID_COLS_MAP: Record<number, string> = {
+  1: 'md:grid-cols-1',
+  2: 'md:grid-cols-2',
+  3: 'md:grid-cols-3',
+  4: 'md:grid-cols-4',
+  5: 'md:grid-cols-5',
+  6: 'md:grid-cols-6',
+  7: 'md:grid-cols-7',
+  8: 'md:grid-cols-8',
+  9: 'md:grid-cols-9',
+  10: 'md:grid-cols-10',
+  11: 'md:grid-cols-11',
+  12: 'md:grid-cols-12',
+}
+
+const LG_GRID_COLS_MAP: Record<number, string> = {
+  1: 'lg:grid-cols-1',
+  2: 'lg:grid-cols-2',
+  3: 'lg:grid-cols-3',
+  4: 'lg:grid-cols-4',
+  5: 'lg:grid-cols-5',
+  6: 'lg:grid-cols-6',
+  7: 'lg:grid-cols-7',
+  8: 'lg:grid-cols-8',
+  9: 'lg:grid-cols-9',
+  10: 'lg:grid-cols-10',
+  11: 'lg:grid-cols-11',
+  12: 'lg:grid-cols-12',
+}
+
 export const Container: React.FC<{
   children: React.ReactNode
   className?: string
@@ -13,7 +71,6 @@ export const Container: React.FC<{
   </div>
 )
 
-// Grid responsivo básico
 export const ResponsiveGrid: React.FC<{
   children: React.ReactNode
   cols?: { xs?: number; sm?: number; md?: number; lg?: number }
@@ -26,10 +83,10 @@ export const ResponsiveGrid: React.FC<{
   className = '',
 }) => {
   const gridCols = [
-    cols.xs && `grid-cols-${cols.xs}`,
-    cols.sm && `sm:grid-cols-${cols.sm}`,
-    cols.md && `md:grid-cols-${cols.md}`,
-    cols.lg && `lg:grid-cols-${cols.lg}`,
+    cols.xs && GRID_COLS_MAP[cols.xs],
+    cols.sm && SM_GRID_COLS_MAP[cols.sm],
+    cols.md && MD_GRID_COLS_MAP[cols.md],
+    cols.lg && LG_GRID_COLS_MAP[cols.lg],
   ]
     .filter(Boolean)
     .join(' ')
@@ -39,7 +96,6 @@ export const ResponsiveGrid: React.FC<{
   )
 }
 
-// Seção com espaçamento
 export const Section: React.FC<{
   children: React.ReactNode
   id?: string
@@ -76,7 +132,6 @@ export const Section: React.FC<{
   )
 }
 
-// Header responsivo básico
 export const ResponsiveHeader: React.FC<{
   logo?: React.ReactNode
   navigation?: React.ReactNode
@@ -103,7 +158,6 @@ export const ResponsiveHeader: React.FC<{
   </header>
 )
 
-// Footer responsivo básico
 export const ResponsiveFooter: React.FC<{
   children: React.ReactNode
   className?: string
@@ -116,7 +170,6 @@ export const ResponsiveFooter: React.FC<{
   </footer>
 )
 
-// Layout completo da aplicação
 export const AppLayout: React.FC<{
   children: React.ReactNode
   header?: React.ReactNode
@@ -129,7 +182,6 @@ export const AppLayout: React.FC<{
   </div>
 )
 
-// Card simples
 export const Card: React.FC<{
   children: React.ReactNode
   padding?: 'sm' | 'md' | 'lg'
@@ -150,7 +202,6 @@ export const Card: React.FC<{
   )
 }
 
-// Stack layout (vertical)
 export const Stack: React.FC<{
   children: React.ReactNode
   spacing?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
