@@ -1,6 +1,5 @@
 import React from 'react'
 
-// Seção de links sociais do footer
 export const SocialLinks: React.FC = () => (
   <div className='flex space-x-4'>
     <a
@@ -48,7 +47,6 @@ export const SocialLinks: React.FC = () => (
   </div>
 )
 
-// Seção de links rápidos
 export const QuickLinks: React.FC = () => (
   <div>
     <h4 className='text-lg font-semibold mb-4'>Links Rápidos</h4>
@@ -89,7 +87,6 @@ export const QuickLinks: React.FC = () => (
   </div>
 )
 
-// Seção de serviços
 export const ServicesLinks: React.FC = () => (
   <div>
     <h4 className='text-lg font-semibold mb-4'>Serviços</h4>
