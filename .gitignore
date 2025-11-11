@@ -30,5 +30,7 @@ dist-ssr
 .env.test.local
 .env.production.local
 
+# TypeScript build cache
+tsconfig.tsbuildinfo
 
 SEO-GUIDE.md
