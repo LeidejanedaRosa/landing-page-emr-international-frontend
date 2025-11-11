@@ -2,6 +2,7 @@ import React from 'react'
 
 import heroImage from '../../assets/rescue-team-tactical-operation-in-extreme-conditio.jpg'
 import Header from '../layout/Header'
+import PromoBannerCarousel from './PromoBannerCarousel'
 
 const EmergencyCard: React.FC = () => (
   <div className=''>
@@ -44,6 +45,7 @@ const Hero: React.FC = () => {
     >
       <div className='relative z-10'>
         <Header className='bg-transparent shadow-none' />
+        <PromoBannerCarousel />
       </div>
 
       <div className='relative z-10 flex items-end pt-8 pb-20 px-4 sm:px-6 lg:px-8'>
