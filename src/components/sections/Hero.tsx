@@ -36,13 +36,19 @@ const Hero: React.FC = () => {
     <section
       id='hero'
       className='relative min-h-screen text-white overflow-hidden'
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), url(${heroImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
     >
+      <img
+        src={heroImage}
+        alt='Equipe de resgate tático da EMR Internacional em operação de emergência em condições extremas, demonstrando atendimento pré-hospitalar especializado'
+        className='absolute inset-0 w-full h-full object-cover'
+        loading='eager'
+        fetchPriority='high'
+        width={1920}
+        height={1080}
+      />
+
+      <div className='absolute inset-0 bg-gradient-to-b from-black/50 to-black/60' />
+
       <div className='relative z-10'>
         <Header className='bg-transparent shadow-none' />
         <PromoBannerCarousel />
