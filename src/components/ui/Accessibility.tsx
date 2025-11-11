@@ -189,8 +189,8 @@ const getVariantClasses = (
       ? 'text-gray-800 font-semibold'
       : 'text-gray-600 hover:text-gray-800',
     ghost: isCurrentPage
-      ? 'text-gray-600 font-semibold'
-      : 'text-gray-400 hover:text-gray-600',
+      ? 'text-white font-semibold'
+      : 'text-white hover:text-primary',
   }
   return variantClasses[variant]
 }
