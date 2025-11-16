@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { MainContent, SkipLink } from '../ui/SimpleAccessibility'
+import { MainContent, SkipLink } from '../ui/Accessibility'
 
 const GRID_COLS_MAP: Record<number, string> = {
   1: 'grid-cols-1',

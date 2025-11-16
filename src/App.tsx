@@ -1,22 +1,46 @@
-import Footer from './components/layout/Footer'
-import About from './components/sections/About'
-import Contact from './components/sections/Contact'
+import React, { Suspense } from 'react'
+
+import ErrorBoundary from './components/error/ErrorBoundary'
 import Hero from './components/sections/Hero'
-import Services from './components/sections/Services'
+import StructuredData from './components/seo/StructuredData'
+import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
 import SEO from './utils/SEO'
+
+// Lazy loading para componentes não críticos
+const About = React.lazy(() => import('./components/sections/About'))
+const Services = React.lazy(() => import('./components/sections/Services'))
+const Contact = React.lazy(() => import('./components/sections/Contact'))
+const Footer = React.lazy(() => import('./components/layout/Footer'))
 
 function App() {
   return (
-    <div className='min-h-screen bg-gray-50'>
-      <SEO />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <ErrorBoundary>
+      <div className='min-h-screen bg-gray-50'>
+        <SEO />
+        <StructuredData />
+        <main>
+          <Hero />
+          <Suspense fallback={<SectionSkeleton />}>
+            <About />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <Services />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <Contact />
+          </Suspense>
+        </main>
+        <Suspense
+          fallback={
+            <div className='py-8'>
+              <LoadingSpinner size='lg' />
+            </div>
+          }
+        >
+          <Footer />
+        </Suspense>
+      </div>
+    </ErrorBoundary>
   )
 }
 
