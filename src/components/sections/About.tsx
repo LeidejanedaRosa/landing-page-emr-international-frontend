@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import FundoAbout from '../../assets/fundo_about.png'
-import JuanImage from '../../assets/Juan.png'
+import Juan from '../../assets/Juan.png'
 
-const useIntersectionObserver = () => {
-  const [isVisible, setIsVisible] = useState(false)
+// const useIntersectionObserver = () => {
+//   const [isVisible, setIsVisible] = useState(false)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-        }
-      },
-      { threshold: 0.2 }
-    )
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       ([entry]) => {
+//         if (entry.isIntersecting) {
+//           setIsVisible(true)
+//         }
+//       },
+//       { threshold: 0.2 }
+//     )
 
-    const section = document.getElementById('sobre')
-    if (section) {
-      observer.observe(section)
-    }
+//     const section = document.getElementById('sobre')
+//     if (section) {
+//       observer.observe(section)
+//     }
 
-    return () => observer.disconnect()
-  }, [])
+//     return () => observer.disconnect()
+//   }, [])
 
-  return isVisible
-}
+//   return isVisible
+// }
 
 // const CheckIcon: React.FC = () => (
 //   <svg
@@ -42,15 +42,13 @@ const useIntersectionObserver = () => {
 
 const ShieldCheckIcon: React.FC = () => (
   <svg
-    // 1. Usando a mesma cor de destaque (vermelho)
     className='flex-shrink-0 w-6 h-6 text-red-600 mt-1 mr-3'
     fill='none'
     stroke='currentColor'
     viewBox='0 0 24 24'
     xmlns='http://www.w3.org/2000/svg'
-    strokeWidth={2} // Pode manter 2 ou 2.5
+    strokeWidth={2}
   >
-    {/* Este é o <path> para um ícone de "shield-check" (escudo com check) */}
     <path
       strokeLinecap='round'
       strokeLinejoin='round'
@@ -110,23 +108,19 @@ const ExpertiseList: React.FC = () => {
   )
 }
 
-const TextContent: React.FC<{ isVisible: boolean }> = ({ isVisible }) => {
+const TextContent: React.FC = () => {
   return (
-    <div
-      className={`lg:mt-0 transition-all duration-1000 delay-300 w-full ${
-        isVisible
-          ? 'translate-x-0 opacity-100'
-          : '-translate-x-8 lg:-translate-x-16 opacity-0'
-      }`}
-    >
+    <div className='lg:mt-0 transition-all duration-1000 delay-300 w-full'>
       <span className='text-sm sm:text-base font-semibold text-red-600 uppercase tracking-wider'>
         Quem está por trás da
       </span>
 
-      <h2 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight'>
+      <h2 className='text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight'>
         EMR INTERNACIONAL
       </h2>
-
+      <p className='text-3xl text-black border-l-4 border-red-500 pl-4 drop-shadow-lg mb-6'>
+        Juan Regenerati
+      </p>
       <p className='text-lg mb-8 text-gray-700'>
         {' '}
         Formado em Saúde e Segurança do Trabalho e Paramédico, é instrutor
@@ -141,50 +135,35 @@ const TextContent: React.FC<{ isVisible: boolean }> = ({ isVisible }) => {
   )
 }
 
-const JuanImageSection: React.FC<{ isVisible: boolean }> = ({ isVisible }) => (
-  <div className='absolute z-30 top-0 left-1/2 transform -translate-x-1/2 lg:top-1/2 lg:translate-y-[-50%] lg:left-1/2 lg:-translate-x-1/2 h-full w-full'>
-    <div
-      className={`relative transition-all duration-1000 delay-500 ${
-        isVisible
-          ? 'translate-y-0 opacity-100 scale-100'
-          : 'translate-y-8 opacity-0 scale-95'
-      }`}
-    >
-      <img
-        src={JuanImage}
-        alt='Juan - Fundador da EMR Internacional'
-        className='max-h-[60vh] w-auto lg:max-w-none lg:h-[100vh] lg:w-auto object-contain lg:object-cover drop-shadow-2xl object-center lg:object-left'
-      />
-    </div>
-  </div>
-)
-
 const About: React.FC = () => {
-  const isVisible = useIntersectionObserver()
-
   return (
     <section
       id='sobre'
-      className='min-h-screen bg-gradient-to-br from-gray-500 to-white relative flex flex-col lg:flex-row-reverse lg:items-center'
+      className='min-h-screen bg-gradient-to-br from-gray-400 to-white relative flex flex-col lg:flex-row-reverse lg:items-center'
     >
       <div
-        className={`w-full h-[60vh] lg:w-1/2 lg:h-full relative transition-transform duration-1000 ease-out ${
-          isVisible ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className='w-full h-[60vh] lg:h-[100vh] lg:w-1/2 relative transition-transform duration-1000 ease-out overflow-hidden flex items-center justify-center lg:overflow-visible'
         style={{
           backgroundImage: `url(${FundoAbout})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
-          zIndex: 1,
         }}
+      >
+        <img
+          src={Juan}
+          className='absolute h-full w-full object-cover md:object-top lg:hidden'
+          alt='Juan'
+        />
+      </div>
+      <img
+        src={Juan}
+        className='absolute h-[100%] w-auto object-cover lg:block hidden '
+        alt='Juan'
       />
-
-      <JuanImageSection isVisible={isVisible} />
-
-      <div className='relative w-full lg:w-1/2 lg:h-full flex flex-col'>
+      <div className='relative w-full lg:w-1/2 lg:h-full'>
         <div className='flex flex-col mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full h-full py-12 lg:py-0'>
-          <TextContent isVisible={isVisible} />
+          <TextContent />
         </div>
       </div>
     </section>
