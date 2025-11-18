@@ -2,7 +2,7 @@ import React from 'react'
 
 const EmergencyCard: React.FC = () => (
   <div className=''>
-    <div className='space-y-6 text-center'>
+    <div className='space-y-0 text-center'>
       <p className='text-2xl text-gray-100 font-semibold'>
         A EMR INTERNACIONAL
         <br />

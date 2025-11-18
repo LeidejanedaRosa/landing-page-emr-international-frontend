@@ -1,16 +1,46 @@
 import React from 'react'
 
-import heroImage from '../../../assets/rescue-team-tactical-operation-in-extreme-conditio.jpg'
+import heroImage from '../../../assets/hero_section.png'
 import Header from '../../layout/Header'
 import PromoBannerCarousel from '../PromoBannerCarousel'
-import EmergencyCard from './EmergencyCard'
+import DesktopLayout from './DesktopLayout'
+import './HeroCarousel.css'
+import { useCarouselAutoPlay, useHeroCarousel } from './hooks/useHeroCarousel'
 import { useScrollToSection } from './hooks/useScrollToSection'
+import MobileTabletCarousel from './MobileTabletCarousel'
 
 const Hero: React.FC = () => {
   const { scrollToSection } = useScrollToSection()
 
+  const {
+    currentSlide,
+    nextSlide,
+    previousSlide,
+    goToSlide,
+    isAutoPlaying,
+    pauseAutoPlay,
+    resumeAutoPlay,
+    autoPlayDelay,
+    totalSlides,
+  } = useHeroCarousel({
+    autoPlayDelay: 5000,
+    enableAutoPlay: true,
+  })
+
+  useCarouselAutoPlay(isAutoPlaying, nextSlide, autoPlayDelay, totalSlides)
+
   const handleViewCoursesClick = () => {
     scrollToSection('cursos')
+  }
+
+  const setIsAutoPlaying = (action: React.SetStateAction<boolean>): void => {
+    const playing =
+      typeof action === 'function' ? action(isAutoPlaying) : action
+    if (playing) {
+      resumeAutoPlay()
+    } else {
+      pauseAutoPlay()
+    }
   }
 
   return (
@@ -21,7 +51,7 @@ const Hero: React.FC = () => {
       <img
         src={heroImage}
         alt='Equipe de resgate tático da EMR Internacional em operação de emergência em condições extremas, demonstrando atendimento pré-hospitalar especializado'
-        className='absolute inset-0 w-full h-full object-cover'
+        className='absolute w-[100%] -top-[550px] h-[250%] object-cover object-center'
         loading='eager'
         fetchPriority='high'
         width={1920}
@@ -38,36 +68,16 @@ const Hero: React.FC = () => {
       <div className='relative z-10 flex items-end pt-8 pb-20 px-4 sm:px-6 lg:px-8'>
         <div className='hidden lg:block' />
 
-        <div className='grid grid-cols-1 lg:grid-cols-3 w-full'>
-          <div className='grid col-span-1 space-y-4 backdrop-blur-sm bg-black/20 p-8 rounded-2xl'>
-            <h1 className='text-4xl lg:text-5xl font-black leading-tight text-pretty drop-shadow-2xl'>
-              O IMPREVISÍVEL
-              <br />
-              <span className='text-red-500'>ACONTECE.</span>
-              <br />
-              VOCÊ ESTÁ
-              <br />
-              REALMENTE PREPARADO?
-            </h1>
-            <p className='text-xl text-gray-100 leading-relaxed text-pretty border-l-4 border-red-500 pl-4 drop-shadow-lg h-fit'>
-              Em cenários táticos ou remotos, a diferença entre a vida e a morte
-              está na primeira resposta.
-            </p>
-          </div>
-          <div className='hidden lg:block lg:col-span-1' />
-          <div className='grid col-span-1 flex-col gap-4 justify-items-center backdrop-blur-sm bg-black/20 p-8 rounded-2xl'>
-            <EmergencyCard />
+        <DesktopLayout onViewCoursesClick={handleViewCoursesClick} />
 
-            <button
-              onClick={handleViewCoursesClick}
-              className='bg-red-600 hover:bg-red-700 text-white w-fit font-bold py-4 px-10 rounded-full text-xl transition shadow-2xl hover:shadow-red-600/50 transform hover:scale-105'
-              type='button'
-              aria-label='Ver cursos de elite da EMR Internacional'
-            >
-              Ver Cursos de Elite
-            </button>
-          </div>
-        </div>
+        <MobileTabletCarousel
+          currentSlide={currentSlide}
+          onViewCoursesClick={handleViewCoursesClick}
+          setIsAutoPlaying={setIsAutoPlaying}
+          nextSlide={nextSlide}
+          previousSlide={previousSlide}
+          goToSlide={goToSlide}
+        />
       </div>
     </section>
   )
