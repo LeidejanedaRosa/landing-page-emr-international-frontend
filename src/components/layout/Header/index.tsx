@@ -1,6 +1,6 @@
 import React from 'react'
 
-import CompanyLogo from '../../../assets/logo_emr_internacional-sem_bg.png'
+import CompanyLogo from '../../../assets/logo_emr_internacional.svg'
 import DesktopMenu from './DesktopMenu'
 import { useMobileMenu } from './hooks/useMobileMenu'
 import MobileMenu from './MobileMenu'
@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ className = '', currentSection }) => {
             <img
               src={CompanyLogo}
               alt='EMR Internacional Logo'
-              className='h-20 drop-shadow-lg filter brightness-110'
+              className='absolute h-32 drop-shadow-lg filter brightness-110'
               style={{
                 filter:
                   'drop-shadow(0 0 12px rgb(255 255 255 / 1)) drop-shadow(0 0 16px rgb(255 255 255 / 0.4))',
