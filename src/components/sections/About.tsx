@@ -3,59 +3,19 @@ import React from 'react'
 import FundoAbout from '../../assets/fundo_about.png'
 import Juan from '../../assets/Juan.png'
 
-// const useIntersectionObserver = () => {
-//   const [isVisible, setIsVisible] = useState(false)
-
-//   useEffect(() => {
-//     const observer = new IntersectionObserver(
-//       ([entry]) => {
-//         if (entry.isIntersecting) {
-//           setIsVisible(true)
-//         }
-//       },
-//       { threshold: 0.2 }
-//     )
-
-//     const section = document.getElementById('sobre')
-//     if (section) {
-//       observer.observe(section)
-//     }
-
-//     return () => observer.disconnect()
-//   }, [])
-
-//   return isVisible
-// }
-
-// const CheckIcon: React.FC = () => (
-//   <svg
-//     className='flex-shrink-0 w-6 h-6 text-red-600 mt-1 mr-3'
-//     fill='none'
-//     stroke='currentColor'
-//     viewBox='0 0 24 24'
-//     xmlns='http://www.w3.org/2000/svg'
-//     strokeWidth={2.5}
-//   >
-//     <path strokeLinecap='round' strokeLinejoin='round' d='M5 13l4 4L19 7' />
-//   </svg>
-// )
-
-const ShieldCheckIcon: React.FC = () => (
+const CheckIcon: React.FC = () => (
   <svg
     className='flex-shrink-0 w-6 h-6 text-red-600 mt-1 mr-3'
     fill='none'
     stroke='currentColor'
     viewBox='0 0 24 24'
     xmlns='http://www.w3.org/2000/svg'
-    strokeWidth={2}
+    strokeWidth={2.5}
   >
-    <path
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      d='M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623 0-1.314-.213-2.622-.62-3.86a11.99 11.99 0 00-2.09-3.489A11.959 11.959 0 0115 2.714a11.959 11.959 0 01-3.402 3.223z'
-    />
+    <path strokeLinecap='round' strokeLinejoin='round' d='M5 13l4 4L19 7' />
   </svg>
 )
+
 const ExpertiseList: React.FC = () => {
   const items = [
     {
@@ -98,7 +58,7 @@ const ExpertiseList: React.FC = () => {
     >
       {items.map(({ id, text }) => (
         <li key={id} className='flex items-start group'>
-          <ShieldCheckIcon />
+          <CheckIcon />
           <span className='transition-colors group-hover:text-red-700 text-gray-900'>
             {text}
           </span>
@@ -142,7 +102,7 @@ const About: React.FC = () => {
       className='min-h-screen bg-gradient-to-br from-gray-400 to-white relative flex flex-col lg:flex-row-reverse lg:items-center'
     >
       <div
-        className='w-full h-[60vh] lg:h-[100vh] lg:w-1/2 relative transition-transform duration-1000 ease-out overflow-hidden flex items-center justify-center lg:overflow-visible'
+        className='w-full h-[60vh] lg:h-[100vh] lg:w-1/2 relative transition-transform duration-1000 ease-out overflow-hidden flex items-center justify-center'
         style={{
           backgroundImage: `url(${FundoAbout})`,
           backgroundSize: 'cover',
@@ -152,13 +112,13 @@ const About: React.FC = () => {
       >
         <img
           src={Juan}
-          className='absolute h-full w-full object-cover md:object-top lg:hidden'
+          className='absolute h-full w-full object-cover -translate-x-10 md:object-top lg:hidden'
           alt='Juan'
         />
       </div>
       <img
         src={Juan}
-        className='absolute h-[100%] w-auto object-cover lg:block hidden '
+        className='absolute h-[100%] w-auto object-cover lg:block hidden -translate-x-52'
         alt='Juan'
       />
       <div className='relative w-full lg:w-1/2 lg:h-full'>
