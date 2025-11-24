@@ -33,13 +33,13 @@ const CompanyLogoComponent: React.FC<LogoProps> = memo(({ logoId }) => {
         id={logoId}
         src={CompanyLogo}
         alt='EMR Internacional - Especialistas em Emergências Médicas e Resgate Tático'
-        className='h-32 drop-shadow-lg filter brightness-110'
         style={{
           filter:
-            'drop-shadow(0 0 12px rgb(255 255 255 / 1)) drop-shadow(0 0 16px rgb(255 255 255 / 0.4))',
+            'drop-shadow(0 0 12px rgb(255 255 255 / 1)) drop-shadow(0 0 16px rgb(255 255 255 / 0.4)) brightness(1.1)',
+          height: '128px',
         }}
         width={120}
-        height={80}
+        height={128}
       />
     </a>
   )
