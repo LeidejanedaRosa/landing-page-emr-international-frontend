@@ -1,3 +1,4 @@
+import type { IncomingMessage, ServerResponse } from 'http'
 import type { Plugin } from 'vite'
 
 export interface SecurityHeadersOptions {
@@ -12,9 +13,9 @@ export interface SecurityHeadersOptions {
   permissionsPolicy?: string | false
 }
 
-// Helper: Define cabeçalhos condicionalmente
+// Helper: Set header conditionally
 const setHeaderIf = (
-  res: any,
+  res: ServerResponse,
   condition: any,
   header: string,
   value: string
@@ -24,11 +25,11 @@ const setHeaderIf = (
   }
 }
 
-// Helper: Verifica se a conexão é HTTPS
-const isSecureConnection = (req: any): boolean => {
+// Helper: Check if connection is HTTPS
+const isSecureConnection = (req: IncomingMessage): boolean => {
   return (
     req.headers['x-forwarded-proto'] === 'https' ||
-    (req.socket && 'encrypted' in req.socket && req.socket.encrypted)
+    Boolean(req.socket && 'encrypted' in req.socket && req.socket.encrypted)
   )
 }
 
@@ -47,7 +48,7 @@ export function securityHeaders(options: SecurityHeadersOptions = {}): Plugin {
       server.middlewares.use((req, res, next) => {
         setHeaderIf(
           res,
-          csp !== undefined && csp !== false,
+          csp !== undefined,
           'Content-Security-Policy',
           csp || ''
         )
@@ -70,8 +71,6 @@ export function securityHeaders(options: SecurityHeadersOptions = {}): Plugin {
           'Permissions-Policy',
           permissionsPolicy || ''
         )
-
-        res.setHeader('X-XSS-Protection', '1; mode=block')
 
         if (isSecureConnection(req)) {
           res.setHeader(
