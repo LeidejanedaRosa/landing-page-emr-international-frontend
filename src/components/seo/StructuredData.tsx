@@ -1,5 +1,24 @@
 import React from 'react'
 
+/**
+ * ⚠️ CSP SECURITY NOTE:
+ * This component uses dangerouslySetInnerHTML for JSON-LD structured data.
+ * Since CSP script-src no longer allows 'unsafe-inline', this component renders
+ * via React's virtual DOM and is covered by the bundled scripts from 'self'.
+ *
+ * The inline JSON-LD in index.html uses a SHA-256 hash in vite.config.ts CSP.
+ * If you modify the index.html script, regenerate the hash:
+ *
+ *   cat index.html | grep -A 50 'application/ld+json' | \
+ *   sed -n '/<script/,/<\/script>/p' | \
+ *   openssl dgst -sha256 -binary | openssl base64
+ *
+ * Then update the hash in vite.config.ts CSP: script-src 'sha256-NEWHASH'
+ *
+ * @see https://content-security-policy.com/hash/
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+ */
+
 // Constantes para evitar duplicação
 const COMPANY_NAME = 'EMR Internacional'
 const COMPANY_URL = 'https://www.emrinternacional.com'
