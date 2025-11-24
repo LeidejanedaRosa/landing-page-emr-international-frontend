@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 
 import {
   useAccessibilityPreferences,
@@ -80,14 +80,20 @@ const useBannerPauseState = (
   const [pauseSource, setPauseSource] = useState<PauseSource>(
     prefersReducedMotion ? 'auto' : 'manual'
   )
+  const prevPrefersReducedMotion = useRef(prefersReducedMotion)
 
   useEffect(() => {
-    if (prefersReducedMotion && !isPaused) {
+    if (
+      prefersReducedMotion &&
+      !prevPrefersReducedMotion.current &&
+      !isPaused
+    ) {
       setIsPaused(true)
       setPauseSource('auto')
       announce('Animação do banner pausada automaticamente', 'polite')
     }
-  }, [prefersReducedMotion, announce])
+    prevPrefersReducedMotion.current = prefersReducedMotion
+  }, [prefersReducedMotion, isPaused, announce])
 
   const handleTogglePause = () => {
     const newPausedState = !isPaused
@@ -136,7 +142,7 @@ const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
       <section
         id={bannerId}
         className={`w-full max-h-10 bg-white border-t border-b border-gray-200 overflow-hidden relative ${className}`}
-        role='banner'
+        role='region'
         aria-labelledby={`${bannerId}-heading`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

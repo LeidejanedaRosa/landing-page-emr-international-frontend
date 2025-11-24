@@ -32,8 +32,7 @@ const ContactItem: React.FC<ContactItemProps> = memo(
       <div className='flex items-center space-x-4'>
         <div
           className='w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center'
-          role='img'
-          aria-label={`Ícone de ${label.toLowerCase()}`}
+          aria-hidden='true'
         >
           {icon}
         </div>
@@ -191,15 +190,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = memo(({ onLoad }) => {
 ContactInfo.displayName = 'ContactInfo'
 
 const SuccessMessage: React.FC = memo(() => {
-  const { announce } = useScreenReaderAnnouncement()
   const messageId = useUniqueId('success-message')
-
-  useEffect(() => {
-    announce(
-      'Mensagem enviada com sucesso! Responderemos em breve.',
-      'assertive'
-    )
-  }, [announce])
 
   return (
     <div
@@ -211,8 +202,7 @@ const SuccessMessage: React.FC = memo(() => {
       <div className='text-center'>
         <div
           className='w-16 h-16 bg-success-500 rounded-full flex items-center justify-center mx-auto mb-4'
-          role='img'
-          aria-label='Ícone de sucesso'
+          aria-hidden='true'
         >
           <svg
             className='w-8 h-8 text-white'
