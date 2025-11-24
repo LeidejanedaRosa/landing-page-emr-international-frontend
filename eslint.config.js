@@ -23,8 +23,71 @@ export default [
       'src/**/*.d.ts',
     ],
   },
+  // Plugin files use Node.js types from tsconfig.node.json
+  {
+    files: ['src/plugins/**/*.ts'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: './tsconfig.node.json',
+      },
+      globals: globals.node,
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+      prettier: prettier,
+      'unused-imports': unusedImports,
+      sonarjs: sonarjs,
+      unicorn: unicorn,
+      security: security,
+    },
+    rules: {
+      // Base & Prettier
+      ...js.configs.recommended.rules,
+      ...prettierConfig.rules,
+      'prettier/prettier': 'error',
+
+      // TypeScript
+      '@typescript-eslint/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': 'warn',
+
+      // Code Quality 🔍 (SonarJS)
+      'sonarjs/cognitive-complexity': ['error', 15],
+      'sonarjs/no-duplicate-string': ['error', { threshold: 3 }],
+      'sonarjs/no-identical-expressions': 'error',
+      'sonarjs/prefer-immediate-return': 'error',
+      'sonarjs/no-redundant-boolean': 'error',
+
+      // Clean Code 🦄 (Unicorn)
+      'unicorn/better-regex': 'error',
+      'unicorn/no-for-loop': 'error',
+      'unicorn/prefer-array-find': 'error',
+      'unicorn/throw-new-error': 'error',
+      'unicorn/prefer-includes': 'error',
+      'unicorn/prefer-modern-math-apis': 'error',
+
+      // Security 🔒
+      'security/detect-object-injection': 'off',
+      'security/detect-unsafe-regex': 'warn',
+      'security/detect-buffer-noassert': 'error',
+
+      // SOLID Principles & Clean Architecture 🏗️
+      'max-lines': ['error', 500],
+      'max-lines-per-function': ['error', 80],
+      'max-params': ['error', 5],
+      complexity: ['error', 10],
+      'max-depth': ['error', 4],
+      'max-nested-callbacks': ['error', 3],
+      'no-duplicate-imports': 'error',
+      'no-console': 'warn',
+      'prefer-const': 'error',
+      'no-var': 'error',
+    },
+  },
   {
     files: ['src/**/*.{ts,tsx}'],
+    ignores: ['src/plugins/**'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
