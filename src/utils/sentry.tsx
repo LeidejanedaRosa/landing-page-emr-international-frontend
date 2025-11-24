@@ -4,14 +4,22 @@ import * as Sentry from '@sentry/react'
 
 export const initSentry = () => {
   if (import.meta.env.PROD) {
+    const dsn = import.meta.env.VITE_SENTRY_DSN
+    if (!dsn) {
+      // eslint-disable-next-line no-console
+      console.error('Sentry DSN not configured')
+      return
+    }
     Sentry.init({
-      dsn: import.meta.env.VITE_SENTRY_DSN,
+      dsn,
       environment: import.meta.env.MODE,
       integrations: [
         Sentry.browserTracingIntegration(),
         Sentry.replayIntegration({
-          maskAllText: false,
-          blockAllMedia: false,
+          // Privacy: Masking habilitado para compliance LGPD/GDPR/HIPAA
+          // Previne captura de PII (dados pessoais, médicos, contato)
+          maskAllText: true,
+          blockAllMedia: true,
         }),
       ],
       tracesSampleRate: 1.0,
@@ -92,6 +100,7 @@ export const withSentryErrorBoundary = <P extends object>(
 
 export const useSentryCapture = () => {
   const captureError = (error: Error, context?: Record<string, any>) => {
+    if (!import.meta.env.PROD) return
     Sentry.withScope(scope => {
       if (context) {
         scope.setContext('errorContext', context)
@@ -104,6 +113,7 @@ export const useSentryCapture = () => {
     message: string,
     level: Sentry.SeverityLevel = 'info'
   ) => {
+    if (!import.meta.env.PROD) return
     Sentry.captureMessage(message, level)
   }
 

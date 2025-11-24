@@ -10,16 +10,28 @@ export interface WebVitalsConfig {
   debug?: boolean
 }
 
+interface MetricData {
+  name: string
+  value: number
+  rating: string
+  delta: number
+  id: string
+  timestamp: number
+  url: string
+  userAgent: string
+  connection: string
+}
+
 const THRESHOLDS = {
-  // Largest Contentful Paint - Bom: ≤2.5s
+  // Largest Contentful Paint - Good: ≤2.5s
   LCP: { good: 2500, poor: 4000 },
-  // First Input Delay - Bom: ≤100ms
+  // Interaction to Next Paint - Good: ≤200ms
   INP: { good: 200, poor: 500 },
-  // Cumulative Layout Shift - Bom: ≤0.1
+  // Cumulative Layout Shift - Good: ≤0.1
   CLS: { good: 0.1, poor: 0.25 },
-  // First Contentful Paint - Bom: ≤1.8s
+  // First Contentful Paint - Good: ≤1.8s
   FCP: { good: 1800, poor: 3000 },
-  // Time to First Byte - Bom: ≤800ms
+  // Time to First Byte - Good: ≤800ms
   TTFB: { good: 800, poor: 1800 },
 } as const
 
@@ -52,15 +64,21 @@ const logMetricDebug = (metric: Metric, rating: string) => {
 // Helper: Envia métrica para endpoint
 const sendMetricToEndpoint = async (
   endpoint: string,
-  data: any,
+  data: MetricData,
   debug: boolean
 ) => {
   try {
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 5000)
+
     await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
+      signal: controller.signal,
     })
+
+    clearTimeout(timeoutId)
   } catch (error) {
     if (debug) {
       // eslint-disable-next-line no-console
@@ -78,11 +96,13 @@ const sendToGoogleAnalytics = (metric: Metric) => {
     return
   }
 
+  // CLS is a unitless score (0-1 range), scale by 10000 for GA integer format
+  // Other metrics are already in milliseconds
   ;(window as any).gtag('event', metric.name, {
     event_category: 'Web Vitals',
     event_label: metric.id,
     value: Math.round(
-      metric.name === 'CLS' ? metric.value * 1000 : metric.value
+      metric.name === 'CLS' ? metric.value * 10000 : metric.value
     ),
     non_interaction: true,
   })
@@ -116,7 +136,14 @@ const sendToAnalytics = async (metric: Metric, config: WebVitalsConfig) => {
   sendToGoogleAnalytics(metric)
 }
 
+let initialized = false
+
 export const initWebVitals = (config: WebVitalsConfig = {}) => {
+  if (initialized) {
+    return
+  }
+  initialized = true
+
   const defaultConfig: WebVitalsConfig = {
     debug: import.meta.env.DEV,
     ...config,
