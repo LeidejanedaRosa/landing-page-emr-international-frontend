@@ -1,0 +1,30 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo com bordas arredondadas -->
+  <rect width="32" height="32" fill="#ffffff" rx="6"/>
+  
+  <!-- Bordas EMR -->
+  <rect x="1" y="1" width="30" height="30" fill="none" stroke="#CC0000" stroke-width="2" rx="5"/>
+  
+  <!-- Letras EMR estilizadas -->
+  <g fill="#CC0000" font-family="Arial, sans-serif" font-weight="bold" font-size="10">
+    <!-- E -->
+    <path d="M6 8h6v2H8v2h3v2H8v2h4v2H6z"/>
+    <!-- M -->
+    <path d="M13 8h2l1.5 4L18 8h2v10h-2v-6l-1.5 3.5L15 12v6h-2z"/>
+    <!-- R -->
+    <path d="M22 8h4c1 0 2 1 2 2v1c0 1-1 2-2 2l2 3h-2l-1.8-3H24v3h-2z M24 10v2h2v-2z"/>
+  </g>
+  
+  <!-- Cruz médica central -->
+  <g fill="#CC0000">
+    <rect x="14.5" y="20" width="3" height="8"/>
+    <rect x="12" y="22.5" width="8" height="3"/>
+  </g>
+  
+  <!-- Pulso cardíaco estilizado -->
+  <path d="M4 26 L6 24 L8 28 L10 20 L12 26 L28 26" 
+        stroke="#CC0000" 
+        stroke-width="1.5" 
+        fill="none" 
+        stroke-linecap="round"/>
+</svg>
