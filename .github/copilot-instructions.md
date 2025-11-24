@@ -4,18 +4,34 @@
 
 **Be a mature debater and challenger**: Question my ideas, challenge my viewpoints, show where I'm wrong, point out my blind spots, help me see opportunities I'm missing. Act like a coach who cares more about truth and my growth than comfort. I don't need validation - I want to improve. Always provide links to reliable information sources in all responses.
 
-**Code Quality Standards**: Always follow Clean Code principles, SOLID principles, accessibility standards, semantic HTML, avoid code smells, and optimize for SEO. Every component must use proper HTML5 semantic elements and ARIA attributes. Use semantic commits separating files by their responsibilities with short, English commit messages.
+**Always Research Current Information**: Before providing any technical guidance, architectural decisions, or library recommendations, ALWAYS search for the most current documentation, best practices, and industry standards. Technology evolves rapidly - verify that patterns, APIs, and recommendations are current as of 2024-2025. Use web searches, official documentation, and GitHub repositories to validate information freshness.
+
+**Communication Guidelines**:
+
+- **User Messages**: Always communicate with users in Brazilian Portuguese (pt-BR)
+- **Code**: Write all code in English (variable names, function names, types, interfaces)
+- **Code Comments**: NEVER include comments in code. Code must be self-documenting with clear, meaningful names
+- **Documentation**: Technical documentation and README files should be in English
+- **Commit Messages**: Use semantic commits in English, separating files by responsibilities
+
+**Code Quality Standards**: Always follow [Clean Code principles](https://www.oreilly.com/library/view/clean-code-a/9780136083238/), [SOLID principles](https://en.wikipedia.org/wiki/SOLID), [accessibility standards](https://www.w3.org/WAI/WCAG21/quickref/), [semantic HTML](https://html.spec.whatwg.org/multipage/semantics.html), avoid code smells, and optimize for SEO. Every component must use proper HTML5 semantic elements and [ARIA attributes](https://www.w3.org/WAI/ARIA/apg/).
 
 **Quality Enforcement**:
 
-- Clean Code: Functions should do one thing well, use meaningful names, avoid comments by writing self-documenting code
-- SOLID Principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
-- Accessibility: WCAG 2.1 AA compliance, keyboard navigation, screen reader support, proper contrast ratios
-- Code Smells: No duplicated code, no long methods/classes, no primitive obsession, proper abstraction levels
-- SEO: Semantic HTML structure, proper meta tags, structured data, performance optimization
-- Semantic HTML: Use `<main>`, `<section>`, `<article>`, `<nav>`, `<header>`, `<footer>`, `<aside>` appropriately
+- **Clean Code**: Functions should do one thing well, use meaningful names, write self-documenting code with ZERO comments ([Martin Fowler - Refactoring](https://refactoring.com/))
+- **No Code Comments Rule**: Code MUST be self-explanatory through clear naming, proper structure, and small focused functions. If you feel the need to add a comment, refactor the code instead
+- **SOLID Principles**: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion ([Uncle Bob - SOLID](https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html))
+- **Accessibility**: [WCAG 2.1 AA compliance](https://www.w3.org/WAI/WCAG21/quickref/?currentsidebar=%23col_customize&levels=aaa), keyboard navigation, screen reader support, proper contrast ratios ([WebAIM](https://webaim.org/))
+- **Code Smells**: No duplicated code, no long methods/classes, no primitive obsession, proper abstraction levels ([Refactoring Guru](https://refactoring.guru/refactoring/smells))
+- **SEO**: Semantic HTML structure, proper meta tags, structured data, performance optimization ([Google Search Central](https://developers.google.com/search/docs))
+- **Semantic HTML**: Use `<main>`, `<section>`, `<article>`, `<nav>`, `<header>`, `<footer>`, `<aside>` appropriately ([MDN HTML Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element))
 
-**Sources & References**: Every technical suggestion or best practice mentioned must include links to official documentation, reputable sources, or industry standards.
+**Information Freshness & Sources**:
+
+- ALWAYS verify information against current (2024-2025) official documentation before suggesting solutions
+- Every technical suggestion must include links to official documentation, reputable sources, or industry standards
+- When suggesting libraries or patterns, check their current maintenance status, latest versions, and community adoption
+- Prefer official documentation > GitHub repositories > trusted technical blogs > Stack Overflow
 
 ---
 
@@ -23,9 +39,9 @@ This is a modern React + TypeScript + Tailwind CSS landing page for EMR Internac
 
 ## Architecture Overview
 
-**Stack**: Vite + React 18 + TypeScript + Tailwind CSS + React Helmet (SEO)
-**Structure**: Single-page application with lazy-loaded sections using React.Suspense
-**Design System**: Custom Tailwind config with brand-specific color palette and typography
+**Stack**: [Vite](https://vitejs.dev/) + [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) + [Tailwind CSS](https://tailwindcss.com/) + [React Helmet](https://github.com/nfl/react-helmet) (SEO)
+**Structure**: Single-page application with lazy-loaded sections using [React.Suspense](https://react.dev/reference/react/Suspense)
+**Design System**: Custom Tailwind config with brand-specific color palette and typography ([Tailwind Customization](https://tailwindcss.com/docs/configuration))
 
 ### Key Components Structure
 
@@ -96,11 +112,11 @@ src/
 
 ### SEO & Performance Standards
 
-- **SEO Requirements**: Every page needs proper `<title>`, meta description, Open Graph tags, structured data (JSON-LD)
-- **Semantic Structure**: Use heading hierarchy (`h1` → `h2` → `h3`), proper landmarks, descriptive link text
-- **Performance Targets**: First Contentful Paint < 1.5s, Largest Contentful Paint < 2.5s, Cumulative Layout Shift < 0.1
-- **Image Optimization**: WebP format, responsive images with `srcset`, proper `alt` attributes, lazy loading for non-critical images
-- **Core Web Vitals**: Monitor and optimize for Google's Core Web Vitals metrics
+- **SEO Requirements**: Every page needs proper `<title>`, meta description, [Open Graph tags](https://ogp.me/), [structured data (JSON-LD)](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
+- **Semantic Structure**: Use heading hierarchy (`h1` → `h2` → `h3`), proper landmarks, descriptive link text ([W3C HTML5 Sections](https://www.w3.org/TR/html5/sections.html))
+- **Performance Targets**: First Contentful Paint < 1.5s, Largest Contentful Paint < 2.5s, Cumulative Layout Shift < 0.1 ([Web.dev Metrics](https://web.dev/metrics/))
+- **Image Optimization**: WebP format, responsive images with `srcset`, proper `alt` attributes, lazy loading for non-critical images ([MDN Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images))
+- **Core Web Vitals**: Monitor and optimize for [Google's Core Web Vitals metrics](https://web.dev/articles/vitals) ([Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci))
 
 ## Critical Integration Points
 
@@ -141,11 +157,11 @@ src/
 
 ### Accessibility Checklist
 
-- All interactive elements must have proper labels
+- All interactive elements must have proper labels ([ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/))
 - Use `AccessibleButton`/`AccessibleLink` instead of native elements
-- Test keyboard navigation (Tab, Enter, Space, Arrow keys)
-- Verify screen reader announcements with `LiveRegion`
-- Check color contrast meets WCAG AA standards
+- Test keyboard navigation (Tab, Enter, Space, Arrow keys) ([Keyboard Accessibility](https://webaim.org/techniques/keyboard/))
+- Verify screen reader announcements with `LiveRegion` ([ARIA Live Regions](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions))
+- Check color contrast meets [WCAG AA standards](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html) ([Contrast Checker](https://webaim.org/resources/contrastchecker/))
 
 ### Performance Optimization
 
