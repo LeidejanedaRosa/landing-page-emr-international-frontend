@@ -36,10 +36,37 @@ npm run dev
 
 4. Acesse `http://localhost:3000` no seu navegador.
 
-### Configuração do Ambiente Python (se necessário)
+### ⚠️ Configuração de Dados da Empresa (OBRIGATÓRIO para Produção)
+
+Antes de fazer deploy para produção, **atualize os dados legais da empresa** em `src/data/companyInfo.ts`:
+
+```typescript
+export const COMPANY_LEGAL_INFO = {
+  cnpj: '00.000.000/0000-00', // ⚠️ Atualizar com CNPJ real
+  creaRegistration: '000000', // ⚠️ Atualizar com registro CREA real
+  legalName: 'EMR Internacional',
+  address: {
+    /* ... */
+  }, // ⚠️ Adicionar endereço completo
+  contact: {
+    /* ... */
+  }, // ⚠️ Adicionar contatos oficiais
+}
+```
+
+**Validação automática**: Execute `npm run pre-deploy` antes de fazer deploy. O script detectará dados placeholder e bloqueará o deploy se necessário.
+
+**Referências**:
+
+- [Consulta CNPJ - Receita Federal](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/cnpj)
+- [CONFEA - Registro Profissional](https://www.confea.org.br/)
+
+### Configuração do Ambiente Python (Opcional)
+
+Requerido apenas se você usar scripts auxiliares de otimização de imagens ou análise de SVG.
 
 ```bash
-# Para scripts auxiliares de otimização de imagens
+# Criar ambiente virtual
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 # ou
@@ -67,6 +94,10 @@ venv\Scripts\activate  # Windows
 - `npm run test:watch` - Executa testes em modo watch
 - `npm run test:e2e` - Executa testes end-to-end com Playwright
 
+### Deploy e Produção
+
+- `npm run pre-deploy` - **⚠️ OBRIGATÓRIO antes do deploy**: Valida dados da empresa e configurações de produção
+
 ### Scripts Auxiliares
 
 - `./scripts/convert-images.sh` - Converte imagens para formatos otimizados (AVIF/WebP)
@@ -84,7 +115,9 @@ src/
 │   ├── seo/             # Componentes para SEO
 │   └── error/           # Error boundaries
 ├── hooks/               # Hooks customizados
-│   ├── form/            # Hooks específicos para formulários
+│   ├── accessibility/   # useCurrentSection, useFocus, useFocusTrap, useUniqueId
+│   ├── form/            # useContactForm
+│   ├── data/            # useAboutData
 │   └── __tests__/       # Testes dos hooks
 ├── utils/               # Funções utilitárias
 │   ├── accessibility/   # Helpers de acessibilidade
@@ -263,7 +296,7 @@ import { AccessibleLink } from './components/ui/Accessibility'
 ```typescript
 import { useCurrentSection } from './hooks/useCurrentSection'
 import { AccessibleLink } from './components/ui/Accessibility'
-import Header from './components/layout/Header'
+import { Header } from './components/layout/Header'
 
 function App() {
   const currentSection = useCurrentSection(['home', 'sobre', 'servicos'])
@@ -391,8 +424,9 @@ dist/
 
 ## 📚 Documentação Adicional
 
-- **`ACCESSIBILITY.md`** - Guia completo de acessibilidade e componentes
-- **`CODE-QUALITY-CHECKLIST.md`** - Lista de verificação antes de cada commit
+Para informações detalhadas sobre padrões de código, acessibilidade e arquitetura, consulte:
+
+- **`.github/copilot-instructions.md`** - Instruções completas do projeto e padrões de desenvolvimento
 
 ## 📄 Licença
 
