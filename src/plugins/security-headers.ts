@@ -48,9 +48,9 @@ export function securityHeaders(options: SecurityHeadersOptions = {}): Plugin {
       server.middlewares.use((req, res, next) => {
         setHeaderIf(
           res,
-          csp !== undefined,
+          csp !== undefined && csp !== '',
           'Content-Security-Policy',
-          csp || ''
+          csp!
         )
         setHeaderIf(res, frameOptions, 'X-Frame-Options', frameOptions || '')
         setHeaderIf(
