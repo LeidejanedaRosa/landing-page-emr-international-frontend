@@ -8,6 +8,15 @@ export const useAboutData = () => {
   const headingId = useMemo(() => generateId('about-heading'), [])
   const expertiseListId = useMemo(() => generateId('expertise-list'), [])
 
+  const expertiseWithIds = useMemo(
+    () =>
+      aboutData.expertise.map(item => ({
+        ...item,
+        uniqueId: generateId(`expertise-${item.id}`),
+      })),
+    []
+  )
+
   const enrichedData = useMemo(
     () => ({
       ...aboutData,
@@ -16,12 +25,9 @@ export const useAboutData = () => {
         heading: headingId,
         expertiseList: expertiseListId,
       },
-      expertise: aboutData.expertise.map(item => ({
-        ...item,
-        uniqueId: generateId(`expertise-${item.id}`),
-      })),
+      expertise: expertiseWithIds,
     }),
-    [sectionId, headingId, expertiseListId]
+    [sectionId, headingId, expertiseListId, expertiseWithIds]
   )
 
   return {
