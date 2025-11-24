@@ -29,10 +29,10 @@ const THRESHOLDS = {
   INP: { good: 200, poor: 500 },
   // Cumulative Layout Shift - Good: ≤0.1
   CLS: { good: 0.1, poor: 0.25 },
-  // First Contentful Paint - Good: ≤1.8s
-  FCP: { good: 1800, poor: 3000 },
-  // Time to First Byte - Good: ≤800ms
-  TTFB: { good: 800, poor: 1800 },
+  // First Contentful Paint - Good: ≤1.5s
+  FCP: { good: 1500, poor: 3000 },
+  // Time to First Byte - Good: ≤200ms
+  TTFB: { good: 200, poor: 1800 },
 } as const
 
 const classifyMetric = (
@@ -67,23 +67,23 @@ const sendMetricToEndpoint = async (
   data: MetricData,
   debug: boolean
 ) => {
-  try {
-    const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 5000)
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), 5000)
 
+  try {
     await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
       signal: controller.signal,
     })
-
-    clearTimeout(timeoutId)
   } catch (error) {
     if (debug) {
       // eslint-disable-next-line no-console
       console.error('Failed to send Web Vitals:', error)
     }
+  } finally {
+    clearTimeout(timeoutId)
   }
 }
 
@@ -123,7 +123,11 @@ const sendToAnalytics = async (metric: Metric, config: WebVitalsConfig) => {
     connection: (navigator as any).connection?.effectiveType || 'unknown',
   }
 
-  if (config.debug && import.meta.env.DEV) {
+  if (
+    config.debug &&
+    typeof import.meta !== 'undefined' &&
+    import.meta.env?.DEV
+  ) {
     logMetricDebug(metric, rating)
   }
 
@@ -136,16 +140,27 @@ const sendToAnalytics = async (metric: Metric, config: WebVitalsConfig) => {
   sendToGoogleAnalytics(metric)
 }
 
-let initialized = false
+let currentConfig: WebVitalsConfig | null = null
 
+/**
+ * Initializes Web Vitals monitoring.
+ * Only reinitializes if config changes (deep comparison).
+ * In production, call once at app startup for best performance.
+ *
+ * @see https://web.dev/articles/vitals
+ */
 export const initWebVitals = (config: WebVitalsConfig = {}) => {
-  if (initialized) {
+  const configKey = JSON.stringify(config)
+  const existingKey = currentConfig ? JSON.stringify(currentConfig) : null
+
+  if (configKey === existingKey) {
     return
   }
-  initialized = true
+
+  currentConfig = config
 
   const defaultConfig: WebVitalsConfig = {
-    debug: import.meta.env.DEV,
+    debug: typeof import.meta !== 'undefined' && import.meta.env?.DEV,
     ...config,
   }
 
@@ -162,7 +177,7 @@ export const initWebVitals = (config: WebVitalsConfig = {}) => {
 export const useWebVitals = (config: WebVitalsConfig = {}) => {
   React.useEffect(() => {
     initWebVitals(config)
-  }, [])
+  }, [config])
 }
 
 export const WebVitalsReporter: React.FC<{ config?: WebVitalsConfig }> = ({
