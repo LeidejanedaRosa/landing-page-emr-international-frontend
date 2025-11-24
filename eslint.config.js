@@ -20,6 +20,7 @@ export default [
       'node_modules/**',
       'vite.config.ts',
       'vite.config.d.ts',
+      'src/**/*.d.ts',
     ],
   },
   {
