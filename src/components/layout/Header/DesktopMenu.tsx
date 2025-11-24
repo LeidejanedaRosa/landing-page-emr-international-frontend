@@ -8,7 +8,6 @@ import { AccessibleLink } from '../../ui/Accessibility'
 
 interface DesktopMenuProps {
   currentSection?: string
-  navId: string
 }
 
 interface NavigationItem {
@@ -49,21 +48,17 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
   }
 
   return (
-    <nav
-      className='hidden md:flex'
-      aria-labelledby={`${menuId}-label`}
-      role='menubar'
-    >
+    <nav className='hidden md:flex' aria-labelledby={`${menuId}-label`}>
       <span id={`${menuId}-label`} className='sr-only'>
         Menu principal de navegação
       </span>
 
-      <ul className='flex space-x-8' role='none'>
+      <ul className='flex space-x-8'>
         {navigationItems.map(item => {
           const isCurrent = currentSection === item.id
 
           return (
-            <li key={item.id} role='none'>
+            <li key={item.id}>
               <AccessibleLink
                 href={item.href}
                 className={`text-white hover:text-primary-200 transition-colors duration-200 px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
@@ -71,7 +66,6 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
                 }`}
                 aria-current={isCurrent ? 'page' : undefined}
                 aria-label={item.ariaLabel}
-                role='menuitem'
                 onClick={() => handleNavigation(item)}
               >
                 {item.label}

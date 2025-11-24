@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 
+import { COMPANY_LEGAL_INFO } from '../../data/companyInfo'
 import { useUniqueId } from '../../hooks/useAccessibility'
 import { QuickLinks, ServicesLinks, SocialLinks } from './FooterSections'
 
@@ -40,11 +41,12 @@ const Copyright: React.FC = memo(() => {
       <div className='text-center'>
         <p className='text-gray-300'>
           <span>&copy; {currentYear} </span>
-          <strong>EMR Internacional</strong>
+          <strong>{COMPANY_LEGAL_INFO.legalName}</strong>
           <span>. Todos os direitos reservados.</span>
         </p>
         <p className='text-gray-400 text-sm mt-2'>
-          CNPJ: 00.000.000/0000-00 | Registro CREA: 000000
+          CNPJ: {COMPANY_LEGAL_INFO.cnpj} | Registro CREA:{' '}
+          {COMPANY_LEGAL_INFO.creaRegistration}
         </p>
       </div>
     </div>
@@ -53,6 +55,15 @@ const Copyright: React.FC = memo(() => {
 
 Copyright.displayName = 'Copyright'
 
+/**
+ * Main footer component with company information and navigation links
+ *
+ * ⚠️ PRODUCTION CHECKLIST:
+ * Before deploying to production, verify that COMPANY_LEGAL_INFO in src/data/companyInfo.ts
+ * has been updated with actual company registration data (CNPJ and CREA).
+ *
+ * @see src/data/companyInfo.ts
+ */
 const Footer: React.FC = memo(() => {
   const footerId = useUniqueId('main-footer')
   const companyInfoId = useUniqueId('company-info')

@@ -111,7 +111,7 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
           <div className='flex justify-between items-center py-4'>
             <CompanyLogoComponent logoId={logoId} />
 
-            <DesktopMenu currentSection={currentSection} navId={navId} />
+            <DesktopMenu currentSection={currentSection} />
 
             <MobileMenuButton
               isMobileMenuOpen={isMobileMenuOpen}
@@ -124,7 +124,6 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
               <MobileMenu
                 onLinkClick={closeMobileMenu}
                 currentSection={currentSection}
-                onClose={closeMobileMenu}
               />
             </div>
           )}
