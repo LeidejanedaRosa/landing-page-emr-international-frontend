@@ -54,6 +54,20 @@ describe('AccessibleButton', () => {
     expect(button).toHaveAttribute('aria-disabled', 'true')
   })
 
+  it('should not fire click events when disabled', async () => {
+    const handleClick = vi.fn()
+    const user = userEvent.setup()
+
+    render(
+      <AccessibleButton onClick={handleClick} disabled>
+        Disabled
+      </AccessibleButton>
+    )
+
+    await user.click(screen.getByRole('button'))
+    expect(handleClick).not.toHaveBeenCalled()
+  })
+
   it('should have proper ARIA attributes', () => {
     render(
       <AccessibleButton
@@ -106,6 +120,20 @@ describe('AccessibleButton', () => {
     expect(button).toBeDisabled()
     expect(button).toHaveAttribute('aria-disabled', 'true')
     expect(screen.getByTestId('loading-spinner')).toBeInTheDocument()
+  })
+
+  it('should not fire click events when loading', async () => {
+    const handleClick = vi.fn()
+    const user = userEvent.setup()
+
+    render(
+      <AccessibleButton onClick={handleClick} loading>
+        Loading
+      </AccessibleButton>
+    )
+
+    await user.click(screen.getByRole('button'))
+    expect(handleClick).not.toHaveBeenCalled()
   })
 
   it('should support custom loading text for i18n', () => {
