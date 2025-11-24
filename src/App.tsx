@@ -6,7 +6,6 @@ import StructuredData from './components/seo/StructuredData'
 import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
 import SEO from './utils/SEO'
 
-// Lazy loading para componentes não críticos
 const About = React.lazy(() => import('./components/sections/About'))
 const Services = React.lazy(() => import('./components/sections/Services'))
 const Contact = React.lazy(() => import('./components/sections/Contact'))

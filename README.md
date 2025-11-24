@@ -1,6 +1,6 @@
 # Landing Page EMR Internacional - Frontend
 
-Uma landing page moderna e responsiva desenvolvida com Vite, React, TypeScript e Tailwind CSS.
+Uma landing page moderna e responsiva desenvolvida com Vite, React, TypeScript e Tailwind CSS, com foco em acessibilidade e performance.
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -8,8 +8,12 @@ Uma landing page moderna e responsiva desenvolvida com Vite, React, TypeScript e
 - **React 18** - Biblioteca para interfaces de usuário
 - **TypeScript** - JavaScript com tipagem estática
 - **Tailwind CSS** - Framework CSS utility-first
+- **PWA** - Progressive Web App com Service Worker
+- **Acessibilidade WCAG 2.1 AA** - Componentes totalmente acessíveis
 
-## 📦 Instalação
+## 📦 Instalação e Configuração
+
+### Desenvolvimento Local
 
 1. Clone o repositório:
 
@@ -32,45 +36,363 @@ npm run dev
 
 4. Acesse `http://localhost:3000` no seu navegador.
 
+### Configuração do Ambiente Python (se necessário)
+
+```bash
+# Para scripts auxiliares de otimização de imagens
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# ou
+venv\Scripts\activate  # Windows
+```
+
 ## 🛠️ Scripts Disponíveis
+
+### Desenvolvimento
 
 - `npm run dev` - Inicia o servidor de desenvolvimento
 - `npm run build` - Gera a build de produção
 - `npm run preview` - Visualiza a build de produção localmente
+
+### Qualidade de Código
+
 - `npm run lint` - Executa o linter ESLint
 - `npm run lint:fix` - Correção automática ESLint
 - `npm run format` - Formatação Prettier
 - `npm run format:check` - Verificação Prettier
-- `npm run preview` - Preview da build
+
+### Testes
+
+- `npm run test` - Executa testes unitários
+- `npm run test:watch` - Executa testes em modo watch
+- `npm run test:e2e` - Executa testes end-to-end com Playwright
+
+### Scripts Auxiliares
+
+- `./scripts/convert-images.sh` - Converte imagens para formatos otimizados (AVIF/WebP)
+- `./scripts/svg-analysis.sh` - Analisa e otimiza arquivos SVG
+- `./scripts/verify-fixes.sh` - Verifica se todas as correções foram aplicadas
 
 ## 📁 Estrutura do Projeto
 
 ```
 src/
-├── components/     # Componentes React reutilizáveis
-├── pages/         # Páginas da aplicação
-├── styles/        # Arquivos de estilo
-├── utils/         # Funções utilitárias
-├── App.tsx        # Componente principal
-├── main.tsx       # Ponto de entrada da aplicação
-└── index.css      # Estilos globais e Tailwind
+├── components/           # Componentes React reutilizáveis
+│   ├── layout/          # Componentes de layout (Header, Footer, ResponsiveLayout)
+│   ├── sections/        # Seções da página (Hero, About, Services, Contact)
+│   ├── ui/              # Componentes de UI acessíveis
+│   ├── seo/             # Componentes para SEO
+│   └── error/           # Error boundaries
+├── hooks/               # Hooks customizados
+│   ├── form/            # Hooks específicos para formulários
+│   └── __tests__/       # Testes dos hooks
+├── utils/               # Funções utilitárias
+│   ├── accessibility/   # Helpers de acessibilidade
+│   └── __tests__/       # Testes dos utilitários
+├── styles/              # Configurações de tema
+├── types/               # Definições de tipos TypeScript
+├── data/                # Dados estáticos da aplicação
+└── assets/              # Imagens e arquivos estáticos
 ```
 
-## 🎨 Customização
+## 🎯 Hooks Disponíveis
 
-O projeto utiliza Tailwind CSS com configurações customizadas em `tailwind.config.js`. As cores primárias e secundárias podem ser ajustadas conforme necessário.
+### Hooks de Acessibilidade
 
-## 🚀 Deploy
+#### `useCurrentSection(sections: string[])`
 
-Para fazer o deploy em produção:
+Detecta automaticamente qual seção está visível no viewport baseado no scroll.
 
-1. Gere a build:
+```typescript
+import { useCurrentSection } from './hooks/useCurrentSection'
+
+function App() {
+  const currentSection = useCurrentSection(['hero', 'sobre', 'servicos', 'contato'])
+
+  return <Header currentSection={currentSection} />
+}
+```
+
+#### `useFocus()`
+
+Gerencia estado e controle de foco de elementos.
+
+```typescript
+import { useFocus } from './hooks/useAccessibility'
+
+function Component() {
+  const { elementRef, focus, blur, isFocused, onFocus, onBlur } = useFocus()
+
+  return (
+    <button ref={elementRef} onFocus={onFocus} onBlur={onBlur}>
+      {isFocused ? 'Focado' : 'Não focado'}
+    </button>
+  )
+}
+```
+
+#### `useFocusTrap(isActive: boolean)`
+
+Implementa armadilha de foco para modais e overlays.
+
+```typescript
+import { useFocusTrap } from './hooks/useAccessibility'
+
+function Modal({ isOpen }) {
+  const { containerRef } = useFocusTrap(isOpen)
+
+  return (
+    <div ref={containerRef} role="dialog">
+      {/* conteúdo do modal */}
+    </div>
+  )
+}
+```
+
+#### `useUniqueId(prefix?: string)`
+
+Gera IDs únicos para elementos, essencial para acessibilidade.
+
+```typescript
+import { useUniqueId } from './hooks/useAccessibility'
+
+function FormField() {
+  const id = useUniqueId('form-field')
+
+  return (
+    <>
+      <label htmlFor={id}>Nome</label>
+      <input id={id} type="text" />
+    </>
+  )
+}
+```
+
+### Hooks de Formulário
+
+#### `useContactForm()`
+
+Gerencia estado completo do formulário de contato com validação.
+
+```typescript
+import { useContactForm } from './hooks/form/useContactForm'
+
+function ContactForm() {
+  const {
+    formData,
+    isLoading,
+    isSuccess,
+    error,
+    updateField,
+    handleSubmit,
+    reset
+  } = useContactForm()
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        value={formData.name}
+        onChange={(e) => updateField('name', e.target.value)}
+      />
+      {/* mais campos... */}
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Enviando...' : 'Enviar'}
+      </button>
+      {error && <p role="alert">{error}</p>}
+      {isSuccess && <p role="status">Mensagem enviada com sucesso!</p>}
+    </form>
+  )
+}
+```
+
+### Hooks de Dados
+
+#### `useAboutData()`
+
+Carrega e gerencia dados da seção "Sobre".
+
+```typescript
+import { useAboutData } from './hooks/useAboutData'
+
+function AboutSection() {
+  const { data, isLoading, error } = useAboutData()
+
+  if (isLoading) return <div>Carregando...</div>
+  if (error) return <div>Erro: {error}</div>
+
+  return <div>{data.description}</div>
+}
+```
+
+## 🎨 Sistema de Navegação Acessível
+
+### Uso do aria-current
+
+O sistema de navegação implementa o padrão ARIA `aria-current` para melhor acessibilidade:
+
+```typescript
+import { AccessibleLink } from './components/ui/Accessibility'
+
+// Link da página atual
+<AccessibleLink href="#sobre" ariaCurrent="page">
+  Sobre
+</AccessibleLink>
+
+// Passo atual em um processo
+<AccessibleLink href="#passo1" ariaCurrent="step">
+  Passo 1
+</AccessibleLink>
+
+// Localização atual
+<AccessibleLink href="#sao-paulo" ariaCurrent="location">
+  São Paulo
+</AccessibleLink>
+```
+
+### Valores do aria-current
+
+- `"page"` - Página atual em um conjunto de páginas
+- `"step"` - Passo atual em um processo
+- `"location"` - Localização atual
+- `"date"` - Data atual em um calendário
+- `"time"` - Horário atual em um seletor de tempo
+- `true` - Item atual (uso genérico)
+
+### Exemplo Completo de Navegação
+
+```typescript
+import { useCurrentSection } from './hooks/useCurrentSection'
+import { AccessibleLink } from './components/ui/Accessibility'
+import Header from './components/layout/Header'
+
+function App() {
+  const currentSection = useCurrentSection(['home', 'sobre', 'servicos'])
+
+  return (
+    <div>
+      <Header currentSection={currentSection} />
+
+      <nav aria-label="Navegação principal">
+        <ul>
+          <li>
+            <AccessibleLink
+              href="#home"
+              ariaCurrent={currentSection === 'home' ? 'page' : undefined}
+            >
+              Home
+            </AccessibleLink>
+          </li>
+          <li>
+            <AccessibleLink
+              href="#sobre"
+              ariaCurrent={currentSection === 'sobre' ? 'page' : undefined}
+            >
+              Sobre
+            </AccessibleLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  )
+}
+```
+
+## ♿ Componentes de Acessibilidade
+
+### AccessibleButton
+
+```typescript
+import { AccessibleButton } from './components/ui/Accessibility'
+
+<AccessibleButton
+  onClick={handleClick}
+  variant="primary"
+  size="lg"
+  aria-label="Abrir menu principal"
+>
+  Menu
+</AccessibleButton>
+```
+
+### AccessibleLink
+
+```typescript
+import { AccessibleLink } from './components/ui/Accessibility'
+
+<AccessibleLink
+  href="#contato"
+  variant="primary"
+  ariaCurrent="page"
+>
+  Contato
+</AccessibleLink>
+```
+
+### SkipLink (Link para pular navegação)
+
+```typescript
+import { SkipLink } from './components/ui/Accessibility'
+
+// Automaticamente incluído no layout
+<SkipLink href="#main-content">
+  Pular para o conteúdo principal
+</SkipLink>
+```
+
+## 🛡️ Qualidade e Padrões
+
+### Clean Code & SOLID
+
+- Funções máx. 20 linhas
+- Componentes máx. 300 linhas
+- Nomes descritivos e auto-documentados
+- Princípio da responsabilidade única
+- Sem código duplicado ou smell codes
+
+### Acessibilidade WCAG 2.1 AA
+
+- HTML semântico (`<main>`, `<section>`, `<article>`, `<nav>`)
+- ARIA labels e live regions
+- Navegação completa por teclado
+- Contraste mínimo 4.5:1
+- Suporte a leitores de tela
+
+### Performance
+
+- Lazy loading de componentes
+- Otimização de imagens (AVIF/WebP)
+- Code splitting
+- Service Worker para cache
+- Core Web Vitals otimizados
+
+## 🚀 Deploy e Produção
+
+### Build de Produção
 
 ```bash
 npm run build
 ```
 
-2. Os arquivos estarão disponíveis na pasta `dist/`
+### Verificação Pré-Deploy
+
+```bash
+npm run lint && npm run format:check && npm run test
+```
+
+### Arquivos Gerados
+
+```
+dist/
+├── assets/          # CSS/JS otimizados
+├── images/          # Imagens convertidas (AVIF/WebP)
+├── index.html       # HTML com inlined critical CSS
+└── sw.js           # Service Worker para PWA
+```
+
+## 📚 Documentação Adicional
+
+- **`ACCESSIBILITY.md`** - Guia completo de acessibilidade e componentes
+- **`CODE-QUALITY-CHECKLIST.md`** - Lista de verificação antes de cada commit
 
 ## 📄 Licença
 

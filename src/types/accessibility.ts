@@ -47,6 +47,7 @@ export interface FormFieldProps extends FocusableElementProps {
 export interface SkipLinkProps {
   href: string
   children: ReactNode
+  onClick?: () => void
 }
 
 export interface AnnouncementProps {
