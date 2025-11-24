@@ -2,48 +2,23 @@ import React, { type ComponentProps, useEffect, useState } from 'react'
 
 interface OptimizedImageProps
   extends Omit<ComponentProps<'img'>, 'src' | 'sizes' | 'onLoad' | 'onError'> {
-  /**
-   * Caminho da imagem original
-   */
   src: string
-  /**
-   * Tamanhos responsivos
-   * @example ['400w', '800w', '1200w']
-   */
+
   sizes?: string[]
-  /**
-   * Media queries para o atributo sizes
-   * @example '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
-   * @default '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
-   */
+
   mediaSizes?: string
-  /**
-   * Formatos a serem gerados
-   * @default ['webp', 'avif', 'jpg']
-   */
+
   formats?: ('webp' | 'avif' | 'jpg' | 'png')[]
-  /**
-   * Qualidade da compressão (1-100)
-   * @default 80
-   */
+
   quality?: number
-  /**
-   * Lazy loading
-   * @default true
-   */
+
   lazy?: boolean
-  /**
-   * Callback para quando a imagem carregar
-   */
+
   onLoad?: () => void
-  /**
-   * Callback para erro no carregamento
-   */
   // eslint-disable-next-line no-unused-vars
   onError?: (_error: Error) => void
 }
 
-// Helper: Gera srcset para um formato específico
 const generateSrcSet = (
   src: string,
   sizes: string[],
@@ -52,14 +27,13 @@ const generateSrcSet = (
 ): string => {
   return sizes
     .map(size => {
-      const width = parseInt(size.replace('w', ''))
+      const width = parseInt(size.replace('w', ''), 10)
       const optimizedSrc = `${src}?w=${width}&format=${format}&quality=${quality}`
       return `${optimizedSrc} ${width}w`
     })
     .join(', ')
 }
 
-// Helper: Gera elementos <source> para formatos modernos
 const generateSources = (
   src: string,
   sizes: string[],
@@ -82,7 +56,6 @@ const generateSources = (
     ))
 }
 
-// Component: Placeholder de erro
 const ErrorPlaceholder: React.FC<{
   alt: string
   className?: string
@@ -111,7 +84,6 @@ const ErrorPlaceholder: React.FC<{
   </div>
 )
 
-// Helper: Gera props da imagem
 const useImageState = (
   src: string,
   onLoad?: () => void,
@@ -135,7 +107,6 @@ const useImageState = (
   return { hasError, isLoaded, handleLoad, handleError }
 }
 
-// Component: Renderiza a imagem otimizada
 const ImageElement: React.FC<{
   src: string
   alt?: string
@@ -228,7 +199,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
 // eslint-disable-next-line react-refresh/only-export-components
 export const useImagePreload = (sources: string[]) => {
   useEffect(() => {
-    // Map para armazenar referências e prevenir CSS injection
+    // Map para armazenar referências dos elementos link para limpeza
     const preloadedLinks = new Map<string, HTMLLinkElement>()
 
     sources.forEach(src => {
