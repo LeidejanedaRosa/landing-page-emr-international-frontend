@@ -61,17 +61,63 @@ const BannerControls: React.FC<BannerControlsProps> = memo(
 
 BannerControls.displayName = 'BannerControls'
 
-/**
- * Banner promocional com carousel acessível seguindo WCAG 2.1 AA:
- * ✅ Controles de pausa para usuários com vestibular disorders
- * ✅ Reduced motion support
- * ✅ Screen reader friendly
- * ✅ Keyboard navigation
- * ✅ ARIA live region para atualizações
- *
- * @see https://www.w3.org/WAI/WCAG21/Understanding/pause-stop-hide.html
- * @see https://www.w3.org/WAI/WCAG21/Understanding/animation-from-interactions.html
- */
+type PauseSource = 'manual' | 'hover' | 'auto'
+
+interface BannerState {
+  isPaused: boolean
+  pauseSource: PauseSource
+}
+
+const useBannerPauseState = (
+  prefersReducedMotion: boolean,
+  announce: ReturnType<typeof useScreenReaderAnnouncement>['announce']
+): BannerState & {
+  handleTogglePause: () => void
+  handleMouseEnter: () => void
+  handleMouseLeave: () => void
+} => {
+  const [isPaused, setIsPaused] = useState(prefersReducedMotion)
+  const [pauseSource, setPauseSource] = useState<PauseSource>(
+    prefersReducedMotion ? 'auto' : 'manual'
+  )
+
+  useEffect(() => {
+    if (prefersReducedMotion && !isPaused) {
+      setIsPaused(true)
+      setPauseSource('auto')
+      announce('Animação do banner pausada automaticamente', 'polite')
+    }
+  }, [prefersReducedMotion, announce])
+
+  const handleTogglePause = () => {
+    const newPausedState = !isPaused
+    setIsPaused(newPausedState)
+    setPauseSource('manual')
+    announce(newPausedState ? 'Banner pausado' : 'Banner retomado', 'polite')
+  }
+
+  const handleMouseEnter = () => {
+    if (!isPaused && pauseSource !== 'manual') {
+      setIsPaused(true)
+      setPauseSource('hover')
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (pauseSource === 'hover' && !prefersReducedMotion) {
+      setIsPaused(false)
+    }
+  }
+
+  return {
+    isPaused,
+    pauseSource,
+    handleTogglePause,
+    handleMouseEnter,
+    handleMouseLeave,
+  }
+}
+
 const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
   // eslint-disable-next-line max-lines-per-function
   ({
@@ -82,34 +128,9 @@ const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
     const { prefersReducedMotion } = useAccessibilityPreferences()
     const { announce } = useScreenReaderAnnouncement()
     const bannerId = useUniqueId('promo-banner')
-    const [isPaused, setIsPaused] = useState(prefersReducedMotion)
 
-    // Pausa automática se o usuário preferir movimento reduzido
-    useEffect(() => {
-      if (prefersReducedMotion && !isPaused) {
-        setIsPaused(true)
-        announce('Animação do banner pausada automaticamente', 'polite')
-      }
-    }, [prefersReducedMotion, isPaused, announce])
-
-    const handleTogglePause = () => {
-      const newPausedState = !isPaused
-      setIsPaused(newPausedState)
-      announce(newPausedState ? 'Banner pausado' : 'Banner retomado', 'polite')
-    }
-
-    // Pausa ao hover para melhor acessibilidade
-    const handleMouseEnter = () => {
-      if (!isPaused) {
-        setIsPaused(true)
-      }
-    }
-
-    const handleMouseLeave = () => {
-      if (!prefersReducedMotion) {
-        setIsPaused(false)
-      }
-    }
+    const { isPaused, handleTogglePause, handleMouseEnter, handleMouseLeave } =
+      useBannerPauseState(prefersReducedMotion, announce)
 
     return (
       <section
@@ -120,7 +141,6 @@ const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {/* Cabeçalho hidden para screen readers */}
         <ScreenReaderOnly>
           <h2 id={`${bannerId}-heading`}>
             Banner promocional da EMR Internacional
@@ -130,7 +150,6 @@ const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
           </div>
         </ScreenReaderOnly>
 
-        {/* Conteúdo do banner */}
         <div
           className={`flex whitespace-nowrap ${
             isPaused || prefersReducedMotion ? '' : 'animate-scroll'
@@ -162,7 +181,6 @@ const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
           ))}
         </div>
 
-        {/* Gradientes de fade */}
         <div
           className='absolute top-0 left-0 w-8 h-full bg-gradient-to-r from-white to-transparent pointer-events-none'
           aria-hidden='true'
@@ -172,7 +190,6 @@ const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
           aria-hidden='true'
         />
 
-        {/* Controles de acessibilidade */}
         {!prefersReducedMotion && (
           <BannerControls
             isPaused={isPaused}
@@ -181,7 +198,6 @@ const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
           />
         )}
 
-        {/* Conteúdo legível para screen readers */}
         <ScreenReaderOnly>
           <p>Promoção atual: {text}</p>
         </ScreenReaderOnly>

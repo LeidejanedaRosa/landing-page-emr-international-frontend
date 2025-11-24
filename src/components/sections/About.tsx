@@ -1,6 +1,9 @@
 import React, { memo, Suspense } from 'react'
 
 import FundoAbout from '../../assets/fundo_about.png'
+import JuanDesktop from '../../assets/juan-desktop.webp'
+import JuanMobile from '../../assets/juan-mobile.webp'
+import JuanTablet from '../../assets/juan-tablet.webp'
 import Juan from '../../assets/Juan.png'
 import { spacing } from '../../styles/theme'
 import { AccessibleButton } from '../ui/AccessibleButton'
@@ -20,22 +23,21 @@ interface AboutData {
   expertise: ExpertiseItem[]
 }
 
-const CheckIcon: React.FC<{ ariaLabel?: string }> = memo(
-  ({ ariaLabel = 'Item validado' }) => (
-    <svg
-      className='flex-shrink-0 w-6 h-6 text-cta-600 mt-1 mr-3'
-      fill='none'
-      stroke='currentColor'
-      viewBox='0 0 24 24'
-      xmlns='http://www.w3.org/2000/svg'
-      strokeWidth={2.5}
-      role='img'
-      aria-label={ariaLabel}
-    >
-      <path strokeLinecap='round' strokeLinejoin='round' d='M5 13l4 4L19 7' />
-    </svg>
-  )
-)
+const CheckIcon: React.FC<{ ariaLabel?: string }> = memo(({ ariaLabel }) => (
+  <svg
+    className='flex-shrink-0 w-6 h-6 text-cta-600 mt-1 mr-3'
+    fill='none'
+    stroke='currentColor'
+    viewBox='0 0 24 24'
+    xmlns='http://www.w3.org/2000/svg'
+    strokeWidth={2.5}
+    role='img'
+    aria-label={ariaLabel}
+    aria-hidden={!ariaLabel}
+  >
+    <path strokeLinecap='round' strokeLinejoin='round' d='M5 13l4 4L19 7' />
+  </svg>
+))
 
 CheckIcon.displayName = 'CheckIcon'
 
@@ -169,24 +171,60 @@ const AboutContent: React.FC = memo(() => {
 
 AboutContent.displayName = 'AboutContent'
 
-const OptimizedImage: React.FC<{
-  src: string
+interface ResponsivePictureProps {
+  mobileWebp: string
+  tabletWebp: string
+  desktopWebp: string
+  fallbackSrc: string
   alt: string
   className: string
   priority?: boolean
   loading?: 'eager' | 'lazy'
-}> = memo(({ src, alt, className, priority = false, loading = 'lazy' }) => (
-  <img
-    src={src}
-    alt={alt}
-    className={className}
-    loading={loading}
-    decoding='async'
-    fetchPriority={priority ? 'high' : 'auto'}
-  />
-))
+}
 
-OptimizedImage.displayName = 'OptimizedImage'
+const ResponsivePicture: React.FC<ResponsivePictureProps> = memo(
+  ({
+    mobileWebp,
+    tabletWebp,
+    desktopWebp,
+    fallbackSrc,
+    alt,
+    className,
+    priority = false,
+    loading = 'lazy',
+  }) => (
+    <picture>
+      {/* Desktop: >= 1024px */}
+      <source
+        media='(min-width: 1024px)'
+        srcSet={desktopWebp}
+        type='image/webp'
+      />
+
+      {/* Tablet: >= 768px */}
+      <source
+        media='(min-width: 768px)'
+        srcSet={tabletWebp}
+        type='image/webp'
+      />
+
+      {/* Mobile: < 768px */}
+      <source srcSet={mobileWebp} type='image/webp' />
+
+      {/* Fallback para navegadores sem suporte a WebP */}
+      <img
+        src={fallbackSrc}
+        alt={alt}
+        className={className}
+        loading={loading}
+        decoding='async'
+        fetchPriority={priority ? 'high' : 'auto'}
+      />
+    </picture>
+  )
+)
+
+ResponsivePicture.displayName = 'ResponsivePicture'
 
 const InstructorMedia: React.FC = memo(() => {
   const backgroundImageAlt =
@@ -206,20 +244,15 @@ const InstructorMedia: React.FC = memo(() => {
         }}
         role='img'
         aria-label={backgroundImageAlt}
-      >
-        <OptimizedImage
-          src={Juan}
-          alt={instructorImageAlt}
-          className='absolute h-full w-full object-cover left-1/2 -translate-x-1/2 object-top lg:hidden'
-          priority
-          loading='eager'
-        />
-      </div>
+      />
 
-      <OptimizedImage
-        src={Juan}
+      <ResponsivePicture
+        mobileWebp={JuanMobile}
+        tabletWebp={JuanTablet}
+        desktopWebp={JuanDesktop}
+        fallbackSrc={Juan}
         alt={instructorImageAlt}
-        className='absolute h-full w-auto object-cover lg:block hidden left-1/2 -translate-x-1/2 z-10'
+        className='absolute h-full w-full lg:w-auto object-cover object-top lg:object-cover left-1/2 -translate-x-1/2 lg:z-10'
         priority
         loading='eager'
       />
@@ -236,7 +269,7 @@ InstructorMedia.displayName = 'InstructorMedia'
 
 const MainContent: React.FC = memo(() => {
   return (
-    <main
+    <div
       className='relative w-full lg:w-1/2 lg:h-full lg:max-h-screen lg:overflow-hidden
                  bg-gradient-to-b from-primary-400/50 via-white/70 to-white
                  lg:bg-gradient-to-r lg:from-white lg:via-primary-200/80 lg:to-primary-400/80'
@@ -254,7 +287,7 @@ const MainContent: React.FC = memo(() => {
           <AboutContent />
         </Suspense>
       </div>
-    </main>
+    </div>
   )
 })
 
@@ -273,6 +306,7 @@ const About: React.FC = memo(() => {
         onClick={() => {
           const nextSection = document.getElementById('contato')
           if (nextSection) {
+            nextSection.setAttribute('tabindex', '-1')
             nextSection.focus()
             nextSection.scrollIntoView({ behavior: 'smooth' })
           }

@@ -188,6 +188,8 @@ export const ContactInfo: React.FC<ContactInfoProps> = memo(({ onLoad }) => {
   )
 })
 
+ContactInfo.displayName = 'ContactInfo'
+
 const SuccessMessage: React.FC = memo(() => {
   const { announce } = useScreenReaderAnnouncement()
   const messageId = useUniqueId('success-message')
@@ -197,7 +199,7 @@ const SuccessMessage: React.FC = memo(() => {
       'Mensagem enviada com sucesso! Responderemos em breve.',
       'assertive'
     )
-  }, [])
+  }, [announce])
 
   return (
     <div
@@ -321,7 +323,6 @@ export const ContactForm: React.FC<ContactFormProps> = memo(({ onLoad }) => {
             : 'Formulário pronto para preenchimento'}
         </div>
 
-        {/* Mensagem de erro acessível */}
         {error && (
           <div
             id={errorId}
@@ -336,7 +337,6 @@ export const ContactForm: React.FC<ContactFormProps> = memo(({ onLoad }) => {
           </div>
         )}
 
-        {/* Campo Nome */}
         <div>
           <label
             htmlFor={`${formId}-name`}
@@ -361,7 +361,6 @@ export const ContactForm: React.FC<ContactFormProps> = memo(({ onLoad }) => {
           />
         </div>
 
-        {/* Campo Email */}
         <div>
           <label
             htmlFor={`${formId}-email`}
@@ -439,3 +438,5 @@ export const ContactForm: React.FC<ContactFormProps> = memo(({ onLoad }) => {
     </section>
   )
 })
+
+ContactForm.displayName = 'ContactForm'

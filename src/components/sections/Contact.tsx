@@ -44,9 +44,13 @@ ContactHeader.displayName = 'ContactHeader'
 
 const ContactContent: React.FC<ContactContentProps> = memo(({ titleId }) => {
   const { announce } = useScreenReaderAnnouncement()
+  const [hasAnnounced, setHasAnnounced] = React.useState(false)
 
   const handleSectionLoad = () => {
-    announce('Seção de contato carregada com sucesso', 'polite')
+    if (!hasAnnounced) {
+      announce('Seção de contato carregada com sucesso', 'polite')
+      setHasAnnounced(true)
+    }
   }
 
   return (
@@ -78,7 +82,7 @@ const ContactContent: React.FC<ContactContentProps> = memo(({ titleId }) => {
           </div>
         }
       >
-        <ContactInfo onLoad={handleSectionLoad} />
+        <ContactInfo />
       </Suspense>
 
       <Suspense
@@ -113,8 +117,7 @@ const Contact: React.FC = memo(() => {
     <section
       id='contato'
       className='py-24 bg-cta-600 text-white'
-      aria-labelledby={titleId}
-      aria-describedby={descriptionId}
+      aria-label='Entre em Contato Conosco'
     >
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <Suspense
@@ -127,9 +130,9 @@ const Contact: React.FC = memo(() => {
           <ContactHeader titleId={titleId} descriptionId={descriptionId} />
         </Suspense>
 
-        <main>
+        <div>
           <ContactContent titleId={titleId} />
-        </main>
+        </div>
       </div>
     </section>
   )

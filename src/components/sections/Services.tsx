@@ -1,10 +1,7 @@
 import React, { memo, Suspense } from 'react'
 
 import { type ServiceData, servicesData } from '../../data/servicesData'
-import {
-  useScreenReaderAnnouncement,
-  useUniqueId,
-} from '../../hooks/useAccessibility'
+import { useUniqueId } from '../../hooks/useAccessibility'
 import { ScreenReaderOnly } from '../ui/Accessibility'
 import { LoadingSpinner } from '../ui/Loading'
 import { ServiceCard } from './ServiceCard'
@@ -45,21 +42,17 @@ ServicesHeader.displayName = 'ServicesHeader'
 
 const ServicesGrid: React.FC<ServicesGridProps> = memo(
   ({ services, titleId }) => {
-    const { announce } = useScreenReaderAnnouncement()
-
-    const handleServiceFocus = (serviceName: string) => {
-      announce(`Focado no serviço: ${serviceName}`, 'polite')
-    }
+    const gridDescriptionId = useUniqueId('grid-description')
 
     return (
       <div
         className='grid md:grid-cols-3 gap-8'
         role='list'
         aria-labelledby={titleId}
-        aria-describedby='services-description'
+        aria-describedby={gridDescriptionId}
       >
         <ScreenReaderOnly>
-          <p id='services-description'>
+          <p id={gridDescriptionId}>
             Lista de {services.length} serviços especializados oferecidos pela
             EMR Internacional
           </p>
@@ -73,10 +66,7 @@ const ServicesGrid: React.FC<ServicesGridProps> = memo(
             aria-setsize={services.length}
           >
             <Suspense fallback={<LoadingSpinner size='md' />}>
-              <ServiceCard
-                {...service}
-                onFocus={() => handleServiceFocus(service.title)}
-              />
+              <ServiceCard {...service} />
             </Suspense>
           </div>
         ))}
@@ -109,24 +99,22 @@ const Services: React.FC = memo(() => {
           <ServicesHeader titleId={titleId} descriptionId={descriptionId} />
         </Suspense>
 
-        <main>
-          <Suspense
-            fallback={
-              <div className='grid md:grid-cols-3 gap-8'>
-                {Array(3)
-                  .fill(0)
-                  .map((_, i) => (
-                    <div
-                      key={i}
-                      className='h-64 bg-gray-200 animate-pulse rounded-xl'
-                    />
-                  ))}
-              </div>
-            }
-          >
-            <ServicesGrid services={servicesData} titleId={titleId} />
-          </Suspense>
-        </main>
+        <Suspense
+          fallback={
+            <div className='grid md:grid-cols-3 gap-8'>
+              {Array(3)
+                .fill(0)
+                .map((_, i) => (
+                  <div
+                    key={i}
+                    className='h-64 bg-gray-200 animate-pulse rounded-xl'
+                  />
+                ))}
+            </div>
+          }
+        >
+          <ServicesGrid services={servicesData} titleId={titleId} />
+        </Suspense>
       </div>
     </section>
   )

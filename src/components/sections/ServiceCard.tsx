@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 
 import {
   useAccessibilityPreferences,
-  useFocus,
   useUniqueId,
 } from '../../hooks/useAccessibility'
 
@@ -11,7 +10,6 @@ interface ServiceCardProps {
   title: string
   description: string
   icon?: React.ReactNode
-  onFocus?: () => void
 }
 
 interface ServiceIconProps {
@@ -36,34 +34,21 @@ const ServiceIcon: React.FC<ServiceIconProps> = memo(
 ServiceIcon.displayName = 'ServiceIcon'
 
 export const ServiceCard: React.FC<ServiceCardProps> = memo(
-  ({ id, title, description, icon, onFocus }) => {
+  ({ id, title, description, icon }) => {
     const cardId = useUniqueId(`service-card-${id}`)
     const titleId = useUniqueId(`service-title-${id}`)
     const iconId = useUniqueId(`service-icon-${id}`)
-    const { elementRef, isFocused, onFocus: handleFocus, onBlur } = useFocus()
     const { prefersReducedMotion } = useAccessibilityPreferences()
-
-    const handleCardFocus = () => {
-      handleFocus()
-      onFocus?.()
-    }
 
     return (
       <article
-        ref={elementRef}
         id={cardId}
         className={`
         bg-white p-8 rounded-xl shadow-lg transition-all duration-300
-        focus-within:ring-2 focus-within:ring-cta-500 focus-within:ring-offset-2
         hover:shadow-xl
         ${!prefersReducedMotion ? 'hover:-translate-y-1' : ''}
-        ${isFocused ? 'ring-2 ring-cta-500 ring-offset-2' : ''}
       `}
-        tabIndex={0}
-        role='article'
         aria-labelledby={titleId}
-        onFocus={handleCardFocus}
-        onBlur={onBlur}
       >
         {icon && <ServiceIcon icon={icon} title={title} iconId={iconId} />}
 

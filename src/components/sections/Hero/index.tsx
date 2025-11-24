@@ -41,7 +41,7 @@ const HeroImage: React.FC<HeroImageProps> = memo(
       <img
         id={imageId}
         src={heroImage}
-        alt='Equipe de resgate tático da EMR Internacional em operação de emergência em condições extremas, demonstrando atendimento pré-hospitalar especializado com equipamentos médicos avançados'
+        alt='Equipe de resgate tático da EMR Internacional em operação de emergência médica com equipamentos avançados'
         className={className}
         loading='eager'
         fetchPriority='high'
@@ -122,7 +122,7 @@ const Hero: React.FC = memo(() => {
   const setIsAutoPlaying: React.Dispatch<
     React.SetStateAction<boolean>
   > = value => {
-    const playing = typeof value === 'function' ? value(true) : value
+    const playing = typeof value === 'function' ? value(isAutoPlaying) : value
     if (playing && !prefersReducedMotion) {
       resumeAutoPlay()
       announce('Reprodução automática ativada', 'polite')
@@ -145,19 +145,26 @@ const Hero: React.FC = memo(() => {
       id={sectionId}
       className='relative min-h-screen text-white overflow-hidden'
       aria-labelledby={`${sectionId}-heading`}
-      role='banner'
     >
-      {/* Descrição da seção para screen readers */}
-      <ScreenReaderOnly>
-        <h1 id={`${sectionId}-heading`}>
-          Página inicial da EMR Internacional - Treinamentos em Emergências
-          Médicas
+      {/* Título principal visível para todos os usuários */}
+      <div className='absolute top-24 left-0 right-0 z-20 px-4 sm:px-6 lg:px-8'>
+        <h1
+          id={`${sectionId}-heading`}
+          className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-2xl max-w-4xl'
+          style={{
+            textShadow:
+              '0 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6)',
+          }}
+        >
+          EMR Internacional - Treinamentos em Emergências Médicas
         </h1>
-        <p>
-          Seção principal com informações sobre cursos de resgate tático,
-          atendimento pré-hospitalar e certificações internacionais.
-        </p>
-      </ScreenReaderOnly>
+        <ScreenReaderOnly>
+          <p>
+            Seção principal com informações sobre cursos de resgate tático,
+            atendimento pré-hospitalar e certificações internacionais.
+          </p>
+        </ScreenReaderOnly>
+      </div>
 
       <HeroImage
         className='absolute w-[100%] -top-[550px] h-[250%] object-cover object-center'
