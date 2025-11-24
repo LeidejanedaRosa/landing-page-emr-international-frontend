@@ -1,92 +1,100 @@
-import { renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { act, renderHook } from '@testing-library/react'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { useCurrentSection } from '../useCurrentSection'
 
-const mockIntersectionObserver = vi.fn()
-mockIntersectionObserver.mockReturnValue({
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-  disconnect: vi.fn(),
-})
-vi.stubGlobal('IntersectionObserver', mockIntersectionObserver)
+const createMockSection = (
+  id: string,
+  offsetTop: number,
+  offsetHeight: number
+) => {
+  const element = document.createElement('section')
+  element.id = id
+  Object.defineProperty(element, 'offsetTop', {
+    value: offsetTop,
+    writable: true,
+  })
+  Object.defineProperty(element, 'offsetHeight', {
+    value: offsetHeight,
+    writable: true,
+  })
+  return element
+}
 
 describe('useCurrentSection', () => {
-  it('should initialize with no current section', () => {
-    const { result } = renderHook(() => useCurrentSection())
+  let scrollEventListener: (() => void) | null = null
 
+  beforeEach(() => {
+    Object.defineProperty(window, 'scrollY', {
+      writable: true,
+      configurable: true,
+      value: 0,
+    })
+
+    const originalAddEventListener = window.addEventListener
+    vi.spyOn(window, 'addEventListener').mockImplementation(
+      (event, handler, options) => {
+        if (event === 'scroll' && typeof handler === 'function') {
+          scrollEventListener = handler as () => void
+        }
+        return originalAddEventListener.call(window, event, handler, options)
+      }
+    )
+  })
+
+  afterEach(() => {
+    vi.clearAllMocks()
+    vi.restoreAllMocks()
+    document.body.innerHTML = ''
+    scrollEventListener = null
+  })
+
+  it('should initialize with no current section', () => {
+    const { result } = renderHook(() => useCurrentSection([]))
     expect(result.current).toBe('')
   })
 
-  it('should setup intersection observer for sections', () => {
-    // Mock dos elementos das seções
-    const mockHeroElement = document.createElement('section')
-    mockHeroElement.id = 'hero'
-    const mockAboutElement = document.createElement('section')
-    mockAboutElement.id = 'sobre'
-    const mockServicesElement = document.createElement('section')
-    mockServicesElement.id = 'servicos'
+  it('should setup scroll listener and detect sections', () => {
+    const mockHero = createMockSection('hero', 0, 500)
+    const mockAbout = createMockSection('sobre', 500, 500)
+    const mockServices = createMockSection('servicos', 1000, 500)
 
-    document.body.appendChild(mockHeroElement)
-    document.body.appendChild(mockAboutElement)
-    document.body.appendChild(mockServicesElement)
+    document.body.append(mockHero, mockAbout, mockServices)
 
-    const mockObserve = vi.fn()
-    mockIntersectionObserver.mockReturnValue({
-      observe: mockObserve,
-      unobserve: vi.fn(),
-      disconnect: vi.fn(),
-    })
+    const { result } = renderHook(() =>
+      useCurrentSection(['hero', 'sobre', 'servicos'])
+    )
 
-    renderHook(() => useCurrentSection())
-
-    expect(mockIntersectionObserver).toHaveBeenCalled()
-
-    document.body.removeChild(mockHeroElement)
-    document.body.removeChild(mockAboutElement)
-    document.body.removeChild(mockServicesElement)
+    expect(window.addEventListener).toHaveBeenCalledWith(
+      'scroll',
+      expect.any(Function),
+      { passive: true }
+    )
+    expect(result.current).toBe('hero')
   })
 
-  it('should handle intersection changes correctly', () => {
-    const mockCallback = vi.fn()
+  it('should update current section when scroll position changes', () => {
+    document.body.appendChild(createMockSection('sobre', 500, 500))
 
-    mockIntersectionObserver.mockImplementation(callback => {
-      mockCallback.mockImplementation(callback)
-      return {
-        observe: vi.fn(),
-        unobserve: vi.fn(),
-        disconnect: vi.fn(),
-      }
+    const { result } = renderHook(() => useCurrentSection(['sobre']))
+
+    act(() => {
+      Object.defineProperty(window, 'scrollY', { value: 600, writable: true })
+      scrollEventListener?.()
     })
 
-    const { result } = renderHook(() => useCurrentSection())
-
-    const mockEntries = [
-      {
-        target: { id: 'sobre' },
-        isIntersecting: true,
-      },
-    ]
-
-    if (mockCallback.mock.calls.length > 0) {
-      mockCallback.mock.calls[0][0](mockEntries)
-    }
-
-    expect(result.current).toBeDefined()
+    expect(result.current).toBe('sobre')
   })
 
-  it('should cleanup observer on unmount', () => {
-    const mockDisconnect = vi.fn()
-    mockIntersectionObserver.mockReturnValue({
-      observe: vi.fn(),
-      unobserve: vi.fn(),
-      disconnect: mockDisconnect,
-    })
-
-    const { unmount } = renderHook(() => useCurrentSection())
+  it('should cleanup scroll listener on unmount', () => {
+    const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener')
+    const { unmount } = renderHook(() => useCurrentSection([]))
 
     unmount()
 
-    expect(mockDisconnect).toHaveBeenCalled()
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      'scroll',
+      expect.any(Function)
+    )
   })
 })

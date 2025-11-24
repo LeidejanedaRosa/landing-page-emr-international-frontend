@@ -5,7 +5,6 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { useContactForm } from '../useContactForm'
 
-// Test constants
 const TEST_USER_NAME = 'João Silva'
 const TEST_EMAIL = 'joao@example.com'
 const TEST_MESSAGE = 'Test message'
@@ -87,9 +86,8 @@ describe('useContactForm', () => {
   })
 
   it('should handle successful form submission', async () => {
-    // Mock Math.random para sempre retornar sucesso
-    const originalRandom = Math.random
-    Math.random = vi.fn(() => 0.5) // Valor que causa sucesso
+    // Mock Math.random to always return success
+    vi.spyOn(Math, 'random').mockReturnValue(0.5) // Value that causes success
 
     const { result } = renderHook(() => useContactForm())
 
@@ -113,13 +111,11 @@ describe('useContactForm', () => {
       expect(result.current.isLoading).toBe(false)
     })
 
-    // Restore original Math.random
-    Math.random = originalRandom
+    vi.restoreAllMocks()
   })
 
   it('should handle form submission error', async () => {
-    const originalRandom = Math.random
-    Math.random = vi.fn(() => 0.9) // Valor que causa erro
+    vi.spyOn(Math, 'random').mockReturnValue(0.9) // Value that causes error
 
     const { result } = renderHook(() => useContactForm())
 
@@ -143,7 +139,7 @@ describe('useContactForm', () => {
       expect(result.current.isLoading).toBe(false)
     })
 
-    Math.random = originalRandom
+    vi.restoreAllMocks()
   })
 
   it('should reset form correctly', () => {

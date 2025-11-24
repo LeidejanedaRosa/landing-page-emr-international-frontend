@@ -105,6 +105,18 @@ describe('AccessibleButton', () => {
     const button = screen.getByRole('button')
     expect(button).toBeDisabled()
     expect(button).toHaveAttribute('aria-disabled', 'true')
-    expect(screen.getByText('Carregando...')).toBeInTheDocument()
+    expect(screen.getByTestId('loading-spinner')).toBeInTheDocument()
+  })
+
+  it('should support custom loading text for i18n', () => {
+    render(
+      <AccessibleButton loading loadingText='Loading...'>
+        Submit
+      </AccessibleButton>
+    )
+
+    const button = screen.getByRole('button')
+    expect(button).toHaveTextContent('Loading...')
+    expect(button).toHaveAttribute('aria-label', 'Loading...')
   })
 })

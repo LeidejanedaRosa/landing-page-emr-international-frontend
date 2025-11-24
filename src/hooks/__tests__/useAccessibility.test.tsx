@@ -105,18 +105,34 @@ describe('useFocusTrap', () => {
     expect(result.current.containerRef.current).toBe(mockContainer)
   })
 
-  it('should store previous focus element', () => {
+  it('should store previous focus element and restore on cleanup', () => {
     const mockActiveElement = document.createElement('button')
-    Object.defineProperty(document, 'activeElement', {
-      value: mockActiveElement,
-      configurable: true,
-    })
+    document.body.appendChild(mockActiveElement)
+    mockActiveElement.focus()
 
-    const { result } = renderHook(() => useFocusTrap(true))
+    const { result, rerender, unmount } = renderHook(
+      ({ isActive }) => useFocusTrap(isActive),
+      { initialProps: { isActive: true } }
+    )
 
     const mockContainer = document.createElement('div')
+    document.body.appendChild(mockContainer)
     result.current.containerRef.current = mockContainer
 
-    expect(result.current.containerRef).toBeDefined()
+    // Verify the hook is active with a container
+    expect(result.current.containerRef.current).toBe(mockContainer)
+
+    // Deactivate the focus trap to trigger cleanup
+    rerender({ isActive: false })
+
+    // Wait for cleanup to execute
+    unmount()
+
+    // Verify focus was restored to the previous element
+    expect(document.activeElement).toBe(mockActiveElement)
+
+    // Cleanup
+    document.body.removeChild(mockActiveElement)
+    document.body.removeChild(mockContainer)
   })
 })

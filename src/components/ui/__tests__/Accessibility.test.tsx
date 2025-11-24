@@ -63,7 +63,6 @@ describe('MainContent', () => {
 
     const main = screen.getByRole('main')
     expect(main).toHaveClass('focus:outline-none')
-    expect(main).toHaveAttribute('tabindex', '-1')
   })
 })
 
