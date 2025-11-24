@@ -104,9 +104,8 @@ test.describe('Mobile Responsiveness', () => {
     const bodyElement = page.locator('body')
     const boundingBox = await bodyElement.boundingBox()
 
-    if (boundingBox) {
-      expect(boundingBox.width).toBeLessThanOrEqual(375)
-    }
+    expect(boundingBox).not.toBeNull()
+    expect(boundingBox!.width).toBeLessThanOrEqual(375)
   })
 })
 
