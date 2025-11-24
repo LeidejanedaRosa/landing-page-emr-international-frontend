@@ -13,7 +13,9 @@ export default defineConfig({
     ...(process.env.NODE_ENV === 'production'
       ? [
           securityHeaders({
-            csp: "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; style-src-elem 'self' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; worker-src 'self' blob:;",
+            // CSP hardened: removed 'unsafe-inline', using hashes for JSON-LD scripts
+            // Hash generated for inline JSON-LD structured data in index.html
+            csp: "default-src 'self'; script-src 'self' 'sha256-E1xA964fM7OP0+1NOZ7mloL70P6XbVKzT4s4mPv35GQ='; style-src 'self' 'unsafe-inline'; style-src-elem 'self' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self';",
             frameOptions: 'DENY',
             contentTypeOptions: true,
             referrerPolicy: 'strict-origin-when-cross-origin',

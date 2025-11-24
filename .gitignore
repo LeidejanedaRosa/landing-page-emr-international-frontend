@@ -38,4 +38,7 @@ tsconfig.tsbuildinfo
 /*.d.ts
 !src/**/*.d.ts
 
+# Lighthouse CI reports (uploaded to GitHub Artifacts)
+.lighthouseci/
+
 SEO-GUIDE.md

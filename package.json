@@ -19,7 +19,8 @@
     "test:watch": "vitest --watch",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:headed": "playwright test --headed"
+    "test:e2e:headed": "playwright test --headed",
+    "pre-deploy": "bash scripts/pre-deploy-validation.sh"
   },
   "dependencies": {
     "@sentry/react": "^10.26.0",
