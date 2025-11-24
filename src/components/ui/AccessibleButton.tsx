@@ -10,6 +10,7 @@ const LoadingSpinner = () => (
     fill='none'
     viewBox='0 0 24 24'
     aria-hidden='true'
+    data-testid='loading-spinner'
   >
     <circle
       className='opacity-25'

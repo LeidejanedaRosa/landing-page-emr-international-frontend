@@ -16,7 +16,7 @@ export const CheckIcon: React.FC<{ ariaLabel?: string }> = memo(
         xmlns='http://www.w3.org/2000/svg'
         strokeWidth={2.5}
         role='img'
-        aria-label={ariaLabel || 'Item validado'}
+        aria-label={ariaLabel}
         aria-hidden={!ariaLabel}
       >
         <path strokeLinecap='round' strokeLinejoin='round' d='M5 13l4 4L19 7' />
