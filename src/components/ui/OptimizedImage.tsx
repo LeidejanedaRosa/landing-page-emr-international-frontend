@@ -12,6 +12,12 @@ interface OptimizedImageProps
    */
   sizes?: string[]
   /**
+   * Media queries para o atributo sizes
+   * @example '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+   * @default '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+   */
+  mediaSizes?: string
+  /**
    * Formatos a serem gerados
    * @default ['webp', 'avif', 'jpg']
    */
@@ -58,29 +64,35 @@ const generateSources = (
   src: string,
   sizes: string[],
   formats: string[],
-  quality: number
+  quality: number,
+  mediaSizes?: string
 ) => {
+  const defaultMediaSizes =
+    '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+
   return formats
     .slice(0, -1)
     .map(format => (
       <source
         key={format}
         srcSet={generateSrcSet(src, sizes, format, quality)}
-        sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+        sizes={mediaSizes || defaultMediaSizes}
         type={`image/${format}`}
       />
     ))
 }
 
 // Component: Placeholder de erro
-const ErrorPlaceholder: React.FC<{ alt: string; className?: string }> = ({
-  alt,
-  className,
-}) => (
+const ErrorPlaceholder: React.FC<{
+  alt: string
+  className?: string
+  style?: React.CSSProperties
+}> = ({ alt, className, style }) => (
   <div
     className={`bg-gray-200 flex items-center justify-center text-gray-400 ${className || ''}`}
     role='img'
     aria-label={alt}
+    style={{ minHeight: '200px', ...style }}
   >
     <svg
       className='w-8 h-8'
@@ -99,18 +111,13 @@ const ErrorPlaceholder: React.FC<{ alt: string; className?: string }> = ({
   </div>
 )
 
-export const OptimizedImage: React.FC<OptimizedImageProps> = ({
-  src,
-  alt,
-  sizes = ['400w', '800w', '1200w'],
-  formats = ['avif', 'webp', 'jpg'],
-  quality = 80,
-  lazy = true,
-  onLoad,
-  onError: _onError,
-  className,
-  ...props
-}) => {
+// Helper: Gera props da imagem
+const useImageState = (
+  src: string,
+  onLoad?: () => void,
+  // eslint-disable-next-line no-unused-vars
+  onError?: (error: Error) => void
+) => {
   const [hasError, setHasError] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -122,27 +129,96 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const handleError = () => {
     setHasError(true)
     const error = new Error(`Failed to load image: ${src}`)
-    _onError?.(error)
+    onError?.(error)
   }
 
-  if (hasError) {
-    return <ErrorPlaceholder alt={alt || ''} className={className} />
-  }
+  return { hasError, isLoaded, handleLoad, handleError }
+}
+
+// Component: Renderiza a imagem otimizada
+const ImageElement: React.FC<{
+  src: string
+  alt?: string
+  fallbackFormat: string
+  quality: number
+  lazy: boolean
+  isLoaded: boolean
+  handleLoad: () => void
+  handleError: () => void
+  className?: string
+  style?: React.CSSProperties
+  [key: string]: any
+}> = ({
+  src,
+  alt,
+  fallbackFormat,
+  quality,
+  lazy,
+  isLoaded,
+  handleLoad,
+  handleError,
+  className,
+  style,
+  ...props
+}) => {
+  const imageClassName = `transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className || ''}`
 
   return (
-    <picture className={className}>
-      {generateSources(src, sizes, formats, quality)}
-      <img
-        src={`${src}?w=800&format=${formats[formats.length - 1]}&quality=${quality}`}
+    <img
+      src={`${src}?w=800&format=${fallbackFormat}&quality=${quality}`}
+      alt={alt}
+      loading={lazy ? 'lazy' : 'eager'}
+      onLoad={handleLoad}
+      onError={handleError}
+      className={imageClassName}
+      style={style}
+      {...props}
+    />
+  )
+}
+
+export const OptimizedImage: React.FC<OptimizedImageProps> = ({
+  src,
+  alt,
+  sizes = ['400w', '800w', '1200w'],
+  mediaSizes,
+  formats = ['avif', 'webp', 'jpg'],
+  quality = 80,
+  lazy = true,
+  onLoad,
+  onError: _onError,
+  className,
+  style,
+  ...props
+}) => {
+  const { hasError, isLoaded, handleLoad, handleError } = useImageState(
+    src,
+    onLoad,
+    _onError
+  )
+
+  if (hasError) {
+    return (
+      <ErrorPlaceholder alt={alt || ''} className={className} style={style} />
+    )
+  }
+
+  const fallbackFormat = formats[formats.length - 1] || 'jpg'
+
+  return (
+    <picture>
+      {generateSources(src, sizes, formats, quality, mediaSizes)}
+      <ImageElement
+        src={src}
         alt={alt}
-        loading={lazy ? 'lazy' : 'eager'}
-        onLoad={handleLoad}
-        onError={handleError}
-        className={`
-          transition-opacity duration-300
-          ${isLoaded ? 'opacity-100' : 'opacity-0'}
-          ${className || ''}
-        `}
+        fallbackFormat={fallbackFormat}
+        quality={quality}
+        lazy={lazy}
+        isLoaded={isLoaded}
+        handleLoad={handleLoad}
+        handleError={handleError}
+        className={className}
+        style={style}
         {...props}
       />
     </picture>
@@ -152,21 +228,26 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
 // eslint-disable-next-line react-refresh/only-export-components
 export const useImagePreload = (sources: string[]) => {
   useEffect(() => {
+    // Map para armazenar referências e prevenir CSS injection
+    const preloadedLinks = new Map<string, HTMLLinkElement>()
+
     sources.forEach(src => {
       const link = document.createElement('link')
       link.rel = 'preload'
       link.as = 'image'
       link.href = src
       document.head.appendChild(link)
+      preloadedLinks.set(src, link)
     })
 
     return () => {
       sources.forEach(src => {
-        const existingLink = document.querySelector(`link[href="${src}"]`)
-        if (existingLink) {
-          document.head.removeChild(existingLink)
+        const link = preloadedLinks.get(src)
+        if (link && document.head.contains(link)) {
+          document.head.removeChild(link)
         }
       })
+      preloadedLinks.clear()
     }
   }, [sources])
 }
