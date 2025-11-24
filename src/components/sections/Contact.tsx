@@ -1,11 +1,10 @@
-import React, { memo, Suspense } from 'react'
+import React, { memo } from 'react'
 
 import {
   useScreenReaderAnnouncement,
   useUniqueId,
 } from '../../hooks/useAccessibility'
 import { ScreenReaderOnly } from '../ui/Accessibility'
-import { LoadingSpinner } from '../ui/Loading'
 import { ContactForm, ContactInfo } from './ContactSections'
 
 interface ContactHeaderProps {
@@ -65,44 +64,9 @@ const ContactContent: React.FC<ContactContentProps> = memo(({ titleId }) => {
         </p>
       </ScreenReaderOnly>
 
-      <Suspense
-        fallback={
-          <div className='bg-white bg-opacity-10 rounded-2xl p-8 animate-pulse'>
-            <div className='h-6 bg-white bg-opacity-20 rounded mb-4' />
-            <div className='space-y-3'>
-              {Array(3)
-                .fill(0)
-                .map((_, i) => (
-                  <div
-                    key={i}
-                    className='h-16 bg-white bg-opacity-20 rounded'
-                  />
-                ))}
-            </div>
-          </div>
-        }
-      >
-        <ContactInfo />
-      </Suspense>
+      <ContactInfo />
 
-      <Suspense
-        fallback={
-          <div className='bg-white bg-opacity-10 rounded-2xl p-8 animate-pulse'>
-            <div className='space-y-4'>
-              {Array(4)
-                .fill(0)
-                .map((_, i) => (
-                  <div
-                    key={i}
-                    className='h-12 bg-white bg-opacity-20 rounded'
-                  />
-                ))}
-            </div>
-          </div>
-        }
-      >
-        <ContactForm onLoad={handleSectionLoad} />
-      </Suspense>
+      <ContactForm onLoad={handleSectionLoad} />
     </div>
   )
 })
@@ -120,15 +84,7 @@ const Contact: React.FC = memo(() => {
       aria-label='Entre em Contato Conosco'
     >
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <Suspense
-          fallback={
-            <div className='text-center'>
-              <LoadingSpinner size='lg' />
-            </div>
-          }
-        >
-          <ContactHeader titleId={titleId} descriptionId={descriptionId} />
-        </Suspense>
+        <ContactHeader titleId={titleId} descriptionId={descriptionId} />
 
         <div>
           <ContactContent titleId={titleId} />

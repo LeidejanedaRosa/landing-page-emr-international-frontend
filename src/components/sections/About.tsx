@@ -1,4 +1,4 @@
-import React, { memo, Suspense } from 'react'
+import React, { memo } from 'react'
 
 import FundoAbout from '../../assets/fundo_about.png'
 import JuanDesktop from '../../assets/juan-desktop.webp'
@@ -7,7 +7,6 @@ import JuanTablet from '../../assets/juan-tablet.webp'
 import Juan from '../../assets/Juan.png'
 import { spacing } from '../../styles/theme'
 import { AccessibleButton } from '../ui/AccessibleButton'
-import { LoadingSpinner } from '../ui/Loading'
 
 interface ExpertiseItem {
   id: string
@@ -111,7 +110,7 @@ const ExpertiseList: React.FC = memo(() => {
       >
         {data.expertise.map(({ id, text, ariaLabel }) => (
           <li key={id} className='flex items-start group'>
-            <CheckIcon ariaLabel='Certificação validada' />
+            <CheckIcon ariaLabel={ariaLabel} />
             <span
               className='drop-shadow-[0_2px_10px_rgba(255,255,255,1)]'
               aria-describedby={`expertise-${id}`}
@@ -162,9 +161,7 @@ const AboutContent: React.FC = memo(() => {
         />
       </header>
 
-      <Suspense fallback={<LoadingSpinner size='sm' />}>
-        <ExpertiseList />
-      </Suspense>
+      <ExpertiseList />
     </article>
   )
 })
@@ -283,9 +280,7 @@ const MainContent: React.FC = memo(() => {
           paddingRight: spacing.container.padding.sm,
         }}
       >
-        <Suspense fallback={<LoadingSpinner />}>
-          <AboutContent />
-        </Suspense>
+        <AboutContent />
       </div>
     </div>
   )
@@ -320,24 +315,9 @@ const About: React.FC = memo(() => {
         em emergências médicas e resgate tático
       </p>
 
-      <Suspense
-        fallback={
-          <LoadingSpinner
-            size='lg'
-            aria-label='Carregando imagens do instrutor'
-          />
-        }
-      >
-        <InstructorMedia />
-      </Suspense>
+      <InstructorMedia />
 
-      <Suspense
-        fallback={
-          <LoadingSpinner aria-label='Carregando informações sobre o instrutor' />
-        }
-      >
-        <MainContent />
-      </Suspense>
+      <MainContent />
     </section>
   )
 })
