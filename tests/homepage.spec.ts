@@ -74,9 +74,7 @@ test.describe('Accessibility Tests', () => {
 
     const skipLink = page.getByRole('link', { name: /pular para o conteúdo/i })
 
-    if (await skipLink.isVisible()) {
-      await expect(skipLink).toBeVisible()
-    }
+    await expect(skipLink).toBeVisible()
   })
 })
 
@@ -86,15 +84,14 @@ test.describe('Mobile Responsiveness', () => {
     await page.goto('/')
 
     const mobileMenuButton = page.getByRole('button', { name: /menu/i })
+    await expect(mobileMenuButton).toBeVisible()
 
-    if (await mobileMenuButton.isVisible()) {
-      await mobileMenuButton.click()
+    await mobileMenuButton.click()
 
-      const mobileMenu = page
-        .getByRole('navigation')
-        .locator('[role="menu"], [id*="menu"]')
-      await expect(mobileMenu).toBeVisible()
-    }
+    const mobileMenu = page
+      .getByRole('navigation')
+      .locator('[role="menu"], [id*="menu"]')
+    await expect(mobileMenu).toBeVisible()
   })
 
   test('should have readable text on mobile', async ({ page }) => {
