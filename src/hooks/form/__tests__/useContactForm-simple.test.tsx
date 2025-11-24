@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { act, renderHook, waitFor } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { useContactForm } from '../useContactForm'
 
@@ -14,6 +14,10 @@ const ERROR_INVALID_EMAIL = 'Email inválido'
 
 // eslint-disable-next-line max-lines-per-function
 describe('useContactForm', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   it('should initialize with empty form data', () => {
     const { result } = renderHook(() => useContactForm())
 
@@ -113,7 +117,5 @@ describe('useContactForm', () => {
       },
       { timeout: 3000 }
     )
-
-    vi.restoreAllMocks()
   })
 })

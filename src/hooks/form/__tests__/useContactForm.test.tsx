@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { act, renderHook, waitFor } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { useContactForm } from '../useContactForm'
 
@@ -21,6 +21,10 @@ vi.mock('../useContactForm', async () => {
 
 // eslint-disable-next-line max-lines-per-function
 describe('useContactForm', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   it('should initialize with empty form data', () => {
     const { result } = renderHook(() => useContactForm())
 
@@ -86,15 +90,14 @@ describe('useContactForm', () => {
   })
 
   it('should handle successful form submission', async () => {
-    // Mock Math.random to always return success
-    vi.spyOn(Math, 'random').mockReturnValue(0.5) // Value that causes success
+    vi.spyOn(Math, 'random').mockReturnValue(0.5)
 
     const { result } = renderHook(() => useContactForm())
 
     act(() => {
-      result.current.updateField('name', 'João Silva')
-      result.current.updateField('email', 'joao@example.com')
-      result.current.updateField('message', 'Test message')
+      result.current.updateField('name', TEST_USER_NAME)
+      result.current.updateField('email', TEST_EMAIL)
+      result.current.updateField('message', TEST_MESSAGE)
     })
 
     const mockEvent = {
@@ -110,8 +113,6 @@ describe('useContactForm', () => {
       expect(result.current.error).toBeNull()
       expect(result.current.isLoading).toBe(false)
     })
-
-    vi.restoreAllMocks()
   })
 
   it('should handle form submission error', async () => {
@@ -138,8 +139,6 @@ describe('useContactForm', () => {
       expect(result.current.isSuccess).toBe(false)
       expect(result.current.isLoading).toBe(false)
     })
-
-    vi.restoreAllMocks()
   })
 
   it('should reset form correctly', () => {
