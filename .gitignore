@@ -32,5 +32,10 @@ dist-ssr
 
 # TypeScript build cache
 tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# TypeScript generated declaration files (except src/)
+/*.d.ts
+!src/**/*.d.ts
 
 SEO-GUIDE.md
