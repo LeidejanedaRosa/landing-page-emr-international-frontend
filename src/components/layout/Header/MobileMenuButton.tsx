@@ -11,7 +11,7 @@ const MobileMenuButton: React.FC<MobileMenuButtonProps> = ({
 }) => (
   <div className='md:hidden'>
     <button
-      className='text-primary-600 hover:text-primary'
+      className='text-white hover:text-primary-400'
       onClick={onClick}
       aria-expanded={isMobileMenuOpen}
       aria-controls='mobile-menu'

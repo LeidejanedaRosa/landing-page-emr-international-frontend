@@ -14,17 +14,17 @@
 - **Documentation**: Technical documentation and README files should be in English
 - **Commit Messages**: Use semantic commits in English, separating files by responsibilities
 
-**Code Quality Standards**: Always follow [Clean Code principles](https://www.oreilly.com/library/view/clean-code-a/9780136083238/), [SOLID principles](https://en.wikipedia.org/wiki/SOLID), [accessibility standards](https://www.w3.org/WAI/WCAG21/quickref/), [semantic HTML](https://html.spec.whatwg.org/multipage/semantics.html), avoid code smells, and optimize for SEO. Every component must use proper HTML5 semantic elements and [ARIA attributes](https://www.w3.org/WAI/ARIA/apg/).
+**Code Quality Standards**: Always follow [Clean Code principles](https://www.oreilly.com/library/view/clean-code-a/9780136083238/) ([Refactoring by Martin Fowler](https://refactoring.com/)), [SOLID principles](https://en.wikipedia.org/wiki/SOLID) ([Uncle Bob - SOLID](https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html)), [accessibility standards: WCAG 2.1 AA](https://www.w3.org/WAI/WCAG21/quickref/?currentsidebar=%23col_customize&levels=aaa) ([WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/Understanding/)), [semantic HTML5 specs](https://html.spec.whatwg.org/multipage/semantics.html) ([MDN HTML Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)), avoid code smells, and optimize for SEO. Every component must use proper HTML5 semantic elements and [ARIA attributes](https://www.w3.org/WAI/ARIA/apg/).
 
 **Quality Enforcement**:
 
-- **Clean Code**: Functions should do one thing well, use meaningful names, write self-documenting code with ZERO comments ([Martin Fowler - Refactoring](https://refactoring.com/))
+- **Clean Code**: Functions should do one thing well, use meaningful names, write self-documenting code with ZERO comments ([Martin Fowler - Refactoring](https://refactoring.com/)) ([Clean Code Book](https://www.oreilly.com/library/view/clean-code-a/9780136083238/))
 - **No Code Comments Rule**: Code MUST be self-explanatory through clear naming, proper structure, and small focused functions. If you feel the need to add a comment, refactor the code instead
-- **SOLID Principles**: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion ([Uncle Bob - SOLID](https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html))
-- **Accessibility**: [WCAG 2.1 AA compliance](https://www.w3.org/WAI/WCAG21/quickref/?currentsidebar=%23col_customize&levels=aaa), keyboard navigation, screen reader support, proper contrast ratios ([WebAIM](https://webaim.org/))
+- **SOLID Principles**: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion ([Uncle Bob - SOLID](https://blog.cleancoder.com/uncle-bob/2020/10/18/Solid-Relevance.html)) ([Wikipedia - SOLID](https://en.wikipedia.org/wiki/SOLID))
+- **Accessibility**: [WCAG 2.1 AA compliance](https://www.w3.org/WAI/WCAG21/quickref/?currentsidebar=%23col_customize&levels=aaa) ([WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/Understanding/)), keyboard navigation, screen reader support, proper contrast ratios ([WebAIM](https://webaim.org/))
 - **Code Smells**: No duplicated code, no long methods/classes, no primitive obsession, proper abstraction levels ([Refactoring Guru](https://refactoring.guru/refactoring/smells))
 - **SEO**: Semantic HTML structure, proper meta tags, structured data, performance optimization ([Google Search Central](https://developers.google.com/search/docs))
-- **Semantic HTML**: Use `<main>`, `<section>`, `<article>`, `<nav>`, `<header>`, `<footer>`, `<aside>` appropriately ([MDN HTML Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element))
+- **Semantic HTML**: Use `<main>`, `<section>`, `<article>`, `<nav>`, `<header>`, `<footer>`, `<aside>` appropriately ([MDN HTML Elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element)) ([HTML Living Standard](https://html.spec.whatwg.org/multipage/semantics.html))
 
 **Information Freshness & Sources**:
 
@@ -116,7 +116,7 @@ src/
 - **Semantic Structure**: Use heading hierarchy (`h1` → `h2` → `h3`), proper landmarks, descriptive link text ([W3C HTML5 Sections](https://www.w3.org/TR/html5/sections.html))
 - **Performance Targets**: First Contentful Paint < 1.5s, Largest Contentful Paint < 2.5s, Cumulative Layout Shift < 0.1 ([Web.dev Metrics](https://web.dev/metrics/))
 - **Image Optimization**: WebP format, responsive images with `srcset`, proper `alt` attributes, lazy loading for non-critical images ([MDN Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images))
-- **Core Web Vitals**: Monitor and optimize for [Google's Core Web Vitals metrics](https://web.dev/articles/vitals) ([Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci))
+- **Core Web Vitals**: Monitor and optimize for [Google's Core Web Vitals metrics](https://web.dev/articles/vitals) ([Web.dev Core Web Vitals](https://web.dev/vitals/)) ([Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci))
 
 ## Critical Integration Points
 

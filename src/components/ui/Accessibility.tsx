@@ -92,15 +92,15 @@ export const AccessibleButton = forwardRef<
   ) => {
     const baseClasses = [
       'inline-flex items-center justify-center font-medium rounded-lg',
-      'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
+      'transition-colors duration-200 focus:outline-none',
       'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
     ]
 
     const variantClasses = {
-      primary: 'bg-cta hover:bg-cta-800 text-secondary focus:ring-cta-500',
+      primary: 'bg-cta hover:bg-cta-800 text-secondary',
       secondary:
-        'bg-secondary hover:bg-gray-50 text-primary border-2 border-primary focus:ring-primary',
-      ghost: 'bg-transparent hover:bg-gray-100 text-primary focus:ring-primary',
+        'bg-secondary hover:bg-gray-50 text-primary border-2 border-primary',
+      ghost: 'bg-transparent hover:bg-gray-100 text-primary',
     }
 
     const sizeClasses = {
@@ -252,8 +252,7 @@ export const AccessibleLink = forwardRef<
 
     const baseClasses = [
       'inline-flex items-center font-medium rounded',
-      'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
-      'focus:ring-primary hover:underline',
+      'transition-colors duration-200 focus:outline-none',
     ]
 
     const variantClass = getVariantClasses(variant, isCurrentPage)

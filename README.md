@@ -107,25 +107,7 @@ venv\Scripts\activate  # Windows
 ## 📁 Estrutura do Projeto
 
 ```
-src/
-├── components/           # Componentes React reutilizáveis
-│   ├── layout/          # Componentes de layout (Header, Footer, ResponsiveLayout)
-│   ├── sections/        # Seções da página (Hero, About, Services, Contact)
-│   ├── ui/              # Componentes de UI acessíveis
-│   ├── seo/             # Componentes para SEO
-│   └── error/           # Error boundaries
-├── hooks/               # Hooks customizados
-│   ├── accessibility/   # useCurrentSection, useFocus, useFocusTrap, useUniqueId
-│   ├── form/            # useContactForm
-│   ├── data/            # useAboutData
-│   └── __tests__/       # Testes dos hooks
-├── utils/               # Funções utilitárias
-│   ├── accessibility/   # Helpers de acessibilidade
-│   └── __tests__/       # Testes dos utilitários
-├── styles/              # Configurações de tema
-├── types/               # Definições de tipos TypeScript
-├── data/                # Dados estáticos da aplicação
-└── assets/              # Imagens e arquivos estáticos
+
 ```
 
 ## 🎯 Hooks Disponíveis
@@ -296,7 +278,7 @@ import { AccessibleLink } from './components/ui/Accessibility'
 ```typescript
 import { useCurrentSection } from './hooks/useCurrentSection'
 import { AccessibleLink } from './components/ui/Accessibility'
-import { Header } from './components/layout/Header'
+import Header from './components/layout/Header'
 
 function App() {
   const currentSection = useCurrentSection(['home', 'sobre', 'servicos'])

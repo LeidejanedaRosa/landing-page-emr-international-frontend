@@ -9,12 +9,9 @@ export default defineConfig({
   plugins: [
     react(),
     imagetools(),
-    // Security headers apenas em produção
     ...(process.env.NODE_ENV === 'production'
       ? [
           securityHeaders({
-            // CSP hardened: removed 'unsafe-inline', using hashes for JSON-LD scripts
-            // Hash generated for inline JSON-LD structured data in index.html
             csp: "default-src 'self'; script-src 'self' 'sha256-E1xA964fM7OP0+1NOZ7mloL70P6XbVKzT4s4mPv35GQ='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';",
             frameOptions: 'DENY',
             contentTypeOptions: true,

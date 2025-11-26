@@ -10,10 +10,10 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = React.memo(
   ({ onLinkClick, currentSection }) => (
     <div id='mobile-menu' className='md:hidden'>
-      <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200'>
+      <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/20'>
         <AccessibleLink
           href='#sobre'
-          className='block px-3 py-2 rounded-md transition-colors duration-200'
+          className='block px-3 py-2 rounded-md transition-colors duration-200 hover:bg-white/30'
           variant='ghost'
           ariaCurrent={currentSection === 'sobre' ? 'page' : undefined}
           onClick={onLinkClick}
@@ -22,7 +22,7 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
         </AccessibleLink>
         <AccessibleLink
           href='#servicos'
-          className='block px-3 py-2 rounded-md transition-colors duration-200'
+          className='block px-3 py-2 rounded-md transition-colors duration-200 hover:bg-white/30'
           variant='ghost'
           ariaCurrent={currentSection === 'servicos' ? 'page' : undefined}
           onClick={onLinkClick}
@@ -31,7 +31,7 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
         </AccessibleLink>
         <AccessibleLink
           href='#contato'
-          className='block px-3 py-2 rounded-md transition-colors duration-200'
+          className='block px-3 py-2 rounded-md transition-colors duration-200 hover:bg-white/30'
           variant='ghost'
           ariaCurrent={currentSection === 'contato' ? 'page' : undefined}
           onClick={onLinkClick}

@@ -26,7 +26,7 @@ const CompanyLogoComponent: React.FC<LogoProps> = memo(({ logoId }) => {
   return (
     <a
       href='#hero'
-      className='flex items-center focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-lg p-2 -m-2'
+      className='flex items-center focus:outline-none rounded-lg p-2 -m-2'
       aria-label='EMR Internacional - Voltar ao início'
     >
       <img
@@ -78,7 +78,6 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
     }
   }, [currentSection, announce])
 
-  // Fecha mobile menu com Escape
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isMobileMenuOpen) {
@@ -93,7 +92,6 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
 
   return (
     <>
-      {/* Skip Links para acessibilidade */}
       <SkipLink href='#main-content' onClick={skipToContent}>
         Pular para conteúdo principal
       </SkipLink>
@@ -104,11 +102,11 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
       <header id={headerId} className={`p-4 ${className}`} role='banner'>
         <nav
           id={navId}
-          className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'
+          className='max-w-7xl mx-auto'
           role='navigation'
           aria-label='Navegação principal'
         >
-          <div className='flex justify-between items-center py-4'>
+          <div className='flex justify-between items-center'>
             <CompanyLogoComponent logoId={logoId} />
 
             <DesktopMenu currentSection={currentSection} />

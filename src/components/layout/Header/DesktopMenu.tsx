@@ -52,11 +52,9 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
       <span id={`${menuId}-label`} className='sr-only'>
         Menu principal de navegação
       </span>
-
       <ul className='flex space-x-8'>
         {navigationItems.map(item => {
           const isCurrent = currentSection === item.id
-
           return (
             <li key={item.id}>
               <AccessibleLink
@@ -78,7 +76,5 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
     </nav>
   )
 })
-
 DesktopMenu.displayName = 'DesktopMenu'
-
 export default DesktopMenu

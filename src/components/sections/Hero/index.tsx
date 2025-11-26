@@ -146,11 +146,10 @@ const Hero: React.FC = memo(() => {
       className='relative min-h-screen text-white overflow-hidden'
       aria-labelledby={`${sectionId}-heading`}
     >
-      {/* Título principal visível para todos os usuários */}
       <div className='absolute top-24 left-0 right-0 z-20 px-4 sm:px-6 lg:px-8'>
         <h1
           id={`${sectionId}-heading`}
-          className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-2xl max-w-4xl'
+          className='hidden text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-2xl max-w-4xl'
           style={{
             textShadow:
               '0 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6)',

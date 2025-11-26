@@ -288,7 +288,11 @@ const MainContent: React.FC = memo(() => {
 
 MainContent.displayName = 'MainContent'
 
-const About: React.FC = memo(() => {
+interface AboutProps {
+  skipToSectionId?: string
+}
+
+const About: React.FC<AboutProps> = memo(({ skipToSectionId = 'contato' }) => {
   return (
     <section
       id='sobre'
@@ -299,7 +303,7 @@ const About: React.FC = memo(() => {
       <AccessibleButton
         className='sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 bg-white px-4 py-2 rounded border-2 border-cta-500'
         onClick={() => {
-          const nextSection = document.getElementById('contato')
+          const nextSection = document.getElementById(skipToSectionId)
           if (nextSection) {
             nextSection.setAttribute('tabindex', '-1')
             nextSection.focus()
