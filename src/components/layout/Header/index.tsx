@@ -26,7 +26,7 @@ const CompanyLogoComponent: React.FC<LogoProps> = memo(({ logoId }) => {
   return (
     <a
       href='#hero'
-      className='flex items-center focus:outline-none rounded-lg p-2 -m-2'
+      className='flex items-center rounded-lg p-2 -m-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
       aria-label='EMR Internacional - Voltar ao início'
     >
       <img
