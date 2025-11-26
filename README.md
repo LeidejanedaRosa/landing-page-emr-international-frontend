@@ -107,7 +107,35 @@ venv\Scripts\activate  # Windows
 ## 📁 Estrutura do Projeto
 
 ```
-
+src/
+├── components/
+│   ├── layout/
+│   │   └── Header/
+│   │       ├── DesktopMenu.tsx
+│   │       ├── MobileMenu.tsx
+│   │       ├── MobileMenuButton.tsx
+│   │       └── index.tsx
+│   ├── ui/
+│   │   └── Accessibility.tsx
+│   ├── sections/
+│   │   ├── Hero/
+│   │   ├── About.tsx
+│   │   ├── Services.tsx
+│   │   └── Contact.tsx
+│   └── ...
+├── hooks/
+│   ├── useCurrentSection.ts
+│   ├── useAccessibility.ts
+│   ├── form/
+│   │   └── useContactForm.ts
+│   └── useAboutData.ts
+├── data/
+│   └── companyInfo.ts
+├── styles/
+│   └── theme.ts
+├── App.tsx
+├── main.tsx
+└── ...
 ```
 
 ## 🎯 Hooks Disponíveis
@@ -413,3 +441,21 @@ Para informações detalhadas sobre padrões de código, acessibilidade e arquit
 ## 📄 Licença
 
 Este projeto é privado e pertence à EMR Internacional.
+
+# 📝 Upgrade Notes
+
+## Breaking Changes
+
+### Header Component Export
+
+- The `Header` component is now exported as a default export.
+- **Migration:**
+  - Before:
+    ```typescript
+    import { Header } from './components/layout/Header'
+    ```
+  - After:
+    ```typescript
+    import Header from './components/layout/Header'
+    ```
+- If you are upgrading from a previous version, update all imports accordingly to avoid runtime errors.
