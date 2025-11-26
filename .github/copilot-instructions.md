@@ -112,12 +112,11 @@ src/
 
 ### SEO & Performance Standards
 
-**Performance Targets**: Largest Contentful Paint < 2.5s, Interaction to Next Paint < 200ms, Cumulative Layout Shift < 0.1 ([Web.dev Metrics](https://web.dev/metrics/))
+**Performance Targets**: First Contentful Paint < 1.5s, Largest Contentful Paint < 2.5s, Interaction to Next Paint < 200ms, Cumulative Layout Shift < 0.1 ([Web.dev Metrics](https://web.dev/metrics/))
 
 - **Semantic Structure**: Use heading hierarchy (`h1` → `h2` → `h3`), proper landmarks, descriptive link text ([W3C HTML5 Sections](https://www.w3.org/TR/html5/sections.html))
-- **Performance Targets**: First Contentful Paint < 1.5s, Largest Contentful Paint < 2.5s, Cumulative Layout Shift < 0.1 ([Web.dev Metrics](https://web.dev/metrics/))
 - **Image Optimization**: WebP format, responsive images with `srcset`, proper `alt` attributes, lazy loading for non-critical images ([MDN Responsive Images](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images))
-- **Core Web Vitals**: Monitor and optimize for [Google's Core Web Vitals metrics](https://web.dev/articles/vitals) ([Web.dev Core Web Vitals](https://web.dev/vitals/)) ([Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci))
+- **Core Web Vitals**: Monitor and optimize for [Google's Core Web Vitals metrics](https://web.dev/articles/vitals) ([Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci))
 
 ## Critical Integration Points
 
