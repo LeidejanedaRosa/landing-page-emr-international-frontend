@@ -97,10 +97,10 @@ export const AccessibleButton = forwardRef<
     ]
 
     const variantClasses = {
-      primary: 'bg-cta hover:bg-cta-800 text-secondary',
+      primary: 'bg-cta hover:bg-cta-800 text-secondary focus:ring-cta-500',
       secondary:
-        'bg-secondary hover:bg-gray-50 text-primary border-2 border-primary',
-      ghost: 'bg-transparent hover:bg-gray-100 text-primary',
+        'bg-secondary hover:bg-gray-50 text-primary border-2 border-primary focus:ring-primary',
+      ghost: 'bg-transparent hover:bg-gray-100 text-primary focus:ring-primary',
     }
 
     const sizeClasses = {
