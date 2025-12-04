@@ -36,7 +36,6 @@ const CompanyLogoComponent: React.FC<LogoProps> = memo(({ logoId }) => {
         style={{
           filter:
             'drop-shadow(0 0 12px rgb(255 255 255 / 1)) drop-shadow(0 0 16px rgb(255 255 255 / 0.4)) brightness(1.1)',
-          height: '128px',
         }}
         width={120}
         height={128}
