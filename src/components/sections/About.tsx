@@ -231,7 +231,7 @@ const About: React.FC = memo(() => {
   return (
     <section
       id='sobre'
-      className='relative min-h-[60vh] lg:min-h-full bg-gradient-to-b lg:bg-gradient-to-b from-slate-800 from-0% to-slate-200 to-90%'
+      className='relative min-h-[60vh] lg:min-h-full bg-gradient-to-b lg:bg-gradient-to-l from-slate-800 from-0% to-slate-200 to-90%'
       aria-labelledby='about-heading'
       aria-describedby='about-description'
     >
