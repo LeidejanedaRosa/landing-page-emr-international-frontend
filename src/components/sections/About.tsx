@@ -12,8 +12,8 @@ const InstructorMedia: React.FC = memo(() => {
     'Juan Regenerati, instrutor certificado em emergências médicas, paramédico e especialista em resgate tático'
 
   return (
-    <figure className='w-full h-full'>
-      <picture>
+    <figure className='w-full h-full flex items-center justify-center p-5'>
+      <picture className='w-full flex items-center justify-center'>
         <source
           srcSet={FundoAboutAvif}
           type='image/avif'
@@ -27,7 +27,7 @@ const InstructorMedia: React.FC = memo(() => {
         <img
           src={FundoAboutJpg}
           alt={instructorImageAlt}
-          className='w-full h-[100vh] 2xl:h-[60vh] object-cover object-left'
+          className='object-contain object-center w-full h-auto max-h-[80vh] grayscale'
           loading='eager'
           decoding='async'
           fetchPriority='high'
@@ -74,7 +74,7 @@ const useAboutData = (): { data: AboutData } => {
             atendimento pré-hospitalar em áreas remotas.
           </>
         ),
-        style: 'border-l-4 border-black pl-4',
+        style: 'border-l-4 border-white pl-4 text-white',
         ariaLabel:
           'Especialização em emergências médicas em ambientes urbanos e rurais',
       },
@@ -89,7 +89,7 @@ const useAboutData = (): { data: AboutData } => {
             Militar, Exército Brasileiro e Força Nacional de Segurança Pública.
           </>
         ),
-        style: 'bg-black text-white p-3 text-center lg:text-xs xl:text-base',
+        style: 'text-white p-3 text-center lg:text-xs xl:text-base',
         ariaLabel:
           'Especialização em resgate tático em zonas de conflito e atendimento pré-hospitalar em ambientes de alto risco',
       },
@@ -103,7 +103,7 @@ const useAboutData = (): { data: AboutData } => {
             American College of Surgeons e American Red Cross, entre outras.
           </>
         ),
-        style: 'border-l-4 border-black pl-4',
+        style: 'border-l-4 border-white pl-4 text-white',
         ariaLabel:
           'Capacitação de forças operacionais incluindo Corpo de Bombeiros, Exército Brasileiro e Força Nacional',
       },
@@ -117,7 +117,7 @@ const AboutContent: React.FC = memo(() => {
   const { data } = useAboutData()
 
   return (
-    <article className='w-full h-full flex items-center justify-center space-y-6 p-10'>
+    <article className='w-full p-10'>
       <header className='w-full max-w-screen-2xl'>
         <p className='text-sm sm:text-base font-semibold text-cta-600  uppercase tracking-wider'>
           {data.overline}
@@ -125,12 +125,12 @@ const AboutContent: React.FC = memo(() => {
 
         <h2
           id='about-heading'
-          className='text-3xl sm:text-4xl md:text-5xl lg:text-4xl font-extrabold text-black mb-4 lg:mb-3 leading-tight'
+          className='text-2xl font-extrabold text-gray-300 mb-4 lg:mb-3 leading-tight'
         >
           {data.title}
         </h2>
 
-        <h3 className='text-3xl lg:text-2xl text-white text-center mb-4 lg:mb-3'>
+        <h3 className='font-capture-it text-4xl md:text-6xl text-white text-center mb-4 lg:mb-3'>
           {data.subtitle}
         </h3>
         <hr
@@ -173,7 +173,7 @@ const StatCard: React.FC<StatCardProps> = memo(
   ({ value, label, ariaLabel }) => {
     return (
       <div
-        className='col-span-1 bg-white border-2 border-black px-4 py-3 flex flex-col items-center justify-center gap-3 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105'
+        className='col-span-1 backdrop-blur-sm bg-white/50  px-4 py-3 flex flex-col items-center justify-center gap-3 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105'
         role='group'
         aria-label={ariaLabel}
       >
@@ -231,15 +231,15 @@ const About: React.FC = memo(() => {
   return (
     <section
       id='sobre'
-      className='relative min-h-[60vh] lg:min-h-full bg-gradient-to-b lg:bg-gradient-to-l from-gray-600 from-0% to-gray-200 to-100%'
+      className='relative min-h-screen bg-black'
       aria-labelledby='about-heading'
       aria-describedby='about-description'
     >
-      <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row-reverse'>
-        <div className='w-full lg:w-1/2 h-full'>
+      <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row lg:min-h-screen'>
+        <div className='w-full lg:w-1/2 min-h-[50vh] lg:min-h-screen flex items-center justify-center'>
           <InstructorMedia />
         </div>
-        <div className='w-full lg:w-1/2 h-full'>
+        <div className='w-full lg:w-1/2 min-h-[50vh] lg:min-h-screen flex items-center justify-center'>
           <AboutContent />
         </div>
       </div>
