@@ -92,6 +92,7 @@ export default {
       },
       fontFamily: {
         sans: ['Arial', 'system-ui', 'sans-serif'],
+        'capture-it': ['Capture it', 'cursive'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

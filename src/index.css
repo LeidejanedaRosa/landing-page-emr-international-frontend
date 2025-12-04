@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Capture it';
+  src: url('/assets/fonts/Capture it.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
