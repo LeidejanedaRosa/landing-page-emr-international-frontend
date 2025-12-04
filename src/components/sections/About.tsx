@@ -118,7 +118,7 @@ const AboutContent: React.FC = memo(() => {
 
   return (
     <article className='w-full h-full flex items-center justify-center space-y-6 p-10'>
-      <header className='w-full max-w-lg'>
+      <header className='w-full max-w-screen-2xl'>
         <p className='text-sm sm:text-base font-semibold text-cta-600  uppercase tracking-wider'>
           {data.overline}
         </p>
@@ -231,7 +231,7 @@ const About: React.FC = memo(() => {
   return (
     <section
       id='sobre'
-      className='relative min-h-[60vh] lg:min-h-full bg-gradient-to-b lg:bg-gradient-to-l from-slate-800 from-0% to-slate-200 to-90%'
+      className='relative min-h-[60vh] lg:min-h-full bg-gradient-to-b lg:bg-gradient-to-l from-gray-600 from-0% to-gray-200 to-100%'
       aria-labelledby='about-heading'
       aria-describedby='about-description'
     >
