@@ -143,7 +143,7 @@ const Hero: React.FC = memo(() => {
   return (
     <section
       id={sectionId}
-      className='relative min-h-screen text-white overflow-hidden'
+      className='relative min-h-screen 2xl:min-h-full text-white overflow-hidden'
       aria-labelledby={`${sectionId}-heading`}
     >
       <div className='absolute top-24 left-0 right-0 z-20 px-4 sm:px-6 lg:px-8'>
@@ -166,7 +166,7 @@ const Hero: React.FC = memo(() => {
       </div>
 
       <HeroImage
-        className='absolute w-[100%] -top-[550px] h-[250%] object-cover object-center'
+        className='absolute w-[100%] -top-[550px] h-[250%] object-cover object-center 2xl:translate-y-32'
         prefersReducedMotion={prefersReducedMotion}
       />
 
@@ -185,7 +185,7 @@ const Hero: React.FC = memo(() => {
         </Suspense>
       </div>
 
-      <MainContent className='relative z-10 flex items-end pt-8 pb-20 px-4 sm:px-6 lg:px-8'>
+      <MainContent className='relative max-w-screen-2xl mx-auto z-10 flex items-end pt-8 pb-20 px-4 sm:px-6 lg:px-8'>
         <HeroContent
           onViewCoursesClick={handleViewCoursesClick}
           carouselProps={carouselProps}
