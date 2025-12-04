@@ -11,7 +11,7 @@ const CarouselIndicators: React.FC<CarouselIndicatorsProps> = ({
   goToSlide,
 }) => (
   <div
-    className='absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2'
+    className='absolute bottom-6 md:bottom-4 left-1/2 -translate-x-1/2 flex space-x-2'
     role='tablist'
     aria-label='Indicadores do carrossel'
   >
