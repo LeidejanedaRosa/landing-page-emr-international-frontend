@@ -57,7 +57,7 @@ const MobileTabletCarousel: React.FC<MobileTabletCarouselProps> = ({
   return (
     <div className='lg:hidden w-full'>
       <div
-        className='backdrop-blur-sm bg-black/20 rounded-2xl p-6 md:p-8 min-h-[400px] relative'
+        className='backdrop-blur-sm bg-black/20 rounded-2xl p-6 md:p-8 min-h-[400px] relative overflow-hidden pb-16'
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
         onKeyDown={handleKeyDown}
