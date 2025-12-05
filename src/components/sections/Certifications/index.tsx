@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 
 import { certifications } from '../../../data/certificationsData'
 import {
@@ -158,6 +158,7 @@ const CertificationsGrid: React.FC<CertificationsGridProps> = memo(
       <div className='overflow-hidden'>
         <div
           className='flex'
+          role='list'
           style={{
             transform: `translateX(-${currentIndex * (100 / itemsVisible)}%)`,
             transition: isTransitioning ? 'transform 0.5s ease-out' : 'none',
@@ -200,21 +201,38 @@ const useCertificationsHandlers = ({
   currentIndex,
   maxIndex,
 }: CertificationsHandlersParams) => {
+  const previousIndexRef = useRef(currentIndex)
+  const isUserInteractionRef = useRef(false)
+
+  useEffect(() => {
+    if (
+      isUserInteractionRef.current &&
+      previousIndexRef.current !== currentIndex
+    ) {
+      const realIndex =
+        currentIndex === 0 || currentIndex > maxIndex + 1
+          ? ((currentIndex - 1 + maxIndex + 1) % (maxIndex + 1)) + 1
+          : currentIndex
+
+      announce(`Mostrando certificação ${realIndex}`, 'polite')
+      isUserInteractionRef.current = false
+    }
+    previousIndexRef.current = currentIndex
+  }, [currentIndex, announce, maxIndex])
+
   const handlePrevious = () => {
+    isUserInteractionRef.current = true
     previousSlide()
-    const certNum = currentIndex === 0 ? maxIndex + 1 : currentIndex
-    announce(`Mostrando certificação ${certNum}`, 'polite')
   }
 
   const handleNext = () => {
+    isUserInteractionRef.current = true
     nextSlide()
-    const certNum = currentIndex === maxIndex ? 1 : currentIndex + 2
-    announce(`Mostrando certificação ${certNum}`, 'polite')
   }
 
   const handleGoToSlide = (targetIndex: number) => {
+    isUserInteractionRef.current = true
     goToSlide(targetIndex)
-    announce(`Mostrando certificação ${targetIndex + 1}`, 'polite')
   }
 
   return { handlePrevious, handleNext, handleGoToSlide }
@@ -257,7 +275,7 @@ const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> 
     }) => {
       return (
         <section
-          id='certifications'
+          id='certificacoes'
           className='w-full py-16 px-4 bg-gray-50'
           aria-labelledby={`${sectionId}-heading`}
           onMouseEnter={pauseAutoPlay}
