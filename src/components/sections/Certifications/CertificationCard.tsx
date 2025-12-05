@@ -10,10 +10,23 @@ interface CertificationCardProps {
   year: string
   logo: string
   index: number
+  certifiedLabel?: string
+  readMoreLabel?: string
+  closeButtonLabel?: string
 }
 
 export const CertificationCard: React.FC<CertificationCardProps> = memo(
-  ({ name, organization, description, year, logo, index }) => {
+  ({
+    name,
+    organization,
+    description,
+    year,
+    logo,
+    index,
+    certifiedLabel = 'Credenciado',
+    readMoreLabel = 'Ler mais',
+    closeButtonLabel = 'Fechar modal',
+  }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const isCTECC = organization.includes('Tactical Emergency Casualty Care')
 
@@ -42,13 +55,13 @@ export const CertificationCard: React.FC<CertificationCardProps> = memo(
               <button
                 onClick={() => setIsModalOpen(true)}
                 className='text-sm text-black font-semibold hover:text-gray-700 underline focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 rounded bg-transparent border-0 cursor-pointer'
-                aria-label={`Ler mais sobre ${name}`}
+                aria-label={`${readMoreLabel} sobre ${name}`}
               >
-                Ler mais
+                {readMoreLabel}
               </button>
             </div>
             <p className='text-xs font-semibold text-gray-500 uppercase tracking-wider mt-4'>
-              Credenciado {year}
+              {certifiedLabel} {year}
             </p>
           </div>
         </article>
@@ -62,6 +75,8 @@ export const CertificationCard: React.FC<CertificationCardProps> = memo(
             description={description}
             year={year}
             logo={logo}
+            certifiedLabel={certifiedLabel}
+            closeButtonLabel={closeButtonLabel}
           />
         )}
       </>
