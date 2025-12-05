@@ -8,19 +8,15 @@ interface CertificationModalProps {
   isOpen: boolean
   onClose: () => void
   name: string
-  organization: string
   description: string
   year: string
-  logo: string
   certifiedLabel?: string
   closeButtonLabel?: string
 }
 
 interface ModalHeaderProps {
   name: string
-  organization: string
   year: string
-  logo: string
   certifiedLabel: string
   closeButtonLabel: string
   onClose: () => void
@@ -29,9 +25,7 @@ interface ModalHeaderProps {
 
 const ModalHeader: React.FC<ModalHeaderProps> = ({
   name,
-  organization,
   year,
-  logo,
   certifiedLabel,
   closeButtonLabel,
   onClose,
@@ -39,14 +33,6 @@ const ModalHeader: React.FC<ModalHeaderProps> = ({
 }) => (
   <div className='sticky top-0 bg-white border-b border-gray-200 p-4 md:p-6 flex items-start justify-between z-10'>
     <div className='flex items-center gap-4 flex-1 min-w-0'>
-      <figure className='w-16 h-16 md:w-20 md:h-20 flex items-center justify-center flex-shrink-0'>
-        <img
-          src={logo}
-          alt={`Logo ${organization}`}
-          className='max-w-full max-h-full object-contain'
-          loading='eager'
-        />
-      </figure>
       <div className='min-w-0 flex-1'>
         <h2
           id='modal-title'
@@ -89,10 +75,8 @@ export const CertificationModal: React.FC<CertificationModalProps> = memo(
     isOpen,
     onClose,
     name,
-    organization,
     description,
     year,
-    logo,
     certifiedLabel = 'Credenciado',
     closeButtonLabel = 'Fechar modal',
   }) => {
@@ -140,9 +124,7 @@ export const CertificationModal: React.FC<CertificationModalProps> = memo(
           >
             <ModalHeader
               name={name}
-              organization={organization}
               year={year}
-              logo={logo}
               certifiedLabel={certifiedLabel}
               closeButtonLabel={closeButtonLabel}
               onClose={onClose}
