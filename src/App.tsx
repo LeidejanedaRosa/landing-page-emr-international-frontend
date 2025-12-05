@@ -7,6 +7,9 @@ import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
 import SEO from './utils/SEO'
 
 const About = React.lazy(() => import('./components/sections/About'))
+const Certifications = React.lazy(
+  () => import('./components/sections/Certifications')
+)
 const Services = React.lazy(() => import('./components/sections/Services'))
 const Contact = React.lazy(() => import('./components/sections/Contact'))
 const Footer = React.lazy(() => import('./components/layout/Footer'))
@@ -21,6 +24,9 @@ function App() {
           <Hero />
           <Suspense fallback={<SectionSkeleton />}>
             <About />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <Certifications />
           </Suspense>
           <Suspense fallback={<SectionSkeleton />}>
             <Services />
