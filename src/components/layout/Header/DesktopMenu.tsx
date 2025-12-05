@@ -30,6 +30,13 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
         'Navegar para seção Sobre - Informações sobre a EMR Internacional',
     },
     {
+      id: 'certifications',
+      href: '#certifications',
+      label: 'Certificações',
+      ariaLabel:
+        'Navegar para seção Certificações - Credenciamento internacional',
+    },
+    {
       id: 'servicos',
       href: '#servicos',
       label: 'Serviços',

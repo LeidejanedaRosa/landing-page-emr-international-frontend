@@ -63,6 +63,7 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
     if (currentSection && currentSection !== 'hero') {
       const sectionNames = {
         sobre: 'Sobre',
+        certifications: 'Certificações',
         servicos: 'Serviços',
         contato: 'Contato',
         cursos: 'Cursos',
