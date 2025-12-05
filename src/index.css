@@ -96,11 +96,14 @@
     animation: scaleIn 0.2s ease-out;
   }
 
+  .animate-fade-in {
+    animation: fadeIn 500ms ease-out forwards;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-fade-in,
     .animate-slide-up,
     .animate-scale-in,
-    .animate-fadeIn,
     .animate-scroll {
       animation: none;
       animation-duration: 0s;
@@ -112,6 +115,15 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
     transform: translateY(10px);
   }
   to {
@@ -120,8 +132,8 @@
   }
 }
 
-.animate-fadeIn {
-  animation: fadeIn 500ms ease-out forwards;
+.animate-fade-in-slide {
+  animation: fadeInSlide 500ms ease-out forwards;
 }
 
 @keyframes slideUp {
