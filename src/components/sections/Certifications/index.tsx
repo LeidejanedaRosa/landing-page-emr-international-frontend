@@ -252,7 +252,6 @@ interface CertificationsSectionContentProps {
   realCurrentIndex: number
   totalItems: number
   handleGoToSlide: (arg: number) => void // eslint-disable-line no-unused-vars
-  prefersReducedMotion: boolean
 }
 
 const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> =
@@ -271,7 +270,6 @@ const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> 
       realCurrentIndex,
       totalItems,
       handleGoToSlide,
-      prefersReducedMotion,
     }) => {
       return (
         <section
@@ -310,13 +308,6 @@ const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> 
                 </>
               )}
             </div>
-
-            <ScreenReaderOnly>
-              <p aria-live='polite' aria-atomic='true'>
-                {!prefersReducedMotion &&
-                  'Carrossel em rotação automática. Passe o mouse sobre a seção para pausar.'}
-              </p>
-            </ScreenReaderOnly>
           </div>
         </section>
       )
@@ -329,6 +320,7 @@ const Certifications: React.FC = () => {
   const { prefersReducedMotion } = useAccessibilityPreferences()
   const { announce } = useScreenReaderAnnouncement()
   const sectionId = useUniqueId('certifications')
+  const hasAnnouncedAutoPlayRef = useRef(false)
 
   const {
     currentIndex,
@@ -347,6 +339,16 @@ const Certifications: React.FC = () => {
     autoPlayDelay: 4000,
     itemsPerView: { mobile: 1, tablet: 2, desktop: 4 },
   })
+
+  useEffect(() => {
+    if (!prefersReducedMotion && !hasAnnouncedAutoPlayRef.current) {
+      announce(
+        'Carrossel em rotação automática. Passe o mouse sobre a seção para pausar.',
+        'polite'
+      )
+      hasAnnouncedAutoPlayRef.current = true
+    }
+  }, [prefersReducedMotion, announce])
 
   const { handlePrevious, handleNext, handleGoToSlide } =
     useCertificationsHandlers({
@@ -387,7 +389,6 @@ const Certifications: React.FC = () => {
       realCurrentIndex={realCurrentIndex}
       totalItems={certifications.length}
       handleGoToSlide={handleGoToSlide}
-      prefersReducedMotion={prefersReducedMotion}
     />
   )
 }
