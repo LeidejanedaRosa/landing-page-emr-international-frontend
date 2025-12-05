@@ -26,6 +26,7 @@
     "@sentry/react": "^10.26.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-focus-lock": "^2.13.7",
     "react-helmet-async": "^2.0.5",
     "web-vitals": "^5.1.0",
     "workbox-window": "^7.4.0"
