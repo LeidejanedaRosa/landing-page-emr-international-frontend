@@ -16,7 +16,7 @@ export interface Certification {
 export const certifications: Certification[] = [
   {
     id: 'hsi',
-    name: 'HSI – Health & Safety Institute',
+    name: 'Health & Safety Institute',
     organization: 'Health & Safety Institute',
     description:
       'Instrutor credenciado pelo Health & Safety Institute (HSI), uma das maiores referências mundiais em educação em saúde, segurança e resposta a emergências. O HSI reúne marcas de excelência como 24-7 EMS, Medic First Aid, ASHI, EMS Safety Services e o inovador AVIRT (Active Violence Immediate Response Training) programa focado em resposta imediata a incidentes de violência ativa, combinando técnicas de controle de hemorragias e tomada de decisão sob estresse. A HSI forma profissionais capazes de agir com eficácia, confiança e padronização em qualquer cenário do ambiente industrial às operações táticas.',
@@ -24,20 +24,20 @@ export const certifications: Certification[] = [
     logo: logo1,
   },
   {
-    id: 'acs',
-    name: 'ACS - American College of Surgeons',
-    organization: 'American College of Surgeons',
+    id: 'naui',
+    name: 'National Association of Underwater Instructors',
+    organization: 'National Association of Underwater Instructors',
     description:
-      'Instrutor certificado pelo programa Stop the Bleed, uma iniciativa global do American College of Surgeons (ACS) em parceria com o Committee on Trauma (CoT). O curso capacita profissionais e civis a reconhecer e controlar hemorragias graves, utilizando técnicas baseadas em evidências do Tactical Combat Casualty Care (TCCC). O programa é reconhecido internacionalmente como padrão ouro em controle de sangramento, sendo parte essencial da resposta imediata a traumas em ambientes civis, militares e de alta ameaça.',
+      'Instrutor vinculado à National Association of Underwater Instructors (NAUI), uma das mais tradicionais e respeitadas organizações de mergulho autônomo do mundo. A NAUI é reconhecida por seus padrões rigorosos de segurança e excelência educacional na formação de mergulhadores, instrutores e especialistas em resgate subaquático. Os programas da NAUI enfatizam autonomia, consciência situacional e gestão de emergências aquáticas, sendo amplamente adotados em treinamentos civis, militares e de operações de busca e salvamento.',
     year: '2025',
     logo: logo2,
   },
   {
-    id: 'arc',
-    name: 'ARC - American Red Cross',
-    organization: 'American Red Cross',
+    id: 'acs',
+    name: 'American College of Surgeons',
+    organization: 'American College of Surgeons',
     description:
-      'Instrutor afiliado à American Red Cross, instituição humanitária de alcance global e referência em formação de socorristas, resposta a desastres e educação em emergências médicas. A Cruz Vermelha Americana é pioneira na criação de protocolos e treinamentos de primeiros socorros, RCP/AED, suporte básico de vida e resposta comunitária a emergências, mantendo padrões internacionais de ensino e ética humanitária em todas as suas certificações.',
+      'Instrutor certificado pelo programa Stop the Bleed, uma iniciativa global do American College of Surgeons (ACS) em parceria com o Committee on Trauma (CoT). O curso capacita profissionais e civis a reconhecer e controlar hemorragias graves, utilizando técnicas baseadas em evidências do Tactical Combat Casualty Care (TCCC). O programa é reconhecido internacionalmente como padrão ouro em controle de sangramento, sendo parte essencial da resposta imediata a traumas em ambientes civis, militares e de alta ameaça.',
     year: '2025',
     logo: logo3,
   },
@@ -51,11 +51,11 @@ export const certifications: Certification[] = [
     logo: logo4,
   },
   {
-    id: 'naui',
-    name: 'NAUI – National Association of Underwater Instructors',
-    organization: 'National Association of Underwater Instructors',
+    id: 'arc',
+    name: 'American Red Cross',
+    organization: 'American Red Cross',
     description:
-      'Instrutor vinculado à National Association of Underwater Instructors (NAUI), uma das mais tradicionais e respeitadas organizações de mergulho autônomo do mundo. A NAUI é reconhecida por seus padrões rigorosos de segurança e excelência educacional na formação de mergulhadores, instrutores e especialistas em resgate subaquático. Os programas da NAUI enfatizam autonomia, consciência situacional e gestão de emergências aquáticas, sendo amplamente adotados em treinamentos civis, militares e de operações de busca e salvamento.',
+      'Instrutor afiliado à American Red Cross, instituição humanitária de alcance global e referência em formação de socorristas, resposta a desastres e educação em emergências médicas. A Cruz Vermelha Americana é pioneira na criação de protocolos e treinamentos de primeiros socorros, RCP/AED, suporte básico de vida e resposta comunitária a emergências, mantendo padrões internacionais de ensino e ética humanitária em todas as suas certificações.',
     year: '2025',
     logo: logo5,
   },
