@@ -6,36 +6,34 @@ import FundoAboutAvif from '../../assets/fundo_about.jpg?format=avif&w=640;768;1
 import FundoAboutJpg from '../../assets/fundo_about.jpg?format=jpg&w=1920&quality=85'
 // @ts-expect-error - vite-imagetools directives
 import FundoAboutWebp from '../../assets/fundo_about.jpg?format=webp&w=640;768;1024;1280;1920&as=srcset'
+import { AccessibleButton } from '../ui/AccessibleButton'
 
 const InstructorMedia: React.FC = memo(() => {
   const instructorImageAlt =
-    'Juan Regenerati, instrutor certificado em emergências médicas, paramédico e especialista em resgate tático'
+    'Juan Regenerati, paramédico e instrutor tático, fardado com equipamento de segurança em ambiente operacional'
 
   return (
-    <figure className='w-full h-full flex items-center justify-center p-5'>
-      <picture className='w-full flex items-center justify-center'>
-        <source
-          srcSet={FundoAboutAvif}
-          type='image/avif'
-          sizes='(max-width: 768px) 100vw, 50vw'
-        />
-        <source
-          srcSet={FundoAboutWebp}
-          type='image/webp'
-          sizes='(max-width: 768px) 100vw, 50vw'
-        />
-        <img
-          src={FundoAboutJpg}
-          alt={instructorImageAlt}
-          className='object-contain object-center w-full h-auto max-h-[80vh] grayscale'
-          loading='eager'
-          decoding='async'
-          fetchPriority='high'
-        />
-      </picture>
+    <figure className='relative w-full h-full overflow-hidden'>
+      <div className='absolute inset-0'>
+        <picture className='w-full h-full'>
+          <source srcSet={FundoAboutAvif} type='image/avif' sizes='100vw' />
+          <source srcSet={FundoAboutWebp} type='image/webp' sizes='100vw' />
+          <img
+            src={FundoAboutJpg}
+            alt={instructorImageAlt}
+            className='w-full h-full object-cover grayscale'
+            style={{ objectPosition: '40% center' }}
+            loading='eager'
+            decoding='async'
+            fetchPriority='high'
+          />
+        </picture>
+        <div className='absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-transparent via-transparent to-black lg:from-transparent lg:via-black/80 lg:to-black' />
+      </div>
       <figcaption className='sr-only'>
         Fotografia profissional de Juan Regenerati, instrutor principal da EMR
-        Internacional, especializado em emergências médicas e resgate tático
+        Internacional, especializado em emergências médicas e resgate tático em
+        ambientes de alto risco
       </figcaption>
     </figure>
   )
@@ -43,144 +41,163 @@ const InstructorMedia: React.FC = memo(() => {
 
 InstructorMedia.displayName = 'InstructorMedia'
 
-interface ExpertiseItem {
-  id: string
-  text: React.ReactNode
-  style: string
-  ariaLabel: string
-}
-
-interface AboutData {
-  overline: string
-  title: string
-  subtitle: string
-  expertise: ExpertiseItem[]
-}
-const useAboutData = (): { data: AboutData } => {
-  const data: AboutData = {
-    overline: 'Quem está por trás da',
-    title: 'EMR INTERNACIONAL',
-    subtitle: 'Juan Regenerati',
-    expertise: [
-      {
-        id: 'medical-emergencies',
-        text: (
-          <>
-            <strong>
-              Formado em Saúde e Segurança do Trabalho e Paramédico
-            </strong>{' '}
-            é instrutor certificado em emergências médicas, com especialização
-            em resgate tático em zonas de conflito de baixa intensidade e em
-            atendimento pré-hospitalar em áreas remotas.
-          </>
-        ),
-        style: 'border-l-4 border-white pl-4 text-white',
-        ariaLabel:
-          'Especialização em emergências médicas em ambientes urbanos e rurais',
-      },
-      {
-        id: 'tactical-rescue',
-        text: (
-          <>
-            Possui{' '}
-            <span className='text-gray-400'>certificações internacionais </span>{' '}
-            em protocolos de resposta a traumas e atua na capacitação de
-            profissionais e equipes operacionais, incluindo Corpo de Bombeiros
-            Militar, Exército Brasileiro e Força Nacional de Segurança Pública.
-          </>
-        ),
-        style: 'text-white p-3 text-center lg:text-xs xl:text-base',
-        ariaLabel:
-          'Especialização em resgate tático em zonas de conflito e atendimento pré-hospitalar em ambientes de alto risco',
-      },
-      {
-        id: 'operational-training',
-        text: (
-          <>
-            Instrutor credenciado por{' '}
-            <strong> instituições de referência mundial </strong> em educação e
-            resposta a emergências, como o Health & Safety Institute (HSI),
-            American College of Surgeons e American Red Cross, entre outras.
-          </>
-        ),
-        style: 'border-l-4 border-white pl-4 text-white',
-        ariaLabel:
-          'Capacitação de forças operacionais incluindo Corpo de Bombeiros, Exército Brasileiro e Força Nacional',
-      },
-    ],
-  }
-
-  return { data }
-}
-
-const AboutContent: React.FC = memo(() => {
-  const { data } = useAboutData()
-
+const InstructorHero: React.FC = memo(() => {
   return (
-    <article className='w-full p-10'>
-      <header className='w-full max-w-screen-2xl'>
-        <p className='text-sm sm:text-base font-semibold text-cta-600  uppercase tracking-wider'>
-          {data.overline}
+    <header className='w-full space-y-4 mb-6'>
+      <div className='space-y-1'>
+        <p className='text-xs sm:text-sm font-bold text-cta-600 uppercase tracking-wider'>
+          Quem está por trás da
         </p>
-
-        <h2
-          id='about-heading'
-          className='text-2xl font-extrabold text-gray-300 mb-4 lg:mb-3 leading-tight'
-        >
-          {data.title}
+        <h2 className='text-xl sm:text-2xl font-extrabold text-white leading-tight'>
+          EMR INTERNACIONAL
         </h2>
+      </div>
 
-        <h3 className='font-capture-it text-4xl md:text-6xl text-white text-center mb-4 lg:mb-3'>
-          {data.subtitle}
-        </h3>
-        <hr
-          className='border-primary-300 mb-6 lg:my-8'
-          role='separator'
-          aria-hidden='true'
-        />
-        <p className='text-lg lg:text-xs xl:text-base mb-6 lg:mb-4'>
-          {data.expertise.map(({ id, text, style, ariaLabel }) => (
-            <span
-              key={id}
-              className={`block mb-5 ${style}`}
-              aria-label={ariaLabel}
-            >
-              {text}
-            </span>
-          ))}
+      <h3
+        id='about-heading'
+        className='font-capture-it text-4xl sm:text-5xl md:text-6xl text-white leading-tight'
+      >
+        Juan Regenerati
+      </h3>
+
+      <p className='text-base sm:text-lg text-gray-200 font-semibold leading-snug'>
+        Paramédico e Instrutor Certificado em Emergências Médicas
+      </p>
+
+      <div className='bg-black/40 border-l-4 border-cta-600 pl-4 py-3'>
+        <p className='text-sm sm:text-base text-gray-100 leading-snug font-medium'>
+          Com formação em Saúde e Segurança do Trabalho,{' '}
+          <strong className='text-white font-bold'>
+            especialista em resgate tático em zonas de conflito de baixa
+            intensidade e atendimento pré-hospitalar em áreas remotas
+          </strong>
+          , oferecendo treinamento de elite para profissionais que salvam vidas
+          em situações críticas.
         </p>
-
-        <hr
-          className='border-primary-300 mb-6 lg:mb-4'
-          role='separator'
-          aria-hidden='true'
-        />
-        <ExpertiseStats />
-      </header>
-    </article>
+      </div>
+    </header>
   )
 })
 
-AboutContent.displayName = 'AboutContent'
+InstructorHero.displayName = 'InstructorHero'
 
-interface StatCardProps {
+const OperationalForces: React.FC = memo(() => {
+  const forces = [
+    'Corpo de Bombeiros Militar',
+    'Exército Brasileiro',
+    'Força Nacional de Segurança Pública',
+  ]
+
+  return (
+    <section aria-labelledby='operational-forces-heading' className='mb-5'>
+      <h4
+        id='operational-forces-heading'
+        className='text-lg sm:text-xl font-bold text-white mb-3'
+      >
+        Capacitação para Forças de Referência
+      </h4>
+      <ul
+        className='space-y-2 text-gray-200'
+        role='list'
+        aria-label='Lista de forças operacionais treinadas'
+      >
+        {forces.map(force => (
+          <li
+            key={force}
+            className='flex items-start gap-2 text-sm sm:text-base'
+          >
+            <svg
+              className='w-5 h-5 text-cta-600 flex-shrink-0 mt-0.5'
+              fill='currentColor'
+              viewBox='0 0 20 20'
+              aria-hidden='true'
+            >
+              <path
+                fillRule='evenodd'
+                d='M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z'
+                clipRule='evenodd'
+              />
+            </svg>
+            <span className='font-medium'>{force}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+})
+
+OperationalForces.displayName = 'OperationalForces'
+
+const InternationalCredentials: React.FC = memo(() => {
+  const credentials = [
+    'Health & Safety Institute (HSI)',
+    'American College of Surgeons',
+    'American Red Cross',
+  ]
+
+  return (
+    <section aria-labelledby='credentials-heading' className='mb-5'>
+      <h4
+        id='credentials-heading'
+        className='text-lg sm:text-xl font-bold text-white mb-3'
+      >
+        Credenciais Internacionais
+      </h4>
+      <p className='text-sm sm:text-base text-gray-200 mb-3 leading-snug'>
+        Instrutor credenciado por instituições de referência mundial em educação
+        e resposta a traumas:
+      </p>
+      <ul
+        className='space-y-2 text-gray-200'
+        role='list'
+        aria-label='Lista de credenciais internacionais'
+      >
+        {credentials.map(credential => (
+          <li
+            key={credential}
+            className='flex items-start gap-2 text-sm sm:text-base'
+          >
+            <svg
+              className='w-5 h-5 text-cta-600 flex-shrink-0 mt-0.5'
+              fill='currentColor'
+              viewBox='0 0 20 20'
+              aria-hidden='true'
+            >
+              <path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' />
+            </svg>
+            <span className='font-medium'>{credential}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+})
+
+InternationalCredentials.displayName = 'InternationalCredentials'
+
+interface MetricCardProps {
   value: string
   label: string
   ariaLabel: string
+  highlight?: boolean
 }
 
-const StatCard: React.FC<StatCardProps> = memo(
-  ({ value, label, ariaLabel }) => {
+const MetricCard: React.FC<MetricCardProps> = memo(
+  ({ value, label, ariaLabel, highlight = false }) => {
     return (
       <div
-        className='col-span-1 backdrop-blur-sm bg-white/50  px-4 py-3 flex flex-col items-center justify-center gap-3 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105'
+        className={`flex-1 backdrop-blur-sm px-2 py-3 sm:px-4 sm:py-4 flex flex-col items-center justify-center gap-1 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 ${highlight ? 'bg-cta-600' : 'bg-gray-100/95'}`}
         role='group'
         aria-label={ariaLabel}
       >
-        <strong className='text-3xl lg:text-4xl font-extrabold text-cta-600 whitespace-nowrap'>
+        <strong
+          className={`text-2xl sm:text-3xl md:text-4xl font-extrabold ${highlight ? 'text-white' : 'text-cta-600'}`}
+        >
           {value}
         </strong>
-        <p className='text-xs lg:text-sm font-bold text-black uppercase tracking-wide leading-tight text-center'>
+        <p
+          className={`text-[8px] sm:text-[10px] md:text-xs font-bold uppercase tracking-wide text-center leading-tight ${highlight ? 'text-white' : 'text-black'}`}
+        >
           {label}
         </p>
       </div>
@@ -188,44 +205,101 @@ const StatCard: React.FC<StatCardProps> = memo(
   }
 )
 
-StatCard.displayName = 'StatCard'
+MetricCard.displayName = 'MetricCard'
 
-const ExpertiseStats: React.FC = memo(() => {
-  const stats = [
+const AboutMetrics: React.FC = memo(() => {
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contato')
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  const metrics = [
     {
       id: 'experience',
       value: '15+',
       label: 'Anos de Experiência',
       ariaLabel: 'Mais de 15 anos de experiência em emergências médicas',
+      highlight: false,
     },
     {
       id: 'trained',
       value: '1000+',
       label: 'Profissionais Treinados',
       ariaLabel: 'Mais de 1000 profissionais capacitados',
+      highlight: false,
     },
   ]
 
   return (
     <section
-      className='w-full h-full '
-      aria-label='Estatísticas de competência profissional'
+      aria-labelledby='metrics-heading'
+      className='w-full space-y-4 pt-4'
     >
-      <div className='grid grid-cols-2 gap-4'>
-        {stats.map(({ id, value, label, ariaLabel }) => (
-          <StatCard
+      <h4 id='metrics-heading' className='sr-only'>
+        Estatísticas de experiência profissional
+      </h4>
+      <div className='flex flex-row gap-2 sm:gap-3'>
+        {metrics.map(({ id, value, label, ariaLabel, highlight }) => (
+          <MetricCard
             key={id}
             value={value}
             label={label}
             ariaLabel={ariaLabel}
+            highlight={highlight}
           />
         ))}
+        <div className='flex-1 backdrop-blur-sm bg-cta-600 hover:bg-cta-700 px-2 py-3 sm:px-4 sm:py-4 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer group'>
+          <AccessibleButton
+            onClick={scrollToContact}
+            variant='ghost'
+            className='w-full h-full text-white hover:text-white hover:bg-transparent font-bold text-center flex flex-col items-center justify-center gap-2 focus:text-white focus:bg-transparent'
+            aria-label='Agende uma consultoria sobre nossos treinamentos'
+          >
+            <svg
+              className='w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white group-hover:text-white'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+              aria-hidden='true'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
+              />
+            </svg>
+            <span className='text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wide text-white group-hover:text-white leading-tight'>
+              Agende uma Consultoria
+            </span>
+          </AccessibleButton>
+        </div>
       </div>
     </section>
   )
 })
 
-ExpertiseStats.displayName = 'ExpertiseStats'
+AboutMetrics.displayName = 'AboutMetrics'
+
+const AboutContent: React.FC = memo(() => {
+  return (
+    <article
+      className='w-full px-6 py-6 sm:px-8 lg:px-10 space-y-4'
+      aria-labelledby='about-heading'
+    >
+      <InstructorHero />
+
+      <div className='space-y-4'>
+        <OperationalForces />
+        <InternationalCredentials />
+      </div>
+    </article>
+  )
+})
+
+AboutContent.displayName = 'AboutContent'
 
 const About: React.FC = memo(() => {
   return (
@@ -233,14 +307,19 @@ const About: React.FC = memo(() => {
       id='sobre'
       className='relative min-h-screen bg-black'
       aria-labelledby='about-heading'
-      aria-describedby='about-description'
     >
-      <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row lg:min-h-screen'>
-        <div className='w-full lg:w-1/2 min-h-[50vh] lg:min-h-screen flex items-center justify-center'>
+      <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row lg:h-screen'>
+        <div className='relative w-full lg:w-1/2 h-[45vh] lg:h-full'>
           <InstructorMedia />
+          <div className='hidden lg:block absolute bottom-0 left-0 right-0 p-6 lg:p-8 z-10'>
+            <AboutMetrics />
+          </div>
         </div>
-        <div className='w-full lg:w-1/2 min-h-[50vh] lg:min-h-screen flex items-center justify-center'>
+        <div className='w-full lg:w-1/2 flex flex-col lg:items-center lg:justify-center bg-black lg:bg-transparent'>
           <AboutContent />
+          <div className='block lg:hidden px-4 pb-6'>
+            <AboutMetrics />
+          </div>
         </div>
       </div>
     </section>
