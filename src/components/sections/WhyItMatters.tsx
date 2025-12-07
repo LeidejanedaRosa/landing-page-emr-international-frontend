@@ -86,6 +86,7 @@ const TabSwitcher = memo(
             return (
               <AccessibleButton
                 key={tab.id}
+                id={`${tab.id}-tab`}
                 onClick={() => onTabChange(tab.id)}
                 variant={isActive ? 'primary' : 'ghost'}
                 className={`flex-1 py-2 px-6 !rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 ${
@@ -198,6 +199,10 @@ StatisticCard.displayName = 'StatisticCard'
 
 const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
   ({ statistics, activeTabId, gridDescriptionId }) => {
+    if (statistics.length === 0) {
+      return null
+    }
+
     const [highlightStat, ...regularStats] = statistics
 
     return (
