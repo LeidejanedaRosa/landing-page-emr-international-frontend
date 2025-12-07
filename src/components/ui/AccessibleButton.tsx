@@ -32,7 +32,7 @@ const LoadingSpinner = () => (
  * Botão acessível com suporte completo a teclado
  */
 interface AccessibleButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'id'> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
