@@ -23,18 +23,18 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
 
   const navigationItems: NavigationItem[] = [
     {
-      id: 'sobre',
-      href: '#sobre',
+      id: 'about',
+      href: '#about',
       label: 'Sobre',
       ariaLabel:
         'Navegar para seção Sobre - Informações sobre a EMR Internacional',
     },
     {
-      id: 'certificacoes',
-      href: '#certificacoes',
+      id: 'certifications',
+      href: '#certifications',
       label: 'Certificações',
       ariaLabel:
-        'Navegar para seção Certificações - Credenciamento internacional',
+        'Navegar para seção Certificações - Certificações internacionais',
     },
     {
       id: 'courses',
@@ -43,10 +43,10 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
       ariaLabel: 'Navegar para seção Cursos - Nossos cursos especializados',
     },
     {
-      id: 'contato',
-      href: '#contato',
+      id: 'contact',
+      href: '#contact',
       label: 'Contato',
-      ariaLabel: 'Navegar para seção Contato - Entre em contato conosco',
+      ariaLabel: 'Navegar para seção Contato - Fale conosco',
     },
   ]
 

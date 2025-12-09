@@ -54,10 +54,10 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
   const { skipToContent, skipToNavigation } = useSkipLinks()
   const currentSection = useCurrentSection([
     'hero',
-    'sobre',
-    'certificacoes',
+    'about',
+    'certifications',
     'courses',
-    'contato',
+    'contact',
   ])
   const headerId = useUniqueId('main-header')
   const logoId = useUniqueId('company-logo')
@@ -68,12 +68,10 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
   useEffect(() => {
     if (currentSection && currentSection !== 'hero') {
       const sectionNames = {
-        sobre: 'Sobre',
-        certificacoes: 'Certificações',
+        about: 'Sobre',
+        certifications: 'Certificações',
         courses: 'Cursos',
-        contato: 'Contato',
-        depoimentos: 'Depoimentos',
-        resultados: 'Resultados',
+        contact: 'Contato',
       }
       const sectionName =
         sectionNames[currentSection as keyof typeof sectionNames]

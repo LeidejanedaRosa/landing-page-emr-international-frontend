@@ -12,19 +12,19 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
     <div id='mobile-menu' className='md:hidden'>
       <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white/20'>
         <AccessibleLink
-          href='#sobre'
+          href='#about'
           className='block px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'
-          ariaCurrent={currentSection === 'sobre' ? 'page' : undefined}
+          ariaCurrent={currentSection === 'about' ? 'page' : undefined}
           onClick={onLinkClick}
         >
           Sobre
         </AccessibleLink>
         <AccessibleLink
-          href='#certificacoes'
+          href='#certifications'
           className='block px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'
-          ariaCurrent={currentSection === 'certificacoes' ? 'page' : undefined}
+          ariaCurrent={currentSection === 'certifications' ? 'page' : undefined}
           onClick={onLinkClick}
         >
           Certificações
@@ -39,10 +39,10 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
           Cursos
         </AccessibleLink>
         <AccessibleLink
-          href='#contato'
+          href='#contact'
           className='block px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'
-          ariaCurrent={currentSection === 'contato' ? 'page' : undefined}
+          ariaCurrent={currentSection === 'contact' ? 'page' : undefined}
           onClick={onLinkClick}
         >
           Contato
