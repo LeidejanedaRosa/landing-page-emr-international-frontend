@@ -85,7 +85,7 @@ const courses: Course[] = [
   },
 ]
 
-export const getCourses = (): Course[] => courses
+export const getCourses = (): Course[] => [...courses]
 
 export const getCourseById = (id: string): Course | undefined =>
   courses.find(course => course.id === id)
