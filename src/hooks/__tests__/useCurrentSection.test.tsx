@@ -56,13 +56,13 @@ describe('useCurrentSection', () => {
 
   it('should setup scroll listener and detect sections', () => {
     const mockHero = createMockSection('hero', 0, 500)
-    const mockAbout = createMockSection('sobre', 500, 500)
-    const mockServices = createMockSection('servicos', 1000, 500)
+    const mockAbout = createMockSection('about', 500, 500)
+    const mockServices = createMockSection('courses', 1000, 500)
 
     document.body.append(mockHero, mockAbout, mockServices)
 
     const { result } = renderHook(() =>
-      useCurrentSection(['hero', 'sobre', 'servicos'])
+      useCurrentSection(['hero', 'about', 'courses'])
     )
 
     expect(window.addEventListener).toHaveBeenCalledWith(
@@ -74,16 +74,16 @@ describe('useCurrentSection', () => {
   })
 
   it('should update current section when scroll position changes', () => {
-    document.body.appendChild(createMockSection('sobre', 500, 500))
+    document.body.appendChild(createMockSection('about', 500, 500))
 
-    const { result } = renderHook(() => useCurrentSection(['sobre']))
+    const { result } = renderHook(() => useCurrentSection(['about']))
 
     act(() => {
       Object.defineProperty(window, 'scrollY', { value: 600, writable: true })
       scrollEventListener?.()
     })
 
-    expect(result.current).toBe('sobre')
+    expect(result.current).toBe('about')
   })
 
   it('should cleanup scroll listener on unmount', () => {
