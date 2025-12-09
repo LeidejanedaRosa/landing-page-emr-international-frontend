@@ -95,7 +95,6 @@ const Hero: React.FC = memo(() => {
   const { scrollToSection } = useScrollToSection()
   const { announce } = useScreenReaderAnnouncement()
   const { prefersReducedMotion } = useAccessibilityPreferences()
-  const sectionId = useUniqueId('hero-section')
 
   const {
     currentSlide,
@@ -142,14 +141,14 @@ const Hero: React.FC = memo(() => {
 
   return (
     <section
-      id={sectionId}
+      id='hero'
       data-section='hero'
       className='relative min-h-screen 2xl:min-h-full text-white overflow-hidden'
-      aria-labelledby={`${sectionId}-heading`}
+      aria-labelledby='hero-heading'
     >
       <div className='absolute top-24 left-0 right-0 z-20 px-4 sm:px-6 lg:px-8'>
         <h1
-          id={`${sectionId}-heading`}
+          id='hero-heading'
           className='hidden text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-2xl max-w-4xl'
           style={{
             textShadow:

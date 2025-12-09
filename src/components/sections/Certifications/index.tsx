@@ -1,10 +1,12 @@
 import React, { memo, useEffect, useRef } from 'react'
 
-import { certifications } from '../../../data/certificationsData'
+import {
+  type Certification,
+  certifications,
+} from '../../../data/certificationsData'
 import {
   useAccessibilityPreferences,
   useScreenReaderAnnouncement,
-  useUniqueId,
 } from '../../../hooks/useAccessibility'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
 import { CertificationCard } from './CertificationCard'
@@ -113,35 +115,30 @@ const CarouselIndicators: React.FC<CarouselIndicatorsProps> = memo(
 
 CarouselIndicators.displayName = 'CarouselIndicators'
 
-interface CertificationsSectionHeaderProps {
-  sectionId: string
-}
-
-const CertificationsSectionHeader: React.FC<CertificationsSectionHeaderProps> =
-  memo(({ sectionId }) => {
-    return (
-      <header className='text-center mb-12'>
-        <div className='inline-block mb-4'>
-          <span
-            className='text-xs font-bold uppercase tracking-wider text-gray-500 border-t-2 border-b-2 border-black py-2 px-4'
-            aria-hidden='true'
-          >
-            Certificações
-          </span>
-        </div>
-        <h2
-          id={`${sectionId}-heading`}
-          className='text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4'
+const CertificationsSectionHeader: React.FC = memo(() => {
+  return (
+    <header className='text-center mb-12'>
+      <div className='inline-block mb-4'>
+        <span
+          className='text-xs font-bold uppercase tracking-wider text-gray-500 border-t-2 border-b-2 border-black py-2 px-4'
+          aria-hidden='true'
         >
-          Credenciamento Internacional
-        </h2>
-        <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
-          Certificado pelas principais instituições mundiais em emergências
-          médicas e resposta a traumas
-        </p>
-      </header>
-    )
-  })
+          Certificações
+        </span>
+      </div>
+      <h2
+        id='certifications-heading'
+        className='text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4'
+      >
+        Credenciamento Internacional
+      </h2>
+      <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
+        Certificado pelas principais instituições mundiais em emergências
+        médicas e resposta a traumas
+      </p>
+    </header>
+  )
+})
 
 CertificationsSectionHeader.displayName = 'CertificationsSectionHeader'
 
@@ -239,10 +236,9 @@ const useCertificationsHandlers = ({
 }
 
 interface CertificationsSectionContentProps {
-  sectionId: string
   pauseAutoPlay: () => void
   resumeAutoPlay: () => void
-  visibleCertifications: typeof certifications
+  visibleCertifications: Certification[]
   currentIndex: number
   itemsVisible: number
   isTransitioning: boolean
@@ -257,7 +253,6 @@ interface CertificationsSectionContentProps {
 const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> =
   memo(
     ({
-      sectionId,
       pauseAutoPlay,
       resumeAutoPlay,
       visibleCertifications,
@@ -273,17 +268,17 @@ const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> 
     }) => {
       return (
         <section
-          id={sectionId}
+          id='certifications'
           data-section='certifications'
           className='w-full py-16 px-4 bg-gray-50'
-          aria-labelledby={`${sectionId}-heading`}
+          aria-labelledby='certifications-heading'
           onMouseEnter={pauseAutoPlay}
           onMouseLeave={resumeAutoPlay}
           onFocus={pauseAutoPlay}
           onBlur={resumeAutoPlay}
         >
           <div className='max-w-7xl mx-auto'>
-            <CertificationsSectionHeader sectionId={sectionId} />
+            <CertificationsSectionHeader />
 
             <div className='relative'>
               <CertificationsGrid
@@ -320,7 +315,6 @@ CertificationsSectionContent.displayName = 'CertificationsSectionContent'
 const Certifications: React.FC = () => {
   const { prefersReducedMotion } = useAccessibilityPreferences()
   const { announce } = useScreenReaderAnnouncement()
-  const sectionId = useUniqueId('certifications')
   const hasAnnouncedAutoPlayRef = useRef(false)
 
   const {
@@ -377,7 +371,6 @@ const Certifications: React.FC = () => {
 
   return (
     <CertificationsSectionContent
-      sectionId={sectionId}
       pauseAutoPlay={pauseAutoPlay}
       resumeAutoPlay={resumeAutoPlay}
       visibleCertifications={extendedCertifications}

@@ -208,14 +208,13 @@ const CoursesHeader = memo(({ titleId, descriptionId }: CoursesHeaderProps) => (
 CoursesHeader.displayName = 'CoursesHeader'
 
 const Courses = () => {
-  const sectionId = useUniqueId('courses')
   const titleId = useUniqueId('courses-title')
   const descriptionId = useUniqueId('courses-description')
   const courses = getCourses()
 
   return (
     <section
-      id={sectionId}
+      id='courses'
       data-section='courses'
       className='relative bg-primary-900 text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden'
       aria-labelledby={titleId}
