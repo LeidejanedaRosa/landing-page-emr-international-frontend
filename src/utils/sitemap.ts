@@ -62,7 +62,7 @@ export const sitemapUrls: SitemapUrl[] = [
     priority: 0.8,
   },
   {
-    loc: 'https://www.emrinternacional.com/contato',
+    loc: 'https://www.emrinternacional.com/contact',
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'yearly',
     priority: 0.6,
