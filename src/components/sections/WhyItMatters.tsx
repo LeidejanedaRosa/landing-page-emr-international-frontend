@@ -81,7 +81,7 @@ const TabSwitcher = memo(
             const activeStyles =
               tab.id === 'tactical'
                 ? 'bg-red-600 text-white shadow-md shadow-red-900/20'
-                : 'bg-yellow-600 text-white whitespace-nowrap shadow-md shadow-yellow-900/20'
+                : 'bg-warning-600 text-white whitespace-nowrap shadow-md shadow-warning-900/20'
 
             return (
               <AccessibleButton
@@ -115,7 +115,7 @@ const getCardStyles = (isHighlight: boolean, isTactical: boolean) => {
   if (isHighlight) {
     const highlightGradient = isTactical
       ? 'from-cta-700 to-cta-500'
-      : 'from-yellow-700 to-yellow-500'
+      : 'from-warning-700 to-warning-500'
     return `p-4 md:p-6 bg-gradient-to-br ${highlightGradient} min-h-[250px]`
   }
   return 'p-3 bg-primary-700 border border-primary-800 hover:bg-primary-900 transition min-h-[130px]'
@@ -140,7 +140,7 @@ const getSubtextStyles = (isHighlight: boolean) => {
 export const StatisticCard: React.FC<StatisticCardProps> = memo(
   ({ statistic, isHighlight = false, activeTabId }) => {
     const isTactical = activeTabId === 'tactical'
-    const accentColor = isTactical ? 'bg-cta-500' : 'bg-yellow-500'
+    const accentColor = isTactical ? 'bg-cta-500' : 'bg-warning-500'
 
     return (
       <article
