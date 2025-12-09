@@ -52,7 +52,13 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
     useMobileMenu()
   const { announce } = useScreenReaderAnnouncement()
   const { skipToContent, skipToNavigation } = useSkipLinks()
-  const currentSection = useCurrentSection()
+  const currentSection = useCurrentSection([
+    'hero',
+    'sobre',
+    'certificacoes',
+    'courses',
+    'contato',
+  ])
   const headerId = useUniqueId('main-header')
   const logoId = useUniqueId('company-logo')
   const navId = useUniqueId('main-navigation')
@@ -64,9 +70,8 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
       const sectionNames = {
         sobre: 'Sobre',
         certificacoes: 'Certificações',
-        servicos: 'Serviços',
+        courses: 'Cursos',
         contato: 'Contato',
-        cursos: 'Cursos',
         depoimentos: 'Depoimentos',
         resultados: 'Resultados',
       }

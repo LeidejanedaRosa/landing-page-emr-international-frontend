@@ -37,10 +37,10 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
         'Navegar para seção Certificações - Credenciamento internacional',
     },
     {
-      id: 'servicos',
-      href: '#servicos',
-      label: 'Serviços',
-      ariaLabel: 'Navegar para seção Serviços - Nossos cursos especializados',
+      id: 'courses',
+      href: '#courses',
+      label: 'Cursos',
+      ariaLabel: 'Navegar para seção Cursos - Nossos cursos especializados',
     },
     {
       id: 'contato',

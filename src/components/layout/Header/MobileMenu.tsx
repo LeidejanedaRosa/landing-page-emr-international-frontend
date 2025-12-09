@@ -30,13 +30,13 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
           Certificações
         </AccessibleLink>
         <AccessibleLink
-          href='#servicos'
+          href='#courses'
           className='block px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'
-          ariaCurrent={currentSection === 'servicos' ? 'page' : undefined}
+          ariaCurrent={currentSection === 'courses' ? 'page' : undefined}
           onClick={onLinkClick}
         >
-          Serviços
+          Cursos
         </AccessibleLink>
         <AccessibleLink
           href='#contato'
