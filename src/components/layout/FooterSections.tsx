@@ -99,17 +99,17 @@ export const QuickLinks: React.FC = memo(() => {
 
   const links = [
     {
-      href: '#sobre',
+      href: '#about',
       label: 'Sobre Nós',
       ariaLabel: 'Navegar para seção sobre a empresa',
     },
     {
-      href: '#servicos',
-      label: 'Serviços',
-      ariaLabel: 'Navegar para seção de serviços',
+      href: '#courses',
+      label: 'Cursos',
+      ariaLabel: 'Navegar para seção de cursos',
     },
     {
-      href: '#contato',
+      href: '#contact',
       label: 'Contato',
       ariaLabel: 'Navegar para seção de contato',
     },
@@ -151,22 +151,22 @@ export const ServicesLinks: React.FC = memo(() => {
 
   const services = [
     {
-      href: '#servicos',
+      href: '#courses',
       label: 'Resgate Tático',
       ariaLabel: 'Saiba mais sobre nossos cursos de resgate tático',
     },
     {
-      href: '#servicos',
+      href: '#courses',
       label: 'Emergências Médicas',
       ariaLabel: 'Conheça nossos cursos de emergências médicas',
     },
     {
-      href: '#servicos',
+      href: '#certifications',
       label: 'Certificações HSI',
       ariaLabel: 'Informações sobre certificações HSI',
     },
     {
-      href: '#contato',
+      href: '#contact',
       label: 'Suporte Técnico',
       ariaLabel: 'Entre em contato para suporte técnico',
     },
