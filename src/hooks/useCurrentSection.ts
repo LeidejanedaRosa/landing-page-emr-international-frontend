@@ -8,9 +8,9 @@ export const useCurrentSection = (sections: string[] = []) => {
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
-        const element = document.getElementById(section)
+        const element = document.querySelector(`[data-section="${section}"]`)
         if (element) {
-          const { offsetTop, offsetHeight } = element
+          const { offsetTop, offsetHeight } = element as HTMLElement
           if (
             scrollPosition >= offsetTop &&
             scrollPosition < offsetTop + offsetHeight
