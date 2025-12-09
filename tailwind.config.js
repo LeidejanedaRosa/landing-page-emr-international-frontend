@@ -4,11 +4,15 @@ export default {
   safelist: [
     'bg-warning-400',
     'bg-warning-500',
+    'bg-warning-600',
     'hover:bg-warning-500',
     'hover:bg-warning-600',
     'text-warning-400',
     'hover:border-warning-400',
     'focus:ring-warning-400',
+    'from-warning-700',
+    'to-warning-500',
+    'shadow-warning-900/20',
   ],
   theme: {
     extend: {
@@ -83,19 +87,6 @@ export default {
           600: '#d97706',
           700: '#b45309',
           800: '#92400e',
-          900: '#78350f',
-        },
-        yellow: {
-          DEFAULT: '#FFC107',
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#FFC107',
-          500: '#f59e0b',
-          600: '#f59e0b',
-          700: '#d97706',
-          800: '#b45309',
           900: '#78350f',
         },
         info: {
