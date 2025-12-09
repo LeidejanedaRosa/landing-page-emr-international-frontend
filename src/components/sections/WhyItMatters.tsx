@@ -204,10 +204,11 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
     }
 
     const [highlightStat, ...regularStats] = statistics
+    const STICKY_OFFSET = 15
 
     return (
       <div
-        className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 gap-4 lg:gap-2'
+        className='flex flex-col lg:grid lg:grid-cols-12 gap-4 lg:gap-2 relative'
         role='list'
         aria-describedby={gridDescriptionId}
       >
@@ -222,7 +223,12 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
           role='listitem'
           aria-posinset={1}
           aria-setsize={statistics.length}
-          className={`h-full ${highlightStat.className || ''}`}
+          style={{ '--sticky-top': '50px', '--sticky-z': '10' } as any}
+          className={`
+            sticky lg:static top-[var(--sticky-top)] lg:top-auto z-[var(--sticky-z)] lg:z-auto
+            mb-8 lg:mb-0 transition-transform duration-300 hover:scale-[1.02]
+            h-full ${highlightStat.className || ''}
+          `}
         >
           <StatisticCard
             statistic={highlightStat}
@@ -231,17 +237,35 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
           />
         </div>
 
-        {regularStats.map((stat, index) => (
-          <div
-            key={stat.id}
-            role='listitem'
-            aria-posinset={index + 2}
-            aria-setsize={statistics.length}
-            className={`h-full ${stat.className || ''}`}
-          >
-            <StatisticCard statistic={stat} activeTabId={activeTabId} />
-          </div>
-        ))}
+        {regularStats.map((stat, index) => {
+          const realIndex = index + 1
+          const topOffset = 50 + realIndex * STICKY_OFFSET
+          const zIndex = 10 + realIndex
+
+          return (
+            <div
+              key={stat.id}
+              role='listitem'
+              aria-posinset={realIndex + 1}
+              aria-setsize={statistics.length}
+              style={
+                {
+                  '--sticky-top': `${topOffset}px`,
+                  '--sticky-z': zIndex.toString(),
+                } as any
+              }
+              className={`
+                sticky lg:static
+                top-[var(--sticky-top)] lg:top-auto
+                z-[var(--sticky-z)] lg:z-auto
+                mb-8 lg:mb-0 transition-transform duration-300 hover:scale-[1.02]
+                h-full ${stat.className || ''}
+              `}
+            >
+              <StatisticCard statistic={stat} activeTabId={activeTabId} />
+            </div>
+          )
+        })}
       </div>
     )
   }
@@ -299,19 +323,21 @@ const WhyItMattersSection: React.FC = memo(() => {
   return (
     <section
       id={sectionId}
-      className='relative w-full bg-gradient-to-b from-primary-50 via-white to-primary-50 py-8 md:py-6 px-4 md:px-8 overflow-hidden font-sans'
+      className='relative w-full bg-gradient-to-b from-primary-50 via-white to-primary-50 py-8 md:py-6 px-4 md:px-8 font-sans'
       aria-labelledby={titleId}
       aria-describedby={subtitleId}
     >
-      <div className='absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none'>
-        <div
-          className='absolute top-20 right-20 w-96 h-96 bg-cta-600 rounded-full blur-[150px]'
-          aria-hidden='true'
-        />
-        <div
-          className='absolute bottom-20 left-20 w-96 h-96 bg-success-600 rounded-full blur-[150px]'
-          aria-hidden='true'
-        />
+      <div className='absolute inset-0 overflow-hidden pointer-events-none'>
+        <div className='absolute top-0 left-0 w-full h-full opacity-[0.03]'>
+          <div
+            className='absolute top-20 right-20 w-96 h-96 bg-cta-600 rounded-full blur-[150px]'
+            aria-hidden='true'
+          />
+          <div
+            className='absolute bottom-20 left-20 w-96 h-96 bg-success-600 rounded-full blur-[150px]'
+            aria-hidden='true'
+          />
+        </div>
       </div>
 
       <div className='max-w-7xl mx-auto relative z-10 flex flex-col w-full items-center'>
