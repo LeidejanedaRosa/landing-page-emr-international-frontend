@@ -160,7 +160,7 @@ const CourseCard = memo(({ course }: CourseCardProps) => {
           <div className='flex flex-col gap-3 pt-2'>
             <AccessibleLink
               href={links.details}
-              className={`flex items-center justify-center w-full py-3.5 px-4 font-bold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 ${styles.primary} ${styles.primaryHover} ${styles.primaryText}`}
+              className={`flex items-center justify-center w-full py-3.5 px-4 font-bold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 ${styles.primary} ${styles.primaryHover} ${styles.primaryText} ${styles.ring}`}
               aria-label={`Ver detalhes completos do curso ${title}`}
             >
               Ver Detalhes do Curso
@@ -169,7 +169,7 @@ const CourseCard = memo(({ course }: CourseCardProps) => {
 
             <AccessibleLink
               href={links.brochure}
-              className={`flex items-center justify-center w-full py-2 text-sm font-medium ${styles.secondary} ${styles.secondaryHover} transition-colors gap-2`}
+              className={`flex items-center justify-center w-full py-2 text-sm font-medium ${styles.secondary} ${styles.secondaryHover} ${styles.ring} transition-colors gap-2`}
               aria-label={`Baixar brochura em PDF do curso ${title}`}
             >
               <Download className='w-4 h-4' aria-hidden='true' />
