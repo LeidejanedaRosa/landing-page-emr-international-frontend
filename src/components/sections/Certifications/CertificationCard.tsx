@@ -71,10 +71,8 @@ export const CertificationCard: React.FC<CertificationCardProps> = memo(
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             name={name}
-            organization={organization}
             description={description}
             year={year}
-            logo={logo}
             certifiedLabel={certifiedLabel}
             closeButtonLabel={closeButtonLabel}
           />
