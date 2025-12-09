@@ -16,8 +16,10 @@ test.describe('EMR Internacional - Homepage', () => {
     const nav = page.getByRole('navigation')
     await expect(nav).toBeVisible()
 
-    await expect(page.getByRole('link', { name: /início/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /sobre/i })).toBeVisible()
+    await expect(
+      page.getByRole('link', { name: /certificações/i })
+    ).toBeVisible()
     await expect(page.getByRole('link', { name: /cursos/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /contato/i })).toBeVisible()
   })
