@@ -6,11 +6,14 @@ import StructuredData from './components/seo/StructuredData'
 import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
 import SEO from './utils/SEO'
 
+const WhyItMattersSection = React.lazy(
+  () => import('./components/sections/WhyItMatters')
+)
 const About = React.lazy(() => import('./components/sections/About'))
 const Certifications = React.lazy(
   () => import('./components/sections/Certifications')
 )
-const Services = React.lazy(() => import('./components/sections/Services'))
+const Courses = React.lazy(() => import('./components/sections/Courses'))
 const Contact = React.lazy(() => import('./components/sections/Contact'))
 const Footer = React.lazy(() => import('./components/layout/Footer'))
 
@@ -23,13 +26,16 @@ function App() {
         <main>
           <Hero />
           <Suspense fallback={<SectionSkeleton />}>
+            <WhyItMattersSection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
             <About />
           </Suspense>
           <Suspense fallback={<SectionSkeleton />}>
             <Certifications />
           </Suspense>
           <Suspense fallback={<SectionSkeleton />}>
-            <Services />
+            <Courses />
           </Suspense>
           <Suspense fallback={<SectionSkeleton />}>
             <Contact />
