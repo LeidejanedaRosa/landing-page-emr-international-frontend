@@ -18,22 +18,22 @@ test.describe('EMR Internacional - Homepage', () => {
 
     await expect(page.getByRole('link', { name: /início/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /sobre/i })).toBeVisible()
-    await expect(page.getByRole('link', { name: /serviços/i })).toBeVisible()
+    await expect(page.getByRole('link', { name: /cursos/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /contato/i })).toBeVisible()
   })
 
   test('should navigate to sections via menu', async ({ page }) => {
     await page.getByRole('link', { name: /sobre/i }).click()
 
-    await expect(page.locator('#sobre')).toBeInViewport()
+    await expect(page.locator('#about')).toBeInViewport()
 
-    await page.getByRole('link', { name: /serviços/i }).click()
-    await expect(page.locator('#servicos')).toBeInViewport()
+    await page.getByRole('link', { name: /cursos/i }).click()
+    await expect(page.locator('#courses')).toBeInViewport()
   })
 
   test('should have working contact form', async ({ page }) => {
     await page.getByRole('link', { name: /contato/i }).click()
-    await expect(page.locator('#contato')).toBeInViewport()
+    await expect(page.locator('#contact')).toBeInViewport()
 
     await page.getByLabel(/nome/i).fill('João Silva')
     await page.getByLabel(/email/i).fill('joao@example.com')
