@@ -208,12 +208,12 @@ const MetricCard: React.FC<MetricCardProps> = memo(
 MetricCard.displayName = 'MetricCard'
 
 const AboutMetrics: React.FC = memo(() => {
-  const scrollToContact = () => {
-    const contactSection = document.querySelector(
-      `[data-section="${CSS.escape('contact')}"]`
+  const scrollToCourses = () => {
+    const coursesSection = document.querySelector(
+      `[data-section="${CSS.escape('courses')}"]`
     )
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if (coursesSection) {
+      coursesSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
 
@@ -254,10 +254,10 @@ const AboutMetrics: React.FC = memo(() => {
         ))}
         <div className='flex-1 backdrop-blur-sm bg-cta-600 hover:bg-cta-700 px-2 py-3 sm:px-4 sm:py-4 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer group'>
           <AccessibleButton
-            onClick={scrollToContact}
+            onClick={scrollToCourses}
             variant='ghost'
             className='w-full h-full text-white hover:text-white hover:bg-transparent font-bold text-center flex flex-col items-center justify-center gap-2 focus:text-white focus:bg-transparent'
-            aria-label='Agende uma consultoria sobre nossos treinamentos'
+            aria-label='Conheça os cursos de emergências médicas da EMR Internacional'
           >
             <svg
               className='w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white group-hover:text-white'
@@ -270,11 +270,11 @@ const AboutMetrics: React.FC = memo(() => {
                 strokeLinecap='round'
                 strokeLinejoin='round'
                 strokeWidth={2}
-                d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'
+                d='M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253'
               />
             </svg>
             <span className='text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wide text-white group-hover:text-white leading-tight'>
-              Agende uma Consultoria
+              Conheça Nossos Cursos
             </span>
           </AccessibleButton>
         </div>
