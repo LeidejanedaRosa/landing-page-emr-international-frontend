@@ -120,7 +120,8 @@ src/
 │   ├── sections/
 │   │   ├── Hero/
 │   │   ├── About.tsx
-│   │   ├── Services.tsx
+│   │   ├── Certifications/
+│   │   ├── Courses.tsx
 │   │   └── Contact.tsx
 │   └── ...
 ├── hooks/
