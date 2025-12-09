@@ -115,7 +115,7 @@ const Hero: React.FC = memo(() => {
 
   const handleViewCoursesClick = () => {
     announce('Navegando para seção de cursos', 'polite')
-    scrollToSection('cursos')
+    scrollToSection('courses')
   }
 
   const setIsAutoPlaying: React.Dispatch<
