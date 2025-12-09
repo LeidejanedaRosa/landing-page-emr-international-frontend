@@ -280,7 +280,9 @@ const CallToAction: React.FC = memo(() => {
     )
     if (coursesSection) {
       coursesSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      ;(coursesSection as HTMLElement).focus()
+      if (coursesSection instanceof HTMLElement) {
+        coursesSection.focus()
+      }
     }
   }, [])
 
