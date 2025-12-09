@@ -150,7 +150,7 @@ Detecta automaticamente qual seção está visível no viewport baseado no scrol
 import { useCurrentSection } from './hooks/useCurrentSection'
 
 function App() {
-  const currentSection = useCurrentSection(['hero', 'sobre', 'servicos', 'contato'])
+  const currentSection = useCurrentSection(['hero', 'about', 'certifications', 'courses', 'contact'])
 
   return <Header currentSection={currentSection} />
 }
@@ -277,7 +277,7 @@ O sistema de navegação implementa o padrão ARIA `aria-current` para melhor ac
 import { AccessibleLink } from './components/ui/Accessibility'
 
 // Link da página atual
-<AccessibleLink href="#sobre" ariaCurrent="page">
+<AccessibleLink href="#about" ariaCurrent="page">
   Sobre
 </AccessibleLink>
 
@@ -309,7 +309,7 @@ import { AccessibleLink } from './components/ui/Accessibility'
 import Header from './components/layout/Header'
 
 function App() {
-  const currentSection = useCurrentSection(['home', 'sobre', 'servicos'])
+  const currentSection = useCurrentSection(['hero', 'about', 'certifications', 'courses', 'contact'])
 
   return (
     <div>
@@ -319,18 +319,26 @@ function App() {
         <ul>
           <li>
             <AccessibleLink
-              href="#home"
-              ariaCurrent={currentSection === 'home' ? 'page' : undefined}
+              href="#hero"
+              ariaCurrent={currentSection === 'hero' ? 'page' : undefined}
             >
-              Home
+              Início
             </AccessibleLink>
           </li>
           <li>
             <AccessibleLink
-              href="#sobre"
-              ariaCurrent={currentSection === 'sobre' ? 'page' : undefined}
+              href="#about"
+              ariaCurrent={currentSection === 'about' ? 'page' : undefined}
             >
               Sobre
+            </AccessibleLink>
+          </li>
+          <li>
+            <AccessibleLink
+              href="#courses"
+              ariaCurrent={currentSection === 'courses' ? 'page' : undefined}
+            >
+              Cursos
             </AccessibleLink>
           </li>
         </ul>
@@ -363,7 +371,7 @@ import { AccessibleButton } from './components/ui/Accessibility'
 import { AccessibleLink } from './components/ui/Accessibility'
 
 <AccessibleLink
-  href="#contato"
+  href="#contact"
   variant="primary"
   ariaCurrent="page"
 >
