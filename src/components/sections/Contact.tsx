@@ -79,7 +79,7 @@ const Contact: React.FC = memo(() => {
 
   return (
     <section
-      id='contato'
+      id='contact'
       className='py-24 bg-cta-600 text-white'
       aria-label='Entre em Contato Conosco'
     >

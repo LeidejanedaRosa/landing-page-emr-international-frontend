@@ -273,7 +273,7 @@ const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> 
     }) => {
       return (
         <section
-          id='certificacoes'
+          id='certifications'
           className='w-full py-16 px-4 bg-gray-50'
           aria-labelledby={`${sectionId}-heading`}
           onMouseEnter={pauseAutoPlay}

@@ -209,7 +209,7 @@ MetricCard.displayName = 'MetricCard'
 
 const AboutMetrics: React.FC = memo(() => {
   const scrollToContact = () => {
-    const contactSection = document.getElementById('contato')
+    const contactSection = document.getElementById('contact')
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
@@ -304,7 +304,7 @@ AboutContent.displayName = 'AboutContent'
 const About: React.FC = memo(() => {
   return (
     <section
-      id='sobre'
+      id='about'
       className='relative min-h-screen bg-black'
       aria-labelledby='about-heading'
     >
