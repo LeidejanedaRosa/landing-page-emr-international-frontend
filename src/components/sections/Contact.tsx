@@ -74,12 +74,14 @@ const ContactContent: React.FC<ContactContentProps> = memo(({ titleId }) => {
 ContactContent.displayName = 'ContactContent'
 
 const Contact: React.FC = memo(() => {
+  const sectionId = useUniqueId('contact')
   const titleId = useUniqueId('contact-title')
   const descriptionId = useUniqueId('contact-description')
 
   return (
     <section
-      id='contact'
+      id={sectionId}
+      data-section='contact'
       className='py-24 bg-cta-600 text-white'
       aria-label='Entre em Contato Conosco'
     >

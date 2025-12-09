@@ -143,6 +143,7 @@ const Hero: React.FC = memo(() => {
   return (
     <section
       id={sectionId}
+      data-section='hero'
       className='relative min-h-screen 2xl:min-h-full text-white overflow-hidden'
       aria-labelledby={`${sectionId}-heading`}
     >

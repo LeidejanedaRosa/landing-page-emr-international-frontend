@@ -6,6 +6,7 @@ import FundoAboutAvif from '../../assets/fundo_about.jpg?format=avif&w=640;768;1
 import FundoAboutJpg from '../../assets/fundo_about.jpg?format=jpg&w=1920&quality=85'
 // @ts-expect-error - vite-imagetools directives
 import FundoAboutWebp from '../../assets/fundo_about.jpg?format=webp&w=640;768;1024;1280;1920&as=srcset'
+import { useUniqueId } from '../../hooks/useAccessibility'
 import { AccessibleButton } from '../ui/AccessibleButton'
 
 const InstructorMedia: React.FC = memo(() => {
@@ -302,9 +303,12 @@ const AboutContent: React.FC = memo(() => {
 AboutContent.displayName = 'AboutContent'
 
 const About: React.FC = memo(() => {
+  const sectionId = useUniqueId('about')
+
   return (
     <section
-      id='about'
+      id={sectionId}
+      data-section='about'
       className='relative min-h-screen bg-black'
       aria-labelledby='about-heading'
     >
