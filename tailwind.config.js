@@ -1,6 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  safelist: [
+    'bg-warning-400',
+    'bg-warning-500',
+    'hover:bg-warning-500',
+    'hover:bg-warning-600',
+    'text-warning-400',
+    'hover:border-warning-400',
+    'focus:ring-warning-400',
+  ],
   theme: {
     extend: {
       colors: {
@@ -75,6 +84,19 @@ export default {
           700: '#b45309',
           800: '#92400e',
           900: '#78350f',
+        },
+        yellow: {
+          DEFAULT: '#FFC107',
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#FFC107',
+          500: '#FFC107',
+          600: '#f59e0b',
+          700: '#d97706',
+          800: '#b45309',
+          900: '#92400e',
         },
         info: {
           DEFAULT: '#17A2B8', // Azul Sóbrio
