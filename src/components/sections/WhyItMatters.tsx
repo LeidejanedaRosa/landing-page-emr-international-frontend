@@ -275,10 +275,12 @@ StatisticsGrid.displayName = 'StatisticsGrid'
 
 const CallToAction: React.FC = memo(() => {
   const handleNavigateToTraining = useCallback(() => {
-    const servicesSection = document.getElementById('services')
-    if (servicesSection) {
-      servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      servicesSection.focus()
+    const coursesSection = document.querySelector(
+      `[data-section="${CSS.escape('courses')}"]`
+    )
+    if (coursesSection) {
+      coursesSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      ;(coursesSection as HTMLElement).focus()
     }
   }, [])
 
