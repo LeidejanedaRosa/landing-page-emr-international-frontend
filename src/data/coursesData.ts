@@ -1,5 +1,8 @@
 import TMRImageJpg from '../assets/TMR.jpg'
-import WECPdf from '../assets/WEC_Spec_Sheet.pdf'
+import {
+  default as TMRPdf,
+  default as WECPdf,
+} from '../assets/WEC_Spec_Sheet.pdf'
 import WMRImageJpg from '../assets/WMR.jpg'
 
 export type CourseVariant = 'emergency' | 'wilderness'
@@ -47,7 +50,7 @@ const courses: Course[] = [
     },
     links: {
       details: '/cursos/tmr-tactical-medical-rescue',
-      brochure: '#',
+      brochure: TMRPdf,
     },
     images: {
       avif: TMRImageJpg,
