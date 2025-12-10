@@ -52,9 +52,10 @@ const SectionHeader = memo(({ titleId, subtitleId }: SectionHeaderProps) => {
         </span>
       </h2>
       <p className='text-zinc-600 max-w-2xl mx-auto text-sm md:text-base'>
-        Em situações críticas, a ignorância é fatal. Os dados abaixo demonstram
-        por que o treinamento de elite não é um luxo, mas uma necessidade de
-        sobrevivência.
+        Em operações táticas e emergências remotas, a ignorância é fatal. Os
+        dados abaixo demonstram por que a formação em APH Tático e medicina
+        wilderness não é um luxo, mas uma necessidade de sobrevivência para
+        operadores e primeiro respondentes.
       </p>
     </header>
   )
