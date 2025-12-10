@@ -46,46 +46,47 @@ const courses: Course[] = [
   {
     id: 'tmr',
     abbreviation: 'TMR',
-    title: 'Tactical Medical Rescue',
+    title: 'Tactical Medical Responder - Operador de APH Tático',
     description:
-      'Curso avançado de resgate tático focado em operações de alto risco e ambientes hostis. Desenvolva habilidades críticas para salvar vidas sob pressão extrema em cenários de combate e operações táticas.',
+      'Formação completa de operadores e primeiro respondentes táticos em APH Tático, medicina tática e protocolos TCCC/TECC. Curso avançado para socorristas táticos focado em operações de alto risco, ambientes hostis e cenários de combate. Desenvolva habilidades críticas para salvar vidas sob pressão extrema com certificação internacional reconhecida.',
     metadata: {
       duration: '40 horas',
-      certification: 'Certificação Internacional',
+      certification: 'Certificação Internacional TMR',
       location: 'In-Company ou Sede EMR',
     },
     links: {
-      details: '/cursos/tmr-tactical-medical-rescue',
+      details: '/cursos/tmr-tactical-medical-responder',
       brochure: TMRPdf,
     },
     images: {
       avif: TMRImageAvif,
       webp: TMRImageWebp,
       jpg: TMRImageJpg,
-      alt: 'Operador tático aplicando torniquete em ambiente de combate simulado durante treinamento do curso TMR',
+      alt: 'Socorrista tático aplicando torniquete tático em ambiente de combate simulado durante treinamento de APH Tático do curso TMR - Tactical Medical Responder',
     },
     variant: 'emergency',
   },
   {
     id: 'wmr',
     abbreviation: 'WMR',
-    title: 'Wilderness Medical Rescue',
+    title:
+      'Wilderness Medical Responder - Operador de Emergências em Áreas Remotas',
     description:
-      'Especialização em resgate em áreas remotas e ambientes selvagens. Prepare-se para atuar onde os recursos são limitados, o acesso é difícil e a estabilização prolongada é necessária.',
+      'Formação especializada em primeiros socorros e emergências em áreas remotas com certificação NAEMT. Curso de wilderness medicine para operadores de campo, guias de turismo de aventura e profissionais de resgate outdoor. Prepare-se para atuar em ambientes silvestres onde os recursos são limitados, o acesso é difícil e a estabilização prolongada é necessária.',
     metadata: {
       duration: '50 horas',
-      certification: 'Certificação NAEMT',
+      certification: 'Certificação NAEMT Wilderness',
       location: 'In-Company ou Sede EMR',
     },
     links: {
-      details: '/cursos/wmr-wilderness-medical-rescue',
+      details: '/cursos/wmr-wilderness-medical-responder',
       brochure: WECPdf,
     },
     images: {
       avif: WMRImageAvif,
       webp: WMRImageWebp,
       jpg: WMRImageJpg,
-      alt: 'Equipe de resgate realizando transporte de vítima em terreno montanhoso durante treinamento do curso WMR',
+      alt: 'Profissional de resgate outdoor e guia de aventura realizando primeiros socorros e transporte de vítima em terreno montanhoso durante treinamento wilderness do curso WMR',
     },
     variant: 'wilderness',
   },
