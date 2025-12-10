@@ -20,6 +20,11 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
+    "test:seo": "playwright test tests/seo --reporter=html",
+    "test:seo:metadata": "playwright test tests/seo/metadata.spec.ts",
+    "test:seo:semantic": "playwright test tests/seo/semantic-html.spec.ts",
+    "test:seo:a11y": "playwright test tests/seo/accessibility.spec.ts",
+    "test:seo:performance": "playwright test tests/seo/performance-keywords.spec.ts",
     "pre-deploy": "bash scripts/pre-deploy-validation.sh"
   },
   "dependencies": {
