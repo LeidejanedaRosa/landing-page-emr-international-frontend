@@ -61,18 +61,20 @@ const InstructorHero: React.FC = memo(() => {
       </h3>
 
       <p className='text-base sm:text-lg text-gray-200 font-semibold leading-snug'>
-        Paramédico e Instrutor Certificado em Emergências Médicas
+        Paramédico | Operador Médico Tático | Instrutor Certificado
+        Internacional
       </p>
 
       <div className='bg-black/40 border-l-4 border-cta-600 pl-4 py-3'>
         <p className='text-sm sm:text-base text-gray-100 leading-snug font-medium'>
           Com formação em Saúde e Segurança do Trabalho,{' '}
           <strong className='text-white font-bold'>
-            especialista em resgate tático em zonas de conflito de baixa
-            intensidade e atendimento pré-hospitalar em áreas remotas
+            especialista em APH Tático, medicina tática (TCCC/TECC), wilderness
+            medicine e formação de primeiro respondentes táticos e operadores de
+            campo em áreas remotas
           </strong>
-          , oferecendo treinamento de elite para profissionais que salvam vidas
-          em situações críticas.
+          . Treinamento de elite para socorristas táticos e profissionais que
+          salvam vidas em zonas de conflito e ambientes austeros.
         </p>
       </div>
     </header>

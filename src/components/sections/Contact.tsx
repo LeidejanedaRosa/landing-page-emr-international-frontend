@@ -30,9 +30,10 @@ const ContactHeader: React.FC<ContactHeaderProps> = memo(
           id={descriptionId}
           className='text-xl mb-8 text-primary-100 max-w-2xl mx-auto leading-relaxed'
         >
-          Pronto para se capacitar em emergências médicas e resgate tático?
-          Nossa equipe especializada está aqui para ajudá-lo a alcançar a
-          excelência profissional!
+          Pronto para se tornar um operador médico tático ou especialista em
+          áreas remotas? Fale conosco sobre nossos cursos de APH Tático,
+          medicina tática (TCCC/TECC) e wilderness medicine com certificação
+          internacional NAEMT!
         </p>
       </header>
     )

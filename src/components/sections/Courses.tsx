@@ -187,13 +187,13 @@ CourseCard.displayName = 'CourseCard'
 const CoursesHeader = memo(({ titleId, descriptionId }: CoursesHeaderProps) => (
   <header className='text-center mb-12 md:mb-16'>
     <span className='text-cta-500 font-semibold tracking-wider uppercase text-sm mb-2 block'>
-      Treinamento Especializado
+      Formação de Operadores Táticos e de Áreas Remotas
     </span>
     <h2
       id={titleId}
       className='text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white tracking-tight'
     >
-      Nossos Cursos
+      Cursos de APH Tático e Wilderness Medicine
     </h2>
     <p
       id={descriptionId}

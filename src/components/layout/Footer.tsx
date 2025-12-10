@@ -17,8 +17,10 @@ const CompanyInfo: React.FC<{ sectionId: string }> = memo(({ sectionId }) => {
       </header>
 
       <p className='text-gray-300 mb-6 max-w-md leading-relaxed'>
-        Especialistas em emergências médicas, resgate tático e capacitação
-        profissional com certificações internacionais reconhecidas mundialmente.
+        Referência em formação de operadores e primeiro respondentes táticos.
+        Especialistas em APH Tático, medicina tática (TCCC/TECC), wilderness
+        medicine e emergências em áreas remotas. Certificações internacionais
+        NAEMT reconhecidas mundialmente.
       </p>
 
       <div className='mt-6'>
