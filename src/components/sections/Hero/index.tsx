@@ -1,6 +1,11 @@
 import React, { memo, Suspense } from 'react'
 
-import heroImage from '../../../assets/hero_section.png'
+// @ts-expect-error - vite-imagetools directives
+import heroImageAvif from '../../../assets/hero_section.png?format=avif&w=640;768;1024;1280;1920&as=srcset'
+// @ts-expect-error - vite-imagetools directives
+import heroImageJpg from '../../../assets/hero_section.png?format=jpg&w=1920&quality=85'
+// @ts-expect-error - vite-imagetools directives
+import heroImageWebp from '../../../assets/hero_section.png?format=webp&w=640;768;1024;1280;1920&as=srcset'
 import {
   useAccessibilityPreferences,
   useScreenReaderAnnouncement,
@@ -38,19 +43,23 @@ const HeroImage: React.FC<HeroImageProps> = memo(
     const imageId = useUniqueId('hero-image')
 
     return (
-      <img
-        id={imageId}
-        src={heroImage}
-        alt='Equipe de resgate tático da EMR Internacional em operação de emergência médica com equipamentos avançados'
-        className={className}
-        loading='eager'
-        fetchPriority='high'
-        width={1920}
-        height={1080}
-        style={{
-          transform: prefersReducedMotion ? 'none' : undefined,
-        }}
-      />
+      <picture>
+        <source srcSet={heroImageAvif} type='image/avif' sizes='100vw' />
+        <source srcSet={heroImageWebp} type='image/webp' sizes='100vw' />
+        <img
+          id={imageId}
+          src={heroImageJpg}
+          alt='Equipe de resgate tático da EMR Internacional em operação de emergência médica com equipamentos avançados'
+          className={className}
+          loading='eager'
+          fetchPriority='high'
+          width={1920}
+          height={1080}
+          style={{
+            transform: prefersReducedMotion ? 'none' : undefined,
+          }}
+        />
+      </picture>
     )
   }
 )

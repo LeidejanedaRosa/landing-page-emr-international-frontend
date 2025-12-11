@@ -124,6 +124,8 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
+          helmet: ['react-helmet-async'],
+          icons: ['lucide-react'],
         },
         assetFileNames: assetInfo => {
           if (!assetInfo.name) return `assets/[name]-[hash][extname]`
