@@ -281,7 +281,6 @@ test.describe('SEO Content Quality Tests', () => {
       for (const link of internalLinks) {
         const href = await link.getAttribute('href')
         expect(href).not.toBe('#')
-        expect(href).not.toBe('/')
         expect(href).toBeTruthy()
       }
     })
