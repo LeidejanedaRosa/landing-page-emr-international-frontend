@@ -24,23 +24,21 @@ function App() {
       <StructuredData />
       <div className='min-h-screen bg-gray-50'>
         <Hero />
-        <main>
-          <Suspense fallback={<SectionSkeleton />}>
-            <WhyItMattersSection />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
-            <About />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
-            <Certifications />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
-            <Courses />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
-            <Contact />
-          </Suspense>
-        </main>
+        <Suspense fallback={<SectionSkeleton />}>
+          <WhyItMattersSection />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <About />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <Certifications />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <Courses />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <Contact />
+        </Suspense>
         <Suspense
           fallback={
             <div className='py-8'>

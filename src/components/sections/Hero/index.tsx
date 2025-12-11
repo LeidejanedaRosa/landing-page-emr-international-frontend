@@ -7,7 +7,7 @@ import {
   useUniqueId,
 } from '../../../hooks/useAccessibility'
 import Header from '../../layout/Header'
-import { MainContent, ScreenReaderOnly } from '../../ui/Accessibility'
+import { ScreenReaderOnly } from '../../ui/Accessibility'
 import { LoadingSpinner } from '../../ui/Loading'
 import PromoBannerCarousel from '../PromoBannerCarousel'
 import DesktopLayout from './DesktopLayout'
@@ -147,15 +147,9 @@ const Hero: React.FC = memo(() => {
       aria-labelledby='hero-heading'
     >
       <div className='absolute top-24 left-0 right-0 z-20 px-4 sm:px-6 lg:px-8'>
-        <h1
-          id='hero-heading'
-          className='hidden text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-2xl max-w-4xl'
-          style={{
-            textShadow:
-              '0 2px 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6)',
-          }}
-        >
-          EMR Internacional - Treinamentos em Emergências Médicas
+        <h1 id='hero-heading' className='sr-only'>
+          EMR Internacional - Formação de Operadores Médicos Táticos e
+          Wilderness - Cursos de APH Tático, TCCC/TECC e Emergências Remotas
         </h1>
         <ScreenReaderOnly>
           <p>
@@ -185,12 +179,16 @@ const Hero: React.FC = memo(() => {
         </Suspense>
       </div>
 
-      <MainContent className='relative max-w-screen-2xl mx-auto z-10 flex items-end pt-8 pb-20 px-4 sm:px-6 lg:px-8'>
+      <main
+        id='main-content'
+        className='relative max-w-screen-2xl mx-auto z-10 flex items-end pt-8 pb-20 px-4 sm:px-6 lg:px-8'
+        tabIndex={-1}
+      >
         <HeroContent
           onViewCoursesClick={handleViewCoursesClick}
           carouselProps={carouselProps}
         />
-      </MainContent>
+      </main>
     </section>
   )
 })

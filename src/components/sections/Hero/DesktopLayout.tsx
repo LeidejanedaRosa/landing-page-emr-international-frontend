@@ -14,7 +14,11 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({
       id='hero-text'
       className='grid col-span-1 space-y-4 backdrop-blur-sm bg-black/20 p-8 rounded-2xl'
     >
-      <h1 className='text-4xl lg:text-5xl font-black leading-tight text-pretty drop-shadow-2xl'>
+      <div
+        className='text-4xl lg:text-5xl font-black leading-tight text-pretty drop-shadow-2xl'
+        role='heading'
+        aria-level={2}
+      >
         O IMPREVISÍVEL
         <br />
         <span className='text-red-500'>ACONTECE.</span>
@@ -22,7 +26,7 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({
         VOCÊ ESTÁ
         <br />
         REALMENTE PREPARADO?
-      </h1>
+      </div>
       <p className='text-xl text-gray-100 leading-relaxed text-pretty border-l-4 border-red-500 pl-4 drop-shadow-lg h-fit'>
         Em cenários táticos ou remotos, a diferença entre a vida e a morte está
         na primeira resposta.

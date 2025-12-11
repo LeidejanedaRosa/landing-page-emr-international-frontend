@@ -60,29 +60,3 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = memo(
 )
 
 OptimizedImage.displayName = 'OptimizedImage'
-
-interface MainContentProps {
-  children: React.ReactNode
-  className?: string
-  ariaLabel?: string
-}
-
-export const MainContent: React.FC<MainContentProps> = memo(
-  ({ children, className = '', ariaLabel }) => {
-    const mainId = generateId('main-content')
-
-    return (
-      <main
-        id={mainId}
-        className={className}
-        role='main'
-        aria-label={ariaLabel}
-        tabIndex={-1}
-      >
-        {children}
-      </main>
-    )
-  }
-)
-
-MainContent.displayName = 'MainContent'

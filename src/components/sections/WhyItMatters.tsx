@@ -328,6 +328,7 @@ const WhyItMattersSection: React.FC = memo(() => {
   return (
     <section
       id={sectionId}
+      data-section='why-it-matters'
       className='relative w-full bg-gradient-to-b from-primary-50 via-white to-primary-50 py-8 md:py-6 px-4 md:px-8 font-sans'
       aria-labelledby={titleId}
       aria-describedby={subtitleId}

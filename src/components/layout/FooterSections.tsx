@@ -132,7 +132,7 @@ export const QuickLinks: React.FC = memo(() => {
           <li key={link.href} role='listitem'>
             <AccessibleLink
               href={link.href}
-              className='text-gray-300 hover:text-cta-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-cta-400 focus:ring-opacity-50 rounded px-2 py-1 -mx-2'
+              className='text-gray-100 hover:text-cta-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-cta-400 focus:ring-opacity-50 rounded px-2 py-1 -mx-2'
               aria-label={link.ariaLabel}
               onClick={() => handleLinkClick(link.label)}
             >
@@ -189,7 +189,7 @@ export const ServicesLinks: React.FC = memo(() => {
           <li key={service.label} role='listitem'>
             <AccessibleLink
               href={service.href}
-              className='text-gray-300 hover:text-cta-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-cta-400 focus:ring-opacity-50 rounded px-2 py-1 -mx-2'
+              className='text-gray-100 hover:text-cta-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-cta-400 focus:ring-opacity-50 rounded px-2 py-1 -mx-2'
               aria-label={service.ariaLabel}
               onClick={() => handleServiceClick(service.label)}
             >

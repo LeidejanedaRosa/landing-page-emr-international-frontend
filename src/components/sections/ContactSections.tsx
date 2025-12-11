@@ -330,7 +330,7 @@ export const ContactForm: React.FC<ContactFormProps> = memo(({ onLoad }) => {
         <div>
           <label
             htmlFor={`${formId}-name`}
-            className='block text-sm font-medium mb-2 text-white'
+            className='block text-sm font-bold mb-2 text-white'
           >
             Nome Completo *
           </label>
@@ -354,7 +354,7 @@ export const ContactForm: React.FC<ContactFormProps> = memo(({ onLoad }) => {
         <div>
           <label
             htmlFor={`${formId}-email`}
-            className='block text-sm font-medium mb-2 text-white'
+            className='block text-sm font-bold mb-2 text-white'
           >
             Email *
           </label>
@@ -379,7 +379,7 @@ export const ContactForm: React.FC<ContactFormProps> = memo(({ onLoad }) => {
         <div>
           <label
             htmlFor={`${formId}-message`}
-            className='block text-sm font-medium mb-2 text-white'
+            className='block text-sm font-bold mb-2 text-white'
           >
             Mensagem *
           </label>

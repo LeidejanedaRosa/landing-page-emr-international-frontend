@@ -16,7 +16,7 @@ const CompanyInfo: React.FC<{ sectionId: string }> = memo(({ sectionId }) => {
         </h2>
       </header>
 
-      <p className='text-gray-300 mb-6 max-w-md leading-relaxed'>
+      <p className='text-gray-100 mb-6 max-w-md leading-relaxed'>
         Referência em formação de operadores e primeiros respondentes táticos.
         Especialistas em APH Tático, medicina tática (
         <span lang='en'>TCCC/TECC</span>),{' '}
@@ -43,7 +43,7 @@ const Copyright: React.FC = memo(() => {
   return (
     <div className='border-t border-gray-800 pt-8'>
       <div className='text-center'>
-        <p className='text-gray-300'>
+        <p className='text-gray-100'>
           <span>&copy; {currentYear} </span>
           <strong>{COMPANY_LEGAL_INFO.legalName}</strong>
           <span>. Todos os direitos reservados.</span>

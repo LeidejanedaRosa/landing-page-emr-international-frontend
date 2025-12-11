@@ -9,7 +9,11 @@ interface HeroSlidesProps {
 const HeroTextSlide: React.FC = () => (
   <div className='hero-carousel-slide'>
     <div className='space-y-4 text-center max-w-lg px-4'>
-      <h1 className='text-3xl md:text-4xl font-black leading-tight drop-shadow-2xl'>
+      <div
+        className='text-3xl md:text-4xl font-black leading-tight drop-shadow-2xl'
+        role='heading'
+        aria-level={2}
+      >
         EM CENÁRIOS TÁTICOS E
         <br />
         <span className='text-red-500'>ÁREAS REMOTAS</span>
@@ -17,7 +21,7 @@ const HeroTextSlide: React.FC = () => (
         CADA SEGUNDO
         <br />
         DEFINE QUEM SOBREVIVE
-      </h1>
+      </div>
       <p className='text-lg text-left text-gray-100 leading-relaxed border-l-4 border-red-500 pl-4 drop-shadow-lg'>
         Torne-se um primeiro respondente tático ou operador de emergências
         remotas. A diferença entre a vida e a morte está no treinamento de APH
