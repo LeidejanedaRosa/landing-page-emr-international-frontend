@@ -94,12 +94,29 @@ test.describe('Performance & Core Web Vitals Tests', () => {
   test.describe('Resource Loading', () => {
     test('should not have render-blocking resources', async ({ page }) => {
       const renderBlockingResources = await page.evaluate(() => {
-        const stylesheets = Array.from(
-          document.querySelectorAll('link[rel="stylesheet"]')
-        )
-        return stylesheets.filter(link => {
-          const href = (link as HTMLLinkElement).href
-          return !href.includes('preload') && !link.hasAttribute('media')
+        const links = Array.from(document.querySelectorAll('link'))
+
+        return links.filter(link => {
+          const rel = link.rel || ''
+          const asAttribute = link.getAttribute('as')
+          const media = link.getAttribute('media')
+
+          const isStylesheet = rel.includes('stylesheet')
+
+          if (!isStylesheet) {
+            return false
+          }
+
+          const isPreloaded = rel.includes('preload') && asAttribute === 'style'
+
+          const hasNonRenderBlockingMedia =
+            media !== null &&
+            media.trim() !== '' &&
+            (media.includes('print') || media.includes('('))
+
+          const isRenderBlocking = !isPreloaded && !hasNonRenderBlockingMedia
+
+          return isRenderBlocking
         }).length
       })
 
@@ -368,6 +385,10 @@ test.describe('SEO Content Quality Tests', () => {
 
       for (const element of jsonLdElements) {
         const content = await element.textContent()
+
+        expect(content).not.toBeNull()
+        expect(content).toBeTruthy()
+
         expect(() => JSON.parse(content!)).not.toThrow()
       }
     })
@@ -380,13 +401,22 @@ test.describe('SEO Content Quality Tests', () => {
       let hasOrgSchema = false
       for (const element of jsonLdElements) {
         const content = await element.textContent()
-        const data = JSON.parse(content!)
-        if (
-          data['@type'] === 'Organization' ||
-          data['@type']?.includes('Organization')
-        ) {
-          hasOrgSchema = true
-          break
+
+        if (!content || content.trim().length === 0) {
+          continue
+        }
+
+        try {
+          const data = JSON.parse(content)
+          if (
+            data['@type'] === 'Organization' ||
+            data['@type']?.includes('Organization')
+          ) {
+            hasOrgSchema = true
+            break
+          }
+        } catch {
+          continue
         }
       }
 
