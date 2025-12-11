@@ -69,9 +69,10 @@ const InstructorHero: React.FC = memo(() => {
         <p className='text-sm sm:text-base text-gray-100 leading-snug font-medium'>
           Com formação em Saúde e Segurança do Trabalho,{' '}
           <strong className='text-white font-bold'>
-            especialista em APH Tático, medicina tática (TCCC/TECC), wilderness
-            medicine e formação de primeiro respondentes táticos e operadores de
-            campo em áreas remotas
+            especialista em APH Tático, medicina tática (TCCC/TECC),{' '}
+            <span lang='en'>wilderness medicine</span> (medicina em ambientes
+            remotos) e formação de primeiros respondentes táticos e operadores
+            de campo em áreas remotas
           </strong>
           . Treinamento de elite para socorristas táticos e profissionais que
           salvam vidas em zonas de conflito e ambientes austeros.

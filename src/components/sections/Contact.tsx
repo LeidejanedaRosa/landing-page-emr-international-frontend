@@ -32,7 +32,8 @@ const ContactHeader: React.FC<ContactHeaderProps> = memo(
         >
           Pronto para se tornar um operador médico tático ou especialista em
           áreas remotas? Fale conosco sobre nossos cursos de APH Tático,
-          medicina tática (TCCC/TECC) e wilderness medicine com certificação
+          medicina tática (<span lang='en'>TCCC/TECC</span>) e{' '}
+          <span lang='en'>Wilderness Medicine</span> com certificação
           internacional NAEMT!
         </p>
       </header>

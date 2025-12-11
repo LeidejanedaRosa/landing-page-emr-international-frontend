@@ -193,7 +193,7 @@ const CoursesHeader = memo(({ titleId, descriptionId }: CoursesHeaderProps) => (
       id={titleId}
       className='text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white tracking-tight'
     >
-      Cursos de APH Tático e Wilderness Medicine
+      Cursos de APH Tático e <span lang='en'>Wilderness Medicine</span>
     </h2>
     <p
       id={descriptionId}

@@ -18,9 +18,10 @@ const CompanyInfo: React.FC<{ sectionId: string }> = memo(({ sectionId }) => {
 
       <p className='text-gray-300 mb-6 max-w-md leading-relaxed'>
         Referência em formação de operadores e primeiro respondentes táticos.
-        Especialistas em APH Tático, medicina tática (TCCC/TECC), wilderness
-        medicine e emergências em áreas remotas. Certificações internacionais
-        NAEMT reconhecidas mundialmente.
+        Especialistas em APH Tático, medicina tática (
+        <span lang='en'>TCCC/TECC</span>),{' '}
+        <span lang='en'>Wilderness Medicine</span> e emergências em áreas
+        remotas. Certificações internacionais NAEMT reconhecidas mundialmente.
       </p>
 
       <div className='mt-6'>

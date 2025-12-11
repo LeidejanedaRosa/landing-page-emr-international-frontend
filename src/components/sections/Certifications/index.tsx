@@ -130,12 +130,14 @@ const CertificationsSectionHeader: React.FC = memo(() => {
         id='certifications-heading'
         className='text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4'
       >
-        Credenciamento Internacional em Medicina Tática e Wilderness
+        Credenciamento Internacional em Medicina Tática e{' '}
+        <span lang='en'>Wilderness Medicine</span>
       </h2>
       <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
         Certificações reconhecidas mundialmente em APH Tático, medicina de
-        combate (TCCC/TECC), wilderness medicine e formação de operadores
-        médicos táticos pela NAEMT, HSI e American College of Surgeons
+        combate (TCCC/TECC), <span lang='en'>Wilderness Medicine</span> e
+        formação de operadores médicos táticos pela NAEMT, HSI e American
+        College of Surgeons
       </p>
     </header>
   )
