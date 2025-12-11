@@ -11,7 +11,9 @@ test.describe('Performance & Core Web Vitals Tests', () => {
     }) => {
       const lcp = await page.evaluate(() => {
         return new Promise<number>(resolve => {
-          new PerformanceObserver(list => {
+          let resolved = false
+          const observer = new PerformanceObserver(list => {
+            if (resolved) return
             const entries = list.getEntries()
             const lastEntry = entries[
               entries.length - 1
@@ -19,13 +21,25 @@ test.describe('Performance & Core Web Vitals Tests', () => {
               renderTime?: number
               loadTime?: number
             }
-            resolve(lastEntry.renderTime || lastEntry.loadTime || 0)
-          }).observe({ type: 'largest-contentful-paint', buffered: true })
+            const lcpValue = lastEntry.renderTime || lastEntry.loadTime || 0
+            if (lcpValue > 0) {
+              resolved = true
+              observer.disconnect()
+              resolve(lcpValue)
+            }
+          })
+          observer.observe({ type: 'largest-contentful-paint', buffered: true })
 
-          setTimeout(() => resolve(0), 5000)
+          setTimeout(() => {
+            if (!resolved) {
+              observer.disconnect()
+              resolve(-1)
+            }
+          }, 5000)
         })
       })
 
+      expect(lcp).toBeGreaterThan(0)
       expect(lcp).toBeLessThan(2500)
     })
 
@@ -58,22 +72,22 @@ test.describe('Performance & Core Web Vitals Tests', () => {
         const fcpEntry = performance
           .getEntriesByType('paint')
           .find(entry => entry.name === 'first-contentful-paint')
-        return fcpEntry?.startTime || 0
+        return fcpEntry?.startTime ?? -1
       })
 
+      expect(fcp).toBeGreaterThan(0)
       expect(fcp).toBeLessThan(1800)
     })
 
-    test('should have acceptable Time to Interactive (TTI)', async ({
-      page,
-    }) => {
-      const tti = await page.evaluate(() => {
-        return (
-          performance.timing.domInteractive - performance.timing.navigationStart
-        )
+    test('should have acceptable DOM Interactive Time', async ({ page }) => {
+      const domInteractive = await page.evaluate(() => {
+        const navigationTiming = performance.getEntriesByType(
+          'navigation'
+        )[0] as PerformanceNavigationTiming
+        return navigationTiming.domInteractive
       })
 
-      expect(tti).toBeLessThan(3800)
+      expect(domInteractive).toBeLessThan(3800)
     })
   })
 
@@ -261,6 +275,7 @@ test.describe('SEO Content Quality Tests', () => {
         .split(/\s+/)
         .filter(Boolean).length
 
+      expect(totalWordCount).toBeGreaterThan(0)
       const mainContentPercentage = (mainWordCount / totalWordCount) * 100
       expect(mainContentPercentage).toBeGreaterThan(60)
     })
