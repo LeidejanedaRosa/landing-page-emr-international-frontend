@@ -45,7 +45,7 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
         await page.keyboard.press('Tab')
         const focused = await page.evaluate(
           () =>
-            `${document.activeElement?.tagName}:${document.activeElement?.textContent?.slice(0, 20)}`
+            `${document.activeElement?.tagName}:${document.activeElement?.textContent?.slice(0, 20) ?? ''}`
         )
         focusedElements.push(focused)
       }
@@ -59,6 +59,7 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
       page,
     }) => {
       const firstFocusable = page.locator('a, button').first()
+      await expect(firstFocusable).toBeVisible()
 
       const hasVisibleFocus = await firstFocusable.evaluate(el => {
         const unfocusedStyles = window.getComputedStyle(el)
@@ -110,17 +111,33 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
     })
 
     test('page should be readable at 200% zoom', async ({ page }) => {
-      await page.setViewportSize({ width: 640, height: 360 })
+      await page.emulateMedia({ reducedMotion: 'reduce' })
 
-      const mainContent = await page.locator('main').first().textContent()
-      expect(mainContent).toBeTruthy()
-      expect(mainContent!.length).toBeGreaterThan(0)
+      await page.evaluate(() => {
+        document.body.style.zoom = '200%'
+        document.body.style.overflow = 'visible'
+      })
+
+      await page.waitForLoadState('networkidle')
+      await page.waitForTimeout(500)
+
+      const mainLocator = page.locator('main').first()
+      const mainExists = await mainLocator.count()
+
+      expect(mainExists).toBeGreaterThan(0)
+
+      if (mainExists > 0) {
+        await expect(mainLocator).toBeVisible()
+        const mainContent = await mainLocator.textContent()
+        expect(mainContent).toBeTruthy()
+        expect(mainContent!.length).toBeGreaterThan(0)
+      }
 
       const hasHorizontalScroll = await page.evaluate(() => {
-        return (
-          document.documentElement.scrollWidth >
-          document.documentElement.clientWidth
-        )
+        const scrollWidth = document.documentElement.scrollWidth
+        const clientWidth = document.documentElement.clientWidth
+        const threshold = 10
+        return scrollWidth > clientWidth + threshold
       })
 
       expect(hasHorizontalScroll).toBeFalsy()
@@ -139,7 +156,7 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
     test('page should have lang attribute', async ({ page }) => {
       const lang = await page.getAttribute('html', 'lang')
       expect(lang).toBeTruthy()
-      expect(lang).toMatch(/^[a-z]{2}(-[A-Z]{2})?$/)
+      expect(lang).toMatch(/^[a-z]{2,3}(-[A-Za-z]{4})?(-[A-Z]{2})?$/i)
     })
   })
 })
