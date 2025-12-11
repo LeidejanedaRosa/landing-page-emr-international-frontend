@@ -59,14 +59,22 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
       page,
     }) => {
       const firstFocusable = page.locator('a, button').first()
-      await firstFocusable.focus()
 
       const hasVisibleFocus = await firstFocusable.evaluate(el => {
-        const styles = window.getComputedStyle(el)
+        const unfocusedStyles = window.getComputedStyle(el)
+        const before = {
+          outline: unfocusedStyles.outline,
+          boxShadow: unfocusedStyles.boxShadow,
+          border: unfocusedStyles.border,
+        }
+
+        el.focus()
+        const focusedStyles = window.getComputedStyle(el)
+
         return (
-          styles.outlineWidth !== '0px' ||
-          styles.boxShadow !== 'none' ||
-          styles.borderWidth !== '0px'
+          focusedStyles.outline !== before.outline ||
+          focusedStyles.boxShadow !== before.boxShadow ||
+          focusedStyles.border !== before.border
         )
       })
 
@@ -102,13 +110,7 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
     })
 
     test('page should be readable at 200% zoom', async ({ page }) => {
-      await page.setViewportSize({ width: 1280, height: 720 })
-
-      await page.evaluate(() => {
-        document.body.style.zoom = '200%'
-      })
-
-      await page.waitForTimeout(500)
+      await page.setViewportSize({ width: 640, height: 360 })
 
       const mainContent = await page.locator('main').first().textContent()
       expect(mainContent).toBeTruthy()
@@ -117,7 +119,7 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
       const hasHorizontalScroll = await page.evaluate(() => {
         return (
           document.documentElement.scrollWidth >
-          document.documentElement.clientWidth + 10
+          document.documentElement.clientWidth
         )
       })
 
