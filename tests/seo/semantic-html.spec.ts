@@ -39,13 +39,6 @@ test.describe('Semantic HTML Structure Tests', () => {
       const sectionCount = await page.locator('section').count()
       expect(sectionCount).toBeGreaterThanOrEqual(3)
     })
-
-    test('should have article elements for self-contained content', async ({
-      page,
-    }) => {
-      const articleCount = await page.locator('article').count()
-      expect(articleCount).toBeGreaterThanOrEqual(0)
-    })
   })
 
   test.describe('Heading Hierarchy - WCAG 1.3.1 & 2.4.6', () => {
@@ -170,15 +163,16 @@ test.describe('Semantic HTML Structure Tests', () => {
       }
     })
 
-    test('required fields should be marked as required', async ({ page }) => {
-      const requiredInputs = await page.locator('input[required]').all()
+    test('required fields should have aria-required attribute', async ({
+      page,
+    }) => {
+      const requiredInputs = await page
+        .locator('input[required], textarea[required], select[required]')
+        .all()
 
       for (const input of requiredInputs) {
         const ariaRequired = await input.getAttribute('aria-required')
-        const hasRequiredAttr = await input.evaluate(el =>
-          el.hasAttribute('required')
-        )
-        expect(hasRequiredAttr || ariaRequired === 'true').toBeTruthy()
+        expect(ariaRequired).toBe('true')
       }
     })
   })
