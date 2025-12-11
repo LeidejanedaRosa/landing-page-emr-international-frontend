@@ -10,7 +10,7 @@ const HeroTextSlide: React.FC = () => (
   <div className='hero-carousel-slide'>
     <div className='space-y-4 text-center max-w-lg px-4'>
       <h1 className='text-3xl md:text-4xl font-black leading-tight drop-shadow-2xl'>
-        EM CENAÁRIOS TÁTICOS E
+        EM CENÁRIOS TÁTICOS E
         <br />
         <span className='text-red-500'>ÁREAS REMOTAS</span>
         <br />
