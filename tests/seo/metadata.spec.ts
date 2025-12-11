@@ -69,7 +69,7 @@ test.describe('SEO Metadata Tests', () => {
         'content'
       )
       expect(ogImage).toBeTruthy()
-      expect(ogImage).toMatch(/\.(jpg|jpeg|png|webp)$/i)
+      expect(ogImage).toMatch(/\.(jpg|jpeg|png|webp|avif)(\?[^?]*)?$/i)
     })
 
     test('should have og:url', async ({ page }) => {
@@ -214,7 +214,13 @@ test.describe('SEO Metadata Tests', () => {
         'meta[name="description"]',
         'content'
       )
-      const words = description!.toLowerCase().split(/\s+/)
+      expect(description).toBeTruthy()
+      expect(description!.trim().length).toBeGreaterThan(0)
+      const words = description!
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(w => w.length > 0)
+      expect(words.length).toBeGreaterThan(0)
       const wordCount = words.reduce(
         (acc, word) => {
           acc[word] = (acc[word] || 0) + 1
