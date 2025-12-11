@@ -21,7 +21,8 @@ const CompanyInfo: React.FC<{ sectionId: string }> = memo(({ sectionId }) => {
         Especialistas em APH Tático, medicina tática (
         <span lang='en'>TCCC/TECC</span>),{' '}
         <span lang='en'>Wilderness Medicine</span> e emergências em áreas
-        remotas. Certificações internacionais NAEMT reconhecidas mundialmente.
+        remotas. Certificações internacionais <span lang='en'>NAEMT</span>{' '}
+        reconhecidas mundialmente.
       </p>
 
       <div className='mt-6'>
