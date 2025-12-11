@@ -112,8 +112,11 @@ Baseado em: [Google Core Web Vitals](https://web.dev/articles/vitals) e [Lightho
 
 - ✅ LCP (Largest Contentful Paint) < 2.5s
 - ✅ CLS (Cumulative Layout Shift) < 0.1
+- ✅ INP (Interaction to Next Paint) < 200ms
+
+#### **Additional Performance Metrics**
+
 - ✅ FCP (First Contentful Paint) < 1.8s
-- ✅ TTI (Time to Interactive) < 3.8s
 
 #### **Otimização de Recursos**
 
