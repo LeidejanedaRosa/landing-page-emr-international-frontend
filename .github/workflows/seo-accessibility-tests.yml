@@ -31,28 +31,53 @@ jobs:
         run: npm run build
 
       - name: Start preview server
-        run: npm run preview &
+        run: |
+          npm run preview > /tmp/preview.log 2>&1 &
+          echo $! > /tmp/preview.pid
+          echo "Preview server started with PID: $(cat /tmp/preview.pid)"
         env:
           CI: true
 
       - name: Wait for server to be ready
-        run: npx wait-on http://localhost:4173 --timeout 30000
+        run: |
+          npx wait-on http://localhost:4173 --timeout 60000 || {
+            echo "❌ Preview server failed to start within 60s";
+            echo "📋 Server logs:";
+            cat /tmp/preview.log;
+            exit 1;
+          }
+          echo "✅ Preview server is ready at http://localhost:4173"
+          curl -f http://localhost:4173 || {
+            echo "❌ Health check failed";
+            cat /tmp/preview.log;
+            exit 1;
+          }
 
       - name: Run SEO Metadata Tests
+        id: metadata-tests
         run: npm run test:seo:metadata
-        continue-on-error: false
+        continue-on-error: true
 
       - name: Run Semantic HTML Tests
+        id: semantic-tests
         run: npm run test:seo:semantic
-        continue-on-error: false
+        continue-on-error: true
 
       - name: Run Accessibility Tests
+        id: accessibility-tests
         run: npm run test:seo:a11y
-        continue-on-error: false
+        continue-on-error: true
 
       - name: Run Performance & Keywords Tests
+        id: performance-tests
         run: npm run test:seo:performance
-        continue-on-error: false
+        continue-on-error: true
+
+      - name: Check if any test failed
+        if: steps.metadata-tests.outcome == 'failure' || steps.semantic-tests.outcome == 'failure' || steps.accessibility-tests.outcome == 'failure' || steps.performance-tests.outcome == 'failure'
+        run: |
+          echo "❌ One or more test suites failed"
+          exit 1
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
@@ -75,20 +100,38 @@ jobs:
         if: github.event_name == 'pull_request' && always()
         with:
           script: |
-            const fs = require('fs');
-            const reportPath = 'playwright-report/index.html';
+            const metadataStatus = '${{ steps.metadata-tests.outcome }}' === 'success' ? '✅' : '❌';
+            const semanticStatus = '${{ steps.semantic-tests.outcome }}' === 'success' ? '✅' : '❌';
+            const accessibilityStatus = '${{ steps.accessibility-tests.outcome }}' === 'success' ? '✅' : '❌';
+            const performanceStatus = '${{ steps.performance-tests.outcome }}' === 'success' ? '✅' : '❌';
 
-            let comment = '## 🔍 SEO & Accessibility Test Results\n\n';
-            comment += '### Test Suites:\n';
-            comment += '- ✅ SEO Metadata Tests\n';
-            comment += '- ✅ Semantic HTML Tests\n';
-            comment += '- ✅ WCAG 2.1 AA Accessibility Tests\n';
-            comment += '- ✅ Performance & Keywords Tests\n\n';
-            comment += '📊 [View Full Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})\n\n';
-            comment += '**Based on:**\n';
-            comment += '- [WCAG 2.1 AA Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)\n';
-            comment += '- [Google SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)\n';
-            comment += '- [Core Web Vitals](https://web.dev/articles/vitals)';
+            const allPassed = '${{ steps.metadata-tests.outcome }}' === 'success' && 
+                              '${{ steps.semantic-tests.outcome }}' === 'success' && 
+                              '${{ steps.accessibility-tests.outcome }}' === 'success' && 
+                              '${{ steps.performance-tests.outcome }}' === 'success';
+
+            const overallStatus = allPassed ? '✅ All tests passed!' : '❌ Some tests failed';
+
+            let comment = `## 🔍 SEO & Accessibility Test Results\n\n`;
+            comment += `### Overall Status: ${overallStatus}\n\n`;
+            comment += `### Test Suites:\n`;
+            comment += `${metadataStatus} **SEO Metadata Tests**\n`;
+            comment += `${semanticStatus} **Semantic HTML Tests**\n`;
+            comment += `${accessibilityStatus} **WCAG 2.1 AA Accessibility Tests** (powered by Axe-core)\n`;
+            comment += `${performanceStatus} **Performance & Keywords Tests**\n\n`;
+
+            if (!allPassed) {
+              comment += `⚠️ **Action Required:** Review failed tests and fix violations before merging.\n\n`;
+            }
+
+            comment += `📊 [View Full Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})\n`;
+            comment += `📦 [Download Artifacts](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})\n\n`;
+            comment += `**Standards Validated:**\n`;
+            comment += `- [WCAG 2.1 AA Guidelines](https://www.w3.org/WAI/WCAG21/quickref/) - 100+ automated rules\n`;
+            comment += `- [Google SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)\n`;
+            comment += `- [Core Web Vitals](https://web.dev/articles/vitals)\n`;
+            comment += `- [HTML Living Standard](https://html.spec.whatwg.org/)\n\n`;
+            comment += `🤖 Powered by Playwright + Axe-core`;
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
