@@ -49,7 +49,11 @@ Baseado em: [WCAG 2.1 Guidelines 1.3.1](https://www.w3.org/WAI/WCAG21/Understand
 
 ---
 
-### 3. **accessibility.spec.ts** - Testes de Acessibilidade WCAG 2.1 AA
+### 3. **accessibility.spec.ts** - Testes de Acessibilidade WCAG 2.1 AA (Powered by Axe-core)
+
+⚠️ **IMPORTANTE**: Testes agora usam [@axe-core/playwright](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright) - padrão da indústria para testes automatizados de acessibilidade.
+
+**📚 Documentação completa:** [docs/ACCESSIBILITY-TESTING.md](/docs/ACCESSIBILITY-TESTING.md)
 
 Baseado em: [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
 
