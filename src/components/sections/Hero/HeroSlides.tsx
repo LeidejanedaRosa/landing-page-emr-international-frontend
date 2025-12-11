@@ -37,7 +37,7 @@ const HeroEmergencySlide: React.FC<HeroSlidesProps> = ({
         onClick={onViewCoursesClick}
         className='bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full text-lg transition shadow-2xl hover:shadow-red-600/50 transform hover:scale-105'
         type='button'
-        aria-label='Ver cursos de APH Tático e Operador de Áreas Remotas da EMR Internacional'
+        aria-label='Ver cursos de Operação Tática e Remota da EMR Internacional'
       >
         Ver Cursos de Operação Tática e Remota
       </button>
