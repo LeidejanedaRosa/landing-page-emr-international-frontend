@@ -49,8 +49,9 @@ test.describe('Semantic HTML Structure Tests', () => {
 
     test('h1 should not be empty', async ({ page }) => {
       const h1Text = await page.locator('h1').first().textContent()
-      expect(h1Text?.trim()).toBeTruthy()
-      expect(h1Text!.trim().length).toBeGreaterThan(10)
+      const trimmedText = h1Text?.trim() || ''
+      expect(trimmedText).toBeTruthy()
+      expect(trimmedText.length).toBeGreaterThan(10)
     })
 
     test('should have proper heading hierarchy (no skipped levels)', async ({

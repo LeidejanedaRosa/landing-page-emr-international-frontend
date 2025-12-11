@@ -176,10 +176,10 @@ test.describe('Performance & Core Web Vitals Tests', () => {
   })
 
   test.describe('JavaScript Performance', () => {
-    test('should not have excessive JavaScript execution time', async ({
+    test('should not have excessive DOMContentLoaded handler execution time', async ({
       page,
     }) => {
-      const jsExecutionTime = await page.evaluate(() => {
+      const domContentLoadedDuration = await page.evaluate(() => {
         const navigationTiming = performance.getEntriesByType(
           'navigation'
         )[0] as PerformanceNavigationTiming
@@ -189,7 +189,7 @@ test.describe('Performance & Core Web Vitals Tests', () => {
         )
       })
 
-      expect(jsExecutionTime).toBeLessThan(1000)
+      expect(domContentLoadedDuration).toBeLessThan(1000)
     })
 
     test('should not have long tasks', async ({ page }) => {
