@@ -48,17 +48,17 @@ const InstructorHero: React.FC = memo(() => {
         <p className='text-xs sm:text-sm font-bold text-cta-600 uppercase tracking-wider'>
           Quem está por trás da
         </p>
-        <h2 className='text-xl sm:text-2xl font-extrabold text-white leading-tight'>
+        <p className='text-xl sm:text-2xl font-extrabold text-white leading-tight'>
           EMR INTERNACIONAL
-        </h2>
+        </p>
       </div>
 
-      <h3
+      <h2
         id='about-heading'
         className='font-capture-it text-4xl sm:text-5xl md:text-6xl text-white leading-tight'
       >
         Juan Regenerati
-      </h3>
+      </h2>
 
       <p className='text-base sm:text-lg text-gray-200 font-semibold leading-snug'>
         Paramédico | Operador Médico Tático | Instrutor Certificado

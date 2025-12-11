@@ -46,6 +46,7 @@ const SEO: React.FC<SEOProps> = ({
     <meta name='keywords' content={keywords} />
 
     <meta property='og:type' content='website' />
+    <meta property='og:locale' content='pt_BR' />
     <meta property='og:title' content={ogTitle || title} />
     <meta property='og:description' content={ogDescription || description} />
     <meta property='og:image' content={ogImage} />
