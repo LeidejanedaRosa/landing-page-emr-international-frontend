@@ -17,7 +17,7 @@ const CompanyInfo: React.FC<{ sectionId: string }> = memo(({ sectionId }) => {
       </header>
 
       <p className='text-gray-300 mb-6 max-w-md leading-relaxed'>
-        Referência em formação de operadores e primeiro respondentes táticos.
+        Referência em formação de operadores e primeiros respondentes táticos.
         Especialistas em APH Tático, medicina tática (
         <span lang='en'>TCCC/TECC</span>),{' '}
         <span lang='en'>Wilderness Medicine</span> e emergências em áreas
