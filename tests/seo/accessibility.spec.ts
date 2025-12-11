@@ -83,7 +83,8 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
     })
 
     test('should have skip navigation link', async ({ page }) => {
-      const skipLink = await page.locator('a[href^="#"]').first()
+      const skipLink = page.locator('a[href^="#"]').first()
+      await expect(skipLink).toBeVisible()
       const skipLinkText = await skipLink.textContent()
 
       const hasSkipLink =
