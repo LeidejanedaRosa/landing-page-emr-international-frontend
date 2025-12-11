@@ -110,13 +110,24 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
       expect(hasHorizontalScroll).toBeFalsy()
     })
 
-    test('page should be readable at 200% zoom', async ({ page }) => {
+    test('page should be readable at 200% zoom', async ({
+      page,
+      browserName,
+    }) => {
       await page.emulateMedia({ reducedMotion: 'reduce' })
 
-      await page.evaluate(() => {
-        document.body.style.zoom = '200%'
-        document.body.style.overflow = 'visible'
-      })
+      if (browserName === 'chromium') {
+        const client = await page.context().newCDPSession(page)
+        await client.send('Emulation.setPageScaleFactor', {
+          pageScaleFactor: 2.0,
+        })
+      } else {
+        await page.evaluate(() => {
+          document.documentElement.style.transform = 'scale(2)'
+          document.documentElement.style.transformOrigin = 'top left'
+          document.documentElement.style.width = '50%'
+        })
+      }
 
       await page.waitForLoadState('networkidle')
       await page.waitForTimeout(500)
