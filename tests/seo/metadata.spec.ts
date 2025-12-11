@@ -155,8 +155,14 @@ test.describe('SEO Metadata Tests', () => {
 
     test('should allow indexing and following', async ({ page }) => {
       const robots = await page.getAttribute('meta[name="robots"]', 'content')
-      expect(robots).toContain('index')
-      expect(robots).toContain('follow')
+      expect(robots).toBeTruthy()
+
+      const tokens = robots!.split(',').map(token => token.trim().toLowerCase())
+
+      expect(tokens).toContain('index')
+      expect(tokens).toContain('follow')
+      expect(tokens).not.toContain('noindex')
+      expect(tokens).not.toContain('nofollow')
     })
   })
 
@@ -186,6 +192,10 @@ test.describe('SEO Metadata Tests', () => {
         'meta[name="description"]',
         'content'
       )
+
+      expect(description).not.toBeNull()
+      expect(description).toBeTruthy()
+
       const keywords = [
         'aph tático',
         'tático',
