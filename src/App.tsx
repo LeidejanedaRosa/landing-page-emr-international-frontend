@@ -20,11 +20,11 @@ const Footer = React.lazy(() => import('./components/layout/Footer'))
 function App() {
   return (
     <ErrorBoundary>
+      <SEO />
+      <StructuredData />
       <div className='min-h-screen bg-gray-50'>
-        <SEO />
-        <StructuredData />
+        <Hero />
         <main>
-          <Hero />
           <Suspense fallback={<SectionSkeleton />}>
             <WhyItMattersSection />
           </Suspense>
