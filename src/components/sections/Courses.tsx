@@ -63,6 +63,8 @@ const CourseImage = memo(({ images }: CourseImageProps) => (
       className='w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105'
       loading='lazy'
       decoding='async'
+      width={800}
+      height={600}
     />
   </picture>
 ))
