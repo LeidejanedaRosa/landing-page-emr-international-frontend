@@ -89,7 +89,7 @@ describe('AccessibleButton', () => {
     )
 
     let button = screen.getByRole('button')
-    expect(button).toHaveClass('bg-primary')
+    expect(button).toHaveClass('bg-cta')
 
     rerender(<AccessibleButton variant='secondary'>Secondary</AccessibleButton>)
     button = screen.getByRole('button')
@@ -106,11 +106,11 @@ describe('AccessibleButton', () => {
     )
 
     let button = screen.getByRole('button')
-    expect(button).toHaveClass('px-3', 'py-1.5', 'text-sm')
+    expect(button).toHaveClass('px-3', 'py-2', 'text-sm')
 
     rerender(<AccessibleButton size='lg'>Large</AccessibleButton>)
     button = screen.getByRole('button')
-    expect(button).toHaveClass('px-8', 'py-4', 'text-lg')
+    expect(button).toHaveClass('px-6', 'py-4', 'text-lg')
   })
 
   it('should show loading state correctly', () => {
