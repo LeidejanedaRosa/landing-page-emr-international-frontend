@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState } from 'react'
+import React, { CSSProperties, memo, useCallback, useState } from 'react'
 
 import {
   type StatisticData,
@@ -31,6 +31,11 @@ interface StatisticsGridProps {
   statistics: StatisticData[]
   activeTabId: string
   gridDescriptionId: string
+}
+
+interface StickyStyle extends CSSProperties {
+  '--sticky-top'?: string
+  '--sticky-z'?: string
 }
 
 const SectionHeader = memo(({ titleId, subtitleId }: SectionHeaderProps) => {
@@ -146,7 +151,7 @@ export const StatisticCard: React.FC<StatisticCardProps> = memo(
     return (
       <article
         className={`
-          relative overflow-hidden rounded-xl shadow-xl h-full flex flex-col justify-end flex-shrink-0
+          relative rounded-xl shadow-xl h-full flex flex-col justify-end flex-shrink-0
           ${getCardStyles(isHighlight, isTactical)}
         `}
       >
@@ -224,7 +229,7 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
           role='listitem'
           aria-posinset={1}
           aria-setsize={statistics.length}
-          style={{ '--sticky-top': '50px', '--sticky-z': '10' } as any}
+          style={{ '--sticky-top': '50px', '--sticky-z': '10' } as StickyStyle}
           className={`
             sticky lg:static top-[var(--sticky-top)] lg:top-auto z-[var(--sticky-z)] lg:z-auto
             mb-8 lg:mb-0 transition-transform duration-300 hover:scale-[1.02]
@@ -253,7 +258,7 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
                 {
                   '--sticky-top': `${topOffset}px`,
                   '--sticky-z': zIndex.toString(),
-                } as any
+                } as StickyStyle
               }
               className={`
                 sticky lg:static
@@ -333,7 +338,7 @@ const WhyItMattersSection: React.FC = memo(() => {
       aria-labelledby={titleId}
       aria-describedby={subtitleId}
     >
-      <div className='absolute inset-0 overflow-hidden pointer-events-none'>
+      <div className='absolute inset-0 pointer-events-none'>
         <div className='absolute top-0 left-0 w-full h-full opacity-[0.03]'>
           <div
             className='absolute top-20 right-20 w-96 h-96 bg-cta-600 rounded-full blur-[150px]'
