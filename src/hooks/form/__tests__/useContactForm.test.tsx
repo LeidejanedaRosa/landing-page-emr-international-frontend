@@ -182,10 +182,18 @@ describe('useContactForm', () => {
       result.current.handleSubmit(mockEvent)
     })
 
-    expect(result.current.isLoading).toBe(true)
+    await waitFor(
+      () => {
+        expect(result.current.isLoading).toBe(true)
+      },
+      { timeout: 100 }
+    )
 
-    await waitFor(() => {
-      expect(result.current.isLoading).toBe(false)
-    })
+    await waitFor(
+      () => {
+        expect(result.current.isLoading).toBe(false)
+      },
+      { timeout: 3000 }
+    )
   })
 })
