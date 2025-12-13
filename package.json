@@ -20,11 +20,16 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
+    "test:e2e:prod": "dotenv -e .env.production -- playwright test",
+    "test:e2e:prod:ui": "dotenv -e .env.production -- playwright test --ui",
     "test:seo": "playwright test tests/seo --reporter=html",
+    "test:seo:prod": "dotenv -e .env.production -- playwright test tests/seo --reporter=html",
     "test:seo:metadata": "playwright test tests/seo/metadata.spec.ts",
     "test:seo:semantic": "playwright test tests/seo/semantic-html.spec.ts",
     "test:seo:a11y": "playwright test tests/seo/accessibility.spec.ts",
     "test:seo:performance": "playwright test tests/seo/performance-keywords.spec.ts",
+    "test:all": "npm run test:run && npm run test:e2e",
+    "test:all:prod": "npm run test:run && npm run test:e2e:prod",
     "pre-deploy": "bash scripts/pre-deploy-validation.sh"
   },
   "dependencies": {
@@ -41,7 +46,6 @@
     "@axe-core/playwright": "^4.11.0",
     "@eslint/js": "^9.39.1",
     "@playwright/test": "^1.56.1",
-    "wait-on": "^8.0.1",
     "@sentry/vite-plugin": "^4.6.1",
     "@storybook/react-vite": "^10.0.8",
     "@testing-library/dom": "^10.4.1",
@@ -59,6 +63,7 @@
     "@vitest/ui": "^4.0.12",
     "autoprefixer": "^10.4.21",
     "axe-core": "^4.11.0",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
@@ -86,7 +91,8 @@
     "vite": "^7.2.0",
     "vite-imagetools": "^9.0.0",
     "vite-plugin-pwa": "^1.1.0",
-    "vitest": "^4.0.12"
+    "vitest": "^4.0.12",
+    "wait-on": "^8.0.1"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
