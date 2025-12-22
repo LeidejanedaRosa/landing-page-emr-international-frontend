@@ -70,15 +70,6 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
               year={year}
               accentColor={accentColor}
             />
-
-            <CourseDateBox
-              date={date}
-              month={month}
-              monthNumber={monthNumber}
-              year={year}
-              accentColor={accentColor}
-              isMobile
-            />
           </div>
         </div>
       </div>
