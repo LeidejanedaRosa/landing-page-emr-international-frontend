@@ -31,7 +31,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
 
     return (
       <article
-        className={`relative group overflow-hidden h-[85vh] ${scaleClass} ${scale}`}
+        className={`relative group overflow-hidden h-[85vh] min-h-[600px] ${scaleClass} ${scale}`}
         tabIndex={0}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -48,8 +48,8 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
         />
 
         <div
-          className='absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30
-                     group-hover:from-black/95 group-hover:via-black/60 transition-all duration-500'
+          className='absolute inset-0 bg-gradient-to-t from-black via-black/60 via-35% to-transparent
+                     group-hover:from-black/95 group-hover:via-black/70 transition-all duration-700 ease-out'
           aria-hidden='true'
         />
 

@@ -21,17 +21,17 @@ export const CourseDateBox: React.FC<CourseDateBoxProps> = memo(
     if (isMobile) {
       return (
         <div
-          className={`md:hidden flex items-center gap-2 ${colors.dateBox} backdrop-blur-sm rounded-lg px-4 py-2 shadow-xl`}
+          className={`md:hidden flex items-center gap-3 ${colors.dateBox} backdrop-blur-md rounded-xl px-5 py-3 shadow-2xl border border-white/10`}
           role='text'
           aria-label={`Data do curso: ${formattedDate}`}
         >
-          <time dateTime={isoDate} className='flex items-center gap-2'>
-            <span className='text-2xl font-black text-white'>{date}</span>
+          <time dateTime={isoDate} className='flex items-center gap-3'>
+            <span className='text-3xl font-black text-white'>{date}</span>
             <div className='flex flex-col'>
-              <span className='text-sm font-bold text-white uppercase leading-none'>
+              <span className='text-base font-bold text-white uppercase leading-none'>
                 {month}
               </span>
-              <span className='text-xs font-semibold text-white/90'>
+              <span className='text-sm font-semibold text-white/90 mt-0.5'>
                 {year}
               </span>
             </div>
@@ -42,18 +42,18 @@ export const CourseDateBox: React.FC<CourseDateBoxProps> = memo(
 
     return (
       <div
-        className={`hidden md:flex flex-col items-center justify-center ${colors.dateBox} backdrop-blur-sm rounded-lg px-6 py-4 shadow-2xl min-w-[100px]`}
+        className={`hidden md:flex flex-col items-center justify-center ${colors.dateBox} backdrop-blur-md rounded-xl px-8 py-6 lg:px-10 lg:py-8 shadow-2xl min-w-[120px] lg:min-w-[140px] border border-white/10`}
         role='text'
         aria-label={`Data do curso: ${formattedDate}`}
       >
         <time dateTime={isoDate} className='flex flex-col items-center'>
-          <span className='text-3xl lg:text-4xl xl:text-5xl font-black text-white leading-none'>
+          <span className='text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-none'>
             {date}
           </span>
-          <span className='text-lg lg:text-xl font-bold text-white uppercase mt-1'>
+          <span className='text-xl lg:text-2xl font-bold text-white uppercase mt-2'>
             {month}
           </span>
-          <span className='text-sm lg:text-base font-semibold text-white/90 mt-1'>
+          <span className='text-base lg:text-lg font-semibold text-white/90 mt-1'>
             {year}
           </span>
         </time>
