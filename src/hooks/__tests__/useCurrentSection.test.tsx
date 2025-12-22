@@ -9,7 +9,7 @@ const createMockSection = (
   offsetHeight: number
 ) => {
   const element = document.createElement('section')
-  element.id = id
+  element.setAttribute('data-section', id)
   Object.defineProperty(element, 'offsetTop', {
     value: offsetTop,
     writable: true,
@@ -21,25 +21,42 @@ const createMockSection = (
   return element
 }
 
+const setupScrollMock = () => {
+  Object.defineProperty(window, 'scrollY', {
+    writable: true,
+    configurable: true,
+    value: 0,
+  })
+}
+
+const setupScrollEventListener = () => {
+  let scrollEventListener: (() => void) | null = null
+  const originalAddEventListener = window.addEventListener
+  vi.spyOn(window, 'addEventListener').mockImplementation(
+    (event, handler, options) => {
+      if (event === 'scroll' && typeof handler === 'function') {
+        scrollEventListener = handler as () => void
+      }
+      return originalAddEventListener.call(window, event, handler, options)
+    }
+  )
+  return scrollEventListener
+}
+
+const updateScrollPosition = (position: number) => {
+  Object.defineProperty(window, 'scrollY', {
+    value: position,
+    writable: true,
+    configurable: true,
+  })
+}
+
 describe('useCurrentSection', () => {
   let scrollEventListener: (() => void) | null = null
 
   beforeEach(() => {
-    Object.defineProperty(window, 'scrollY', {
-      writable: true,
-      configurable: true,
-      value: 0,
-    })
-
-    const originalAddEventListener = window.addEventListener
-    vi.spyOn(window, 'addEventListener').mockImplementation(
-      (event, handler, options) => {
-        if (event === 'scroll' && typeof handler === 'function') {
-          scrollEventListener = handler as () => void
-        }
-        return originalAddEventListener.call(window, event, handler, options)
-      }
-    )
+    setupScrollMock()
+    scrollEventListener = setupScrollEventListener()
   })
 
   afterEach(() => {
@@ -70,16 +87,22 @@ describe('useCurrentSection', () => {
       expect.any(Function),
       { passive: true }
     )
+
+    act(() => {
+      scrollEventListener?.()
+    })
+
     expect(result.current).toBe('hero')
   })
 
   it('should update current section when scroll position changes', () => {
-    document.body.appendChild(createMockSection('about', 500, 500))
+    const mockAbout = createMockSection('about', 500, 500)
+    document.body.appendChild(mockAbout)
 
     const { result } = renderHook(() => useCurrentSection(['about']))
 
     act(() => {
-      Object.defineProperty(window, 'scrollY', { value: 600, writable: true })
+      updateScrollPosition(600)
       scrollEventListener?.()
     })
 

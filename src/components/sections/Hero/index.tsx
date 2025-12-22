@@ -1,24 +1,21 @@
 import React, { memo, Suspense } from 'react'
 
+import heroImageJpg from '../../../assets/hero_section_bg.png'
 // @ts-expect-error - vite-imagetools directives
-import heroImageAvif from '../../../assets/hero_section.png?format=avif&w=640;768;1024;1280;1920&as=srcset'
+import heroImageAvif from '../../../assets/hero_section_bg.png?format=avif&w=640;768;1024;1280;1920&as=srcset'
 // @ts-expect-error - vite-imagetools directives
-import heroImageJpg from '../../../assets/hero_section.png?format=jpg&w=1920&quality=85'
-// @ts-expect-error - vite-imagetools directives
-import heroImageWebp from '../../../assets/hero_section.png?format=webp&w=640;768;1024;1280;1920&as=srcset'
+import heroImageWebp from '../../../assets/hero_section_bg.png?format=webp&w=640;768;1024;1280;1920&as=srcset'
 import {
   useAccessibilityPreferences,
-  useScreenReaderAnnouncement,
   useUniqueId,
 } from '../../../hooks/useAccessibility'
 import Header from '../../layout/Header'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
 import { LoadingSpinner } from '../../ui/Loading'
+import { HeroEnrollmentOpen } from '../HeroEnrollmentOpen'
 import PromoBannerCarousel from '../PromoBannerCarousel'
 import DesktopLayout from './DesktopLayout'
 import './HeroCarousel.css'
-import { useCarouselAutoPlay, useHeroCarousel } from './hooks/useHeroCarousel'
-import { useScrollToSection } from './hooks/useScrollToSection'
 import MobileTabletCarousel from './MobileTabletCarousel'
 
 interface HeroImageProps {
@@ -101,52 +98,52 @@ HeroContent.displayName = 'HeroContent'
 
 // eslint-disable-next-line max-lines-per-function
 const Hero: React.FC = memo(() => {
-  const { scrollToSection } = useScrollToSection()
-  const { announce } = useScreenReaderAnnouncement()
+  // const { scrollToSection } = useScrollToSection()
+  // const { announce } = useScreenReaderAnnouncement()
   const { prefersReducedMotion } = useAccessibilityPreferences()
 
-  const {
-    currentSlide,
-    nextSlide,
-    previousSlide,
-    goToSlide,
-    isAutoPlaying,
-    pauseAutoPlay,
-    resumeAutoPlay,
-    autoPlayDelay,
-    totalSlides,
-  } = useHeroCarousel({
-    autoPlayDelay: prefersReducedMotion ? 0 : 5000,
-    enableAutoPlay: !prefersReducedMotion,
-  })
+  // const {
+  //   currentSlide,
+  //   nextSlide,
+  //   previousSlide,
+  //   goToSlide,
+  //   isAutoPlaying,
+  //   pauseAutoPlay,
+  //   resumeAutoPlay,
+  //   autoPlayDelay,
+  //   totalSlides,
+  // } = useHeroCarousel({
+  //   autoPlayDelay: prefersReducedMotion ? 0 : 5000,
+  //   enableAutoPlay: !prefersReducedMotion,
+  // })
 
-  useCarouselAutoPlay(isAutoPlaying, nextSlide, autoPlayDelay, totalSlides)
+  // useCarouselAutoPlay(isAutoPlaying, nextSlide, autoPlayDelay, totalSlides)
 
-  const handleViewCoursesClick = () => {
-    announce('Navegando para seção de cursos', 'polite')
-    scrollToSection('courses')
-  }
+  // const handleViewCoursesClick = () => {
+  //   announce('Navegando para seção de cursos', 'polite')
+  //   scrollToSection('courses')
+  // }
 
-  const setIsAutoPlaying: React.Dispatch<
-    React.SetStateAction<boolean>
-  > = value => {
-    const playing = typeof value === 'function' ? value(isAutoPlaying) : value
-    if (playing && !prefersReducedMotion) {
-      resumeAutoPlay()
-      announce('Reprodução automática ativada', 'polite')
-    } else {
-      pauseAutoPlay()
-      announce('Reprodução automática pausada', 'polite')
-    }
-  }
+  // const setIsAutoPlaying: React.Dispatch<
+  //   React.SetStateAction<boolean>
+  // > = value => {
+  //   const playing = typeof value === 'function' ? value(isAutoPlaying) : value
+  //   if (playing && !prefersReducedMotion) {
+  //     resumeAutoPlay()
+  //     announce('Reprodução automática ativada', 'polite')
+  //   } else {
+  //     pauseAutoPlay()
+  //     announce('Reprodução automática pausada', 'polite')
+  //   }
+  // }
 
-  const carouselProps = {
-    currentSlide,
-    nextSlide,
-    previousSlide,
-    goToSlide,
-    setIsAutoPlaying,
-  }
+  // const carouselProps = {
+  //   currentSlide,
+  //   nextSlide,
+  //   previousSlide,
+  //   goToSlide,
+  //   setIsAutoPlaying,
+  // }
 
   return (
     <section
@@ -169,7 +166,7 @@ const Hero: React.FC = memo(() => {
       </div>
 
       <HeroImage
-        className='absolute w-[100%] -top-[550px] h-[250%] object-cover object-center 2xl:translate-y-32'
+        className='absolute inset-0 w-full h-full object-cover'
         prefersReducedMotion={prefersReducedMotion}
       />
 
@@ -178,7 +175,7 @@ const Hero: React.FC = memo(() => {
         aria-hidden='true'
       />
 
-      <div className='relative z-10'>
+      <div className='relative z-20'>
         <Suspense fallback={<div className='h-16 bg-black/20' />}>
           <Header className='bg-transparent shadow-none' />
         </Suspense>
@@ -190,16 +187,19 @@ const Hero: React.FC = memo(() => {
 
       <main
         id='main-content'
-        className='relative max-w-screen-2xl mx-auto z-10 flex items-end pt-8 pb-20 px-4 sm:px-6 lg:px-8'
+        className='relative max-w-screen-2xl mx-auto z-10 inset-0'
         tabIndex={-1}
       >
-        <HeroContent
+        <HeroEnrollmentOpen />
+
+        {/* <HeroContent
           onViewCoursesClick={handleViewCoursesClick}
           carouselProps={carouselProps}
-        />
+        /> */}
       </main>
     </section>
   )
 })
 
 export default Hero
+// pt-8 pb-20 px-4 sm:px-6 lg:px-8

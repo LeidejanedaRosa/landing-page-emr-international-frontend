@@ -105,10 +105,13 @@
     .animate-fade-in,
     .animate-slide-up,
     .animate-scale-in,
-    .animate-scroll {
-      animation: none;
-      animation-duration: 0s;
-      transition: none;
+    .animate-scroll,
+    [class*='animate-[slideDown'] {
+      animation: none !important;
+      animation-duration: 0s !important;
+      transition: none !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 }
@@ -170,4 +173,15 @@
 
 .animate-scroll {
   animation: scroll var(--animation-duration, 15s) linear infinite;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

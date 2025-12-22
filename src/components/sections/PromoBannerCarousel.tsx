@@ -141,7 +141,7 @@ const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
     return (
       <section
         id={bannerId}
-        className={`w-full max-h-10 bg-white border-t border-b border-gray-200 overflow-hidden relative ${className}`}
+        className={`w-full max-h-10 bg-white border-t border-b border-gray-200 overflow-hidden relative z-50 ${className}`}
         role='region'
         aria-labelledby={`${bannerId}-heading`}
         onMouseEnter={handleMouseEnter}

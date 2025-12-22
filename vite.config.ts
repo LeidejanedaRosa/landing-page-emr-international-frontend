@@ -8,7 +8,20 @@ import { securityHeaders } from './src/plugins/security-headers'
 export default defineConfig({
   plugins: [
     react(),
-    imagetools(),
+    imagetools({
+      defaultDirectives: url => {
+        if (
+          url.searchParams.has('as') &&
+          url.searchParams.get('as') === 'srcset'
+        ) {
+          return new URLSearchParams({
+            format: url.searchParams.get('format') || 'avif;webp',
+            quality: '80',
+          })
+        }
+        return new URLSearchParams()
+      },
+    }),
     ...(process.env.NODE_ENV === 'production'
       ? [
           securityHeaders({
@@ -67,7 +80,7 @@ export default defineConfig({
             },
             workbox: {
               globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,avif}'],
-              maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
+              maximumFileSizeToCacheInBytes: 10 * 1024 * 1024, // 10MB
               runtimeCaching: [
                 {
                   urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

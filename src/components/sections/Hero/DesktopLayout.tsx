@@ -1,6 +1,10 @@
 import React from 'react'
 
-import EmergencyCard from './EmergencyCard'
+import heroImageJpg from '../../../assets/hero_section.jpg'
+// @ts-expect-error - vite-imagetools directives
+import heroImageAvif from '../../../assets/hero_section.jpg?format=avif&w=640;768;1024;1280;1920&as=srcset'
+// @ts-expect-error - vite-imagetools directives
+import heroImageWebp from '../../../assets/hero_section.jpg?format=webp&w=640;768;1024;1280;1920&as=srcset'
 
 interface DesktopLayoutProps {
   onViewCoursesClick: () => void
@@ -9,10 +13,10 @@ interface DesktopLayoutProps {
 const DesktopLayout: React.FC<DesktopLayoutProps> = ({
   onViewCoursesClick,
 }) => (
-  <div className='hidden lg:grid grid-cols-1 lg:grid-cols-3 w-full'>
+  <div className='hidden lg:grid grid-cols-2 w-full h-full gap-8'>
     <div
       id='hero-text'
-      className='grid col-span-1 space-y-4 backdrop-blur-sm bg-black/20 p-8 rounded-2xl'
+      className='col-span-1 h-[70vh] gap-8 backdrop-blur-sm bg-black/20 p-8 rounded-2xl'
     >
       <div
         className='text-4xl lg:text-5xl font-black leading-tight text-pretty drop-shadow-2xl'
@@ -27,17 +31,7 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({
         <br />
         REALMENTE PREPARADO?
       </div>
-      <p className='text-xl text-gray-100 leading-relaxed text-pretty border-l-4 border-red-500 pl-4 drop-shadow-lg h-fit'>
-        Em cenários táticos ou remotos, a diferença entre a vida e a morte está
-        na primeira resposta.
-      </p>
-    </div>
-    <div className='hidden lg:block lg:col-span-1' />
-    <div
-      id='hero-emergency'
-      className='grid col-span-1 flex-col gap-4 justify-items-center backdrop-blur-sm bg-black/20 p-8 rounded-2xl'
-    >
-      <EmergencyCard />
+
       <button
         onClick={onViewCoursesClick}
         className='bg-red-600 hover:bg-red-700 text-white w-fit font-bold py-4 px-10 rounded-full text-xl transition shadow-2xl hover:shadow-red-600/50 transform hover:scale-105'
@@ -46,6 +40,16 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({
       >
         Ver Cursos de Elite
       </button>
+    </div>
+    <div className='col-span-1'>
+      <img
+        src={heroImageJpg}
+        srcSet={`${heroImageAvif}, ${heroImageWebp}`}
+        alt='Imagem ilustrativa de um operador médico tático em ação, simbolizando os cursos oferecidos pela EMR Internacional.'
+        className='w-full h-full object-cover rounded-2xl'
+        loading='eager'
+        fetchPriority='high'
+      />
     </div>
   </div>
 )
