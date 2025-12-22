@@ -60,8 +60,10 @@ export const ScreenReaderOnly = ({
   return <span className='sr-only'>{children}</span>
 }
 
-interface AccessibleButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'disabled'> {
+interface AccessibleButtonProps extends Omit<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  'disabled'
+> {
   children: React.ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
@@ -210,8 +212,7 @@ const computeAriaLabel = (
   return external ? ariaLabel || `${children} (abre em nova aba)` : ariaLabel
 }
 
-interface AccessibleLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface AccessibleLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode
   external?: boolean
   variant?: 'primary' | 'secondary' | 'ghost'

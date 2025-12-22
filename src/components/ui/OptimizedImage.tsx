@@ -1,7 +1,9 @@
 import React, { type ComponentProps, useEffect, useState } from 'react'
 
-interface OptimizedImageProps
-  extends Omit<ComponentProps<'img'>, 'src' | 'sizes' | 'onLoad' | 'onError'> {
+interface OptimizedImageProps extends Omit<
+  ComponentProps<'img'>,
+  'src' | 'sizes' | 'onLoad' | 'onError'
+> {
   src: string
 
   sizes?: string[]
