@@ -28,6 +28,8 @@ const Hero = memo<HeroProps>(
       }
     }
 
+    const headingId = `${HERO_SECTION_ID}-heading`
+
     return (
       <>
         <StructuredData />
@@ -35,10 +37,10 @@ const Hero = memo<HeroProps>(
         <section
           id={HERO_SECTION_ID}
           className={`relative w-full min-h-screen bg-black overflow-hidden flex flex-col ${className}`}
-          aria-labelledby={HERO_CONTENT.seo.title}
+          aria-labelledby={headingId}
         >
           <ScreenReaderOnly>
-            <h2>{HERO_CONTENT.seo.title}</h2>
+            <h2 id={headingId}>{HERO_CONTENT.seo.title}</h2>
             <p>{HERO_CONTENT.seo.contextDescription}</p>
           </ScreenReaderOnly>
 

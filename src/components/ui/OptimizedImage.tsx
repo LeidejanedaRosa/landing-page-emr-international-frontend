@@ -6,11 +6,11 @@ interface OptimizedImageProps extends Omit<
 > {
   src: string
 
-  sizes?: string[]
+  sizes?: readonly string[]
 
   mediaSizes?: string
 
-  formats?: ('webp' | 'avif' | 'jpg' | 'png')[]
+  formats?: readonly ('webp' | 'avif' | 'jpg' | 'png')[]
 
   quality?: number
 
@@ -23,7 +23,7 @@ interface OptimizedImageProps extends Omit<
 
 const generateSrcSet = (
   src: string,
-  sizes: string[],
+  sizes: readonly string[],
   format: string,
   quality: number
 ): string => {
@@ -38,8 +38,8 @@ const generateSrcSet = (
 
 const generateSources = (
   src: string,
-  sizes: string[],
-  formats: string[],
+  sizes: readonly string[],
+  formats: readonly string[],
   quality: number,
   mediaSizes?: string
 ) => {

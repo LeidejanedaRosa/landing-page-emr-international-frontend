@@ -3,16 +3,6 @@ import { memo } from 'react'
 import { HERO_CONTENT } from '../constants'
 import type { SocialProofProps } from '../types'
 
-/**
- * Social Proof Component
- *
- * Displays trust indicators and statistics
- *
- * Clean Code principles:
- * - Single Responsibility: Only displays social proof
- * - Semantic HTML: Uses proper list structure
- * - Accessibility: Screen reader friendly
- */
 export const SocialProof = memo<SocialProofProps>(
   ({
     studentsText = HERO_CONTENT.socialProof.students,
@@ -24,11 +14,7 @@ export const SocialProof = memo<SocialProofProps>(
       aria-label='Indicadores de confiança'
     >
       <p>{studentsText}</p>
-      <div
-        className='w-1 h-1 bg-gray-600 rounded-full'
-        aria-hidden='true'
-        role='separator'
-      />
+      <div className='w-1 h-1 bg-gray-600 rounded-full' aria-hidden='true' />
       <p>{methodologyText}</p>
     </div>
   )
