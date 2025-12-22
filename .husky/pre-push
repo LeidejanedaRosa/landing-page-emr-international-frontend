@@ -1,0 +1,35 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-push validations..."
+echo ""
+
+# 1. Unit tests (fast - ~10-20s)
+echo "🧪 Running unit tests..."
+npm run test:run || {
+  echo "❌ Unit tests failed! Fix tests before pushing."
+  exit 1
+}
+echo "✅ Unit tests passed"
+echo ""
+
+# 2. TypeScript type checking (fast - ~5-10s)
+echo "🔍 Running TypeScript type check..."
+npx tsc --noEmit || {
+  echo "❌ TypeScript errors found! Fix type errors before pushing."
+  exit 1
+}
+echo "✅ Type check passed"
+echo ""
+
+# 3. Build test (medium - ~20-40s)
+echo "🏗️  Testing production build..."
+npm run build || {
+  echo "❌ Build failed! Fix build errors before pushing."
+  exit 1
+}
+echo "✅ Build successful"
+echo ""
+
+echo "✅ All pre-push validations passed! Proceeding with push..."
+echo ""
