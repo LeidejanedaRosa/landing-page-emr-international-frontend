@@ -19,7 +19,7 @@ import { useCourseHover } from './hooks/useCourseHover'
  */
 export const HeroEnrollmentOpen: React.FC = memo(() => {
   const { prefersReducedMotion } = useAccessibilityPreferences()
-  const { createHoverHandlers } = useCourseHover()
+  const { createHoverHandlers, hoveredCard } = useCourseHover()
 
   // Structured data for SEO (Schema.org Course markup)
   const structuredData = {
@@ -36,7 +36,7 @@ export const HeroEnrollmentOpen: React.FC = memo(() => {
           '@type': 'Organization',
           name: 'EMR Internacional',
         },
-        startDate: `${course.year}-${course.month}-${course.date}`,
+        startDate: `${course.year}-${course.monthNumber.padStart(2, '0')}-${course.date.padStart(2, '0')}`,
         courseMode: 'Presencial',
         educationalCredentialAwarded: 'Certificação Internacional',
       },
@@ -69,12 +69,13 @@ export const HeroEnrollmentOpen: React.FC = memo(() => {
                   subtitle={course.subtitle}
                   date={course.date}
                   month={course.month}
+                  monthNumber={course.monthNumber}
                   year={course.year}
                   imageAvif={course.imageAvif}
                   imageWebp={course.imageWebp}
                   imageJpg={course.imageJpg}
                   accentColor={course.accentColor}
-                  isHovered={handlers.isHovered}
+                  isHovered={hoveredCard === course.id}
                   onMouseEnter={handlers.onMouseEnter}
                   onMouseLeave={handlers.onMouseLeave}
                   onFocus={handlers.onFocus}

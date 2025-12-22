@@ -17,8 +17,13 @@ export const CourseImage: React.FC<CourseImageProps> = memo(
         <img
           src={imageJpg}
           alt={`${title} - ${subtitle}`}
+          width={800}
+          height={600}
           className='w-full h-full object-cover'
           loading='eager'
+          onError={e => {
+            e.currentTarget.src = '/fallback-image.jpg'
+          }}
         />
       </picture>
     )

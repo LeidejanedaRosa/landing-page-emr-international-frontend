@@ -60,10 +60,23 @@ fi
 echo ""
 echo "🔐 Checking environment configuration..."
 if [ -f .env.production ]; then
-    report_success "Production environment file found"
+    report_success "Production environment file found (.env.production)"
+
+    # Validate it's not just a copy of the example (contains actual values)
+    if [ -f .env.production.example ]; then
+        if diff -q .env.production .env.production.example > /dev/null 2>&1; then
+            report_error ".env.production is identical to .env.production.example"
+            echo "   Update .env.production with actual production values"
+        fi
+    fi
 else
-    report_warning "No .env.production file found"
-    echo "   Consider creating .env.production for production-specific configuration"
+    report_error "No .env.production file found"
+    echo "   Production environment configuration is required for deployment"
+    if [ -f .env.production.example ]; then
+        echo "   Copy .env.production.example to .env.production and configure with production values"
+    else
+        echo "   Create .env.production with production environment variables"
+    fi
 fi
 
 # Check 3: Check for TODO comments in production code

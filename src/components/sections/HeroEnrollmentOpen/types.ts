@@ -3,6 +3,7 @@ export interface CourseCardProps {
   subtitle: string
   date: string
   month: string
+  monthNumber: string
   year: string
   imageAvif: string
   imageWebp: string
@@ -14,6 +15,7 @@ export interface CourseCardProps {
   onFocus: () => void
   onBlur: () => void
   prefersReducedMotion: boolean
+  onCtaClick?: () => void
 }
 
 export interface CourseData {
@@ -22,6 +24,7 @@ export interface CourseData {
   subtitle: string
   date: string
   month: string
+  monthNumber: string
   year: string
   imageAvif: string
   imageWebp: string

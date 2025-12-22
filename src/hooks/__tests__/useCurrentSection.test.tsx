@@ -40,7 +40,7 @@ const setupScrollEventListener = () => {
       return originalAddEventListener.call(window, event, handler, options)
     }
   )
-  return scrollEventListener
+  return () => scrollEventListener
 }
 
 const updateScrollPosition = (position: number) => {
@@ -52,18 +52,18 @@ const updateScrollPosition = (position: number) => {
 }
 
 describe('useCurrentSection', () => {
-  let scrollEventListener: (() => void) | null = null
+  let getScrollEventListener: (() => (() => void) | null) | null = null
 
   beforeEach(() => {
     setupScrollMock()
-    scrollEventListener = setupScrollEventListener()
+    getScrollEventListener = setupScrollEventListener()
   })
 
   afterEach(() => {
     vi.clearAllMocks()
     vi.restoreAllMocks()
     document.body.innerHTML = ''
-    scrollEventListener = null
+    getScrollEventListener = null
   })
 
   it('should initialize with no current section', () => {
@@ -89,7 +89,7 @@ describe('useCurrentSection', () => {
     )
 
     act(() => {
-      scrollEventListener?.()
+      getScrollEventListener?.()?.()
     })
 
     expect(result.current).toBe('hero')
@@ -103,7 +103,7 @@ describe('useCurrentSection', () => {
 
     act(() => {
       updateScrollPosition(600)
-      scrollEventListener?.()
+      getScrollEventListener?.()?.()
     })
 
     expect(result.current).toBe('about')

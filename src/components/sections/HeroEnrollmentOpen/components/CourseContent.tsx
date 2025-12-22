@@ -9,10 +9,12 @@ interface CourseContentProps {
   subtitle: string
   date: string
   month: string
+  monthNumber: string
   year: string
   accentColor: CourseCardProps['accentColor']
   ctaLabel: string
   ctaAriaLabel: string
+  onCtaClick?: () => void
 }
 
 export const CourseContent: React.FC<CourseContentProps> = memo(
@@ -21,10 +23,12 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
     subtitle,
     date,
     month,
+    monthNumber,
     year,
     accentColor,
     ctaLabel,
     ctaAriaLabel,
+    onCtaClick,
   }) => {
     const colors = ACCENT_COLORS[accentColor]
 
@@ -52,6 +56,7 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
                          focus:outline-none focus:ring-4 ${colors.focusRing}`}
               aria-label={ctaAriaLabel}
               type='button'
+              onClick={onCtaClick}
             >
               {ctaLabel} →
             </button>
@@ -60,6 +65,7 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
           <CourseDateBox
             date={date}
             month={month}
+            monthNumber={monthNumber}
             year={year}
             accentColor={accentColor}
           />
@@ -67,6 +73,7 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
           <CourseDateBox
             date={date}
             month={month}
+            monthNumber={monthNumber}
             year={year}
             accentColor={accentColor}
             isMobile

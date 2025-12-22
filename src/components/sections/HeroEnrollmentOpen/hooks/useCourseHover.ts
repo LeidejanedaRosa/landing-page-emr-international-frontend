@@ -9,10 +9,9 @@ export const useCourseHover = () => {
       onMouseLeave: () => setHoveredCard(null),
       onFocus: () => setHoveredCard(courseId),
       onBlur: () => setHoveredCard(null),
-      isHovered: hoveredCard === courseId,
     }),
-    [hoveredCard]
+    []
   )
 
-  return { createHoverHandlers }
+  return { createHoverHandlers, hoveredCard }
 }

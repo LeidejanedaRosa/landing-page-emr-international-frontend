@@ -106,7 +106,7 @@
     .animate-slide-up,
     .animate-scale-in,
     .animate-scroll,
-    [class*='animate-[slideDown'] {
+    [class*='animate-slideDown'] {
       animation: none !important;
       animation-duration: 0s !important;
       transition: none !important;

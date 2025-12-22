@@ -11,6 +11,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
     subtitle,
     date,
     month,
+    monthNumber,
     year,
     imageAvif,
     imageWebp,
@@ -31,6 +32,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
     return (
       <article
         className={`relative group overflow-hidden h-[85vh] ${scaleClass} ${scale}`}
+        tabIndex={0}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onFocus={onFocus}
@@ -61,6 +63,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
           subtitle={subtitle}
           date={date}
           month={month}
+          monthNumber={monthNumber}
           year={year}
           accentColor={accentColor}
           ctaLabel='INSCREVA-SE AGORA'

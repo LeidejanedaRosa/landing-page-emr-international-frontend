@@ -16,7 +16,7 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({
   <div className='hidden lg:grid grid-cols-2 w-full h-full gap-8'>
     <div
       id='hero-text'
-      className='col-span-1 h-[70vh] gap-8 backdrop-blur-sm bg-black/20 p-8 rounded-2xl'
+      className='col-span-1 h-[70vh] flex flex-col gap-8 backdrop-blur-sm bg-black/20 p-8 rounded-2xl'
     >
       <div
         className='text-4xl lg:text-5xl font-black leading-tight text-pretty drop-shadow-2xl'
@@ -42,14 +42,17 @@ const DesktopLayout: React.FC<DesktopLayoutProps> = ({
       </button>
     </div>
     <div className='col-span-1'>
-      <img
-        src={heroImageJpg}
-        srcSet={`${heroImageAvif}, ${heroImageWebp}`}
-        alt='Imagem ilustrativa de um operador médico tático em ação, simbolizando os cursos oferecidos pela EMR Internacional.'
-        className='w-full h-full object-cover rounded-2xl'
-        loading='eager'
-        fetchPriority='high'
-      />
+      <picture>
+        <source type='image/avif' srcSet={heroImageAvif} />
+        <source type='image/webp' srcSet={heroImageWebp} />
+        <img
+          src={heroImageJpg}
+          alt='Imagem ilustrativa de um operador médico tático em ação, simbolizando os cursos oferecidos pela EMR Internacional.'
+          className='w-full h-full object-cover rounded-2xl'
+          loading='eager'
+          fetchPriority='high'
+        />
+      </picture>
     </div>
   </div>
 )

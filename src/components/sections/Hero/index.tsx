@@ -1,6 +1,6 @@
 import React, { memo, Suspense } from 'react'
 
-import heroImageJpg from '../../../assets/hero_section_bg.png'
+import heroImagePng from '../../../assets/hero_section_bg.png'
 // @ts-expect-error - vite-imagetools directives
 import heroImageAvif from '../../../assets/hero_section_bg.png?format=avif&w=640;768;1024;1280;1920&as=srcset'
 // @ts-expect-error - vite-imagetools directives
@@ -45,7 +45,7 @@ const HeroImage: React.FC<HeroImageProps> = memo(
         <source srcSet={heroImageWebp} type='image/webp' sizes='100vw' />
         <img
           id={imageId}
-          src={heroImageJpg}
+          src={heroImagePng}
           alt='Equipe de resgate tático da EMR Internacional em operação de emergência médica com equipamentos avançados'
           className={className}
           loading='eager'
@@ -187,7 +187,7 @@ const Hero: React.FC = memo(() => {
 
       <main
         id='main-content'
-        className='relative max-w-screen-2xl mx-auto z-10 inset-0'
+        className='relative max-w-screen-2xl mx-auto z-10'
         tabIndex={-1}
       >
         <HeroEnrollmentOpen />
