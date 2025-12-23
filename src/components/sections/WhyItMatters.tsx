@@ -203,6 +203,9 @@ export const StatisticCard: React.FC<StatisticCardProps> = memo(
 
 StatisticCard.displayName = 'StatisticCard'
 
+const STICKY_BASE_OFFSET_REM = 3.5
+const STICKY_INCREMENT_REM = 1
+
 const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
   ({ statistics, activeTabId, gridDescriptionId }) => {
     if (statistics.length === 0) {
@@ -210,8 +213,6 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
     }
 
     const [highlightStat, ...regularStats] = statistics
-    const STICKY_BASE_OFFSET_REM = 3.5
-    const STICKY_INCREMENT_REM = 1
 
     return (
       <div
