@@ -13,11 +13,11 @@ const organizationSchema = {
     '@type': 'PostalAddress' as const,
     addressCountry: 'BR',
     addressRegion: 'SP',
-    addressLocality: 'São Paulo',
+    addressLocality: 'Socorro',
   },
   contactPoint: {
     '@type': 'ContactPoint' as const,
-    telephone: '+55-11-1234-5678',
+    telephone: '+55-19-97157-5640',
     email: 'contato@emrinternacional.com',
     contactType: 'customer service',
   },
