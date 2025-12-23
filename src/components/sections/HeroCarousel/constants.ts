@@ -8,6 +8,8 @@ export const HERO_CAROUSEL_CONFIG = {
 export const HERO_CAROUSEL_A11Y = {
   roleDescription: 'carrossel',
   ariaLabel: 'Seção principal com navegação entre páginas',
+  slideAnnouncement: (label: string, current: number, total: number) =>
+    `${label} - Slide ${current} de ${total}`,
 } as const
 
 export const getSlideLabels = (): Record<number, string> => {

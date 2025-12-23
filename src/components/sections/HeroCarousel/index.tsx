@@ -7,6 +7,7 @@ import { CarouselContainer } from './components'
 import {
   getSlideLabels,
   getTotalSlides,
+  HERO_CAROUSEL_A11Y,
   HERO_CAROUSEL_CONFIG,
 } from './constants'
 import { useHeroCarousel } from './hooks/useHeroCarousel'
@@ -48,7 +49,11 @@ const HeroCarousel = memo(() => {
     if (hasOpenEnrollment) {
       const label = slideLabels[currentSlide] || `Slide ${currentSlide + 1}`
       announce(
-        `${label} - Slide ${currentSlide + 1} de ${totalSlides}`,
+        HERO_CAROUSEL_A11Y.slideAnnouncement(
+          label,
+          currentSlide + 1,
+          totalSlides
+        ),
         'polite'
       )
     }
