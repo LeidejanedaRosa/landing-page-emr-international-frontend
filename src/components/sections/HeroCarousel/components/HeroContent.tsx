@@ -21,7 +21,7 @@ export const HeroContent = memo<HeroContentProps>(({ className = '' }) => {
   const headingId = `${HERO_SECTION_ID}-heading`
 
   return (
-    <div
+    <section
       className={`relative w-full h-full bg-black flex flex-col ${className}`}
       aria-labelledby={headingId}
     >
@@ -47,10 +47,10 @@ export const HeroContent = memo<HeroContentProps>(({ className = '' }) => {
       </div>
 
       <ScreenReaderOnly>
-        <h2>{HERO_CONTENT.about.title}</h2>
+        <h3>{HERO_CONTENT.about.title}</h3>
         <p>{HERO_CONTENT.about.description}</p>
       </ScreenReaderOnly>
-    </div>
+    </section>
   )
 })
 

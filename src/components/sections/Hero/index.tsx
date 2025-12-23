@@ -71,7 +71,7 @@ const Hero = memo<HeroProps>(
         </div>
 
         <ScreenReaderOnly>
-          <h2>{HERO_CONTENT.about.title}</h2>
+          <h3>{HERO_CONTENT.about.title}</h3>
           <p>{HERO_CONTENT.about.description}</p>
         </ScreenReaderOnly>
       </section>
