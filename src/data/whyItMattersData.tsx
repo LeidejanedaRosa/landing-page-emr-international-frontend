@@ -8,7 +8,6 @@ import {
   Crosshair,
   MapPin,
   Plane,
-  Scissors,
   Skull,
   Trees,
   TrendingDown,
@@ -130,13 +129,22 @@ export const whyItMattersData: TabData[] = [
         className: GRID_CLASSES.HIGHLIGHT,
       },
       {
-        id: 'sharp-objects',
+        id: 'top-killer',
+        icon: <Skull className='w-10 h-10 text-red-500' aria-hidden='true' />,
+        value: '#1 Causa',
+        label:
+          'Hemorragia é a maior causa de morte evitável no ambiente remoto.',
+        subtext: 'Antes do atendimento definitivo.',
+        className: GRID_CLASSES.WIDE,
+      },
+      {
+        id: 'extremities',
         icon: (
-          <Scissors className='w-10 h-10 text-red-500' aria-hidden='true' />
+          <Activity className='w-10 h-10 text-red-500' aria-hidden='true' />
         ),
-        value: '40%',
-        label: 'Lesões com objetos cortantes em campo envolvem membros.',
-        subtext: 'Facão, machado, ferramentas agrícolas.',
+        value: '70%',
+        label: 'Hemorragias graves em áreas remotas são em extremidades.',
+        subtext: 'Onde torniquete e pressão direta salvam.',
         className: GRID_CLASSES.WIDE,
       },
       {
@@ -159,16 +167,6 @@ export const whyItMattersData: TabData[] = [
         subtext: '',
         className: GRID_CLASSES.MEDIUM,
       },
-
-      {
-        id: 'top-killer',
-        icon: <Skull className='w-10 h-10 text-red-500' aria-hidden='true' />,
-        value: '#1 Causa',
-        label:
-          'Hemorragia é a maior causa de morte evitável no ambiente remoto.',
-        subtext: 'Antes do atendimento definitivo.',
-        className: GRID_CLASSES.REGULAR,
-      },
       {
         id: 'wilderness-trauma',
         icon: <Trees className='w-10 h-10 text-red-500' aria-hidden='true' />,
@@ -176,17 +174,6 @@ export const whyItMattersData: TabData[] = [
         label:
           'Resgates em áreas selvagens envolvem trauma, quedas ou lacerações.',
         subtext: 'Risco real de hemorragia.',
-        className: GRID_CLASSES.REGULAR,
-      },
-
-      {
-        id: 'extremities',
-        icon: (
-          <Activity className='w-10 h-10 text-red-500' aria-hidden='true' />
-        ),
-        value: '70%',
-        label: 'Hemorragias graves em áreas remotas são em extremidades.',
-        subtext: 'Onde torniquete e pressão direta salvam.',
         className: GRID_CLASSES.REGULAR,
       },
       {
