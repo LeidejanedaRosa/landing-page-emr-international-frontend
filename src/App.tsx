@@ -15,6 +15,9 @@ const Certifications = React.lazy(
   () => import('./components/sections/Certifications')
 )
 const Courses = React.lazy(() => import('./components/sections/Courses'))
+const Testimonials = React.lazy(
+  () => import('./components/sections/Testimonials')
+)
 const Contact = React.lazy(() => import('./components/sections/Contact'))
 const Footer = React.lazy(() => import('./components/layout/Footer'))
 
@@ -36,6 +39,9 @@ function App() {
         </Suspense>
         <Suspense fallback={<SectionSkeleton />}>
           <Courses />
+        </Suspense>
+        <Suspense fallback={<SectionSkeleton />}>
+          <Testimonials />
         </Suspense>
         <Suspense fallback={<SectionSkeleton />}>
           <Contact />
