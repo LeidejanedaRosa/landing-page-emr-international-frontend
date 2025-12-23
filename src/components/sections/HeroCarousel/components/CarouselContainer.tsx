@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 
+import { HERO_CAROUSEL_A11Y } from '../constants'
 import type { CarouselIndicatorsProps } from '../types'
 import { CarouselHeader } from './CarouselHeader'
 import { CarouselIndicators } from './CarouselIndicators'
@@ -32,8 +33,8 @@ export const CarouselContainer = memo<CarouselContainerProps>(
       <section
         className='relative w-full h-screen max-h-screen bg-black overflow-hidden flex flex-col'
         role='region'
-        aria-roledescription='carrossel'
-        aria-label='Seção principal com navegação entre páginas'
+        aria-roledescription={HERO_CAROUSEL_A11Y.roleDescription}
+        aria-label={HERO_CAROUSEL_A11Y.ariaLabel}
       >
         <CarouselHeader />
 
