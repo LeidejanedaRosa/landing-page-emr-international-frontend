@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react'
+import { memo } from 'react'
 
 import { useAccessibilityPreferences } from '../../../../hooks/useAccessibility'
 import {
@@ -9,20 +9,22 @@ import {
 import { ACCENT_COLORS } from '../../HeroEnrollmentOpen/constants'
 import type { CourseData } from '../../HeroEnrollmentOpen/types'
 
+const WHATSAPP_NUMBER = '5519971575640'
+const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
+
 interface CourseSlideProps {
   course: CourseData
-  onCtaClick?: () => void
 }
 
 interface SlideContentProps {
   course: CourseData
   colors: (typeof ACCENT_COLORS)[keyof typeof ACCENT_COLORS]
   prefersReducedMotion: boolean
-  onCtaClick: () => void
+  whatsappUrl: string
 }
 
 const MobileSlideContent = memo<SlideContentProps>(
-  ({ course, colors, prefersReducedMotion, onCtaClick }) => (
+  ({ course, colors, prefersReducedMotion, whatsappUrl }) => (
     <>
       <div className='relative h-[45%] lg:hidden'>
         <CourseImage
@@ -58,14 +60,15 @@ const MobileSlideContent = memo<SlideContentProps>(
         </p>
 
         <div className='flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6'>
-          <button
-            className={`w-full sm:w-auto px-8 py-4 ${colors.button} text-white font-bold text-base rounded-lg shadow-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 ${colors.focusRing}`}
+          <a
+            href={whatsappUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+            className={`w-full sm:w-auto px-8 py-4 ${colors.button} text-white font-bold text-base rounded-lg shadow-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 ${colors.focusRing} text-center`}
             aria-label={course.ctaAriaLabel}
-            type='button'
-            onClick={onCtaClick}
           >
             {course.ctaLabel} →
-          </button>
+          </a>
 
           <CourseDateBox
             date={course.date}
@@ -84,7 +87,7 @@ const MobileSlideContent = memo<SlideContentProps>(
 MobileSlideContent.displayName = 'MobileSlideContent'
 
 const DesktopSlideContent = memo<SlideContentProps>(
-  ({ course, colors, prefersReducedMotion, onCtaClick }) => (
+  ({ course, colors, prefersReducedMotion, whatsappUrl }) => (
     <div className='hidden lg:block absolute inset-0'>
       <CourseImage
         imageAvif={course.imageAvif}
@@ -120,14 +123,15 @@ const DesktopSlideContent = memo<SlideContentProps>(
                 Certificação Internacional
               </p>
 
-              <button
-                className={`px-12 py-5 ${colors.button} text-white font-bold text-xl rounded-lg shadow-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 ${colors.focusRing}`}
+              <a
+                href={whatsappUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className={`inline-block px-12 py-5 ${colors.button} text-white font-bold text-xl rounded-lg shadow-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 ${colors.focusRing} text-center`}
                 aria-label={course.ctaAriaLabel}
-                type='button'
-                onClick={onCtaClick}
               >
                 {course.ctaLabel} →
-              </button>
+              </a>
             </div>
 
             <CourseDateBox
@@ -146,19 +150,13 @@ const DesktopSlideContent = memo<SlideContentProps>(
 
 DesktopSlideContent.displayName = 'DesktopSlideContent'
 
-export const CourseSlide = memo<CourseSlideProps>(({ course, onCtaClick }) => {
+export const CourseSlide = memo<CourseSlideProps>(({ course }) => {
   const { prefersReducedMotion } = useAccessibilityPreferences()
   const colors = ACCENT_COLORS[course.accentColor]
-
-  const handleCtaClick = useCallback(() => {
-    if (onCtaClick) {
-      onCtaClick()
-    } else {
-      document.getElementById('contact')?.scrollIntoView({
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
-      })
-    }
-  }, [onCtaClick, prefersReducedMotion])
+  const whatsappMessage = encodeURIComponent(
+    `Olá! Tenho interesse no curso ${course.title}. Gostaria de mais informações.`
+  )
+  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${whatsappMessage}`
 
   return (
     <article
@@ -169,13 +167,13 @@ export const CourseSlide = memo<CourseSlideProps>(({ course, onCtaClick }) => {
         course={course}
         colors={colors}
         prefersReducedMotion={prefersReducedMotion}
-        onCtaClick={handleCtaClick}
+        whatsappUrl={whatsappUrl}
       />
       <DesktopSlideContent
         course={course}
         colors={colors}
         prefersReducedMotion={prefersReducedMotion}
-        onCtaClick={handleCtaClick}
+        whatsappUrl={whatsappUrl}
       />
     </article>
   )

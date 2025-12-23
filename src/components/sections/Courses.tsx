@@ -110,6 +110,9 @@ const CourseLocation = memo(
 
 CourseLocation.displayName = 'CourseLocation'
 
+const WHATSAPP_NUMBER = '5519971575640'
+const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
+
 const CourseCard = memo(({ course }: CourseCardProps) => {
   const {
     id,
@@ -123,6 +126,10 @@ const CourseCard = memo(({ course }: CourseCardProps) => {
   } = course
   const cardId = useUniqueId(`course-${id}`)
   const styles = getVariantStyles(variant)
+  const whatsappMessage = encodeURIComponent(
+    `Olá! Tenho interesse no curso ${title}. Gostaria de mais informações.`
+  )
+  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${whatsappMessage}`
 
   return (
     <article
@@ -161,11 +168,13 @@ const CourseCard = memo(({ course }: CourseCardProps) => {
 
           <div className='flex flex-col gap-3 pt-2'>
             <AccessibleLink
-              href={links.details}
+              href={whatsappUrl}
+              target='_blank'
+              rel='noopener noreferrer'
               className={`flex items-center justify-center w-full py-3.5 px-4 font-bold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 ${styles.primary} ${styles.primaryHover} ${styles.primaryText} ${styles.ring}`}
-              aria-label={`Ver detalhes completos do curso ${title}`}
+              aria-label={`Inscreva-se no curso ${title} via WhatsApp`}
             >
-              Ver Detalhes do Curso
+              Inscreva-se
               <ArrowRight className='w-5 h-5 ml-2' aria-hidden='true' />
             </AccessibleLink>
 

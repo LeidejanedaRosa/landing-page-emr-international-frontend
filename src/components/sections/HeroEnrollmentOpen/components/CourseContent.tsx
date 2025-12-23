@@ -4,6 +4,9 @@ import { ACCENT_COLORS } from '../constants'
 import type { CourseCardProps } from '../types'
 import { CourseDateBox } from './CourseDateBox'
 
+const WHATSAPP_NUMBER = '5519971575640'
+const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
+
 interface CourseContentProps {
   title: string
   subtitle: string
@@ -14,7 +17,6 @@ interface CourseContentProps {
   accentColor: CourseCardProps['accentColor']
   ctaLabel: string
   ctaAriaLabel: string
-  onCtaClick?: () => void
 }
 
 export const CourseContent: React.FC<CourseContentProps> = memo(
@@ -28,9 +30,12 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
     accentColor,
     ctaLabel,
     ctaAriaLabel,
-    onCtaClick,
   }) => {
     const colors = ACCENT_COLORS[accentColor]
+    const whatsappMessage = encodeURIComponent(
+      `Olá! Tenho interesse no curso ${title}. Gostaria de mais informações.`
+    )
+    const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${whatsappMessage}`
 
     return (
       <div className='absolute inset-x-0 bottom-0 px-6 pb-8 md:px-10 md:pb-12 lg:px-16 lg:pb-16 xl:px-20 xl:pb-20'>
@@ -51,16 +56,17 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
                 Certificação Internacional
               </p>
 
-              <button
-                className={`w-full md:w-auto px-10 py-4 md:px-12 md:py-5 ${colors.button} text-white font-bold text-base md:text-lg lg:text-xl rounded-lg shadow-2xl
+              <a
+                href={whatsappUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className={`inline-block w-full md:w-auto px-10 py-4 md:px-12 md:py-5 ${colors.button} text-white font-bold text-base md:text-lg lg:text-xl rounded-lg shadow-2xl
                            transition-all duration-300 transform hover:scale-[1.02] hover:shadow-3xl active:scale-[0.98]
-                           focus:outline-none focus:ring-4 ${colors.focusRing}`}
+                           focus:outline-none focus:ring-4 ${colors.focusRing} text-center`}
                 aria-label={ctaAriaLabel}
-                type='button'
-                onClick={onCtaClick}
               >
                 {ctaLabel} →
-              </button>
+              </a>
             </div>
 
             <CourseDateBox
