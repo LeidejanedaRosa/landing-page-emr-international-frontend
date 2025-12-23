@@ -27,23 +27,32 @@ export const SlidesTrack = memo<SlidesTrackProps>(({ currentSlide }) => {
       <div
         className='w-full flex-shrink-0 h-full'
         role='tabpanel'
-        aria-label={slideLabels[0]}
+        aria-label={slideLabels[0] || 'Slide 1'}
         id='hero-slide-0'
+        aria-hidden={currentSlide !== 0}
+        tabIndex={currentSlide === 0 ? 0 : -1}
       >
         <HeroContent />
       </div>
 
-      {COURSES_DATA.map((course, courseIndex) => (
-        <div
-          key={course.id}
-          className='w-full flex-shrink-0 h-full'
-          role='tabpanel'
-          aria-label={slideLabels[courseIndex + 1]}
-          id={`hero-slide-${courseIndex + 1}`}
-        >
-          <CourseSlide course={course} />
-        </div>
-      ))}
+      {COURSES_DATA.map((course, courseIndex) => {
+        const slideIndex = courseIndex + 1
+        const isActive = currentSlide === slideIndex
+
+        return (
+          <div
+            key={course.id}
+            className='w-full flex-shrink-0 h-full'
+            role='tabpanel'
+            aria-label={slideLabels[slideIndex] || `Slide ${slideIndex + 1}`}
+            id={`hero-slide-${slideIndex}`}
+            aria-hidden={!isActive}
+            tabIndex={isActive ? 0 : -1}
+          >
+            <CourseSlide course={course} />
+          </div>
+        )
+      })}
     </div>
   )
 })
