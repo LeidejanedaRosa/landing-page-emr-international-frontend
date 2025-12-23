@@ -189,7 +189,7 @@ CourseCard.displayName = 'CourseCard'
 const CoursesHeader = memo(({ titleId, descriptionId }: CoursesHeaderProps) => (
   <header className='text-center mb-12 md:mb-16'>
     <span className='text-cta-500 font-semibold tracking-wider uppercase text-sm mb-2 block'>
-      Formação de Operadores Táticos e de Áreas Remotas
+      formação de operadores de emergência tática e de Áreas Remotas
     </span>
     <h2
       id={titleId}
@@ -201,8 +201,8 @@ const CoursesHeader = memo(({ titleId, descriptionId }: CoursesHeaderProps) => (
       id={descriptionId}
       className='text-lg md:text-xl text-primary-300 max-w-2xl mx-auto leading-relaxed'
     >
-      Capacitação profissional de excelência em resgate e emergências médicas,
-      projetada para quem atua na linha de frente.
+      Capacitação profissional de excelência em resgate e emergências, projetada
+      para quem atua na linha de frente.
     </p>
   </header>
 ))

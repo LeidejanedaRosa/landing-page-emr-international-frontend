@@ -61,7 +61,7 @@ const InstructorHero: React.FC = memo(() => {
       </h2>
 
       <p className='text-base sm:text-lg text-gray-200 font-semibold leading-snug'>
-        Paramédico | Operador Médico Tático | Instrutor Certificado
+        Paramédico | Operador de Emergência Tática | Instrutor Certificado
         Internacional
       </p>
 
@@ -71,7 +71,7 @@ const InstructorHero: React.FC = memo(() => {
           <strong className='text-white font-bold'>
             especialista em APH Tático, protocolos TECC,{' '}
             <span lang='en'>Wilderness Medicine</span> e formação de operadores
-            médicos táticos e operadores de emergência em áreas remotas
+            táticos e operadores de emergência em áreas remotas
           </strong>
           , com treinamento de elite para profissionais que salvam vidas em
           cenários de alto risco e ambientes austeros.
@@ -229,9 +229,9 @@ const AboutMetrics: React.FC = memo(() => {
     },
     {
       id: 'trained',
-      value: '1000+',
+      value: '6000+',
       label: 'Profissionais Treinados',
-      ariaLabel: 'Mais de 1000 profissionais capacitados',
+      ariaLabel: 'Mais de 6000 profissionais capacitados',
       highlight: false,
     },
   ]

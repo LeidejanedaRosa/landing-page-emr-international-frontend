@@ -58,8 +58,8 @@ const SectionHeader = memo(({ titleId, subtitleId }: SectionHeaderProps) => {
       </h2>
       <p className='text-zinc-600 max-w-2xl mx-auto text-sm md:text-base'>
         Em operações táticas e emergências remotas, a ignorância é fatal. Os
-        dados abaixo demonstram por que a formação em APH Tático e medicina
-        wilderness não é um luxo, mas uma necessidade de sobrevivência para
+        dados abaixo demonstram por que a formação em APH Tático e Wilderness
+        Medicine não é um luxo, mas uma necessidade de sobrevivência para
         operadores e primeiros respondentes.
       </p>
     </header>

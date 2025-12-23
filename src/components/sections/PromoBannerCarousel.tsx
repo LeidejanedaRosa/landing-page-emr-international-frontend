@@ -125,12 +125,7 @@ const useBannerPauseState = (
 }
 
 const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
-  // eslint-disable-next-line max-lines-per-function
-  ({
-    text = 'CURSOS DE EMERGÊNCIA MÉDICA COM CERTIFICAÇÃO INTERNACIONAL',
-    speed = 15,
-    className = '',
-  }) => {
+  ({ text = 'INSCRIÇÕES ABERTAS', speed = 15, className = '' }) => {
     const { prefersReducedMotion } = useAccessibilityPreferences()
     const { announce } = useScreenReaderAnnouncement()
     const bannerId = useUniqueId('promo-banner')
