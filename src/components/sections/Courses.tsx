@@ -189,7 +189,7 @@ CourseCard.displayName = 'CourseCard'
 const CoursesHeader = memo(({ titleId, descriptionId }: CoursesHeaderProps) => (
   <header className='text-center mb-12 md:mb-16'>
     <span className='text-cta-500 font-semibold tracking-wider uppercase text-sm mb-2 block'>
-      formação de operadores de emergência tática e de Áreas Remotas
+      Formação de Operadores de Emergência Tática e de Áreas Remotas
     </span>
     <h2
       id={titleId}
