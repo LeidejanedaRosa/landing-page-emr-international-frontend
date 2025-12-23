@@ -315,7 +315,7 @@ const About: React.FC = memo(() => {
       aria-labelledby='about-heading'
     >
       <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row lg:h-screen'>
-        <div className='relative w-full lg:w-1/2 h-[45vh] lg:h-full'>
+        <div className='relative w-full lg:w-1/2 min-h-[280px] sm:min-h-[350px] lg:min-h-0 lg:h-full'>
           <InstructorMedia />
           <div className='hidden lg:block absolute bottom-0 left-0 right-0 p-6 lg:p-8 z-10'>
             <AboutMetrics />

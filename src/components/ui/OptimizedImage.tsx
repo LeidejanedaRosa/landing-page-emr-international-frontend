@@ -67,7 +67,7 @@ const ErrorPlaceholder: React.FC<{
     className={`bg-gray-200 flex items-center justify-center text-gray-400 ${className || ''}`}
     role='img'
     aria-label={alt}
-    style={{ minHeight: '200px', ...style }}
+    style={{ minHeight: '12rem', ...style }}
   >
     <svg
       className='w-8 h-8'

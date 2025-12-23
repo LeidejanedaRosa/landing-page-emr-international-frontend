@@ -210,7 +210,8 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
     }
 
     const [highlightStat, ...regularStats] = statistics
-    const STICKY_OFFSET = 15
+    const STICKY_BASE_OFFSET_REM = 3.5
+    const STICKY_INCREMENT_REM = 1
 
     return (
       <div
@@ -229,7 +230,12 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
           role='listitem'
           aria-posinset={1}
           aria-setsize={statistics.length}
-          style={{ '--sticky-top': '50px', '--sticky-z': '10' } as StickyStyle}
+          style={
+            {
+              '--sticky-top': `${STICKY_BASE_OFFSET_REM}rem`,
+              '--sticky-z': '10',
+            } as StickyStyle
+          }
           className={`
             sticky lg:static top-[var(--sticky-top)] lg:top-auto z-[var(--sticky-z)] lg:z-auto
             mb-8 lg:mb-0 transition-transform duration-300 hover:scale-[1.02]
@@ -245,7 +251,8 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
 
         {regularStats.map((stat, index) => {
           const realIndex = index + 1
-          const topOffset = 50 + realIndex * STICKY_OFFSET
+          const topOffsetRem =
+            STICKY_BASE_OFFSET_REM + realIndex * STICKY_INCREMENT_REM
           const zIndex = 10 + realIndex
 
           return (
@@ -256,7 +263,7 @@ const StatisticsGrid: React.FC<StatisticsGridProps> = memo(
               aria-setsize={statistics.length}
               style={
                 {
-                  '--sticky-top': `${topOffset}px`,
+                  '--sticky-top': `${topOffsetRem}rem`,
                   '--sticky-z': zIndex.toString(),
                 } as StickyStyle
               }
