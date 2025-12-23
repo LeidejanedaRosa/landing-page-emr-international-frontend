@@ -1,8 +1,9 @@
 import React, { Suspense } from 'react'
 
 import ErrorBoundary from './components/error/ErrorBoundary'
-import Hero from './components/sections/Hero'
-import StructuredData from './components/seo/StructuredData'
+import HeroCarousel from './components/sections/HeroCarousel'
+import { JsonLdScript } from './components/seo/JsonLdScript'
+import { ORGANIZATION_STRUCTURED_DATA } from './components/seo/organizationSchema'
 import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
 import SEO from './utils/SEO'
 
@@ -21,9 +22,9 @@ function App() {
   return (
     <ErrorBoundary>
       <SEO />
-      <StructuredData />
+      <JsonLdScript data={ORGANIZATION_STRUCTURED_DATA} />
       <div className='min-h-screen bg-gray-50'>
-        <Hero />
+        <HeroCarousel />
         <Suspense fallback={<SectionSkeleton />}>
           <WhyItMattersSection />
         </Suspense>

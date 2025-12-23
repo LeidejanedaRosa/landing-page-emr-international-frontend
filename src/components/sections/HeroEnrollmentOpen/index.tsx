@@ -1,27 +1,15 @@
 import React, { memo } from 'react'
 
 import { useAccessibilityPreferences } from '../../../hooks/useAccessibility'
+import { JsonLdScript } from '../../seo/JsonLdScript'
 import { CourseCard } from './components'
 import { COURSES_DATA } from './constants'
 import { useCourseHover } from './hooks/useCourseHover'
 
-/**
- * HeroEnrollmentOpen Component
- *
- * Displays promotional course cards for courses with open enrollment.
- * Follows SOLID principles with separated concerns and single responsibility.
- *
- * @component
- * @example
- * ```tsx
- * <HeroEnrollmentOpen />
- * ```
- */
 export const HeroEnrollmentOpen: React.FC = memo(() => {
   const { prefersReducedMotion } = useAccessibilityPreferences()
   const { createHoverHandlers, hoveredCard } = useCourseHover()
 
-  // Structured data for SEO (Schema.org Course markup)
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -45,10 +33,7 @@ export const HeroEnrollmentOpen: React.FC = memo(() => {
 
   return (
     <>
-      <script
-        type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <JsonLdScript data={structuredData} />
 
       <section
         className='relative w-full max-w-full min-h-[500px] md:min-h-[650px] lg:h-[70vh] m-0 p-0'

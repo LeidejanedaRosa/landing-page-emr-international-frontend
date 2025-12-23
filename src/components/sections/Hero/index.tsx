@@ -2,7 +2,6 @@ import { memo, Suspense } from 'react'
 
 import heroSideImage from '../../../assets/hero_section_01.jpg'
 import Header from '../../layout/Header'
-import StructuredData from '../../seo/StructuredData'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
 import PromoBannerCarousel from '../PromoBannerCarousel'
 import {
@@ -31,55 +30,51 @@ const Hero = memo<HeroProps>(
     const headingId = `${HERO_SECTION_ID}-heading`
 
     return (
-      <>
-        <StructuredData />
+      <section
+        id={HERO_SECTION_ID}
+        className={`relative w-full min-h-screen bg-black overflow-hidden flex flex-col ${className}`}
+        aria-labelledby={headingId}
+      >
+        <ScreenReaderOnly>
+          <h2 id={headingId}>{HERO_CONTENT.seo.title}</h2>
+          <p>{HERO_CONTENT.seo.contextDescription}</p>
+        </ScreenReaderOnly>
 
-        <section
-          id={HERO_SECTION_ID}
-          className={`relative w-full min-h-screen bg-black overflow-hidden flex flex-col ${className}`}
-          aria-labelledby={headingId}
-        >
-          <ScreenReaderOnly>
-            <h2 id={headingId}>{HERO_CONTENT.seo.title}</h2>
-            <p>{HERO_CONTENT.seo.contextDescription}</p>
-          </ScreenReaderOnly>
+        <div className='flex-none'>
+          <Suspense
+            fallback={<div className='h-16 bg-black/20' aria-hidden='true' />}
+          >
+            <Header className='bg-transparent shadow-none' />
+          </Suspense>
 
-          <div className='flex-none'>
-            <Suspense
-              fallback={<div className='h-16 bg-black/20' aria-hidden='true' />}
-            >
-              <Header className='bg-transparent shadow-none' />
-            </Suspense>
+          <Suspense
+            fallback={<div className='h-12 bg-black/10' aria-hidden='true' />}
+          >
+            <PromoBannerCarousel />
+          </Suspense>
+        </div>
 
-            <Suspense
-              fallback={<div className='h-12 bg-black/10' aria-hidden='true' />}
-            >
-              <PromoBannerCarousel />
-            </Suspense>
+        <div className='flex-1 grid lg:grid-cols-2 gap-0 relative'>
+          <div className='relative z-20 flex flex-col justify-center px-6 sm:px-12 lg:pl-24 lg:pr-12 py-12 lg:py-0 order-2 lg:order-1'>
+            <TrustBadge />
+            <HeroHeadline />
+            <HeroCTA onClick={handleCtaClick} />
+            <SocialProof />
           </div>
 
-          <div className='flex-1 grid lg:grid-cols-2 gap-0 relative'>
-            <div className='relative z-20 flex flex-col justify-center px-6 sm:px-12 lg:pl-24 lg:pr-12 py-12 lg:py-0 order-2 lg:order-1'>
-              <TrustBadge />
-              <HeroHeadline />
-              <HeroCTA onClick={handleCtaClick} />
-              <SocialProof />
-            </div>
+          <aside
+            className='relative h-[50vh] lg:h-auto w-full order-1 lg:order-2'
+            aria-label='Imagem ilustrativa de treinamento tático'
+          >
+            <HeroVisual imageSrc={imageSrc} alt={HERO_CONTENT.visual.alt} />
+          </aside>
+        </div>
 
-            <aside
-              className='relative h-[50vh] lg:h-auto w-full order-1 lg:order-2'
-              aria-label='Imagem ilustrativa de treinamento tático'
-            >
-              <HeroVisual imageSrc={imageSrc} alt={HERO_CONTENT.visual.alt} />
-            </aside>
-          </div>
-
-          <ScreenReaderOnly>
-            <h2>{HERO_CONTENT.about.title}</h2>
-            <p>{HERO_CONTENT.about.description}</p>
-          </ScreenReaderOnly>
-        </section>
-      </>
+        <ScreenReaderOnly>
+          <h2>{HERO_CONTENT.about.title}</h2>
+          <p>{HERO_CONTENT.about.description}</p>
+        </ScreenReaderOnly>
+      </section>
     )
   }
 )
