@@ -33,7 +33,7 @@ export const HeroContent = memo<HeroContentProps>(({ className = '' }) => {
       <div className='flex-1 flex flex-col lg:grid lg:grid-cols-2 gap-0 relative'>
         <aside
           className='relative h-[45%] lg:h-full w-full order-1 lg:order-2'
-          aria-label='Imagem ilustrativa de treinamento tático'
+          aria-label={HERO_CONTENT.visual.ariaLabel}
         >
           <HeroVisual imageSrc={heroSideImage} alt={HERO_CONTENT.visual.alt} />
         </aside>

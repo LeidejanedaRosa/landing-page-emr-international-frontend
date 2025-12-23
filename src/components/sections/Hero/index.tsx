@@ -64,7 +64,7 @@ const Hero = memo<HeroProps>(
 
           <aside
             className='relative h-[50vh] lg:h-auto w-full order-1 lg:order-2'
-            aria-label='Imagem ilustrativa de treinamento tático'
+            aria-label={HERO_CONTENT.visual.ariaLabel}
           >
             <HeroVisual imageSrc={imageSrc} alt={HERO_CONTENT.visual.alt} />
           </aside>
