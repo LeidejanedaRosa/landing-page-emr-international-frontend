@@ -7,9 +7,9 @@ export const HERO_CONTENT = {
     title:
       'EMR Internacional - Formação de Operadores de Emergência Tática e Wilderness',
     description:
-      'Cursos de APH Tático, TECC e Emergências Remotas. Prepare-se para o inesperado com instrutores de elite.',
+      'Cursos de APH Tático, TECC e Wilderness Medicine. Prepare-se para o inesperado com instrutores de elite.',
     contextDescription:
-      'Seção principal com informações sobre cursos de APH Tático, atendimento pré-hospitalar e certificações internacionais.',
+      'Seção principal com informações sobre cursos de APH Tático e certificações internacionais.',
   },
   badge: {
     label: 'Certificação Internacional',

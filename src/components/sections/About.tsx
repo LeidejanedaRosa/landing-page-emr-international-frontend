@@ -73,8 +73,8 @@ const InstructorHero: React.FC = memo(() => {
             <span lang='en'>Wilderness Medicine</span> e formação de operadores
             médicos táticos e operadores de emergência em áreas remotas
           </strong>
-          . Treinamento de elite para profissionais que salvam vidas em cenários
-          de alto risco e ambientes austeros.
+          , com treinamento de elite para profissionais que salvam vidas em
+          cenários de alto risco e ambientes austeros.
         </p>
       </div>
     </header>
