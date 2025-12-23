@@ -37,7 +37,7 @@ export const certifications: Certification[] = [
     name: 'American College of Surgeons',
     organization: 'American College of Surgeons',
     description:
-      'Instrutor certificado pelo programa Stop the Bleed, uma iniciativa global do American College of Surgeons (ACS) em parceria com o Committee on Trauma (CoT). O curso capacita profissionais e civis a reconhecer e controlar hemorragias graves, utilizando técnicas baseadas em evidências do Tactical Combat Casualty Care (TCCC). O programa é reconhecido internacionalmente como padrão ouro em controle de sangramento, sendo parte essencial da resposta imediata a traumas em ambientes civis, militares e de alta ameaça.',
+      'Instrutor certificado pelo programa Stop the Bleed, uma iniciativa global do American College of Surgeons (ACS) em parceria com o Committee on Trauma (CoT). O curso capacita profissionais e civis a reconhecer e controlar hemorragias graves, utilizando técnicas baseadas em evidências e protocolos internacionais de APH Tático. O programa é reconhecido internacionalmente como padrão ouro em controle de sangramento, sendo parte essencial da resposta imediata a traumas em ambientes civis e de alta ameaça.',
     year: '2025',
     logo: logo3,
   },
@@ -46,7 +46,7 @@ export const certifications: Certification[] = [
     name: 'Committee for Tactical Emergency Casualty Care',
     organization: 'Committee for Tactical Emergency Casualty Care',
     description:
-      'Instrutor com formação alinhada aos protocolos do Committee for Tactical Emergency Casualty Care (C-TECC), organização responsável por adaptar as diretrizes do Tactical Combat Casualty Care (TCCC) para o contexto civil e tático. O C-TECC estabelece as melhores práticas para o atendimento a múltiplas vítimas em cenários de alta ameaça, integrando princípios de segurança, medicina operacional e coordenação interagências. Esses protocolos são amplamente adotados por equipes de resposta tática, forças de segurança, e serviços de emergência médica em todo o mundo.',
+      'Instrutor com formação alinhada aos protocolos do Committee for Tactical Emergency Casualty Care (C-TECC), organização responsável por estabelecer diretrizes de APH Tático para o contexto civil e operacional. O C-TECC estabelece as melhores práticas para o atendimento a múltiplas vítimas em cenários de alta ameaça, integrando princípios de segurança, operações médicas táticas e coordenação interagências. Esses protocolos são amplamente adotados por equipes de resposta tática, forças de segurança e serviços de emergência médica em todo o mundo.',
     year: '2025',
     logo: logo4,
   },

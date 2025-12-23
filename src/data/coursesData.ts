@@ -46,9 +46,9 @@ const courses: Course[] = [
   {
     id: 'tmr',
     abbreviation: 'TMR',
-    title: 'Tactical Medical Responder - Operador de APH Tático',
+    title: 'Tactical Medical Responder - Operador de Emergência Tática',
     description:
-      'Formação completa de operadores e primeiro respondentes táticos em APH Tático, medicina tática e protocolos TCCC/TECC. Curso avançado para socorristas táticos focado em operações de alto risco, ambientes hostis e cenários de combate. Desenvolva habilidades críticas para salvar vidas sob pressão extrema com certificação internacional reconhecida.',
+      'Formação completa de Operadores de Emergência Tática em APH Tático e protocolos TECC. Curso avançado para operadores médicos táticos focado em operações de alto risco, ambientes hostis e cenários críticos. Desenvolva habilidades essenciais para salvar vidas sob pressão extrema com certificação internacional reconhecida.',
     metadata: {
       duration: '40 horas',
       certification: 'Certificação Internacional TMR',
@@ -72,10 +72,10 @@ const courses: Course[] = [
     title:
       'Wilderness Medical Responder - Operador de Emergências em Áreas Remotas',
     description:
-      'Formação especializada em primeiros socorros e emergências em áreas remotas com certificação NAEMT. Curso de wilderness medicine para operadores de campo, guias de turismo de aventura e profissionais de resgate outdoor. Prepare-se para atuar em ambientes silvestres onde os recursos são limitados, o acesso é difícil e a estabilização prolongada é necessária.',
+      'Formação especializada em emergências em áreas remotas com certificação internacional. Curso de Wilderness Medicine para operadores de campo, guias de turismo de aventura e profissionais de resgate outdoor. Prepare-se para atuar em ambientes silvestres onde os recursos são limitados, o acesso é difícil e a estabilização prolongada é necessária.',
     metadata: {
       duration: '50 horas',
-      certification: 'Certificação NAEMT Wilderness',
+      certification: 'Certificação Internacional Wilderness',
       location: 'In-Company ou Sede EMR',
     },
     links: {

@@ -19,9 +19,9 @@ interface SEOProps {
 const DEFAULT_TITLE =
   'EMR Internacional | APH Tático e Emergência em Áreas Remotas'
 const DEFAULT_DESCRIPTION =
-  'A EMR Internacional oferece cursos de Atendimento Pré-Hospitalar Tático (APH Tático) e Emergência em Áreas Remotas. Treinamentos onde o convencional não alcança.'
+  'Formação de Operadores de Emergência Tática e APH Tático (TECC). Cursos de Wilderness Medicine e emergências em áreas remotas. Treinamentos onde o convencional não alcança.'
 const DEFAULT_KEYWORDS =
-  'APH Tático, Emergência, Áreas Remotas, Atendimento Pré-Hospitalar, Treinamento Tático, EMR Internacional'
+  'APH Tático, operador de emergência tática, TECC, Emergência, Áreas Remotas, Atendimento Pré-Hospitalar, Treinamento Tático, EMR Internacional, socorrista tático, medicina tática, TCCC, medicina de combate'
 const DEFAULT_IMAGE = 'https://www.emrinternacional.com/social-image.jpg'
 const DEFAULT_URL = 'https://www.emrinternacional.com/'
 
