@@ -20,8 +20,11 @@ export const CarouselIndicators = memo<CarouselIndicatorsProps>(
           return (
             <button
               key={slideIndex}
+              type='button'
               role='tab'
               aria-selected={isActive}
+              aria-controls={`hero-slide-${slideIndex}`}
+              tabIndex={isActive ? 0 : -1}
               aria-label={`${label} - Slide ${slideIndex + 1} de ${totalSlides}`}
               onClick={() => onSelect(slideIndex)}
               className={`
