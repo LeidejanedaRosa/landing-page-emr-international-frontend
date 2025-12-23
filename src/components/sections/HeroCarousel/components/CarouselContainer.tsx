@@ -32,7 +32,6 @@ export const CarouselContainer = memo<CarouselContainerProps>(
     return (
       <section
         className='relative w-full h-screen max-h-screen bg-black overflow-hidden flex flex-col'
-        role='region'
         aria-roledescription={HERO_CAROUSEL_A11Y.roleDescription}
         aria-label={HERO_CAROUSEL_A11Y.ariaLabel}
       >
