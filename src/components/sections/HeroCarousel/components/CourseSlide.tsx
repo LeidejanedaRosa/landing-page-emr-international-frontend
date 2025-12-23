@@ -154,9 +154,11 @@ export const CourseSlide = memo<CourseSlideProps>(({ course, onCtaClick }) => {
     if (onCtaClick) {
       onCtaClick()
     } else {
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+      document.getElementById('contact')?.scrollIntoView({
+        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      })
     }
-  }, [onCtaClick])
+  }, [onCtaClick, prefersReducedMotion])
 
   return (
     <article
