@@ -98,7 +98,7 @@ const TabSwitcher = memo(
                 className={`flex-1 py-2 px-6 !rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 ${
                   isActive
                     ? activeStyles
-                    : 'text-zinc-500 hover:text-zinc-800 hover:bg-zinc-200/50'
+                    : 'text-zinc-500 hover:text-zinc-800 hover:bg-zinc-200/50 text-nowrap'
                 }`}
                 role='tab'
                 aria-selected={isActive}
