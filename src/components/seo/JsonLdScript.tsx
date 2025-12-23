@@ -15,9 +15,9 @@ interface JsonLdScriptProps {
  */
 export const JsonLdScript: React.FC<JsonLdScriptProps> = memo(
   ({ data, prettyPrint = false }) => {
-    const jsonString = prettyPrint
-      ? JSON.stringify(data, null, 2)
-      : JSON.stringify(data)
+    const jsonString = (
+      prettyPrint ? JSON.stringify(data, null, 2) : JSON.stringify(data)
+    ).replace(/<\/script>/gi, '<\\/script>')
 
     return (
       <script
