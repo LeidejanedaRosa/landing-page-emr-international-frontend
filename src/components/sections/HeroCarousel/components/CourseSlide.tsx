@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 
 import { useAccessibilityPreferences } from '../../../../hooks/useAccessibility'
 import {
@@ -11,16 +11,18 @@ import type { CourseData } from '../../HeroEnrollmentOpen/types'
 
 interface CourseSlideProps {
   course: CourseData
+  onCtaClick?: () => void
 }
 
 interface SlideContentProps {
   course: CourseData
   colors: (typeof ACCENT_COLORS)[keyof typeof ACCENT_COLORS]
   prefersReducedMotion: boolean
+  onCtaClick: () => void
 }
 
 const MobileSlideContent = memo<SlideContentProps>(
-  ({ course, colors, prefersReducedMotion }) => (
+  ({ course, colors, prefersReducedMotion, onCtaClick }) => (
     <>
       <div className='relative h-[45%] lg:hidden'>
         <CourseImage
@@ -60,6 +62,7 @@ const MobileSlideContent = memo<SlideContentProps>(
             className={`w-full sm:w-auto px-8 py-4 ${colors.button} text-white font-bold text-base rounded-lg shadow-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 ${colors.focusRing}`}
             aria-label={course.ctaAriaLabel}
             type='button'
+            onClick={onCtaClick}
           >
             {course.ctaLabel} →
           </button>
@@ -81,7 +84,7 @@ const MobileSlideContent = memo<SlideContentProps>(
 MobileSlideContent.displayName = 'MobileSlideContent'
 
 const DesktopSlideContent = memo<SlideContentProps>(
-  ({ course, colors, prefersReducedMotion }) => (
+  ({ course, colors, prefersReducedMotion, onCtaClick }) => (
     <div className='hidden lg:block absolute inset-0'>
       <CourseImage
         imageAvif={course.imageAvif}
@@ -121,6 +124,7 @@ const DesktopSlideContent = memo<SlideContentProps>(
                 className={`px-12 py-5 ${colors.button} text-white font-bold text-xl rounded-lg shadow-2xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 ${colors.focusRing}`}
                 aria-label={course.ctaAriaLabel}
                 type='button'
+                onClick={onCtaClick}
               >
                 {course.ctaLabel} →
               </button>
@@ -142,9 +146,17 @@ const DesktopSlideContent = memo<SlideContentProps>(
 
 DesktopSlideContent.displayName = 'DesktopSlideContent'
 
-export const CourseSlide = memo<CourseSlideProps>(({ course }) => {
+export const CourseSlide = memo<CourseSlideProps>(({ course, onCtaClick }) => {
   const { prefersReducedMotion } = useAccessibilityPreferences()
   const colors = ACCENT_COLORS[course.accentColor]
+
+  const handleCtaClick = useCallback(() => {
+    if (onCtaClick) {
+      onCtaClick()
+    } else {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [onCtaClick])
 
   return (
     <article
@@ -155,11 +167,13 @@ export const CourseSlide = memo<CourseSlideProps>(({ course }) => {
         course={course}
         colors={colors}
         prefersReducedMotion={prefersReducedMotion}
+        onCtaClick={handleCtaClick}
       />
       <DesktopSlideContent
         course={course}
         colors={colors}
         prefersReducedMotion={prefersReducedMotion}
+        onCtaClick={handleCtaClick}
       />
     </article>
   )
