@@ -20,6 +20,7 @@ export const CarouselNavigation = memo<CarouselNavigationProps>(
     return (
       <>
         <button
+          type='button'
           onClick={onPrev}
           className={`${buttonBaseClasses} left-4 md:left-6`}
           aria-label={`Slide anterior (${currentSlide === 0 ? totalSlides : currentSlide} de ${totalSlides})`}
@@ -28,6 +29,7 @@ export const CarouselNavigation = memo<CarouselNavigationProps>(
         </button>
 
         <button
+          type='button'
           onClick={onNext}
           className={`${buttonBaseClasses} right-4 md:right-6`}
           aria-label={`Próximo slide (${currentSlide + 2 > totalSlides ? 1 : currentSlide + 2} de ${totalSlides})`}
