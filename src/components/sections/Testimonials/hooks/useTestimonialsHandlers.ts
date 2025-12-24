@@ -8,7 +8,6 @@ interface UseTestimonialsHandlersParams {
   // eslint-disable-next-line no-unused-vars
   goToSlide: (index: number) => void
   currentIndex: number
-  maxIndex: number
   totalItems: number
 }
 
@@ -18,7 +17,6 @@ export const useTestimonialsHandlers = ({
   previousSlide,
   goToSlide,
   currentIndex,
-  maxIndex,
   totalItems,
 }: UseTestimonialsHandlersParams) => {
   const previousIndexRef = useRef(currentIndex)
@@ -29,16 +27,23 @@ export const useTestimonialsHandlers = ({
       isUserInteractionRef.current &&
       previousIndexRef.current !== currentIndex
     ) {
-      const realIndex =
-        currentIndex === 0 || currentIndex > maxIndex + 1
-          ? ((currentIndex - 1 + maxIndex + 1) % (maxIndex + 1)) + 1
-          : currentIndex
+      // Converte índice do carrossel (1 a totalItems, com 0 e totalItems+1 como clones)
+      // para índice de exibição 1-based
+      const displayIndex =
+        currentIndex === 0
+          ? totalItems
+          : currentIndex > totalItems
+            ? 1
+            : currentIndex
 
-      announce(`Mostrando depoimento ${realIndex} de ${totalItems}`, 'polite')
+      announce(
+        `Mostrando depoimento ${displayIndex} de ${totalItems}`,
+        'polite'
+      )
       isUserInteractionRef.current = false
     }
     previousIndexRef.current = currentIndex
-  }, [currentIndex, announce, maxIndex, totalItems])
+  }, [currentIndex, announce, totalItems])
 
   const handlePrevious = () => {
     isUserInteractionRef.current = true

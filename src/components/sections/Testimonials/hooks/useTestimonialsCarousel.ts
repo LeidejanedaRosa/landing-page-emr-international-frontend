@@ -70,7 +70,6 @@ export const useTestimonialsCarousel = ({
     currentIndex,
     totalItems,
     itemsVisible,
-    maxIndex,
     hasMultiplePages,
     isTransitioning,
     nextSlide,

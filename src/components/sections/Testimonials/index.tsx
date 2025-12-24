@@ -21,7 +21,6 @@ const Testimonials = memo(() => {
   const {
     currentIndex,
     itemsVisible,
-    maxIndex,
     hasMultiplePages,
     isTransitioning,
     nextSlide,
@@ -43,7 +42,6 @@ const Testimonials = memo(() => {
       previousSlide,
       goToSlide,
       currentIndex,
-      maxIndex,
       totalItems: testimonials.length,
     })
 
