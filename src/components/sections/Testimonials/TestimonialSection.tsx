@@ -143,9 +143,12 @@ const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
       >
         <div
           className='overflow-hidden rounded-2xl bg-primary-900/60 backdrop-blur-sm border border-primary-700/50 shadow-2xl'
-          role='tabpanel'
+          role='region'
           id={`testimonial-slide-${currentIndex}`}
-          aria-label={`Depoimento ${currentIndex + 1} de ${totalSlides}`}
+          aria-label={TESTIMONIALS_A11Y.slideLabel(
+            currentIndex + 1,
+            totalSlides
+          )}
         >
           <TestimonialCard
             key={currentTestimonial.id}

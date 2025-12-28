@@ -12,6 +12,8 @@ export const TESTIMONIALS_A11Y = {
   nextButton: 'Próximo depoimento',
   goToSlide: (index: number) => `Ir para depoimento ${index}`,
   counter: (current: number, total: number) => `${current} de ${total}`,
+  slideLabel: (current: number, total: number) =>
+    `Depoimento ${current} de ${total}`,
 } as const
 
 export const TESTIMONIALS_CONTENT = {

@@ -19,7 +19,7 @@ export const TestimonialNavigation = memo<TestimonialNavigationProps>(
     const getPreviousIndex = () =>
       currentIndex === 0 ? totalSlides : currentIndex
     const getNextIndex = () =>
-      currentIndex + 2 > totalSlides ? 1 : currentIndex + 2
+      currentIndex + 1 === totalSlides ? 1 : currentIndex + 2
 
     return (
       <>
