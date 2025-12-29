@@ -53,19 +53,25 @@ const TestimonialSection = memo(() => {
   )
 
   useEffect(() => {
+    const name: string =
+      currentTestimonial.authorName ??
+      currentTestimonial.companyName ??
+      `Slide ${currentIndex + 1}`
     announce(
-      TESTIMONIALS_A11Y.slideAnnouncement(
-        currentTestimonial.authorName,
-        currentIndex + 1,
-        totalSlides
-      ),
+      TESTIMONIALS_A11Y.slideAnnouncement(name, currentIndex + 1, totalSlides),
       'polite'
     )
-  }, [currentIndex, announce, currentTestimonial.authorName, totalSlides])
+  }, [
+    currentIndex,
+    announce,
+    currentTestimonial.authorName,
+    currentTestimonial.companyName,
+    totalSlides,
+  ])
 
   return (
     <section
-      className='h-screen flex flex-col justify-center bg-gradient-to-b from-primary-950 via-primary-900 to-cta-700 py-20 px-4 sm:px-6 lg:px-8'
+      className='min-h-svh flex flex-col justify-center bg-gradient-to-b from-primary-950 via-primary-900 to-cta-700 py-12 md:py-20 px-4 sm:px-6 lg:px-8'
       aria-labelledby='testimonials-heading'
       aria-roledescription={TESTIMONIALS_A11Y.roleDescription}
     >
@@ -120,21 +126,21 @@ const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
     isAutoPlaying,
     autoPlayDelay,
   }) => (
-    <div className='max-w-7xl mx-auto'>
-      <header className='text-center mb-16'>
+    <div className='w-full max-w-7xl mx-auto'>
+      <header className='text-center mb-8 md:mb-16'>
         <h2
           id='testimonials-heading'
-          className='text-4xl md:text-5xl font-bold text-white mb-4'
+          className='text-3xl md:text-5xl font-bold text-white mb-4'
         >
           {TESTIMONIALS_CONTENT.title}
         </h2>
-        <p className='text-primary-300 text-lg max-w-2xl mx-auto'>
+        <p className='text-primary-300 text-base md:text-lg max-w-2xl mx-auto'>
           {TESTIMONIALS_CONTENT.subtitle}
         </p>
       </header>
 
       <div
-        className='relative'
+        className='relative lg:px-12 xl:px-16'
         onMouseEnter={onPauseAutoPlay}
         onMouseLeave={onResumeAutoPlay}
         onFocus={onPauseAutoPlay}
