@@ -1,100 +1,53 @@
 import React, { memo } from 'react'
 
-import {
-  useScreenReaderAnnouncement,
-  useUniqueId,
-} from '../../hooks/useAccessibility'
-import { ScreenReaderOnly } from '../ui/Accessibility'
-import { ContactForm, ContactInfo } from './ContactSections'
+import { useUniqueId } from '../../hooks/useAccessibility'
 
-interface ContactHeaderProps {
-  titleId: string
-  descriptionId: string
-}
-
-interface ContactContentProps {
-  titleId: string
-}
-
-const ContactHeader: React.FC<ContactHeaderProps> = memo(
-  ({ titleId, descriptionId }) => {
-    return (
-      <header className='text-center mb-16'>
-        <h2
-          id={titleId}
-          className='text-3xl md:text-4xl font-bold mb-8 text-white'
-        >
-          Entre em Contato Conosco
-        </h2>
-        <p
-          id={descriptionId}
-          className='text-xl mb-8 text-primary-100 max-w-2xl mx-auto leading-relaxed'
-        >
-          Pronto para se tornar um operador médico tático ou especialista em
-          áreas remotas? Fale conosco sobre nossos cursos de APH Tático,
-          medicina tática (<span lang='en'>TCCC/TECC</span>) e{' '}
-          <span lang='en'>Wilderness Medicine</span> com certificação
-          internacional NAEMT!
-        </p>
-      </header>
-    )
-  }
-)
-
-ContactHeader.displayName = 'ContactHeader'
-
-const ContactContent: React.FC<ContactContentProps> = memo(({ titleId }) => {
-  const { announce } = useScreenReaderAnnouncement()
-  const [hasAnnounced, setHasAnnounced] = React.useState(false)
-
-  const handleSectionLoad = () => {
-    if (!hasAnnounced) {
-      announce('Seção de contato carregada com sucesso', 'polite')
-      setHasAnnounced(true)
-    }
-  }
-
-  return (
-    <div
-      className='grid lg:grid-cols-2 gap-12 items-start'
-      aria-labelledby={titleId}
-    >
-      <ScreenReaderOnly>
-        <p>
-          Seção dividida em duas partes: informações de contato e formulário de
-          mensagem
-        </p>
-      </ScreenReaderOnly>
-
-      <ContactInfo />
-
-      <ContactForm onLoad={handleSectionLoad} />
-    </div>
-  )
-})
-
-ContactContent.displayName = 'ContactContent'
+const WHATSAPP_NUMBER = '5519971575640'
+const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
 
 const Contact: React.FC = memo(() => {
   const titleId = useUniqueId('contact-title')
   const descriptionId = useUniqueId('contact-description')
 
+  const whatsappMessage = encodeURIComponent(
+    'Olá! Gostaria de saber mais sobre os treinamentos da EMR Internacional.'
+  )
+  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${whatsappMessage}`
+
   return (
     <section
       id='contact'
       data-section='contact'
-      className='py-24 bg-cta-600 text-white'
-      aria-label='Entre em Contato Conosco'
+      className='py-20 md:py-24 bg-cta-600 text-white'
+      aria-labelledby={titleId}
     >
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-        <ContactHeader titleId={titleId} descriptionId={descriptionId} />
-
-        <div>
-          <ContactContent titleId={titleId} />
-        </div>
+      <div className='max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
+        <h2
+          id={titleId}
+          className='text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-white'
+        >
+          Prepare-se para salvar vidas
+        </h2>
+        <p
+          id={descriptionId}
+          className='text-base md:text-lg mb-8 text-white/80'
+        >
+          Garanta sua vaga nos próximos treinamentos da EMR Internacional
+        </p>
+        <a
+          href={whatsappUrl}
+          target='_blank'
+          rel='noopener noreferrer'
+          className='inline-block bg-white text-cta-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg uppercase tracking-wider text-sm transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-cta-600'
+          aria-label='Entrar em contato via WhatsApp para se inscrever nos treinamentos'
+        >
+          Quero me inscrever agora
+        </a>
       </div>
     </section>
   )
 })
+
+Contact.displayName = 'Contact'
 
 export default Contact
