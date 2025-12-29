@@ -10,17 +10,41 @@ export interface TestimonialImages {
 
 export type TestimonialVariant = 'full' | 'text-only' | 'image-only'
 
-export interface Testimonial {
+interface BaseTestimonial {
   id: string
-  variant: TestimonialVariant
   courseType: 'tatico' | 'remoto'
-  companyName?: string
-  testimonialText?: string
-  authorName?: string
-  authorRole?: string
-  rating?: number
-  images?: TestimonialImages
 }
+
+export interface FullTestimonial extends BaseTestimonial {
+  variant: 'full'
+  testimonialText: string
+  authorName: string
+  authorRole: string
+  rating: number
+  images: TestimonialImages
+  companyName?: string
+}
+
+export interface TextOnlyTestimonial extends BaseTestimonial {
+  variant: 'text-only'
+  testimonialText: string
+  authorName: string
+  authorRole: string
+  rating?: number
+  companyName?: string
+}
+
+export interface ImageOnlyTestimonial extends BaseTestimonial {
+  variant: 'image-only'
+  images: TestimonialImages
+  authorName?: string
+  companyName?: string
+}
+
+export type Testimonial =
+  | FullTestimonial
+  | TextOnlyTestimonial
+  | ImageOnlyTestimonial
 
 export interface UseTestimonialsCarouselOptions {
   totalSlides: number
