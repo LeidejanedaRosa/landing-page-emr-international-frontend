@@ -8,15 +8,18 @@ export interface TestimonialImages {
   alt: string
 }
 
+export type TestimonialVariant = 'full' | 'text-only' | 'image-only'
+
 export interface Testimonial {
   id: string
-  companyName: string
+  variant: TestimonialVariant
   courseType: 'tatico' | 'remoto'
-  testimonialText: string
-  authorName: string
-  authorRole: string
-  rating: number
-  images: TestimonialImages
+  companyName?: string
+  testimonialText?: string
+  authorName?: string
+  authorRole?: string
+  rating?: number
+  images?: TestimonialImages
 }
 
 export interface UseTestimonialsCarouselOptions {
