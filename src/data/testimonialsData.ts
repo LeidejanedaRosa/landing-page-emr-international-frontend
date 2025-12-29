@@ -33,6 +33,7 @@ import type { Testimonial } from '../components/sections/Testimonials/types'
 export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-1',
+    variant: 'full',
     companyName: 'Petrobras',
     courseType: 'tatico',
     testimonialText:
@@ -49,6 +50,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'testimonial-2',
+    variant: 'full',
     companyName: 'Vale',
     courseType: 'remoto',
     testimonialText:
@@ -65,6 +67,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'testimonial-3',
+    variant: 'full',
     companyName: 'SAMU-RJ',
     courseType: 'tatico',
     testimonialText:
@@ -81,6 +84,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'testimonial-4',
+    variant: 'full',
     companyName: 'Hospital Albert Einstein',
     courseType: 'tatico',
     testimonialText:
@@ -97,6 +101,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'testimonial-5',
+    variant: 'full',
     companyName: 'Corpo de Bombeiros SP',
     courseType: 'tatico',
     testimonialText:
@@ -113,6 +118,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'testimonial-6',
+    variant: 'full',
     companyName: 'Exército Brasileiro',
     courseType: 'remoto',
     testimonialText:
@@ -125,6 +131,50 @@ export const testimonials: Testimonial[] = [
       webp: GuiaTuristicoWebp,
       jpg: GuiaTuristicoJpg,
       alt: 'Foto de Cap. Marcos R.',
+    },
+  },
+  {
+    id: 'testimonial-7',
+    variant: 'text-only',
+    courseType: 'tatico',
+    testimonialText:
+      'O treinamento tático da EMR foi transformador. A didática dos instrutores e o conteúdo prático me prepararam para situações reais de emergência.',
+    authorName: 'Dra. Juliana Costa',
+    authorRole: 'Médica Emergencista',
+    rating: 5,
+  },
+  {
+    id: 'testimonial-8',
+    variant: 'image-only',
+    courseType: 'remoto',
+    companyName: 'Petrobras - Plataforma P-52',
+    images: {
+      avif: MergulhadoresAvif,
+      webp: MergulhadoresWebp,
+      jpg: MergulhadoresJpg,
+      alt: 'Equipe de resgate da Petrobras em treinamento',
+    },
+  },
+  {
+    id: 'testimonial-9',
+    variant: 'text-only',
+    courseType: 'remoto',
+    testimonialText:
+      'Excelente capacitação para atendimento em áreas remotas. O conhecimento adquirido já salvou vidas em nossas operações de campo.',
+    authorName: 'Ricardo Mendes',
+    authorRole: 'Coordenador de Segurança - Mineração',
+    rating: 5,
+  },
+  {
+    id: 'testimonial-10',
+    variant: 'image-only',
+    courseType: 'tatico',
+    companyName: 'SAMU - São Paulo',
+    images: {
+      avif: CorpoDeBombeirosAvif,
+      webp: CorpoDeBombeirosWebp,
+      jpg: CorpoDeBombeirosJpg,
+      alt: 'Equipe do SAMU em treinamento tático',
     },
   },
 ]
