@@ -10,10 +10,10 @@ export const TestimonialNavigation = memo<TestimonialNavigationProps>(
     const buttonBaseClasses = `
       absolute top-1/2 -translate-y-1/2
       bg-white/90 hover:bg-white text-primary-900
-      rounded-full p-2 md:p-3 shadow-lg
+      rounded-full p-3 shadow-lg
       transition-all duration-300 hover:scale-110
       focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-900
-      flex items-center justify-center
+      hidden lg:flex items-center justify-center
     `
 
     const getPreviousIndex = () =>
@@ -26,19 +26,19 @@ export const TestimonialNavigation = memo<TestimonialNavigationProps>(
         <button
           type='button'
           onClick={onPrev}
-          className={`${buttonBaseClasses} -left-4 lg:-left-6`}
+          className={`${buttonBaseClasses} -left-6 xl:-left-8`}
           aria-label={`${TESTIMONIALS_A11Y.previousButton} (${getPreviousIndex()} de ${totalSlides})`}
         >
-          <ChevronLeft className='w-5 h-5 md:w-6 md:h-6' aria-hidden='true' />
+          <ChevronLeft className='w-6 h-6' aria-hidden='true' />
         </button>
 
         <button
           type='button'
           onClick={onNext}
-          className={`${buttonBaseClasses} -right-4 lg:-right-6`}
+          className={`${buttonBaseClasses} -right-6 xl:-right-8`}
           aria-label={`${TESTIMONIALS_A11Y.nextButton} (${getNextIndex()} de ${totalSlides})`}
         >
-          <ChevronRight className='w-5 h-5 md:w-6 md:h-6' aria-hidden='true' />
+          <ChevronRight className='w-6 h-6' aria-hidden='true' />
         </button>
       </>
     )
