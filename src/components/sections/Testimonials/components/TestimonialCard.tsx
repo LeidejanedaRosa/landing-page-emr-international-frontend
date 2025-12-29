@@ -1,6 +1,11 @@
 import { memo } from 'react'
 
-import type { Testimonial, TestimonialCardProps } from '../types'
+import type {
+  FullTestimonial,
+  ImageOnlyTestimonial,
+  TestimonialCardProps,
+  TextOnlyTestimonial,
+} from '../types'
 import { CourseTypeTag } from './CourseTypeTag'
 import { StarRating } from './StarRating'
 import { TestimonialImage } from './TestimonialImage'
@@ -31,10 +36,9 @@ TestimonialAuthor.displayName = 'TestimonialAuthor'
 
 const CARD_HEIGHT = 'h-[400px] md:h-[450px] lg:h-[400px]'
 
-const ImageOnlyVariant = memo<{ testimonial: Testimonial }>(
+const ImageOnlyVariant = memo<{ testimonial: ImageOnlyTestimonial }>(
   ({ testimonial }) => {
     const { courseType, images, companyName } = testimonial
-    if (!images) return null
 
     return (
       <article className={`animate-fade-in w-full ${CARD_HEIGHT}`}>
@@ -58,7 +62,7 @@ const ImageOnlyVariant = memo<{ testimonial: Testimonial }>(
 
 ImageOnlyVariant.displayName = 'ImageOnlyVariant'
 
-const TextOnlyVariant = memo<{ testimonial: Testimonial }>(
+const TextOnlyVariant = memo<{ testimonial: TextOnlyTestimonial }>(
   ({ testimonial }) => {
     const { courseType, testimonialText, rating, authorName, authorRole } =
       testimonial
@@ -92,66 +96,68 @@ const TextOnlyVariant = memo<{ testimonial: Testimonial }>(
 
 TextOnlyVariant.displayName = 'TextOnlyVariant'
 
-const FullVariant = memo<{ testimonial: Testimonial }>(({ testimonial }) => {
-  const {
-    courseType,
-    images,
-    companyName,
-    testimonialText,
-    rating,
-    authorName,
-    authorRole,
-  } = testimonial
+const FullVariant = memo<{ testimonial: FullTestimonial }>(
+  ({ testimonial }) => {
+    const {
+      courseType,
+      images,
+      companyName,
+      testimonialText,
+      rating,
+      authorName,
+      authorRole,
+    } = testimonial
 
-  return (
-    <article
-      className={`grid md:grid-cols-2 gap-0 animate-fade-in w-full ${CARD_HEIGHT}`}
-    >
-      {images && (
-        <figure className='relative h-full overflow-hidden'>
-          <TestimonialImage images={images} />
-          <div className='absolute top-3 left-3 md:top-4 md:left-4'>
-            <CourseTypeTag courseType={courseType} />
-          </div>
-        </figure>
-      )}
-
-      <div className='p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-center bg-primary-900/40 min-w-0 overflow-hidden'>
-        {!images && (
-          <div className='mb-4'>
-            <CourseTypeTag courseType={courseType} />
-          </div>
+    return (
+      <article
+        className={`grid ${images ? 'md:grid-cols-2' : 'md:grid-cols-1'} gap-0 animate-fade-in w-full ${CARD_HEIGHT}`}
+      >
+        {images && (
+          <figure className='relative h-full overflow-hidden'>
+            <TestimonialImage images={images} />
+            <div className='absolute top-3 left-3 md:top-4 md:left-4'>
+              <CourseTypeTag courseType={courseType} />
+            </div>
+          </figure>
         )}
 
-        {rating !== undefined && <StarRating rating={rating} />}
+        <div className='p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-center bg-primary-900/40 min-w-0 overflow-hidden'>
+          {!images && (
+            <div className='mb-4'>
+              <CourseTypeTag courseType={courseType} />
+            </div>
+          )}
 
-        {testimonialText && (
-          <blockquote className='text-base md:text-xl lg:text-2xl font-medium text-white my-3 md:my-4 leading-relaxed'>
-            <p>&ldquo;{testimonialText}&rdquo;</p>
-          </blockquote>
-        )}
+          {rating !== undefined && <StarRating rating={rating} />}
 
-        <TestimonialAuthor
-          authorName={authorName}
-          authorRole={authorRole}
-          companyName={companyName}
-        />
-      </div>
-    </article>
-  )
-})
+          {testimonialText && (
+            <blockquote className='text-base md:text-xl lg:text-2xl font-medium text-white my-3 md:my-4 leading-relaxed'>
+              <p>&ldquo;{testimonialText}&rdquo;</p>
+            </blockquote>
+          )}
+
+          <TestimonialAuthor
+            authorName={authorName}
+            authorRole={authorRole}
+            companyName={companyName}
+          />
+        </div>
+      </article>
+    )
+  }
+)
 
 FullVariant.displayName = 'FullVariant'
 
-const variantComponents = {
-  'image-only': ImageOnlyVariant,
-  'text-only': TextOnlyVariant,
-  full: FullVariant,
-} as const
-
 export const TestimonialCard = memo<TestimonialCardProps>(({ testimonial }) => {
-  const VariantComponent = variantComponents[testimonial.variant]
-  return <VariantComponent testimonial={testimonial} />
+  switch (testimonial.variant) {
+    case 'image-only':
+      return <ImageOnlyVariant testimonial={testimonial} />
+    case 'text-only':
+      return <TextOnlyVariant testimonial={testimonial} />
+    case 'full':
+      return <FullVariant testimonial={testimonial} />
+  }
 })
 
 TestimonialCard.displayName = 'TestimonialCard'
