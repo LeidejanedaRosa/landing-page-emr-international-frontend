@@ -134,8 +134,18 @@ function getVisibleDots(currentIndex: number, totalSlides: number): DotInfo[] {
     }))
   }
 
-  const sideCount = Math.floor((MAX_VISIBLE_DOTS - 1) / 2)
-  const { start, end } = calculateDotRange(currentIndex, totalSlides, sideCount)
+  const mainDotsCount = MAX_VISIBLE_DOTS - 2
+  const sideCount = Math.floor((mainDotsCount - 1) / 2)
+  let { start, end } = calculateDotRange(currentIndex, totalSlides, sideCount)
+
+  const hasStartEllipsis = start > 0
+  const hasEndEllipsis = end < totalSlides - 1
+
+  if (!hasStartEllipsis && hasEndEllipsis) {
+    end = Math.min(totalSlides - 2, MAX_VISIBLE_DOTS - 2)
+  } else if (hasStartEllipsis && !hasEndEllipsis) {
+    start = Math.max(1, totalSlides - (MAX_VISIBLE_DOTS - 1))
+  }
 
   return buildDotsList(start, end, totalSlides)
 }
