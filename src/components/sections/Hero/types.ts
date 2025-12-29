@@ -1,11 +1,17 @@
+export interface HeroImages {
+  avif: string
+  webp: string
+  jpg: string
+}
+
 export interface HeroProps {
   onCtaClick?: () => void
-  imageSrc?: string
+  images?: HeroImages
   className?: string
 }
 
 export interface HeroVisualProps {
-  imageSrc: string
+  images: HeroImages
   alt?: string
   className?: string
 }

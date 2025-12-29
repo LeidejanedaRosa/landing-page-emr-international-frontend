@@ -1,25 +1,36 @@
 import { memo } from 'react'
 
-import { OptimizedImage } from '../../../ui/OptimizedImage'
-import { HERO_CONTENT, HERO_IMAGE } from '../constants'
+import { HERO_CONTENT } from '../constants'
 import type { HeroVisualProps } from '../types'
 
 export const HeroVisual = memo<HeroVisualProps>(
-  ({ imageSrc, alt = HERO_CONTENT.visual.alt, className = '' }) => {
+  ({ images, alt = HERO_CONTENT.visual.alt, className = '' }) => {
     return (
       <div
         className={`relative h-full w-full min-h-[400px] lg:min-h-[600px] group overflow-hidden rounded-sm lg:rounded-none ${className}`}
       >
-        <OptimizedImage
-          src={imageSrc}
-          alt={alt}
-          sizes={HERO_IMAGE.sizes}
-          formats={HERO_IMAGE.formats}
-          quality={HERO_IMAGE.quality}
-          lazy={false}
-          className='absolute w-full h-full object-cover object-[center_30%] scale-90 transition-transform duration-700 group-hover:scale-105'
-          fetchPriority={HERO_IMAGE.fetchPriority}
-        />
+        <picture>
+          <source
+            srcSet={images.avif}
+            type='image/avif'
+            sizes='(max-width: 768px) 100vw, 50vw'
+          />
+          <source
+            srcSet={images.webp}
+            type='image/webp'
+            sizes='(max-width: 768px) 100vw, 50vw'
+          />
+          <img
+            src={images.jpg}
+            alt={alt}
+            width={1600}
+            height={1067}
+            loading='eager'
+            decoding='async'
+            fetchPriority='high'
+            className='absolute w-full h-full object-cover object-[center_30%] scale-90 transition-transform duration-700 group-hover:scale-105'
+          />
+        </picture>
 
         <div
           className='absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90 lg:bg-gradient-to-l lg:via-black/20 lg:to-black pointer-events-none'

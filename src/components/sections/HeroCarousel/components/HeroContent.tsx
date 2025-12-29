@@ -1,6 +1,10 @@
 import { memo } from 'react'
 
-import heroSideImage from '../../../../assets/hero_section_01.jpg'
+import heroSideImageJpg from '../../../../assets/hero_section_01.jpg'
+// @ts-expect-error - vite-imagetools directives
+import heroSideImageAvif from '../../../../assets/hero_section_01.jpg?format=avif&w=640;768;1024;1280;1600&as=srcset'
+// @ts-expect-error - vite-imagetools directives
+import heroSideImageWebp from '../../../../assets/hero_section_01.jpg?format=webp&w=640;768;1024;1280;1600&as=srcset'
 import { ScreenReaderOnly } from '../../../ui/Accessibility'
 import {
   HeroCTA,
@@ -11,6 +15,13 @@ import {
 } from '../../Hero/components'
 import { HERO_CONTENT, HERO_SECTION_ID } from '../../Hero/constants'
 import { useHeroNavigation } from '../../Hero/hooks/useHeroNavigation'
+import type { HeroImages } from '../../Hero/types'
+
+const heroImages: HeroImages = {
+  avif: heroSideImageAvif,
+  webp: heroSideImageWebp,
+  jpg: heroSideImageJpg,
+}
 
 interface HeroContentProps {
   className?: string
@@ -35,7 +46,7 @@ export const HeroContent = memo<HeroContentProps>(({ className = '' }) => {
           className='relative h-[45%] lg:h-full w-full order-1 lg:order-2'
           aria-label={HERO_CONTENT.visual.ariaLabel}
         >
-          <HeroVisual imageSrc={heroSideImage} alt={HERO_CONTENT.visual.alt} />
+          <HeroVisual images={heroImages} alt={HERO_CONTENT.visual.alt} />
         </aside>
 
         <div className='flex-1 lg:flex-none relative z-20 flex flex-col justify-center px-6 sm:px-12 lg:pl-24 lg:pr-12 py-6 lg:py-0 order-2 lg:order-1'>
