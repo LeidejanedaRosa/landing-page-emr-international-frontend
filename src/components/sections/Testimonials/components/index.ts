@@ -1,4 +1,6 @@
+export { CourseTypeTag } from './CourseTypeTag'
 export { StarRating } from './StarRating'
 export { TestimonialCard } from './TestimonialCard'
+export { TestimonialImage } from './TestimonialImage'
 export { TestimonialIndicators } from './TestimonialIndicators'
 export { TestimonialNavigation } from './TestimonialNavigation'
