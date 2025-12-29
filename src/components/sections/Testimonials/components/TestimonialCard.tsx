@@ -22,6 +22,8 @@ export const TestimonialCard = memo<TestimonialCardProps>(({ testimonial }) => {
           <img
             src={images.jpg}
             alt={images.alt}
+            width={640}
+            height={384}
             className='w-full h-full object-cover transition-transform duration-700 hover:scale-105'
             loading='lazy'
           />

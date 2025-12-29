@@ -40,6 +40,8 @@ export const CertificationCard: React.FC<CertificationCardProps> = memo(
             <OptimizedImage
               src={logo}
               alt={`Logo ${organization}`}
+              width={300}
+              height={160}
               className={`object-contain mx-auto ${isCTECC ? 'max-w-[60%] max-h-[70%]' : 'max-w-[80%] max-h-full'}`}
               loading={index < 4 ? 'eager' : 'lazy'}
             />

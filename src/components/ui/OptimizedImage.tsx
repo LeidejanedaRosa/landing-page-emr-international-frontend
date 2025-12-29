@@ -16,6 +16,10 @@ interface OptimizedImageProps extends Omit<
 
   lazy?: boolean
 
+  width?: number
+
+  height?: number
+
   onLoad?: () => void
   // eslint-disable-next-line no-unused-vars
   onError?: (_error: Error) => void
@@ -120,6 +124,8 @@ const ImageElement: React.FC<{
   handleError: () => void
   className?: string
   style?: React.CSSProperties
+  width?: number
+  height?: number
   [key: string]: any
 }> = ({
   src,
@@ -132,6 +138,8 @@ const ImageElement: React.FC<{
   handleError,
   className,
   style,
+  width,
+  height,
   ...props
 }) => {
   const imageClassName = `transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className || ''}`
@@ -140,6 +148,8 @@ const ImageElement: React.FC<{
     <img
       src={`${src}?w=800&format=${fallbackFormat}&quality=${quality}`}
       alt={alt}
+      width={width}
+      height={height}
       loading={lazy ? 'lazy' : 'eager'}
       onLoad={handleLoad}
       onError={handleError}
@@ -158,6 +168,8 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   formats = ['avif', 'webp', 'jpg'],
   quality = 80,
   lazy = true,
+  width,
+  height,
   onLoad,
   onError: _onError,
   className,
@@ -192,6 +204,8 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
         handleError={handleError}
         className={className}
         style={style}
+        width={width}
+        height={height}
         {...props}
       />
     </picture>

@@ -21,6 +21,8 @@ const InstructorMedia: React.FC = memo(() => {
           <img
             src={FundoAboutJpg}
             alt={instructorImageAlt}
+            width={1920}
+            height={1280}
             className='w-full h-full object-cover grayscale'
             style={{ objectPosition: '40% center' }}
             loading='eager'
