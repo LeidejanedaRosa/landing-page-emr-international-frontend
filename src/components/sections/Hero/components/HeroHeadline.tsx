@@ -2,16 +2,6 @@ import { memo } from 'react'
 
 import { HERO_CONTENT, HERO_MAIN_TITLE_ID } from '../constants'
 
-/**
- * Hero Headline Component
- *
- * Main heading for the hero section
- *
- * Clean Code principles:
- * - Single Responsibility: Only displays the headline
- * - Semantic HTML: Uses h1 as main page title
- * - SEO: Proper heading hierarchy
- */
 export const HeroHeadline = memo(() => (
   <h1
     id={HERO_MAIN_TITLE_ID}
