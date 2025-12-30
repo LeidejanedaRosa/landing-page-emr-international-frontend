@@ -13,9 +13,9 @@ const InstructorMedia: React.FC = memo(() => {
     'Juan Regenerati, paramédico e instrutor tático, fardado com equipamento de segurança em ambiente operacional'
 
   return (
-    <figure className='relative w-full h-full overflow-hidden'>
-      <div className='absolute inset-0'>
-        <picture className='w-full h-full'>
+    <figure className='relative w-full h-full min-h-[inherit] overflow-hidden'>
+      <div className='absolute inset-0 min-h-[inherit]'>
+        <picture className='block w-full h-full min-h-[inherit]'>
           <source srcSet={FundoAboutAvif} type='image/avif' sizes='100vw' />
           <source srcSet={FundoAboutWebp} type='image/webp' sizes='100vw' />
           <img
