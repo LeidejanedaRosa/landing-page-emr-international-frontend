@@ -18,7 +18,9 @@ const Courses = React.lazy(() => import('./components/sections/Courses'))
 const Testimonials = React.lazy(
   () => import('./components/sections/Testimonials')
 )
-const Contact = React.lazy(() => import('./components/sections/Contact'))
+const CallToAction = React.lazy(
+  () => import('./components/sections/CallToAction')
+)
 const Footer = React.lazy(() => import('./components/layout/Footer'))
 
 function App() {
@@ -44,7 +46,7 @@ function App() {
           <Testimonials />
         </Suspense>
         <Suspense fallback={<SectionSkeleton />}>
-          <Contact />
+          <CallToAction />
         </Suspense>
         <Suspense
           fallback={
