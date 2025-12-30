@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 
-import LogoEMR from '../../assets/logo_emr_internacional.svg'
-import { COMPANY_LEGAL_INFO } from '../../data/companyInfo'
+import LogoEMR from '../../../assets/logo_emr_internacional.svg'
+import { COMPANY_LEGAL_INFO } from '../../../data/companyInfo'
 import { QuickLinks, SocialLinks } from './FooterSections'
 
 const BrandSection: React.FC = memo(() => {
@@ -26,13 +26,13 @@ BrandSection.displayName = 'BrandSection'
 
 const ContactSection: React.FC = memo(() => {
   return (
-    <div className='flex flex-col items-center md:items-start'>
+    <div className='flex flex-col items-start'>
       <h3 className='text-lg font-semibold mb-4 text-white'>Contato</h3>
       <p className='text-gray-400 text-sm mb-6'>
         Fale conosco pelas redes sociais
       </p>
       <SocialLinks />
-      <div className='mt-6 pt-6 border-t border-gray-800 w-full flex flex-col items-center'>
+      <div className='mt-6 pt-6 border-t border-gray-800 w-full flex flex-col items-start'>
         <p className='text-gray-400 text-sm mb-1'>Atendimento</p>
         <p className='text-white font-medium'>Segunda a Sexta</p>
         <p className='text-gray-400 text-sm'>8h às 18h</p>

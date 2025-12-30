@@ -3,8 +3,8 @@ import React, { memo } from 'react'
 import {
   useScreenReaderAnnouncement,
   useUniqueId,
-} from '../../hooks/useAccessibility'
-import { AccessibleLink } from '../ui/Accessibility'
+} from '../../../hooks/useAccessibility'
+import { AccessibleLink } from '../../ui/Accessibility'
 
 interface SocialLinkData {
   name: string
