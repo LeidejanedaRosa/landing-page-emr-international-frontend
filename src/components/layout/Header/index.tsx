@@ -57,6 +57,7 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
     'about',
     'certifications',
     'courses',
+    'testimonials',
     'contact',
   ])
   const headerId = useUniqueId('main-header')
@@ -71,6 +72,7 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
         about: 'Sobre',
         certifications: 'Certificações',
         courses: 'Cursos',
+        testimonials: 'Depoimentos',
         contact: 'Contato',
       }
       const sectionName =

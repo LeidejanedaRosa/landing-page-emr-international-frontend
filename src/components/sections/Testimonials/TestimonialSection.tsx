@@ -71,6 +71,8 @@ const TestimonialSection = memo(() => {
 
   return (
     <section
+      id='testimonials'
+      data-section='testimonials'
       className='min-h-svh flex flex-col justify-center bg-gradient-to-b from-primary-950 via-primary-900 to-cta-700 py-12 md:py-20 px-4 sm:px-6 lg:px-8'
       aria-labelledby='testimonials-heading'
       aria-roledescription={TESTIMONIALS_A11Y.roleDescription}

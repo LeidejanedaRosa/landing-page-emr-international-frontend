@@ -39,6 +39,15 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
           Cursos
         </AccessibleLink>
         <AccessibleLink
+          href='#testimonials'
+          className='block px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
+          variant='ghost'
+          ariaCurrent={currentSection === 'testimonials' ? 'page' : undefined}
+          onClick={onLinkClick}
+        >
+          Depoimentos
+        </AccessibleLink>
+        <AccessibleLink
           href='#contact'
           className='block px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'

@@ -43,6 +43,12 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
       ariaLabel: 'Navegar para seção Cursos - Nossos cursos especializados',
     },
     {
+      id: 'testimonials',
+      href: '#testimonials',
+      label: 'Depoimentos',
+      ariaLabel: 'Navegar para seção Depoimentos - O que dizem nossos alunos',
+    },
+    {
       id: 'contact',
       href: '#contact',
       label: 'Contato',
