@@ -70,7 +70,6 @@ src/
 
 - **Always use custom accessibility components**: `AccessibleButton`, `AccessibleLink`, `SkipLink`, `MainContent`
 - **Navigation pattern**: Use `useCurrentSection` hook with `aria-current="page"` for active states
-- **Form pattern**: Forms use `useContactForm` hook with built-in validation and error handling
 - **Screen reader support**: All interactive elements have proper ARIA labels and live regions
 - **Keyboard Navigation**: Tab order, focus management, escape key handling, arrow key navigation where appropriate
 
@@ -126,12 +125,6 @@ src/
 - **Components**: `DesktopLayout` (hidden on mobile), `MobileTabletCarousel` (responsive)
 - **Accessibility**: Full keyboard navigation, screen reader announcements, reduced motion support
 - **Styling**: Custom CSS in `HeroCarousel.css` with media queries
-
-### Form Handling
-
-- **Hook**: `useContactForm` provides validation, loading states, error handling
-- **Pattern**: Controlled inputs with `updateField` callback, form submission with `handleSubmit`
-- **Validation**: Built-in email/required field validation with user-friendly error messages
 
 ### Navigation System
 

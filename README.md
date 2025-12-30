@@ -122,13 +122,12 @@ src/
 │   │   ├── About.tsx
 │   │   ├── Certifications/
 │   │   ├── Courses.tsx
-│   │   └── Contact.tsx
+│   │   ├── Testimonials/
+│   │   └── CallToAction.tsx
 │   └── ...
 ├── hooks/
 │   ├── useCurrentSection.ts
 │   ├── useAccessibility.ts
-│   ├── form/
-│   │   └── useContactForm.ts
 │   └── useAboutData.ts
 ├── data/
 │   └── companyInfo.ts
@@ -208,43 +207,6 @@ function FormField() {
       <label htmlFor={id}>Nome</label>
       <input id={id} type="text" />
     </>
-  )
-}
-```
-
-### Hooks de Formulário
-
-#### `useContactForm()`
-
-Gerencia estado completo do formulário de contato com validação.
-
-```typescript
-import { useContactForm } from './hooks/form/useContactForm'
-
-function ContactForm() {
-  const {
-    formData,
-    isLoading,
-    isSuccess,
-    error,
-    updateField,
-    handleSubmit,
-    reset
-  } = useContactForm()
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        value={formData.name}
-        onChange={(e) => updateField('name', e.target.value)}
-      />
-      {/* mais campos... */}
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? 'Enviando...' : 'Enviar'}
-      </button>
-      {error && <p role="alert">{error}</p>}
-      {isSuccess && <p role="status">Mensagem enviada com sucesso!</p>}
-    </form>
   )
 }
 ```
