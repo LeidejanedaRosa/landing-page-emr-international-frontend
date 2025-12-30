@@ -7,7 +7,13 @@ import { QuickLinks, SocialLinks } from './FooterSections'
 const BrandSection: React.FC = memo(() => {
   return (
     <div className='flex flex-col items-center'>
-      <img src={LogoEMR} alt='EMR Internacional' className='h-32 w-auto mb-4' />
+      <img
+        src={LogoEMR}
+        alt='EMR Internacional'
+        width='160'
+        height='128'
+        className='h-32 w-auto mb-4'
+      />
       <p className='text-cta-500 w-full bg-white px-6 py-4 rounded-xl font-bold text-xl uppercase tracking-wider mb-2 text-center'>
         Emergência 24-7, 360°
       </p>
