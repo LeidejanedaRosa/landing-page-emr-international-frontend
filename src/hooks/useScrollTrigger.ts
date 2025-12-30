@@ -11,7 +11,12 @@ export function useScrollTrigger({
   storageKey,
   enabled = true,
 }: UseScrollTriggerOptions) {
-  const [hasTriggered, setHasTriggered] = useState(false)
+  const [hasTriggered, setHasTriggered] = useState(() => {
+    if (storageKey && typeof sessionStorage !== 'undefined') {
+      return sessionStorage.getItem(storageKey) === 'true'
+    }
+    return false
+  })
   const observerRef = useRef<IntersectionObserver | null>(null)
 
   const resetTrigger = useCallback(() => {
