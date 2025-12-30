@@ -5,7 +5,7 @@ import { Product } from '../components/sections/ProductsModal/types'
 
 export const productsData: Product[] = [
   {
-    id: 'tourniquete',
+    id: 'tourniquet',
     name: 'Torniquete Tático',
     description: 'Torniquete de uso profissional para controle de hemorragias',
     price: 'Consulte',
