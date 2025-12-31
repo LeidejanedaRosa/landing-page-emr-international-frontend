@@ -186,13 +186,13 @@ const getVariantClasses = (
   const variantClasses = {
     primary: isCurrentPage
       ? 'text-primary-700 font-semibold'
-      : 'text-primary hover:text-primary-700',
+      : 'text-primary hover:text-gray-200',
     secondary: isCurrentPage
       ? 'text-gray-800 font-semibold'
       : 'text-gray-600 hover:text-gray-800',
     ghost: isCurrentPage
       ? 'text-white font-semibold'
-      : 'text-white hover:text-primary',
+      : 'text-white hover:text-gray-200',
   }
   return variantClasses[variant]
 }
