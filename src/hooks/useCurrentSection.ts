@@ -1,29 +1,48 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export const useCurrentSection = (sections: string[] = []) => {
   const [currentSection, setCurrentSection] = useState<string>('')
+  const rafIdRef = useRef<number | null>(null)
+  const elementsRef = useRef<Map<string, HTMLElement>>(new Map())
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100
+    // Cache dos elementos para evitar queries repetidas no DOM
+    elementsRef.current.clear()
+    for (const section of sections) {
+      const element = document.querySelector(
+        `[data-section="${CSS.escape(section)}"]`
+      ) as HTMLElement | null
+      if (element) {
+        elementsRef.current.set(section, element)
+      }
+    }
 
-      for (const section of sections) {
-        const element = document.querySelector(
-          `[data-section="${CSS.escape(section)}"]`
-        )
-        if (element) {
-          const { offsetTop, offsetHeight } = element as HTMLElement
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setCurrentSection(section)
-            return
-          }
-        }
+    const handleScroll = () => {
+      // Cancela frame anterior para evitar acúmulo
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current)
       }
 
-      setCurrentSection('')
+      // Usa requestAnimationFrame para throttling natural
+      rafIdRef.current = requestAnimationFrame(() => {
+        const scrollPosition = window.scrollY + 100
+
+        for (const section of sections) {
+          const element = elementsRef.current.get(section)
+          if (element) {
+            const { offsetTop, offsetHeight } = element
+            if (
+              scrollPosition >= offsetTop &&
+              scrollPosition < offsetTop + offsetHeight
+            ) {
+              setCurrentSection(prev => (prev !== section ? section : prev))
+              return
+            }
+          }
+        }
+
+        setCurrentSection(prev => (prev !== '' ? '' : prev))
+      })
     }
 
     handleScroll()
@@ -32,6 +51,9 @@ export const useCurrentSection = (sections: string[] = []) => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current)
+      }
     }
   }, [sections])
 
