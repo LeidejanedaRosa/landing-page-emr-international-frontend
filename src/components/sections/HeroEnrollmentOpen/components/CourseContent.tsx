@@ -39,7 +39,7 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
 
     return (
       <div className='absolute inset-x-0 bottom-0 px-6 pb-8 md:px-10 md:pb-12 lg:px-16 lg:pb-16 xl:px-20 xl:pb-20'>
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-screen-2xl mx-auto'>
           <div className='flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-8'>
             <div className='flex-1 min-w-0 lg:max-w-[calc(100%-160px)] xl:max-w-3xl'>
               <span

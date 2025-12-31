@@ -38,7 +38,7 @@ export const CarouselContainer = memo<CarouselContainerProps>(
         <CarouselHeader />
 
         <div
-          className='flex-1 relative overflow-hidden'
+          className='flex-1 relative overflow-hidden max-w-screen-2xl mx-auto'
           onMouseEnter={onPause}
           onMouseLeave={onResume}
           onFocus={onPause}

@@ -14,6 +14,7 @@ const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
 
 interface CourseSlideProps {
   course: CourseData
+  isActive?: boolean
 }
 
 interface SlideContentProps {
@@ -21,10 +22,11 @@ interface SlideContentProps {
   colors: (typeof ACCENT_COLORS)[keyof typeof ACCENT_COLORS]
   prefersReducedMotion: boolean
   whatsappUrl: string
+  priority?: boolean
 }
 
 const MobileSlideContent = memo<SlideContentProps>(
-  ({ course, colors, prefersReducedMotion, whatsappUrl }) => (
+  ({ course, colors, prefersReducedMotion, whatsappUrl, priority }) => (
     <>
       <div className='relative h-[45%] lg:hidden'>
         <CourseImage
@@ -33,6 +35,7 @@ const MobileSlideContent = memo<SlideContentProps>(
           imageJpg={course.imageJpg}
           title={course.title}
           subtitle={course.subtitle}
+          priority={priority}
         />
         <div
           className='absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent'
@@ -87,7 +90,7 @@ const MobileSlideContent = memo<SlideContentProps>(
 MobileSlideContent.displayName = 'MobileSlideContent'
 
 const DesktopSlideContent = memo<SlideContentProps>(
-  ({ course, colors, prefersReducedMotion, whatsappUrl }) => (
+  ({ course, colors, prefersReducedMotion, whatsappUrl, priority }) => (
     <div className='hidden lg:block absolute inset-0'>
       <CourseImage
         imageAvif={course.imageAvif}
@@ -95,6 +98,7 @@ const DesktopSlideContent = memo<SlideContentProps>(
         imageJpg={course.imageJpg}
         title={course.title}
         subtitle={course.subtitle}
+        priority={priority}
       />
       <div
         className='absolute inset-0 bg-gradient-to-t from-black via-black/60 via-35% to-transparent'
@@ -106,7 +110,7 @@ const DesktopSlideContent = memo<SlideContentProps>(
       />
 
       <div className='absolute inset-x-0 bottom-0 px-16 pb-16 xl:px-20 xl:pb-20'>
-        <div className='max-w-7xl mx-auto'>
+        <div className='max-w-screen-2xl mx-auto'>
           <div className='flex flex-row items-end justify-between gap-8'>
             <div className='flex-1 min-w-0 max-w-3xl'>
               <span
@@ -150,33 +154,37 @@ const DesktopSlideContent = memo<SlideContentProps>(
 
 DesktopSlideContent.displayName = 'DesktopSlideContent'
 
-export const CourseSlide = memo<CourseSlideProps>(({ course }) => {
-  const { prefersReducedMotion } = useAccessibilityPreferences()
-  const colors = ACCENT_COLORS[course.accentColor]
-  const whatsappMessage = encodeURIComponent(
-    `Olá! Tenho interesse no curso ${course.title}. Gostaria de mais informações.`
-  )
-  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${whatsappMessage}`
+export const CourseSlide = memo<CourseSlideProps>(
+  ({ course, isActive = false }) => {
+    const { prefersReducedMotion } = useAccessibilityPreferences()
+    const colors = ACCENT_COLORS[course.accentColor]
+    const whatsappMessage = encodeURIComponent(
+      `Olá! Tenho interesse no curso ${course.title}. Gostaria de mais informações.`
+    )
+    const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${whatsappMessage}`
 
-  return (
-    <article
-      className='relative w-full h-full bg-black overflow-hidden flex flex-col lg:block'
-      aria-label={`Curso ${course.title}: ${course.subtitle}`}
-    >
-      <MobileSlideContent
-        course={course}
-        colors={colors}
-        prefersReducedMotion={prefersReducedMotion}
-        whatsappUrl={whatsappUrl}
-      />
-      <DesktopSlideContent
-        course={course}
-        colors={colors}
-        prefersReducedMotion={prefersReducedMotion}
-        whatsappUrl={whatsappUrl}
-      />
-    </article>
-  )
-})
+    return (
+      <article
+        className='relative w-full h-full bg-black overflow-hidden flex flex-col lg:block'
+        aria-label={`Curso ${course.title}: ${course.subtitle}`}
+      >
+        <MobileSlideContent
+          course={course}
+          colors={colors}
+          prefersReducedMotion={prefersReducedMotion}
+          whatsappUrl={whatsappUrl}
+          priority={isActive}
+        />
+        <DesktopSlideContent
+          course={course}
+          colors={colors}
+          prefersReducedMotion={prefersReducedMotion}
+          whatsappUrl={whatsappUrl}
+          priority={isActive}
+        />
+      </article>
+    )
+  }
+)
 
 CourseSlide.displayName = 'CourseSlide'

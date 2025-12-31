@@ -359,7 +359,7 @@ const WhyItMattersSection: React.FC = memo(() => {
         </div>
       </div>
 
-      <div className='max-w-7xl mx-auto relative z-10 flex flex-col w-full items-center'>
+      <div className='max-w-screen-2xl mx-auto relative z-10 flex flex-col w-full items-center'>
         <SectionHeader titleId={titleId} subtitleId={subtitleId} />
 
         <TabSwitcher

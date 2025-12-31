@@ -107,7 +107,7 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
       <header id={headerId} className={`p-4 ${className}`} role='banner'>
         <nav
           id={navId}
-          className='max-w-7xl mx-auto'
+          className='max-w-screen-2xl mx-auto'
           role='navigation'
           aria-label='Navegação principal'
         >

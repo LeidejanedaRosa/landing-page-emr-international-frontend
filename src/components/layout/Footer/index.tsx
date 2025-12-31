@@ -80,7 +80,7 @@ const Footer: React.FC = memo(() => {
       role='contentinfo'
       aria-label='Rodapé do site com informações da empresa e links úteis'
     >
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr_1fr] gap-8 lg:gap-12 mb-12 items-end'>
           <BrandSection />
           <div className='grid grid-cols-2 md:contents'>

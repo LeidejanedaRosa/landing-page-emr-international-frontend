@@ -128,7 +128,7 @@ const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
     isAutoPlaying,
     autoPlayDelay,
   }) => (
-    <div className='w-full max-w-7xl mx-auto'>
+    <div className='w-full max-w-screen-2xl mx-auto'>
       <header className='text-center mb-8 md:mb-16'>
         <h2
           id='testimonials-heading'

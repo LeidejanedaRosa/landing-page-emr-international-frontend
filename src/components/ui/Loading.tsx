@@ -43,7 +43,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
 const SectionSkeleton: React.FC = () => (
   <div className='py-24 bg-gray-50'>
-    <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+    <div className='max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='animate-pulse'>
         <div className='h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8' />
         <div className='h-4 bg-gray-200 rounded w-2/3 mx-auto mb-12' />
