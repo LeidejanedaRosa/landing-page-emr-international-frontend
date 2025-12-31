@@ -52,12 +52,10 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
                      group-hover:from-black/95 group-hover:via-black/70 transition-all duration-700 ease-out'
           aria-hidden='true'
         />
-
         <EnrollmentBadge
           accentColor={accentColor}
           prefersReducedMotion={prefersReducedMotion}
         />
-
         <CourseContent
           title={title}
           subtitle={subtitle}

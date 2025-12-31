@@ -40,8 +40,8 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
     return (
       <div className='absolute inset-x-0 bottom-0 px-6 pb-8 md:px-10 md:pb-12 lg:px-16 lg:pb-16 xl:px-20 xl:pb-20'>
         <div className='max-w-7xl mx-auto'>
-          <div className='flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8'>
-            <div className='flex-1 min-w-0 max-w-3xl'>
+          <div className='flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-8'>
+            <div className='flex-1 min-w-0 lg:max-w-[calc(100%-160px)] xl:max-w-3xl'>
               <span
                 className={`inline-block px-4 py-2 mb-5 md:mb-6 rounded-md ${colors.badgeAlpha} backdrop-blur-sm text-sm md:text-base font-bold uppercase tracking-wide text-white shadow-lg`}
               >
@@ -68,6 +68,15 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
                 {ctaLabel} →
               </a>
             </div>
+
+            <CourseDateBox
+              date={date}
+              month={month}
+              monthNumber={monthNumber}
+              year={year}
+              accentColor={accentColor}
+              isMobile
+            />
 
             <CourseDateBox
               date={date}
