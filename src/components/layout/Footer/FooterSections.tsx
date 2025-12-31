@@ -136,6 +136,7 @@ export const QuickLinks: React.FC = memo(() => {
       href: '#contact',
       label: 'Contato',
       ariaLabel: 'Navegar para seção de contato',
+      disable: true,
     },
   ]
 
@@ -157,15 +158,24 @@ export const QuickLinks: React.FC = memo(() => {
       <ul className='space-y-3' role='list'>
         {links.map((link, index) => (
           <li key={`${link.href}-${index}`} role='listitem'>
-            <AccessibleLink
-              href={link.href}
-              variant='ghost'
-              className='text-gray-300 hover:text-cta-400 transition-colors duration-200'
-              aria-label={link.ariaLabel}
-              onClick={() => handleLinkClick(link.label)}
-            >
-              {link.label}
-            </AccessibleLink>
+            {link.disable ? (
+              <span
+                className='text-gray-500 cursor-not-allowed'
+                aria-disabled='true'
+              >
+                {link.label}
+              </span>
+            ) : (
+              <AccessibleLink
+                href={link.href}
+                variant='ghost'
+                className='text-gray-300 hover:text-cta-400 transition-colors duration-200'
+                aria-label={link.ariaLabel}
+                onClick={() => handleLinkClick(link.label)}
+              >
+                {link.label}
+              </AccessibleLink>
+            )}
           </li>
         ))}
       </ul>
