@@ -49,7 +49,7 @@ export const SlidesTrack = memo<SlidesTrackProps>(({ currentSlide }) => {
             aria-hidden={!isActive}
             tabIndex={isActive ? 0 : -1}
           >
-            <CourseSlide course={course} />
+            <CourseSlide course={course} isActive={isActive} />
           </div>
         )
       })}
