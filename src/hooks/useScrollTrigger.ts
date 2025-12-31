@@ -64,16 +64,20 @@ export function useScrollTrigger({
       return () => observerRef.current?.disconnect()
     }
 
-    // Polling simples ao invés de MutationObserver (mais leve para HMR)
+    let cancelled = false
     let attempts = 0
     const checkForElement = () => {
+      if (cancelled) return
       const section = document.getElementById(targetSectionId)
       if (section) return setupObserver(section)
-      if (++attempts < 10) setTimeout(checkForElement, 100)
+      if (++attempts < 10) {
+        setTimeout(checkForElement, 100)
+      }
     }
 
     const timeoutId = setTimeout(checkForElement, 100)
     return () => {
+      cancelled = true
       clearTimeout(timeoutId)
       observerRef.current?.disconnect()
     }
