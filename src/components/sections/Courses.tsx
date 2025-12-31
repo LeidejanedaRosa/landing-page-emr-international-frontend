@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import { ArrowRight, Award, Clock, Download, MapPin } from 'lucide-react'
 
 import { type Course, getCourses } from '../../data/coursesData'
@@ -45,7 +43,7 @@ const getVariantStyles = (variant: Course['variant']): CourseStyleConfig => {
   }
 }
 
-const CourseImage = memo(({ images }: CourseImageProps) => (
+const CourseImage = ({ images }: CourseImageProps) => (
   <picture className='w-full h-full'>
     <source
       srcSet={images.avif}
@@ -67,53 +65,49 @@ const CourseImage = memo(({ images }: CourseImageProps) => (
       height={600}
     />
   </picture>
-))
-
-CourseImage.displayName = 'CourseImage'
-
-const CourseMetadata = memo(
-  ({
-    duration,
-    certification,
-    icon,
-  }: {
-    duration: string
-    certification: string
-    icon: string
-  }) => (
-    <div className='flex flex-wrap gap-4 text-sm text-primary-300'>
-      <div className='flex items-center gap-1.5'>
-        <Clock className={`w-4 h-4 ${icon}`} aria-hidden='true' />
-        <span>{duration}</span>
-      </div>
-      <div className='flex items-center gap-1.5'>
-        <Award className={`w-4 h-4 ${icon}`} aria-hidden='true' />
-        <span>{certification}</span>
-      </div>
-    </div>
-  )
 )
 
-CourseMetadata.displayName = 'CourseMetadata'
-
-const CourseLocation = memo(
-  ({ location, icon }: { location: string; icon: string }) => (
-    <div className='flex items-start gap-2 text-sm text-primary-300'>
-      <MapPin
-        className={`w-4 h-4 flex-shrink-0 mt-0.5 ${icon}`}
-        aria-hidden='true'
-      />
-      <span>{location}</span>
+const CourseMetadata = ({
+  duration,
+  certification,
+  icon,
+}: {
+  duration: string
+  certification: string
+  icon: string
+}) => (
+  <div className='flex flex-wrap gap-4 text-sm text-primary-300'>
+    <div className='flex items-center gap-1.5'>
+      <Clock className={`w-4 h-4 ${icon}`} aria-hidden='true' />
+      <span>{duration}</span>
     </div>
-  )
+    <div className='flex items-center gap-1.5'>
+      <Award className={`w-4 h-4 ${icon}`} aria-hidden='true' />
+      <span>{certification}</span>
+    </div>
+  </div>
 )
 
-CourseLocation.displayName = 'CourseLocation'
+const CourseLocation = ({
+  location,
+  icon,
+}: {
+  location: string
+  icon: string
+}) => (
+  <div className='flex items-start gap-2 text-sm text-primary-300'>
+    <MapPin
+      className={`w-4 h-4 flex-shrink-0 mt-0.5 ${icon}`}
+      aria-hidden='true'
+    />
+    <span>{location}</span>
+  </div>
+)
 
 const WHATSAPP_NUMBER = '5519971575640'
 const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
 
-const CourseCard = memo(({ course }: CourseCardProps) => {
+const CourseCard = ({ course }: CourseCardProps) => {
   const {
     id,
     abbreviation,
@@ -191,11 +185,9 @@ const CourseCard = memo(({ course }: CourseCardProps) => {
       </div>
     </article>
   )
-})
+}
 
-CourseCard.displayName = 'CourseCard'
-
-const CoursesHeader = memo(({ titleId, descriptionId }: CoursesHeaderProps) => (
+const CoursesHeader = ({ titleId, descriptionId }: CoursesHeaderProps) => (
   <header className='text-center mb-12 md:mb-16'>
     <span className='text-cta-500 font-semibold tracking-wider uppercase text-sm mb-2 block'>
       Formação de Operadores de Emergência Tática e de Áreas Remotas
@@ -214,9 +206,7 @@ const CoursesHeader = memo(({ titleId, descriptionId }: CoursesHeaderProps) => (
       para quem atua na linha de frente.
     </p>
   </header>
-))
-
-CoursesHeader.displayName = 'CoursesHeader'
+)
 
 const Courses = () => {
   const titleId = useUniqueId('courses-title')
@@ -251,4 +241,4 @@ const Courses = () => {
   )
 }
 
-export default memo(Courses)
+export default Courses

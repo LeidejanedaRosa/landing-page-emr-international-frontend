@@ -1,8 +1,6 @@
-import { memo } from 'react'
-
 import { HERO_CONTENT, HERO_MAIN_TITLE_ID } from '../constants'
 
-export const HeroHeadline = memo(() => (
+export const HeroHeadline = () => (
   <h1
     id={HERO_MAIN_TITLE_ID}
     className='text-4xl sm:text-5xl xl:text-6xl font-black text-white leading-[0.95] tracking-tight uppercase'
@@ -14,6 +12,4 @@ export const HeroHeadline = memo(() => (
     </span>
     {HERO_CONTENT.headline.thirdLine}
   </h1>
-))
-
-HeroHeadline.displayName = 'HeroHeadline'
+)
