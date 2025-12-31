@@ -1,8 +1,5 @@
 import React, { forwardRef } from 'react'
 
-/**
- * Spinner de carregamento acessível
- */
 const LoadingSpinner = () => (
   <svg
     className='animate-spin h-4 w-4'
@@ -28,9 +25,6 @@ const LoadingSpinner = () => (
   </svg>
 )
 
-/**
- * Botão acessível com suporte completo a teclado
- */
 interface AccessibleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   variant?: 'primary' | 'secondary' | 'ghost'
