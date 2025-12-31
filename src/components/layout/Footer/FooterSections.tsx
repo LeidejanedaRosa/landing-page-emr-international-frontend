@@ -136,7 +136,7 @@ export const QuickLinks: React.FC = memo(() => {
       href: '#contact',
       label: 'Contato',
       ariaLabel: 'Navegar para seção de contato',
-      disable: true,
+      disabled: true,
     },
   ]
 
@@ -158,7 +158,7 @@ export const QuickLinks: React.FC = memo(() => {
       <ul className='space-y-3' role='list'>
         {links.map((link, index) => (
           <li key={`${link.href}-${index}`} role='listitem'>
-            {link.disable ? (
+            {link.disabled ? (
               <span
                 className='text-gray-500 cursor-not-allowed'
                 aria-disabled='true'
