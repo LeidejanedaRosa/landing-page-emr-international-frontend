@@ -72,7 +72,7 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
             <li key={item.id}>
               <AccessibleLink
                 href={item.href}
-                className={`text-white transition-colors duration-200 px-3 py-2 rounded-md text-lg font-medium focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
+                className={`text-white transition-colors duration-200 px-3 py-2 rounded-md text-lg font-medium  focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 ${
                   isCurrent
                     ? 'bg-white bg-opacity-20'
                     : 'hover:bg-white hover:bg-opacity-30'
