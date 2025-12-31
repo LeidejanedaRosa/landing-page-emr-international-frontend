@@ -1,6 +1,5 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-import { imagetools } from 'vite-imagetools'
 import { VitePWA } from 'vite-plugin-pwa'
 
 import { securityHeaders } from './src/plugins/security-headers'
@@ -8,20 +7,6 @@ import { securityHeaders } from './src/plugins/security-headers'
 export default defineConfig({
   plugins: [
     react(),
-    imagetools({
-      defaultDirectives: url => {
-        if (
-          url.searchParams.has('as') &&
-          url.searchParams.get('as') === 'srcset'
-        ) {
-          return new URLSearchParams({
-            format: url.searchParams.get('format') || 'avif;webp',
-            quality: '80',
-          })
-        }
-        return new URLSearchParams()
-      },
-    }),
     ...(process.env.NODE_ENV === 'production'
       ? [
           securityHeaders({
@@ -124,6 +109,9 @@ export default defineConfig({
         ]
       : []),
   ],
+  optimizeDeps: {
+    exclude: ['lucide-react'],
+  },
   server: {
     port: 3000,
     open: true,
