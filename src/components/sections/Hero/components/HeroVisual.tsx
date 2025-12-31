@@ -7,7 +7,7 @@ export const HeroVisual = memo<HeroVisualProps>(
   ({ images, alt = HERO_CONTENT.visual.alt, className = '' }) => {
     return (
       <div
-        className={`relative h-full w-full min-h-[400px] lg:min-h-[600px] group overflow-hidden rounded-sm lg:rounded-none ${className}`}
+        className={`relative h-full w-full min-h-[200px] sm:min-h-[250px] lg:min-h-0 group overflow-hidden rounded-sm lg:rounded-none ${className}`}
       >
         <picture>
           <source
@@ -28,7 +28,7 @@ export const HeroVisual = memo<HeroVisualProps>(
             loading='eager'
             decoding='async'
             fetchPriority='high'
-            className='absolute w-full h-full object-cover object-[center_30%] scale-90 transition-transform duration-700 group-hover:scale-105'
+            className='absolute w-full h-full object-cover object-[center_25%] lg:object-[center_30%] scale-100 transition-transform duration-700 group-hover:scale-105'
           />
         </picture>
 

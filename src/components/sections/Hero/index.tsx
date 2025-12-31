@@ -42,7 +42,7 @@ const Hero = memo<HeroProps>(({ onCtaClick, images, className = '' }) => {
   return (
     <section
       id={HERO_SECTION_ID}
-      className={`relative w-full min-h-screen bg-black overflow-hidden flex flex-col ${className}`}
+      className={`relative w-full min-h-fit xl:min-h-screen bg-black overflow-hidden flex flex-col ${className}`}
       aria-labelledby={headingId}
     >
       <ScreenReaderOnly>
@@ -73,7 +73,7 @@ const Hero = memo<HeroProps>(({ onCtaClick, images, className = '' }) => {
         </div>
 
         <aside
-          className='relative min-h-[250px] sm:min-h-[300px] h-auto lg:h-full w-full order-1 lg:order-2'
+          className='relative min-h-[200px] sm:min-h-[250px] h-auto lg:h-full w-full order-1 lg:order-2'
           aria-label={HERO_CONTENT.visual.ariaLabel}
         >
           <HeroVisual images={heroImages} alt={HERO_CONTENT.visual.alt} />

@@ -5,16 +5,6 @@ import { ShieldCheck } from 'lucide-react'
 import { HERO_CONTENT } from '../constants'
 import type { TrustBadgeProps } from '../types'
 
-/**
- * Trust Badge Component
- *
- * Displays certification badge with proper accessibility
- *
- * Clean Code principles:
- * - Single Responsibility: Only displays trust badge
- * - Semantic HTML: Uses div with proper ARIA attributes
- * - Accessibility: Icon marked as decorative, text is readable
- */
 export const TrustBadge = memo<TrustBadgeProps>(
   ({
     label = HERO_CONTENT.badge.label,
