@@ -1,6 +1,6 @@
 import placeholderImage1 from '../assets/testimonials/corpo-de-bombeiros.jpg'
 import placeholderImage2 from '../assets/testimonials/guia-turistico.jpg'
-import placeholderImage3 from '../assets/testimonials/mergulhadores.webp'
+import placeholderImage3 from '../assets/testimonials/mergulhadores.jpg'
 import { Product } from '../components/sections/ProductsModal/types'
 
 export const productsData: Product[] = [

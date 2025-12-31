@@ -1,7 +1,7 @@
 import CemiterioJpg from '../assets/testimonials/cemiterio.jpg'
 import CorpoDeBombeirosJpg from '../assets/testimonials/corpo-de-bombeiros.jpg'
 import GuiaTuristicoJpg from '../assets/testimonials/guia-turistico.jpg'
-import MergulhadoresJpg from '../assets/testimonials/mergulhadores.webp'
+import MergulhadoresJpg from '../assets/testimonials/mergulhadores.jpg'
 import MundakaAventuraJpg from '../assets/testimonials/mundaka-aventura.jpg'
 import PousadaJpg from '../assets/testimonials/pousada.jpg'
 import type { Testimonial } from '../components/sections/Testimonials/types'
