@@ -17,7 +17,8 @@ const InstructorMedia: React.FC = memo(() => {
           height={1280}
           className='w-full h-full object-cover grayscale'
           style={{ objectPosition: '40% center' }}
-          loading='lazy'
+          loading='eager'
+          fetchPriority='high'
           decoding='async'
         />
         <div className='absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-transparent via-transparent to-black lg:from-transparent lg:via-black/80 lg:to-black' />
