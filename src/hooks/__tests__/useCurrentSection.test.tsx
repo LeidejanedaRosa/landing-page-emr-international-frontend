@@ -57,6 +57,10 @@ describe('useCurrentSection', () => {
   beforeEach(() => {
     setupScrollMock()
     getScrollEventListener = setupScrollEventListener()
+    vi.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => {
+      cb(0)
+      return 0
+    })
   })
 
   afterEach(() => {
