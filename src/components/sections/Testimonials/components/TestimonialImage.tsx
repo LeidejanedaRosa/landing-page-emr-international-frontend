@@ -11,8 +11,8 @@ export const TestimonialImage = memo<TestimonialImageProps>(
   ({ images, showOverlay = true }) => (
     <div className='relative w-full h-full overflow-hidden'>
       <picture>
-        <source srcSet={images.avif} type='image/avif' />
-        <source srcSet={images.webp} type='image/webp' />
+        {images.avif && <source srcSet={images.avif} type='image/avif' />}
+        {images.webp && <source srcSet={images.webp} type='image/webp' />}
         <img
           src={images.jpg}
           alt={images.alt}

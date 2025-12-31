@@ -1,10 +1,6 @@
 import { memo, Suspense, useMemo } from 'react'
 
 import heroSideImageJpg from '../../../assets/hero_section_01.jpg'
-// @ts-expect-error - vite-imagetools directives
-import heroSideImageAvif from '../../../assets/hero_section_01.jpg?format=avif&w=640;768;1024;1280;1600&as=srcset'
-// @ts-expect-error - vite-imagetools directives
-import heroSideImageWebp from '../../../assets/hero_section_01.jpg?format=webp&w=640;768;1024;1280;1600&as=srcset'
 import Header from '../../layout/Header'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
 import PromoBannerCarousel from '../PromoBannerCarousel'
@@ -20,8 +16,6 @@ import { useHeroNavigation } from './hooks/useHeroNavigation'
 import type { HeroImages, HeroProps } from './types'
 
 const defaultHeroImages: HeroImages = {
-  avif: heroSideImageAvif,
-  webp: heroSideImageWebp,
   jpg: heroSideImageJpg,
 }
 
@@ -64,7 +58,7 @@ const Hero = memo<HeroProps>(({ onCtaClick, images, className = '' }) => {
         </Suspense>
       </div>
 
-      <div className='flex-1 grid lg:grid-cols-2 gap-0 relative'>
+      <div className='flex-1 grid lg:grid-cols-2 gap-0 relative max-w-screen-2xl mx-auto '>
         <div className='relative z-20 flex flex-col justify-center px-6 sm:px-12 lg:pl-24 lg:pr-12 py-12 lg:py-0 order-2 lg:order-1'>
           <TrustBadge />
           <HeroHeadline />

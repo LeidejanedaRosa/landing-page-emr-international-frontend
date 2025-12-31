@@ -1,6 +1,6 @@
 export interface HeroImages {
-  avif: string
-  webp: string
+  avif?: string
+  webp?: string
   jpg: string
 }
 

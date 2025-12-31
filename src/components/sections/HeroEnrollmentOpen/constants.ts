@@ -1,13 +1,5 @@
 import tmrImageJpg from '../../../assets/hero_section_TMR.jpg'
-// @ts-expect-error - vite-imagetools directives
-import tmrImageAvif from '../../../assets/hero_section_TMR.jpg?format=avif&w=640;768;1024;1280&quality=75&as=srcset'
-// @ts-expect-error - vite-imagetools directives
-import tmrImageWebp from '../../../assets/hero_section_TMR.jpg?format=webp&w=640;768;1024;1280&quality=80&as=srcset'
 import wmrImageJpg from '../../../assets/hero_section_WMR.jpg'
-// @ts-expect-error - vite-imagetools directives
-import wmrImageAvif from '../../../assets/hero_section_WMR.jpg?format=avif&w=640;768;1024;1280&quality=75&as=srcset'
-// @ts-expect-error - vite-imagetools directives
-import wmrImageWebp from '../../../assets/hero_section_WMR.jpg?format=webp&w=640;768;1024;1280&quality=80&as=srcset'
 import type { CourseData } from './types'
 
 export const COURSES_DATA: CourseData[] = [
@@ -19,8 +11,6 @@ export const COURSES_DATA: CourseData[] = [
     month: 'DEZ',
     monthNumber: '12',
     year: '2025',
-    imageAvif: tmrImageAvif,
-    imageWebp: tmrImageWebp,
     imageJpg: tmrImageJpg,
     accentColor: 'red',
     ctaLabel: 'INSCREVA-SE AGORA',
@@ -34,8 +24,6 @@ export const COURSES_DATA: CourseData[] = [
     month: 'MAR',
     monthNumber: '03',
     year: '2026',
-    imageAvif: wmrImageAvif,
-    imageWebp: wmrImageWebp,
     imageJpg: wmrImageJpg,
     accentColor: 'yellow',
     ctaLabel: 'INSCREVA-SE AGORA',

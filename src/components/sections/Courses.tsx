@@ -45,16 +45,20 @@ const getVariantStyles = (variant: Course['variant']): CourseStyleConfig => {
 
 const CourseImage = ({ images }: CourseImageProps) => (
   <picture className='w-full h-full'>
-    <source
-      srcSet={images.avif}
-      type='image/avif'
-      sizes='(max-width: 768px) 100vw, 50vw'
-    />
-    <source
-      srcSet={images.webp}
-      type='image/webp'
-      sizes='(max-width: 768px) 100vw, 50vw'
-    />
+    {images.avif && (
+      <source
+        srcSet={images.avif}
+        type='image/avif'
+        sizes='(max-width: 768px) 100vw, 50vw'
+      />
+    )}
+    {images.webp && (
+      <source
+        srcSet={images.webp}
+        type='image/webp'
+        sizes='(max-width: 768px) 100vw, 50vw'
+      />
+    )}
     <img
       src={images.jpg}
       alt={images.alt}
@@ -223,7 +227,7 @@ const Courses = () => {
     >
       <div className='absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary-800/20 via-primary-900 to-primary-900 pointer-events-none' />
 
-      <div className='relative max-w-7xl mx-auto w-full'>
+      <div className='relative max-w-screen-2xl mx-auto w-full'>
         <CoursesHeader titleId={titleId} descriptionId={descriptionId} />
 
         <ul

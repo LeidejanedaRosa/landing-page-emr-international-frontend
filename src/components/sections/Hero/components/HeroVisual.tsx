@@ -10,16 +10,20 @@ export const HeroVisual = memo<HeroVisualProps>(
         className={`relative h-full w-full min-h-[200px] sm:min-h-[250px] lg:min-h-0 group overflow-hidden rounded-sm lg:rounded-none ${className}`}
       >
         <picture>
-          <source
-            srcSet={images.avif}
-            type='image/avif'
-            sizes='(max-width: 768px) 100vw, 50vw'
-          />
-          <source
-            srcSet={images.webp}
-            type='image/webp'
-            sizes='(max-width: 768px) 100vw, 50vw'
-          />
+          {images.avif && (
+            <source
+              srcSet={images.avif}
+              type='image/avif'
+              sizes='(max-width: 768px) 100vw, 50vw'
+            />
+          )}
+          {images.webp && (
+            <source
+              srcSet={images.webp}
+              type='image/webp'
+              sizes='(max-width: 768px) 100vw, 50vw'
+            />
+          )}
           <img
             src={images.jpg}
             alt={alt}

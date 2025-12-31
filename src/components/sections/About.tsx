@@ -1,11 +1,6 @@
 import React, { memo } from 'react'
 
-// @ts-expect-error - vite-imagetools directives
-import FundoAboutAvif from '../../assets/fundo_about.jpg?format=avif&w=640;768;1024;1280;1920&as=srcset'
-// @ts-expect-error - vite-imagetools directives
-import FundoAboutJpg from '../../assets/fundo_about.jpg?format=jpg&w=1920&quality=85'
-// @ts-expect-error - vite-imagetools directives
-import FundoAboutWebp from '../../assets/fundo_about.jpg?format=webp&w=640;768;1024;1280;1920&as=srcset'
+import FundoAboutJpg from '../../assets/fundo_about.jpg'
 import { AccessibleButton } from '../ui/AccessibleButton'
 
 const InstructorMedia: React.FC = memo(() => {
@@ -15,21 +10,16 @@ const InstructorMedia: React.FC = memo(() => {
   return (
     <figure className='relative w-full h-full min-h-[inherit] overflow-hidden'>
       <div className='absolute inset-0 min-h-[inherit]'>
-        <picture className='block w-full h-full min-h-[inherit]'>
-          <source srcSet={FundoAboutAvif} type='image/avif' sizes='100vw' />
-          <source srcSet={FundoAboutWebp} type='image/webp' sizes='100vw' />
-          <img
-            src={FundoAboutJpg}
-            alt={instructorImageAlt}
-            width={1920}
-            height={1280}
-            className='w-full h-full object-cover grayscale'
-            style={{ objectPosition: '40% center' }}
-            loading='eager'
-            decoding='async'
-            fetchPriority='high'
-          />
-        </picture>
+        <img
+          src={FundoAboutJpg}
+          alt={instructorImageAlt}
+          width={1920}
+          height={1280}
+          className='w-full h-full object-cover grayscale'
+          style={{ objectPosition: '40% center' }}
+          loading='lazy'
+          decoding='async'
+        />
         <div className='absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-transparent via-transparent to-black lg:from-transparent lg:via-black/80 lg:to-black' />
       </div>
       <figcaption className='sr-only'>

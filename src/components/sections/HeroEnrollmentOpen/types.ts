@@ -5,8 +5,8 @@ export interface CourseCardProps {
   month: string
   monthNumber: string
   year: string
-  imageAvif: string
-  imageWebp: string
+  imageAvif?: string
+  imageWebp?: string
   imageJpg: string
   accentColor: 'red' | 'yellow'
   isHovered: boolean
@@ -26,8 +26,8 @@ export interface CourseData {
   month: string
   monthNumber: string
   year: string
-  imageAvif: string
-  imageWebp: string
+  imageAvif?: string
+  imageWebp?: string
   imageJpg: string
   accentColor: 'red' | 'yellow'
   ctaLabel: string

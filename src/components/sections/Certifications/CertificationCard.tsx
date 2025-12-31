@@ -1,6 +1,5 @@
 import React, { memo, useState } from 'react'
 
-import { OptimizedImage } from '../../ui/OptimizedImage'
 import { CertificationModal } from './CertificationModal'
 
 interface CertificationCardProps {
@@ -37,13 +36,14 @@ export const CertificationCard: React.FC<CertificationCardProps> = memo(
           aria-label={`Certificação ${name}`}
         >
           <figure className='w-full h-40 flex items-center justify-center mb-4 flex-shrink-0'>
-            <OptimizedImage
+            <img
               src={logo}
               alt={`Logo ${organization}`}
               width={300}
               height={160}
               className={`object-contain mx-auto ${isCTECC ? 'max-w-[60%] max-h-[70%]' : 'max-w-[80%] max-h-full'}`}
               loading={index < 4 ? 'eager' : 'lazy'}
+              decoding='async'
             />
           </figure>
           <div className='text-center flex-1 flex flex-col justify-between w-full'>

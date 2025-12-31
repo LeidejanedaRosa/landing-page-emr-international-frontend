@@ -1,10 +1,6 @@
 import { memo } from 'react'
 
 import heroSideImageJpg from '../../../../assets/hero_section_01.jpg'
-// @ts-expect-error - vite-imagetools directives
-import heroSideImageAvif from '../../../../assets/hero_section_01.jpg?format=avif&w=640;768;1024;1280;1600&as=srcset'
-// @ts-expect-error - vite-imagetools directives
-import heroSideImageWebp from '../../../../assets/hero_section_01.jpg?format=webp&w=640;768;1024;1280;1600&as=srcset'
 import { ScreenReaderOnly } from '../../../ui/Accessibility'
 import {
   HeroCTA,
@@ -18,8 +14,6 @@ import { useHeroNavigation } from '../../Hero/hooks/useHeroNavigation'
 import type { HeroImages } from '../../Hero/types'
 
 const heroImages: HeroImages = {
-  avif: heroSideImageAvif,
-  webp: heroSideImageWebp,
   jpg: heroSideImageJpg,
 }
 

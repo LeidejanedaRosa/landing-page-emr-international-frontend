@@ -2,8 +2,8 @@
 import type { KeyboardEvent, MutableRefObject } from 'react'
 
 export interface TestimonialImages {
-  avif: string
-  webp: string
+  avif?: string
+  webp?: string
   jpg: string
   alt: string
 }
