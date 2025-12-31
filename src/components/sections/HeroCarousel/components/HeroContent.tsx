@@ -43,7 +43,7 @@ export const HeroContent = memo<HeroContentProps>(({ className = '' }) => {
           <HeroVisual images={heroImages} alt={HERO_CONTENT.visual.alt} />
         </aside>
 
-        <div className='flex-1 lg:flex-none relative z-20 flex flex-col justify-center px-6 sm:px-12 lg:pl-24 lg:pr-12 pt-6 pb-14 sm:pb-16 lg:py-0 order-2 lg:order-1'>
+        <div className='flex-1 relative z-20 flex flex-col justify-center lg:justify-between px-6 sm:px-12 lg:pl-24 lg:pr-12 pt-6 pb-14 sm:pb-16 lg:py-16 order-2 lg:order-1'>
           <TrustBadge />
           <HeroHeadline />
           <HeroCTA onClick={scrollToCourses} />
