@@ -163,7 +163,7 @@ const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = memo(
           }}
           aria-hidden='true'
         >
-          {Array.from({ length: 8 }, (_, index) => (
+          {Array.from({ length: 20 }, (_, index) => (
             <React.Fragment key={index}>
               <div className='flex items-center justify-center px-8'>
                 <span className='text-black font-bold text-sm md:text-base lg:text-xs uppercase tracking-wider'>
