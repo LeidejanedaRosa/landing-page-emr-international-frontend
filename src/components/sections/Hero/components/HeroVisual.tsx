@@ -7,7 +7,7 @@ export const HeroVisual = memo<HeroVisualProps>(
   ({ images, alt = HERO_CONTENT.visual.alt, className = '' }) => {
     return (
       <div
-        className={`relative h-full w-full min-h-[200px] sm:min-h-[250px] lg:min-h-0 group overflow-hidden rounded-sm lg:rounded-none ${className}`}
+        className={`relative h-full w-full min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-0 group overflow-hidden rounded-sm lg:rounded-none ${className}`}
       >
         <picture>
           {images.avif && (
@@ -42,16 +42,16 @@ export const HeroVisual = memo<HeroVisualProps>(
         />
 
         <div
-          className='absolute bottom-6 right-6 lg:bottom-10 lg:right-10'
+          className='absolute bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-10 lg:right-10'
           role='status'
           aria-label={HERO_CONTENT.visual.badge.ariaLabel}
         >
-          <div className='bg-black/80 backdrop-blur-md border border-red-900/30 px-4 py-2 rounded flex items-center gap-2 shadow-2xl'>
+          <div className='bg-black/80 backdrop-blur-md border border-red-900/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded flex items-center gap-1.5 sm:gap-2 shadow-2xl'>
             <div
-              className='w-2 h-2 bg-red-500 rounded-full animate-pulse'
+              className='w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-500 rounded-full animate-pulse'
               aria-hidden='true'
             />
-            <span className='text-white text-xs font-bold tracking-widest uppercase'>
+            <span className='text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase'>
               {HERO_CONTENT.visual.badge.label}
             </span>
           </div>

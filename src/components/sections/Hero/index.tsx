@@ -1,10 +1,8 @@
-import { memo, Suspense, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 
 import heroSideImageJpg from '../../../assets/hero_section_01.jpg'
 import heroSideImageWebp from '../../../assets/hero_section_01.webp'
-import Header from '../../layout/Header'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
-import PromoBannerCarousel from '../PromoBannerCarousel'
 import {
   HeroCTA,
   HeroHeadline,
@@ -36,51 +34,35 @@ const Hero = memo<HeroProps>(({ onCtaClick, images, className = '' }) => {
   const headingId = `${HERO_SECTION_ID}-heading`
 
   return (
-    <section
-      id={HERO_SECTION_ID}
-      className={`relative w-full min-h-fit xl:min-h-screen bg-black overflow-hidden flex flex-col ${className}`}
-      aria-labelledby={headingId}
+    <div
+      className={`relative w-full h-full bg-black flex flex-col ${className}`}
     >
       <ScreenReaderOnly>
         <h2 id={headingId}>{HERO_CONTENT.seo.title}</h2>
         <p>{HERO_CONTENT.seo.contextDescription}</p>
       </ScreenReaderOnly>
 
-      <div className='flex-none'>
-        <Suspense
-          fallback={<div className='h-16 bg-black/20' aria-hidden='true' />}
+      <div className='flex-1 flex flex-col md:grid md:grid-cols-2 gap-0 relative w-full overflow-hidden'>
+        <aside
+          className='relative h-[40%] md:h-full w-full order-1 md:order-2'
+          aria-label={HERO_CONTENT.visual.ariaLabel}
         >
-          <Header className='bg-transparent shadow-none' />
-        </Suspense>
+          <HeroVisual images={heroImages} alt={HERO_CONTENT.visual.alt} />
+        </aside>
 
-        <Suspense
-          fallback={<div className='h-12 bg-black/10' aria-hidden='true' />}
-        >
-          <PromoBannerCarousel />
-        </Suspense>
-      </div>
-
-      <div className='flex-1 grid lg:grid-cols-2 gap-0 relative max-w-screen-2xl mx-auto w-full h-full'>
-        <div className='relative z-20 flex flex-col justify-center lg:justify-between px-6 sm:px-12 lg:pl-24 lg:pr-12 py-12 lg:py-16 order-2 lg:order-1'>
+        <div className='flex-1 relative z-20 flex flex-col justify-center md:justify-between px-6 sm:px-8 md:px-10 lg:pl-24 lg:pr-12 pt-4 pb-4 sm:pb-6 md:py-12 lg:py-16 order-2 md:order-1 overflow-hidden'>
           <TrustBadge />
           <HeroHeadline />
           <HeroCTA onClick={handleCtaClick} />
           <SocialProof />
         </div>
-
-        <aside
-          className='relative min-h-[200px] sm:min-h-[250px] h-auto lg:h-full w-full order-1 lg:order-2'
-          aria-label={HERO_CONTENT.visual.ariaLabel}
-        >
-          <HeroVisual images={heroImages} alt={HERO_CONTENT.visual.alt} />
-        </aside>
       </div>
 
       <ScreenReaderOnly>
         <h3>{HERO_CONTENT.about.title}</h3>
         <p>{HERO_CONTENT.about.description}</p>
       </ScreenReaderOnly>
-    </section>
+    </div>
   )
 })
 

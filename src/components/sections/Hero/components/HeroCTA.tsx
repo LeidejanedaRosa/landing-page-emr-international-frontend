@@ -27,15 +27,15 @@ export const HeroCTA = memo<HeroCTAProps>(
     text = HERO_CONTENT.cta.text,
     ariaLabel = HERO_CONTENT.cta.ariaLabel,
   }) => (
-    <div className='mt-8'>
+    <div className='mt-6 sm:mt-8'>
       <AccessibleButton
         onClick={onClick}
         aria-label={ariaLabel}
-        className='group relative inline-flex items-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-lg rounded-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] uppercase tracking-wide overflow-hidden'
+        className='group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-base sm:text-lg rounded-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] uppercase tracking-wide overflow-hidden w-full sm:w-auto'
       >
         <span className='relative z-10'>{text}</span>
         <ArrowRight
-          className='w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1'
+          className='w-4 h-4 sm:w-5 sm:h-5 relative z-10 transition-transform group-hover:translate-x-1'
           aria-hidden='true'
         />
 
