@@ -28,7 +28,7 @@ const CarouselNavigation: React.FC<CarouselNavigationProps> = memo(
       <>
         <button
           onClick={onPrevious}
-          className='absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 lg:-translate-x-16 text-black hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors bg-transparent border-0 cursor-pointer p-0'
+          className='hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 text-black hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors bg-transparent border-0 cursor-pointer p-0'
           aria-label='Certificação anterior'
         >
           <svg
@@ -55,7 +55,7 @@ const CarouselNavigation: React.FC<CarouselNavigationProps> = memo(
 
         <button
           onClick={onNext}
-          className='absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 lg:translate-x-16 text-black hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors bg-transparent border-0 cursor-pointer p-0'
+          className='hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 text-black hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors bg-transparent border-0 cursor-pointer p-0'
           aria-label='Próxima certificação'
         >
           <svg
@@ -367,12 +367,15 @@ const Certifications: React.FC = () => {
   ]
 
   const showNavigation = hasMultiplePages
-  const realCurrentIndex =
-    currentIndex === 0
-      ? certifications.length - 1
-      : currentIndex === certifications.length + 1
-        ? 0
-        : currentIndex - 1
+  const totalSlides = maxIndex + 1
+
+  const getRealIndex = (index: number): number => {
+    if (index === 0) return maxIndex
+    if (index > maxIndex + 1) return 0
+    return (((index - 1) % totalSlides) + totalSlides) % totalSlides
+  }
+
+  const realCurrentIndex = getRealIndex(currentIndex)
 
   return (
     <CertificationsSectionContent
@@ -386,7 +389,7 @@ const Certifications: React.FC = () => {
       handlePrevious={handlePrevious}
       handleNext={handleNext}
       realCurrentIndex={realCurrentIndex}
-      totalItems={certifications.length}
+      totalItems={totalSlides}
       handleGoToSlide={handleGoToSlide}
     />
   )
