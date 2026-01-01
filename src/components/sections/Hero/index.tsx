@@ -34,7 +34,8 @@ const Hero = memo<HeroProps>(({ onCtaClick, images, className = '' }) => {
   const headingId = `${HERO_SECTION_ID}-heading`
 
   return (
-    <div
+    <section
+      aria-labelledby={headingId}
       className={`relative w-full h-full bg-black flex flex-col ${className}`}
     >
       <ScreenReaderOnly>
@@ -62,7 +63,7 @@ const Hero = memo<HeroProps>(({ onCtaClick, images, className = '' }) => {
         <h3>{HERO_CONTENT.about.title}</h3>
         <p>{HERO_CONTENT.about.description}</p>
       </ScreenReaderOnly>
-    </div>
+    </section>
   )
 })
 
