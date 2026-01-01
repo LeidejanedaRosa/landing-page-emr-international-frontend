@@ -2,6 +2,8 @@ import React, { memo, useCallback, useEffect } from 'react'
 
 import { testimonials } from '../../../data/testimonialsData'
 import { useScreenReaderAnnouncement } from '../../../hooks/useAccessibility'
+import { useCarousel } from '../../../hooks/useCarousel'
+import { useIndicatorKeyboard } from '../../../hooks/useIndicatorKeyboard'
 import {
   TestimonialCard,
   TestimonialIndicators,
@@ -12,8 +14,6 @@ import {
   TESTIMONIALS_CONFIG,
   TESTIMONIALS_CONTENT,
 } from './constants'
-import { useIndicatorKeyboard } from './hooks/useIndicatorKeyboard'
-import { useTestimonialsCarousel } from './hooks/useTestimonialsCarousel'
 import type { TestimonialIndicatorsProps } from './types'
 
 const TestimonialSection = memo(() => {
@@ -28,8 +28,8 @@ const TestimonialSection = memo(() => {
     goToSlide,
     pauseAutoPlay,
     resumeAutoPlay,
-  } = useTestimonialsCarousel({
-    totalSlides,
+  } = useCarousel({
+    totalItems: totalSlides,
     autoPlayDelay: TESTIMONIALS_CONFIG.autoPlayDelay,
     enableAutoPlay: true,
   })

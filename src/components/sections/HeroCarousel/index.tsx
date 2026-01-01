@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useEffect, useMemo } from 'react'
 
 import { useScreenReaderAnnouncement } from '../../../hooks/useAccessibility'
+import { useCarousel } from '../../../hooks/useCarousel'
 import Hero from '../Hero'
 import { COURSES_DATA } from '../HeroEnrollmentOpen/constants'
 import { CarouselContainer } from './components'
@@ -10,7 +11,6 @@ import {
   HERO_CAROUSEL_A11Y,
   HERO_CAROUSEL_CONFIG,
 } from './constants'
-import { useHeroCarousel } from './hooks/useHeroCarousel'
 
 const HeroCarousel = memo(() => {
   const { announce } = useScreenReaderAnnouncement()
@@ -20,14 +20,14 @@ const HeroCarousel = memo(() => {
   const slideLabels = useMemo(() => getSlideLabels(), [])
 
   const {
-    currentSlide,
+    currentIndex: currentSlide,
     nextSlide,
     previousSlide,
     goToSlide,
     pauseAutoPlay,
     resumeAutoPlay,
-  } = useHeroCarousel({
-    totalSlides,
+  } = useCarousel({
+    totalItems: totalSlides,
     autoPlayDelay: HERO_CAROUSEL_CONFIG.autoPlayDelay,
     enableAutoPlay: hasOpenEnrollment,
   })

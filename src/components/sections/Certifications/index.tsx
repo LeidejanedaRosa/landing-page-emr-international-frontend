@@ -8,9 +8,10 @@ import {
   useAccessibilityPreferences,
   useScreenReaderAnnouncement,
 } from '../../../hooks/useAccessibility'
+import { useCarousel } from '../../../hooks/useCarousel'
+import { useResponsiveItems } from '../../../hooks/useResponsiveItems'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
 import { CertificationCard } from './CertificationCard'
-import { useCertificationsCarousel } from './hooks/useCertificationsCarousel'
 
 CertificationCard.displayName = 'CertificationCard'
 
@@ -319,9 +320,10 @@ const Certifications: React.FC = () => {
   const { announce } = useScreenReaderAnnouncement()
   const hasAnnouncedAutoPlayRef = useRef(false)
 
+  const itemsVisible = useResponsiveItems({ mobile: 1, tablet: 2, desktop: 4 })
+
   const {
     currentIndex,
-    itemsVisible,
     maxIndex,
     hasMultiplePages,
     isTransitioning,
@@ -330,11 +332,12 @@ const Certifications: React.FC = () => {
     goToSlide,
     pauseAutoPlay,
     resumeAutoPlay,
-  } = useCertificationsCarousel({
+  } = useCarousel({
     totalItems: certifications.length,
     enableAutoPlay: !prefersReducedMotion,
     autoPlayDelay: 4000,
-    itemsPerView: { mobile: 1, tablet: 2, desktop: 4 },
+    infiniteLoop: true,
+    itemsVisible,
   })
 
   useEffect(() => {
