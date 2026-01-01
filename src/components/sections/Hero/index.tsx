@@ -1,6 +1,7 @@
 import { memo, Suspense, useMemo } from 'react'
 
 import heroSideImageJpg from '../../../assets/hero_section_01.jpg'
+import heroSideImageWebp from '../../../assets/hero_section_01.webp'
 import Header from '../../layout/Header'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
 import PromoBannerCarousel from '../PromoBannerCarousel'
@@ -17,6 +18,7 @@ import type { HeroImages, HeroProps } from './types'
 
 const defaultHeroImages: HeroImages = {
   jpg: heroSideImageJpg,
+  webp: heroSideImageWebp,
 }
 
 const Hero = memo<HeroProps>(({ onCtaClick, images, className = '' }) => {
