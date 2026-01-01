@@ -1,8 +1,10 @@
 import CemiterioJpg from '../assets/testimonials/cemiterio.jpg'
 import CorpoDeBombeirosJpg from '../assets/testimonials/corpo-de-bombeiros.jpg'
+import CorpoDeBombeirosWebp from '../assets/testimonials/corpo-de-bombeiros.webp'
 import GuiaTuristicoJpg from '../assets/testimonials/guia-turistico.jpg'
 import MergulhadoresJpg from '../assets/testimonials/mergulhadores.jpg'
 import MundakaAventuraJpg from '../assets/testimonials/mundaka-aventura.jpg'
+import MundakaAventuraWebp from '../assets/testimonials/mundaka-aventura.webp'
 import PousadaJpg from '../assets/testimonials/pousada.jpg'
 import type { Testimonial } from '../components/sections/Testimonials/types'
 
@@ -49,6 +51,7 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     images: {
       jpg: MundakaAventuraJpg,
+      webp: MundakaAventuraWebp,
       alt: 'Foto de Roberto M.',
     },
   },
@@ -79,6 +82,7 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     images: {
       jpg: CorpoDeBombeirosJpg,
+      webp: CorpoDeBombeirosWebp,
       alt: 'Foto de Tenente João C.',
     },
   },
@@ -134,6 +138,7 @@ export const testimonials: Testimonial[] = [
     companyName: 'SAMU - São Paulo',
     images: {
       jpg: CorpoDeBombeirosJpg,
+      webp: CorpoDeBombeirosWebp,
       alt: 'Equipe do SAMU em treinamento tático',
     },
   },
