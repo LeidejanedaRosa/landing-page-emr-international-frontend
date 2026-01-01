@@ -12,16 +12,15 @@ const getItemsForViewport = (width: number, itemsPerView: ItemsPerView) => {
   return itemsPerView.desktop
 }
 
-/**
- * Hook para calcular quantidade de items visíveis baseado no viewport
- * Breakpoints: < 768px (mobile), < 1024px (tablet), >= 1024px (desktop)
- */
 export const useResponsiveItems = (
   itemsPerView: ItemsPerView = { mobile: 1, tablet: 2, desktop: 4 }
 ) => {
-  const [itemsVisible, setItemsVisible] = useState(itemsPerView.desktop)
+  const { mobile, tablet, desktop } = itemsPerView
+  const [itemsVisible, setItemsVisible] = useState(desktop)
 
   useEffect(() => {
+    if (typeof window === 'undefined') return
+
     const updateItemsVisible = () => {
       setItemsVisible(getItemsForViewport(window.innerWidth, itemsPerView))
     }
@@ -30,7 +29,7 @@ export const useResponsiveItems = (
     window.addEventListener('resize', updateItemsVisible)
 
     return () => window.removeEventListener('resize', updateItemsVisible)
-  }, [itemsPerView])
+  }, [mobile, tablet, desktop])
 
   return itemsVisible
 }
