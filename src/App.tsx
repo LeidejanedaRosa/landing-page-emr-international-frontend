@@ -37,7 +37,7 @@ function App() {
     <ErrorBoundary>
       <SEO />
       <JsonLdScript data={ORGANIZATION_STRUCTURED_DATA} />
-      <div className='min-h-screen bg-gray-50 overflow-x-hidden'>
+      <div className='min-h-screen bg-gray-50'>
         <HeroCarousel />
         <Suspense fallback={<SectionSkeleton />}>
           <WhyItMattersSection />
