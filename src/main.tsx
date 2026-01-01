@@ -7,15 +7,18 @@ import App from './App.tsx'
 import './index.css'
 import { initWebVitals } from './utils/webVitals.ts'
 
-// Defer Sentry initialization to after first paint for better FCP/LCP
 if (import.meta.env.PROD) {
-  requestIdleCallback(
-    async () => {
-      const { initSentry } = await import('./utils/sentry.tsx')
-      initSentry()
-    },
-    { timeout: 2000 }
-  )
+  const initSentryDeferred = async () => {
+    const { initSentry } = await import('./utils/sentry.tsx')
+    initSentry()
+  }
+
+  // Safari doesn't support requestIdleCallback, use setTimeout as fallback
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initSentryDeferred, { timeout: 2000 })
+  } else {
+    setTimeout(initSentryDeferred, 1)
+  }
 }
 
 initWebVitals({
