@@ -6,9 +6,7 @@ interface UseCarouselOptions {
   totalItems: number
   autoPlayDelay?: number
   enableAutoPlay?: boolean
-  /** Quando true, usa navegação com loop infinito (para múltiplos items visíveis) */
   infiniteLoop?: boolean
-  /** Número de items visíveis (para carrosséis responsivos) */
   itemsVisible?: number
 }
 
@@ -22,7 +20,6 @@ interface UseCarouselReturn {
   goToSlide: (index: number) => void
   pauseAutoPlay: () => void
   resumeAutoPlay: () => void
-  /** Para carrosséis com múltiplos items */
   maxIndex: number
   hasMultiplePages: boolean
 }
@@ -46,7 +43,6 @@ export const useCarousel = ({
   const maxIndex = Math.max(0, totalItems - itemsVisible)
   const hasMultiplePages = totalItems > itemsVisible
 
-  // Loop infinito: quando chega nas cópias, reseta sem transição
   useEffect(() => {
     if (!infiniteLoop) return
 
@@ -113,8 +109,12 @@ export const useCarousel = ({
     }
   }, [enableAutoPlay, prefersReducedMotion])
 
-  // Desativa autoplay se usuário prefere reduced motion
   useEffect(() => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current)
+      autoPlayRef.current = null
+    }
+
     if (prefersReducedMotion) {
       setIsAutoPlaying(false)
       return
@@ -123,13 +123,6 @@ export const useCarousel = ({
     if (isAutoPlaying && enableAutoPlay) {
       autoPlayRef.current = setInterval(nextSlide, autoPlayDelay)
     }
-
-    return () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current)
-        autoPlayRef.current = null
-      }
-    }
   }, [
     isAutoPlaying,
     autoPlayDelay,
@@ -137,13 +130,6 @@ export const useCarousel = ({
     prefersReducedMotion,
     enableAutoPlay,
   ])
-
-  // Reage a mudanças em prefersReducedMotion
-  useEffect(() => {
-    if (prefersReducedMotion && isAutoPlaying) {
-      setIsAutoPlaying(false)
-    }
-  }, [prefersReducedMotion, isAutoPlaying])
 
   return {
     currentIndex,
