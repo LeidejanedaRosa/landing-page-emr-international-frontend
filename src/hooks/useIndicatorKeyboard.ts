@@ -19,6 +19,8 @@ export function useIndicatorKeyboard({
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLButtonElement>, slideIndex: number) => {
+      if (totalSlides <= 0) return
+
       let nextIndex: number | null = null
 
       if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
