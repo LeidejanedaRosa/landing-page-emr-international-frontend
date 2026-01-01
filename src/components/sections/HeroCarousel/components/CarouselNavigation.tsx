@@ -7,8 +7,9 @@ import type { CarouselNavigationProps } from '../types'
 export const CarouselNavigation = memo<CarouselNavigationProps>(
   ({ onPrev, onNext, currentSlide, totalSlides }) => {
     const buttonBaseClasses = `
+      hidden lg:block
       absolute top-1/2 -translate-y-1/2 z-30
-      w-12 h-12 md:w-14 md:h-14
+      w-14 h-14
       flex items-center justify-center
       bg-black/30 hover:bg-black/50
       text-white rounded-full
