@@ -1,10 +1,10 @@
 import { memo } from 'react'
 
 import { useAccessibilityPreferences } from '../../../../hooks/useAccessibility'
+import Hero from '../../Hero'
 import { COURSES_DATA } from '../../HeroEnrollmentOpen/constants'
 import { getSlideLabels, HERO_CAROUSEL_CONFIG } from '../constants'
 import { CourseSlide } from './CourseSlide'
-import { HeroContent } from './HeroContent'
 
 interface SlidesTrackProps {
   currentSlide: number
@@ -32,7 +32,7 @@ export const SlidesTrack = memo<SlidesTrackProps>(({ currentSlide }) => {
         aria-hidden={currentSlide !== 0}
         tabIndex={currentSlide === 0 ? 0 : -1}
       >
-        <HeroContent />
+        <Hero />
       </div>
 
       {COURSES_DATA.map((course, courseIndex) => {

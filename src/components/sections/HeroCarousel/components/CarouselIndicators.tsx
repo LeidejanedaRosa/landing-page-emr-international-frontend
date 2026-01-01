@@ -36,7 +36,7 @@ export const CarouselIndicators = memo<CarouselIndicatorsProps>(
 
     return (
       <div
-        className='absolute bottom-4 sm:bottom-5 md:bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-3'
+        className='flex-none py-4 sm:py-5 md:py-6 bg-black flex justify-center gap-3'
         role='tablist'
         aria-label='Navegação do carrossel'
       >

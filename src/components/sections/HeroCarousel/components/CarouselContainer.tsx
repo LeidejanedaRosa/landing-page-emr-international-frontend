@@ -31,14 +31,14 @@ export const CarouselContainer = memo<CarouselContainerProps>(
   }) => {
     return (
       <section
-        className='relative w-full h-screen max-h-screen bg-black overflow-hidden flex flex-col'
+        className='relative w-full max-h-screen bg-black overflow-hidden flex flex-col'
         aria-roledescription={HERO_CAROUSEL_A11Y.roleDescription}
         aria-label={HERO_CAROUSEL_A11Y.ariaLabel}
       >
         <CarouselHeader />
 
         <div
-          className='flex-1 relative overflow-hidden max-w-screen-2xl mx-auto'
+          className='flex-1 h-0 relative overflow-hidden w-full'
           onMouseEnter={onPause}
           onMouseLeave={onResume}
           onFocus={onPause}
@@ -53,13 +53,13 @@ export const CarouselContainer = memo<CarouselContainerProps>(
             currentSlide={currentSlide}
             totalSlides={totalSlides}
           />
-
-          <CarouselIndicators
-            currentSlide={currentSlide}
-            totalSlides={totalSlides}
-            onSelect={onSelect}
-          />
         </div>
+
+        <CarouselIndicators
+          currentSlide={currentSlide}
+          totalSlides={totalSlides}
+          onSelect={onSelect}
+        />
       </section>
     )
   }

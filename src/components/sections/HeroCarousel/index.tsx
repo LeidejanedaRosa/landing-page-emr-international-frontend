@@ -3,8 +3,9 @@ import React, { memo, useCallback, useEffect, useMemo } from 'react'
 import { useScreenReaderAnnouncement } from '../../../hooks/useAccessibility'
 import { useCarousel } from '../../../hooks/useCarousel'
 import Hero from '../Hero'
+import { HERO_SECTION_ID } from '../Hero/constants'
 import { COURSES_DATA } from '../HeroEnrollmentOpen/constants'
-import { CarouselContainer } from './components'
+import { CarouselContainer, CarouselHeader } from './components'
 import {
   getSlideLabels,
   getTotalSlides,
@@ -60,7 +61,17 @@ const HeroCarousel = memo(() => {
   }, [currentSlide, announce, hasOpenEnrollment, slideLabels, totalSlides])
 
   if (!hasOpenEnrollment) {
-    return <Hero />
+    return (
+      <section
+        id={HERO_SECTION_ID}
+        className='relative w-full h-screen max-h-screen bg-black overflow-hidden flex flex-col'
+      >
+        <CarouselHeader />
+        <div className='flex-1 overflow-hidden'>
+          <Hero />
+        </div>
+      </section>
+    )
   }
 
   return (
