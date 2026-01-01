@@ -36,7 +36,7 @@ export const HeroEnrollmentOpen: React.FC = memo(() => {
       <JsonLdScript data={structuredData} />
 
       <section
-        className='relative w-full max-w-full min-h-[500px] md:min-h-[600px] lg:min-h-[650px] lg:max-h-[85vh] m-0 p-0'
+        className='relative w-full max-w-full overflow-hidden m-0 p-0'
         aria-labelledby='enrollment-heading'
       >
         <h2 id='enrollment-heading' className='sr-only'>

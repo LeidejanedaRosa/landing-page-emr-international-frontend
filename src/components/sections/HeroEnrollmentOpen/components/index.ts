@@ -1,5 +1,7 @@
 export { CourseCard } from './CourseCard'
 export { CourseContent } from './CourseContent'
+export { CourseCTAButton } from './CourseCTAButton'
 export { CourseDateBox } from './CourseDateBox'
 export { CourseImage } from './CourseImage'
+export { CourseInfoBlock } from './CourseInfoBlock'
 export { EnrollmentBadge } from './EnrollmentBadge'
