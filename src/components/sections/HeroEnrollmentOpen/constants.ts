@@ -1,4 +1,5 @@
 import tmrImageJpg from '../../../assets/hero_section_TMR.jpg'
+import tmrImageWebp from '../../../assets/hero_section_TMR.webp'
 import wmrImageJpg from '../../../assets/hero_section_WMR.jpg'
 import type { CourseData } from './types'
 
@@ -12,6 +13,7 @@ export const COURSES_DATA: CourseData[] = [
     monthNumber: '12',
     year: '2025',
     imageJpg: tmrImageJpg,
+    imageWebp: tmrImageWebp,
     accentColor: 'red',
     ctaLabel: 'INSCREVA-SE AGORA',
     ctaAriaLabel: 'Inscrever-se no curso Tactical Medical Response',
