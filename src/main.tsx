@@ -1,15 +1,23 @@
 import { StrictMode } from 'react'
 
-import * as Sentry from '@sentry/react'
 import { createRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
 
 import App from './App.tsx'
 import './index.css'
-import { initSentry } from './utils/sentry.tsx'
 import { initWebVitals } from './utils/webVitals.ts'
 
-initSentry()
+// Defer Sentry initialization to after first paint for better FCP/LCP
+if (import.meta.env.PROD) {
+  requestIdleCallback(
+    async () => {
+      const { initSentry } = await import('./utils/sentry.tsx')
+      initSentry()
+    },
+    { timeout: 2000 }
+  )
+}
+
 initWebVitals({
   debug: import.meta.env.DEV,
 })
@@ -22,8 +30,9 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
       .then(() => {
         console.log('Service Worker registered successfully')
       })
-      .catch(error => {
+      .catch(async error => {
         console.error('Service Worker registration failed:', error)
+        const Sentry = await import('@sentry/react')
         Sentry.captureException(error, {
           tags: { component: 'service-worker' },
           contexts: {
@@ -45,15 +54,7 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
     })
     .catch(error => {
       console.error('Failed to unregister service workers:', error)
-      Sentry.captureException(error, {
-        tags: { component: 'service-worker' },
-        contexts: {
-          serviceWorker: {
-            action: 'unregistration',
-            environment: 'development',
-          },
-        },
-      })
+      // Skip Sentry in dev mode - just log the error
     })
 }
 /* eslint-enable no-console */
