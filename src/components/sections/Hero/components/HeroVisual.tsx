@@ -46,12 +46,12 @@ export const HeroVisual = memo<HeroVisualProps>(
           role='status'
           aria-label={HERO_CONTENT.visual.badge.ariaLabel}
         >
-          <div className='bg-black/80 backdrop-blur-md border border-red-900/30 px-3 py-1.5 sm:px-4 sm:py-2 rounded flex items-center gap-1.5 sm:gap-2 shadow-2xl'>
+          <div className='bg-black/80 backdrop-blur-md border border-red-900/30 px-3 py-2 sm:px-4 sm:py-2.5 rounded flex items-center gap-2 shadow-2xl'>
             <div
-              className='w-1.5 h-1.5 sm:w-2 sm:h-2 bg-red-500 rounded-full animate-pulse'
+              className='w-2 h-2 bg-red-500 rounded-full animate-pulse'
               aria-hidden='true'
             />
-            <span className='text-white text-[10px] sm:text-xs font-bold tracking-widest uppercase'>
+            <span className='text-white text-xs sm:text-sm font-bold tracking-widest uppercase'>
               {HERO_CONTENT.visual.badge.label}
             </span>
           </div>
