@@ -10,7 +10,7 @@ export const CarouselNavigation = memo<CarouselNavigationProps>(
       hidden lg:block
       absolute top-1/2 -translate-y-1/2 z-30
       w-14 h-14
-      flex items-center justify-center
+      grid place-items-center
       bg-black/30 hover:bg-black/50
       text-white rounded-full
       transition-all duration-300
