@@ -68,9 +68,11 @@ export const useCarousel = ({
         setCurrentIndex(prev => prev + 1)
       }
     } else {
-      setCurrentIndex(prev => (prev + 1) % totalItems)
+      if (hasMultiplePages) {
+        setCurrentIndex(prev => (prev >= maxIndex ? 0 : prev + 1))
+      }
     }
-  }, [totalItems, infiniteLoop, hasMultiplePages])
+  }, [infiniteLoop, hasMultiplePages, maxIndex])
 
   const previousSlide = useCallback(() => {
     if (infiniteLoop) {
@@ -79,9 +81,11 @@ export const useCarousel = ({
         setCurrentIndex(prev => prev - 1)
       }
     } else {
-      setCurrentIndex(prev => (prev - 1 + totalItems) % totalItems)
+      if (hasMultiplePages) {
+        setCurrentIndex(prev => (prev <= 0 ? maxIndex : prev - 1))
+      }
     }
-  }, [totalItems, infiniteLoop, hasMultiplePages])
+  }, [infiniteLoop, hasMultiplePages, maxIndex])
 
   const goToSlide = useCallback(
     (index: number) => {
@@ -91,12 +95,12 @@ export const useCarousel = ({
           setCurrentIndex(index + 1)
         }
       } else {
-        if (index >= 0 && index < totalItems) {
+        if (index >= 0 && index <= maxIndex) {
           setCurrentIndex(index)
         }
       }
     },
-    [totalItems, infiniteLoop, maxIndex]
+    [infiniteLoop, maxIndex]
   )
 
   const pauseAutoPlay = useCallback(() => {
@@ -122,6 +126,13 @@ export const useCarousel = ({
 
     if (isAutoPlaying && enableAutoPlay) {
       autoPlayRef.current = setInterval(nextSlide, autoPlayDelay)
+    }
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current)
+        autoPlayRef.current = null
+      }
     }
   }, [
     isAutoPlaying,
