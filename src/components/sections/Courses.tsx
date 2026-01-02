@@ -129,9 +129,9 @@ const CourseHeader = ({
       id={`${cardId}-title`}
       className='text-2xl font-bold text-white mb-2 leading-tight'
     >
-      <span className='font-capture-it  text-3xl'>{abbreviation}</span>
+      <span className='font-capture-it text-3xl'>{abbreviation}</span>
       {' - '}
-      {title.split(' - ')[1]}
+      {title.split(' - ')[1] || title}
     </h3>
     <CourseMetadata
       duration={metadata.duration}
