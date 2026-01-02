@@ -22,7 +22,7 @@ export const HeroEnrollmentOpen: React.FC<HeroEnrollmentOpenProps> = memo(
     const structuredData = {
       '@context': 'https://schema.org',
       '@type': 'Course',
-      name: `${course.title} - ${course.subtitle} ${course.subbtitle2}`,
+      name: `${course.title} - ${course.subtitle} ${course.subtitle2}`,
       description: 'Certificação Internacional',
       provider: {
         '@type': 'Organization',
@@ -50,7 +50,7 @@ export const HeroEnrollmentOpen: React.FC<HeroEnrollmentOpenProps> = memo(
           <CourseCard
             title={course.title}
             subtitle={course.subtitle}
-            subtitle2={course.subbtitle2}
+            subtitle2={course.subtitle2}
             date={course.date}
             month={course.month}
             monthNumber={course.monthNumber}
