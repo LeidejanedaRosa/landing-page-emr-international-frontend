@@ -58,7 +58,7 @@ const HeroCarousel = () => {
 
   if (!hasOpenEnrollment) {
     return (
-      <div className='h-[calc(100svh)] xl:h-[calc(100svh-150px)]'>
+      <div className='h-[100svh] xl:h-[calc(100svh - 150px)]'>
         <Hero />
       </div>
     )
