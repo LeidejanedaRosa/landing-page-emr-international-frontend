@@ -9,7 +9,7 @@ interface MobileMenuProps {
 
 const MobileMenu: React.FC<MobileMenuProps> = React.memo(
   ({ onLinkClick, currentSection }) => (
-    <div id='mobile-menu' className='md:hidden mx-auto'>
+    <div id='mobile-menu' className='md:hidden flex justify-center'>
       <div className='flex justify-center items-center flex-wrap gap-2 w-[90vw] px-2 pt-2 pb-3 sm:px-3 bg-white/20'>
         <AccessibleLink
           href='#about'
