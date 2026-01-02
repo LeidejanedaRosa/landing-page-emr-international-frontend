@@ -9,11 +9,7 @@ import {
   TestimonialIndicators,
   TestimonialNavigation,
 } from './components'
-import {
-  TESTIMONIALS_A11Y,
-  TESTIMONIALS_CONFIG,
-  TESTIMONIALS_CONTENT,
-} from './constants'
+import { TESTIMONIALS_A11Y, TESTIMONIALS_CONFIG } from './constants'
 import type { TestimonialIndicatorsProps } from './types'
 
 const TestimonialSection = memo(() => {
@@ -134,10 +130,11 @@ const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
           id='testimonials-heading'
           className='text-3xl md:text-5xl font-bold text-white mb-4'
         >
-          {TESTIMONIALS_CONTENT.title}
+          O que dizem sobre <span className='font-capture-it'>nós</span>
         </h2>
         <p className='text-primary-300 text-base md:text-lg max-w-2xl mx-auto'>
-          {TESTIMONIALS_CONTENT.subtitle}
+          <span className='font-capture-it'>Histórias</span> reais de empresas e
+          profissionais que se capacitaram conosco
         </p>
       </header>
 

@@ -111,6 +111,70 @@ const CourseLocation = ({
 const WHATSAPP_NUMBER = '5519971575640'
 const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
 
+const CourseHeader = ({
+  abbreviation,
+  title,
+  cardId,
+  metadata,
+  icon,
+}: {
+  abbreviation: string
+  title: string
+  cardId: string
+  metadata: Course['metadata']
+  icon: string
+}) => (
+  <header className='mb-4'>
+    <h3
+      id={`${cardId}-title`}
+      className='text-2xl font-bold text-white mb-2 leading-tight'
+    >
+      <span className='font-capture-it  text-3xl'>{abbreviation}</span>
+      {' - '}
+      {title.split(' - ')[1]}
+    </h3>
+    <CourseMetadata
+      duration={metadata.duration}
+      certification={metadata.certification}
+      icon={icon}
+    />
+  </header>
+)
+
+const CourseActions = ({
+  whatsappUrl,
+  title,
+  brochureLink,
+  styles,
+}: {
+  whatsappUrl: string
+  title: string
+  brochureLink: string
+  styles: CourseStyleConfig
+}) => (
+  <div className='flex flex-col gap-3 pt-2'>
+    <AccessibleLink
+      href={whatsappUrl}
+      target='_blank'
+      rel='noopener noreferrer'
+      className={`flex items-center justify-center w-full py-3.5 px-4 font-bold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 ${styles.primary} ${styles.primaryHover} ${styles.primaryText} ${styles.ring}`}
+      aria-label={`Inscreva-se no curso ${title} via WhatsApp`}
+    >
+      Inscreva-se
+      <ArrowRight className='w-5 h-5 ml-2' aria-hidden='true' />
+    </AccessibleLink>
+
+    <AccessibleLink
+      href={brochureLink}
+      className={`flex items-center justify-center w-full py-2 text-sm font-medium ${styles.secondary} ${styles.secondaryHover} ${styles.ring} transition-colors gap-2`}
+      aria-label={`Baixar brochura em PDF do curso ${title}`}
+    >
+      <Download className='w-4 h-4' aria-hidden='true' />
+      <span>Baixar PDF técnico</span>
+    </AccessibleLink>
+  </div>
+)
+
 const CourseCard = ({ course }: CourseCardProps) => {
   const {
     id,
@@ -137,25 +201,19 @@ const CourseCard = ({ course }: CourseCardProps) => {
     >
       <div className='relative h-full w-full overflow-hidden'>
         <CourseImage images={images} />
-        <div className='absolute top-4 right-4 bg-primary-900/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white border border-primary-700 shadow-sm'>
+        <div className='absolute top-4 right-4 bg-primary-900/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-capture-it text-white border border-primary-700 shadow-sm'>
           {abbreviation}
         </div>
       </div>
 
       <div className='p-6 flex flex-col flex-grow'>
-        <header className='mb-4'>
-          <h3
-            id={`${cardId}-title`}
-            className='text-2xl font-bold text-white mb-2 leading-tight'
-          >
-            {title}
-          </h3>
-          <CourseMetadata
-            duration={metadata.duration}
-            certification={metadata.certification}
-            icon={styles.icon}
-          />
-        </header>
+        <CourseHeader
+          abbreviation={abbreviation}
+          title={title}
+          cardId={cardId}
+          metadata={metadata}
+          icon={styles.icon}
+        />
 
         <p className='text-primary-200 text-base leading-relaxed mb-6 flex-grow border-b border-primary-700/50 pb-6'>
           {description}
@@ -163,28 +221,12 @@ const CourseCard = ({ course }: CourseCardProps) => {
 
         <div className='space-y-4 mt-auto'>
           <CourseLocation location={metadata.location} icon={styles.icon} />
-
-          <div className='flex flex-col gap-3 pt-2'>
-            <AccessibleLink
-              href={whatsappUrl}
-              target='_blank'
-              rel='noopener noreferrer'
-              className={`flex items-center justify-center w-full py-3.5 px-4 font-bold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 ${styles.primary} ${styles.primaryHover} ${styles.primaryText} ${styles.ring}`}
-              aria-label={`Inscreva-se no curso ${title} via WhatsApp`}
-            >
-              Inscreva-se
-              <ArrowRight className='w-5 h-5 ml-2' aria-hidden='true' />
-            </AccessibleLink>
-
-            <AccessibleLink
-              href={links.brochure}
-              className={`flex items-center justify-center w-full py-2 text-sm font-medium ${styles.secondary} ${styles.secondaryHover} ${styles.ring} transition-colors gap-2`}
-              aria-label={`Baixar brochura em PDF do curso ${title}`}
-            >
-              <Download className='w-4 h-4' aria-hidden='true' />
-              <span>Baixar PDF técnico</span>
-            </AccessibleLink>
-          </div>
+          <CourseActions
+            whatsappUrl={whatsappUrl}
+            title={title}
+            brochureLink={links.brochure}
+            styles={styles}
+          />
         </div>
       </div>
     </article>
@@ -200,7 +242,10 @@ const CoursesHeader = ({ titleId, descriptionId }: CoursesHeaderProps) => (
       id={titleId}
       className='text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white tracking-tight'
     >
-      Cursos de APH Tático e <span lang='en'>Wilderness Medicine</span>
+      <span className='font-capture-it'>Cursos</span> de APH Tático e{' '}
+      <span lang='en' className='font-capture-it'>
+        Wilderness Medicine
+      </span>
     </h2>
     <p
       id={descriptionId}
