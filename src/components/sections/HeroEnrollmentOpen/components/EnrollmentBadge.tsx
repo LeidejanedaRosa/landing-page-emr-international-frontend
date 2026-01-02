@@ -12,7 +12,7 @@ export const EnrollmentBadge: React.FC<EnrollmentBadgeProps> = memo(
     const colorClass = accentColor === 'red' ? 'bg-red-500' : 'bg-yellow-500'
 
     return (
-      <div className='absolute top-6 left-6 md:top-8 md:left-8 lg:top-10 lg:left-16 xl:left-20 z-10'>
+      <div className='absolute top-6 left-6 md:top-8 md:left-8 lg:top-10 lg:left-16 2xl:left-[500px] z-10'>
         <div
           className={`inline-flex items-center gap-2.5 px-5 py-2.5 md:px-6 md:py-3 rounded-full
                      bg-white/95 backdrop-blur-md shadow-xl border border-white/20 ${
