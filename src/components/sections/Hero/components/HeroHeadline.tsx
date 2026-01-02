@@ -10,7 +10,7 @@ export const HeroHeadline = () => (
       {HERO_CONTENT.headline.highlightLine}
       <br />
     </span>
-    <span className='block md:inline'>{HERO_CONTENT.headline.thirdLine}</span>
-    <span className='block md:inline'>{HERO_CONTENT.headline.fourthLine}</span>
+    <span className='block lg:inline'>{HERO_CONTENT.headline.thirdLine}</span>
+    <span className='block lg:inline'>{HERO_CONTENT.headline.fourthLine}</span>
   </h1>
 )
