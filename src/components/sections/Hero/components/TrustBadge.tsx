@@ -11,7 +11,7 @@ export const TrustBadge = memo<TrustBadgeProps>(
     ariaLabel = HERO_CONTENT.badge.ariaLabel,
   }) => (
     <div
-      className='inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 border border-white/20 backdrop-blur-sm mb-6 animate-fade-in-up'
+      className='inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/10 border border-white/20 backdrop-blur-sm animate-fade-in-up'
       role='status'
       aria-label={ariaLabel}
     >

@@ -7,7 +7,7 @@ export const HeroVisual = memo<HeroVisualProps>(
   ({ images, alt = HERO_CONTENT.visual.alt, className = '' }) => {
     return (
       <div
-        className={`relative h-full w-full min-h-[250px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-0 group overflow-hidden rounded-sm lg:rounded-none ${className}`}
+        className={`relative h-full w-full min-h-0 group overflow-hidden rounded-sm lg:rounded-none ${className}`}
       >
         <picture>
           {images.avif && (

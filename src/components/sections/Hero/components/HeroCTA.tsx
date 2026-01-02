@@ -27,7 +27,7 @@ export const HeroCTA = memo<HeroCTAProps>(
     text = HERO_CONTENT.cta.text,
     ariaLabel = HERO_CONTENT.cta.ariaLabel,
   }) => (
-    <div className='mt-6 sm:mt-8'>
+    <div>
       <AccessibleButton
         onClick={onClick}
         aria-label={ariaLabel}
