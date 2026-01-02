@@ -1,11 +1,13 @@
 import React, { memo } from 'react'
 
+import Hero from '../../Hero'
+import { HERO_SECTION_ID } from '../../Hero/constants'
+import { HeroEnrollmentOpen } from '../../HeroEnrollmentOpen'
+import { COURSES_DATA } from '../../HeroEnrollmentOpen/constants'
 import { HERO_CAROUSEL_A11Y } from '../constants'
 import type { CarouselIndicatorsProps } from '../types'
-import { CarouselHeader } from './CarouselHeader'
 import { CarouselIndicators } from './CarouselIndicators'
 import { CarouselNavigation } from './CarouselNavigation'
-import { SlidesTrack } from './SlidesTrack'
 
 interface CarouselContainerProps {
   currentSlide: number
@@ -31,21 +33,43 @@ export const CarouselContainer = memo<CarouselContainerProps>(
   }) => {
     return (
       <section
-        className='relative w-full max-h-screen bg-black overflow-hidden flex flex-col'
+        id={HERO_SECTION_ID}
         aria-roledescription={HERO_CAROUSEL_A11Y.roleDescription}
         aria-label={HERO_CAROUSEL_A11Y.ariaLabel}
       >
-        <CarouselHeader />
-
         <div
-          className='flex-1 h-0 relative overflow-hidden w-full'
+          className='relative'
           onMouseEnter={onPause}
           onMouseLeave={onResume}
           onFocus={onPause}
           onBlur={onResume}
           onKeyDown={onKeyDown}
         >
-          <SlidesTrack currentSlide={currentSlide} />
+          {currentSlide === 0 && (
+            <div
+              id='hero-slide-0'
+              role='tabpanel'
+              aria-label='Página principal'
+            >
+              <Hero />
+            </div>
+          )}
+
+          {COURSES_DATA.map((course, index) => {
+            const slideIndex = index + 1
+            return (
+              currentSlide === slideIndex && (
+                <div
+                  key={course.id}
+                  id={`hero-slide-${slideIndex}`}
+                  role='tabpanel'
+                  aria-label={`Curso ${course.title}`}
+                >
+                  <HeroEnrollmentOpen courseIndex={index} />
+                </div>
+              )
+            )
+          })}
 
           <CarouselNavigation
             onPrev={onPrev}

@@ -1,6 +1,3 @@
 export { CarouselContainer } from './CarouselContainer'
-export { CarouselHeader } from './CarouselHeader'
 export { CarouselIndicators } from './CarouselIndicators'
 export { CarouselNavigation } from './CarouselNavigation'
-export { CourseSlide } from './CourseSlide'
-export { SlidesTrack } from './SlidesTrack'
