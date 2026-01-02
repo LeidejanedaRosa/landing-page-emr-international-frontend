@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import CompanyLogo from '../../../assets/logo_emr_internacional.svg'
 import {
@@ -22,7 +22,7 @@ interface LogoProps {
   logoId: string
 }
 
-const CompanyLogoComponent: React.FC<LogoProps> = memo(({ logoId }) => {
+const CompanyLogoComponent: React.FC<LogoProps> = ({ logoId }) => {
   return (
     <a
       href='#hero'
@@ -42,12 +42,12 @@ const CompanyLogoComponent: React.FC<LogoProps> = memo(({ logoId }) => {
       />
     </a>
   )
-})
+}
 
 CompanyLogoComponent.displayName = 'CompanyLogoComponent'
 
 // eslint-disable-next-line max-lines-per-function
-const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
+const Header: React.FC<HeaderProps> = () => {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } =
     useMobileMenu()
   const { announce } = useScreenReaderAnnouncement()
@@ -104,7 +104,7 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
         Pular para navegação
       </SkipLink>
 
-      <header id={headerId} className={`p-4 ${className}`} role='banner'>
+      <header id={headerId} className='p-4 bg-black' role='banner'>
         <nav
           id={navId}
           className='max-w-screen-2xl mx-auto'
@@ -134,6 +134,6 @@ const Header: React.FC<HeaderProps> = memo(({ className = '' }) => {
       </header>
     </>
   )
-})
+}
 
 export default Header
