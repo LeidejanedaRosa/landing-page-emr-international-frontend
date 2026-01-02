@@ -1,6 +1,7 @@
 export interface CourseCardProps {
   title: string
   subtitle: string
+  subtitle2?: string
   date: string
   month: string
   monthNumber: string
@@ -22,6 +23,7 @@ export interface CourseData {
   id: string
   title: string
   subtitle: string
+  subbtitle2?: string
   date: string
   month: string
   monthNumber: string

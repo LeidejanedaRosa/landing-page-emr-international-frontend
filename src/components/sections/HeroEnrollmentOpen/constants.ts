@@ -7,7 +7,8 @@ export const COURSES_DATA: CourseData[] = [
   {
     id: 'tmr',
     title: 'Tactical Medical Response',
-    subtitle: 'Emergências para Áreas de Conflito',
+    subtitle: 'Emergências para ',
+    subbtitle2: 'Áreas de Conflito',
     date: '07',
     month: 'DEZ',
     monthNumber: '12',
@@ -21,7 +22,8 @@ export const COURSES_DATA: CourseData[] = [
   {
     id: 'wmr',
     title: 'Wilderness Medical Response',
-    subtitle: 'Emergências em Áreas Remotas',
+    subtitle: 'Emergências em ',
+    subbtitle2: 'Áreas Remotas',
     date: '14',
     month: 'MAR',
     monthNumber: '03',
