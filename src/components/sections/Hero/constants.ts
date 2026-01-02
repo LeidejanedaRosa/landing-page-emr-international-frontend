@@ -22,7 +22,8 @@ export const HERO_CONTENT = {
   headline: {
     firstLine: 'O Imprevisível',
     highlightLine: 'Acontece.',
-    thirdLine: 'VOCÊ ESTÁ REALMENTE PREPARADO?',
+    thirdLine: 'VOCÊ ESTÁ ',
+    fourthLine: 'REALMENTE PREPARADO?',
   },
   cta: {
     text: 'Ver Cursos de Elite',
