@@ -20,7 +20,7 @@ export const CourseImage: React.FC<CourseImageProps> = memo(
           alt={`${title} - ${subtitle}`}
           width={800}
           height={600}
-          className='w-full h-full object-contain object-top lg:object-cover lg:object-center xl:object-[center_30%] bg-gradient-to-t from-black via-black/20 to-black opacity-90 md:bg-gradient-to-l'
+          className='w-full h-full object-contain object-top lg:object-cover lg:object-center xl:object-[center_30%]'
           loading={priority ? 'eager' : 'lazy'}
           fetchPriority={priority ? 'high' : 'auto'}
           onError={e => {
