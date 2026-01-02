@@ -31,7 +31,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
 
     return (
       <article
-        className={`relative group overflow-hidden min-h-[500px] sm:min-h-[550px] md:min-h-[600px] lg:min-h-[650px] max-h-[85vh] ${scaleClass} ${scale}`}
+        className={`relative group overflow-hidden flex-1 max-h-[85vh] ${scaleClass} ${scale}`}
         tabIndex={0}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
