@@ -38,7 +38,12 @@ const Hero = () => {
           <HeroVisual images={heroImages} alt={HERO_CONTENT.visual.alt} />
         </aside>
 
-        <div className='flex-1 min-h-0 relative z-20 flex flex-col justify-center gap-3 md:gap-4 px-4 sm:px-6 md:px-10 lg:pl-24 lg:pr-12 py-4 md:py-12 lg:py-16 order-2 md:order-1 bg-black md:bg-transparent'>
+        <div
+          className='flex-1 min-h-0 relative z-20 flex flex-col justify-center md:justify-between gap-6 px-4 py-4 order-2
+                        sm:px-6
+                        md:gap-4 md:px-10 md:py-12 md:order-1 md:bg-transparent
+                        lg:pl-24 lg:pr-12 lg:py-16'
+        >
           <TrustBadge />
           <HeroHeadline />
           <HeroCTA onClick={scrollToCourses} />

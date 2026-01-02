@@ -9,7 +9,7 @@ export const SocialProof = memo<SocialProofProps>(
     methodologyText = HERO_CONTENT.socialProof.methodology,
   }) => (
     <div
-      className='mt-8 sm:mt-10 md:mt-12 flex flex-row items-center gap-3 sm:gap-6 text-gray-400 text-xs sm:text-sm font-medium border-t border-white/10 pt-4 sm:pt-6'
+      className='sm:mt-10 md:mt-12 flex flex-row items-center justify-center text-center gap-3 sm:gap-6 text-gray-400 text-xs sm:text-sm font-medium border-t border-white/10 pt-4 sm:pt-6'
       role='group'
       aria-label='Indicadores de confiança'
     >
