@@ -48,7 +48,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
         />
 
         <div
-          className='absolute inset-0 bg-gradient-to-t from-black via-black/60 via-35% to-transparent
+          className='absolute inset-0 bg-gradient-to-t from-black via-black/60 via-35% to-transparent 
                      group-hover:from-black/95 group-hover:via-black/70 transition-all duration-700 ease-out'
           aria-hidden='true'
         />

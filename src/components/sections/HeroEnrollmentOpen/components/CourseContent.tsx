@@ -33,33 +33,16 @@ export const CourseContent: React.FC<CourseContentProps> = memo(
     const colors = ACCENT_COLORS[accentColor]
 
     return (
-      <div className='absolute inset-x-0 bottom-0 px-4 pb-8 sm:px-6 sm:pb-10 md:px-10 md:pb-12 lg:px-16 lg:pb-16 xl:px-20 xl:pb-20'>
+      <div className='absolute inset-x-0 bottom-0 px-4 pb-6 sm:px-6 sm:pb-8 md:px-10 md:pb-12 lg:px-16 lg:pb-16'>
         <div className='max-w-screen-2xl mx-auto'>
-          <div className='flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 sm:gap-5 lg:gap-8'>
-            <div className='flex-1 min-w-0 lg:max-w-[calc(100%-160px)] xl:max-w-3xl'>
-              <CourseInfoBlock
-                title={title}
-                subtitle={subtitle}
-                colors={colors}
-                variant='card'
-              />
+          <CourseInfoBlock title={title} subtitle={subtitle} colors={colors} />
 
-              <CourseCTAButton
-                courseTitle={title}
-                ctaLabel={ctaLabel}
-                ctaAriaLabel={ctaAriaLabel}
-                colors={colors}
-                variant='card'
-              />
-            </div>
-
-            <CourseDateBox
-              date={date}
-              month={month}
-              monthNumber={monthNumber}
-              year={year}
-              accentColor={accentColor}
-              isMobile
+          <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4 md:items-end md:justify-between'>
+            <CourseCTAButton
+              courseTitle={title}
+              ctaLabel={ctaLabel}
+              ctaAriaLabel={ctaAriaLabel}
+              colors={colors}
             />
 
             <CourseDateBox
