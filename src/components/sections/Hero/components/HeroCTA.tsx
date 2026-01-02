@@ -6,21 +6,6 @@ import { AccessibleButton } from '../../../ui/AccessibleButton'
 import { HERO_CONTENT } from '../constants'
 import type { HeroCTAProps } from '../types'
 
-/**
- * Hero Call-to-Action Button
- *
- * High-impact CTA with visual feedback
- *
- * Clean Code principles:
- * - Single Responsibility: Only renders CTA button
- * - DRY: Reuses AccessibleButton component
- * - Accessibility: Uses existing accessible button
- *
- * Note: Replaced raw button with AccessibleButton for:
- * - Consistent keyboard navigation
- * - ARIA attributes
- * - Loading states support
- */
 export const HeroCTA = memo<HeroCTAProps>(
   ({
     onClick,
@@ -31,9 +16,9 @@ export const HeroCTA = memo<HeroCTAProps>(
       <AccessibleButton
         onClick={onClick}
         aria-label={ariaLabel}
-        className='group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-base sm:text-lg rounded-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] uppercase tracking-wide overflow-hidden w-full sm:w-auto'
+        className='group relative inline-flex items-center justify-center gap-2 rounded-lg sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-base sm:text-lg transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] uppercase tracking-wide overflow-hidden w-full sm:w-auto'
       >
-        <span className='relative z-10'>{text}</span>
+        <span className='relative z-10 font-bold'>{text}</span>
         <ArrowRight
           className='w-4 h-4 sm:w-5 sm:h-5 relative z-10 transition-transform group-hover:translate-x-1'
           aria-hidden='true'
