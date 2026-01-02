@@ -1,33 +1,36 @@
+import tmrImageJpg from '../../../assets/hero_section_TMR.jpg'
+import tmrImageWebp from '../../../assets/hero_section_TMR.webp'
+import wmrImageJpg from '../../../assets/hero_section_WMR.jpg'
 import type { CourseData } from './types'
 
 export const COURSES_DATA: CourseData[] = [
-  // {
-  //   id: 'tmr',
-  //   title: 'Tactical Medical Response',
-  //   subtitle: 'Emergências para Áreas de Conflito',
-  //   date: '07',
-  //   month: 'DEZ',
-  //   monthNumber: '12',
-  //   year: '2025',
-  //   imageJpg: tmrImageJpg,
-  //   imageWebp: tmrImageWebp,
-  //   accentColor: 'red',
-  //   ctaLabel: 'INSCREVA-SE AGORA',
-  //   ctaAriaLabel: 'Inscrever-se no curso Tactical Medical Response',
-  // },
-  // {
-  //   id: 'wmr',
-  //   title: 'Wilderness Medical Response',
-  //   subtitle: 'Emergências em Áreas Remotas',
-  //   date: '14',
-  //   month: 'MAR',
-  //   monthNumber: '03',
-  //   year: '2026',
-  //   imageJpg: wmrImageJpg,
-  //   accentColor: 'yellow',
-  //   ctaLabel: 'INSCREVA-SE AGORA',
-  //   ctaAriaLabel: 'Inscrever-se no curso Wilderness Medical Response',
-  // },
+  {
+    id: 'tmr',
+    title: 'Tactical Medical Response',
+    subtitle: 'Emergências para Áreas de Conflito',
+    date: '07',
+    month: 'DEZ',
+    monthNumber: '12',
+    year: '2025',
+    imageJpg: tmrImageJpg,
+    imageWebp: tmrImageWebp,
+    accentColor: 'red',
+    ctaLabel: 'INSCREVA-SE AGORA',
+    ctaAriaLabel: 'Inscrever-se no curso Tactical Medical Response',
+  },
+  {
+    id: 'wmr',
+    title: 'Wilderness Medical Response',
+    subtitle: 'Emergências em Áreas Remotas',
+    date: '14',
+    month: 'MAR',
+    monthNumber: '03',
+    year: '2026',
+    imageJpg: wmrImageJpg,
+    accentColor: 'yellow',
+    ctaLabel: 'INSCREVA-SE AGORA',
+    ctaAriaLabel: 'Inscrever-se no curso Wilderness Medical Response',
+  },
 ]
 
 export const ACCENT_COLORS = {
