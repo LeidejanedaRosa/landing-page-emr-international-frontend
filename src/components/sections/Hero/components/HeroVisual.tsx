@@ -37,7 +37,7 @@ export const HeroVisual = memo<HeroVisualProps>(
         </picture>
 
         <div
-          className='absolute inset-0 bg-gradient-to-t from-black  via-black/20 to-black opacity-90 md:bg-gradient-to-l pointer-events-none'
+          className='absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black opacity-90 md:bg-gradient-to-l pointer-events-none'
           aria-hidden='true'
         />
 
