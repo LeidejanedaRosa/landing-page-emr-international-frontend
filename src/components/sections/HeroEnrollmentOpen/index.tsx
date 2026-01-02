@@ -28,7 +28,7 @@ export const HeroEnrollmentOpen: React.FC<HeroEnrollmentOpenProps> = memo(
         '@type': 'Organization',
         name: 'EMR Internacional',
       },
-      startDate: `${course.year}-${course.monthNumber.padStart(2, '0')}-${course.date.padStart(2, '0')}`,
+      startDate: `${course.year}-${String(course.monthNumber).padStart(2, '0')}-${String(course.date).padStart(2, '0')}`,
       courseMode: 'Presencial',
       educationalCredentialAwarded: 'Certificação Internacional',
     }
