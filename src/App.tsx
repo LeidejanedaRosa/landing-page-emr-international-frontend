@@ -1,8 +1,10 @@
 import React, { Suspense } from 'react'
 
 import ErrorBoundary from './components/error/ErrorBoundary'
+import Header from './components/layout/Header'
 import HeroCarousel from './components/sections/HeroCarousel'
 import { ProductsModal } from './components/sections/ProductsModal'
+import PromoBannerCarousel from './components/sections/PromoBannerCarousel'
 import { JsonLdScript } from './components/seo/JsonLdScript'
 import { ORGANIZATION_STRUCTURED_DATA } from './components/seo/organizationSchema'
 import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
@@ -38,6 +40,8 @@ function App() {
       <SEO />
       <JsonLdScript data={ORGANIZATION_STRUCTURED_DATA} />
       <div className='min-h-screen bg-gray-50'>
+        <Header />
+        <PromoBannerCarousel />
         <HeroCarousel />
         <Suspense fallback={<SectionSkeleton />}>
           <WhyItMattersSection />
