@@ -9,6 +9,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
   ({
     title,
     subtitle,
+    subtitle2,
     date,
     month,
     monthNumber,
@@ -59,6 +60,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
         <CourseContent
           title={title}
           subtitle={subtitle}
+          subtitle2={subtitle2}
           date={date}
           month={month}
           monthNumber={monthNumber}
