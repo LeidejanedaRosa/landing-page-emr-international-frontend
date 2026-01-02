@@ -38,7 +38,7 @@ export const CarouselContainer = memo<CarouselContainerProps>(
         aria-label={HERO_CAROUSEL_A11Y.ariaLabel}
       >
         <div
-          className='relative'
+          className='relative h-[calc(100svh-150px)]'
           onMouseEnter={onPause}
           onMouseLeave={onResume}
           onFocus={onPause}
@@ -50,6 +50,7 @@ export const CarouselContainer = memo<CarouselContainerProps>(
               id='hero-slide-0'
               role='tabpanel'
               aria-label='Página principal'
+              className='absolute inset-0'
             >
               <Hero />
             </div>
@@ -64,6 +65,7 @@ export const CarouselContainer = memo<CarouselContainerProps>(
                   id={`hero-slide-${slideIndex}`}
                   role='tabpanel'
                   aria-label={`Curso ${course.title}`}
+                  className='absolute inset-0'
                 >
                   <HeroEnrollmentOpen courseIndex={index} />
                 </div>
@@ -77,13 +79,13 @@ export const CarouselContainer = memo<CarouselContainerProps>(
             currentSlide={currentSlide}
             totalSlides={totalSlides}
           />
-        </div>
 
-        <CarouselIndicators
-          currentSlide={currentSlide}
-          totalSlides={totalSlides}
-          onSelect={onSelect}
-        />
+          <CarouselIndicators
+            currentSlide={currentSlide}
+            totalSlides={totalSlides}
+            onSelect={onSelect}
+          />
+        </div>
       </section>
     )
   }
