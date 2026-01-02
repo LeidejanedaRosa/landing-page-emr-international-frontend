@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-import FundoAboutJpg from '../../assets/fundo_about.jpg'
+import FundoAboutJpg from '../../assets/bg_about.jpg'
 import { AccessibleButton } from '../ui/AccessibleButton'
 
 const InstructorMedia: React.FC = memo(() => {
