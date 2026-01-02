@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo } from 'react'
+import { type KeyboardEvent, useEffect } from 'react'
 
 import { useScreenReaderAnnouncement } from '../../../hooks/useAccessibility'
 import { useCarousel } from '../../../hooks/useCarousel'
@@ -12,12 +12,12 @@ import {
   HERO_CAROUSEL_CONFIG,
 } from './constants'
 
-const HeroCarousel = memo(() => {
+const HeroCarousel = () => {
   const { announce } = useScreenReaderAnnouncement()
   const hasOpenEnrollment = COURSES_DATA.length > 0
 
-  const totalSlides = useMemo(() => getTotalSlides(), [])
-  const slideLabels = useMemo(() => getSlideLabels(), [])
+  const totalSlides = getTotalSlides()
+  const slideLabels = getSlideLabels()
 
   const {
     currentIndex: currentSlide,
@@ -32,18 +32,15 @@ const HeroCarousel = memo(() => {
     enableAutoPlay: hasOpenEnrollment,
   })
 
-  const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') {
-        previousSlide()
-        event.preventDefault()
-      } else if (event.key === 'ArrowRight') {
-        nextSlide()
-        event.preventDefault()
-      }
-    },
-    [nextSlide, previousSlide]
-  )
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'ArrowLeft') {
+      previousSlide()
+      event.preventDefault()
+    } else if (event.key === 'ArrowRight') {
+      nextSlide()
+      event.preventDefault()
+    }
+  }
 
   useEffect(() => {
     if (hasOpenEnrollment) {
@@ -60,7 +57,11 @@ const HeroCarousel = memo(() => {
   }, [currentSlide, announce, hasOpenEnrollment, slideLabels, totalSlides])
 
   if (!hasOpenEnrollment) {
-    return <Hero />
+    return (
+      <div className='h-[calc(100svh-200px)]'>
+        <Hero />
+      </div>
+    )
   }
 
   return (
@@ -75,8 +76,6 @@ const HeroCarousel = memo(() => {
       onKeyDown={handleKeyDown}
     />
   )
-})
-
-HeroCarousel.displayName = 'HeroCarousel'
+}
 
 export default HeroCarousel
