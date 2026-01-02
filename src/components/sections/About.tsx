@@ -16,12 +16,13 @@ const InstructorMedia: React.FC = memo(() => {
           width={1920}
           height={1280}
           className='w-full h-full object-cover grayscale'
-          style={{ objectPosition: '40% center' }}
+          style={{ objectPosition: '23% center' }}
           loading='eager'
           fetchPriority='high'
           decoding='async'
         />
-        <div className='absolute inset-0 bg-gradient-to-b lg:bg-gradient-to-r from-transparent via-transparent to-black lg:from-transparent lg:via-black/80 lg:to-black' />
+        <div className='absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black lg:hidden' />
+        <div className='hidden lg:block absolute inset-0 bg-gradient-to-r from-black via-transparent to-black' />
       </div>
       <figcaption className='sr-only'>
         Fotografia profissional de Juan Regenerati, instrutor principal da EMR
