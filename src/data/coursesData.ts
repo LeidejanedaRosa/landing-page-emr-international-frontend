@@ -4,9 +4,10 @@ import WECPdf from '../assets/WEC_Spec_Sheet.pdf'
 import WMRImageJpg from '../assets/WMR.jpg'
 
 export type CourseVariant = 'emergency' | 'wilderness'
+export type CourseLevel = 'basic' | 'intermediate' | 'advanced'
+export type EnrollmentStatus = 'open' | 'interest' | 'closed'
 
 export interface CourseMetadata {
-  duration: string
   certification: string
   location: string
 }
@@ -23,15 +24,35 @@ export interface CourseImages {
   alt: string
 }
 
+export interface CourseLevelData {
+  level: CourseLevel
+  code: string
+  name: string
+  namePt: string
+  duration: string
+  immersivity: number
+  difficulty: number
+  skill: number
+  description: string
+  enrollmentStatus: EnrollmentStatus
+  brochure?: string
+}
+
 export interface Course {
   id: string
   abbreviation: string
   title: string
-  description: string
+  levels: CourseLevelData[]
   metadata: CourseMetadata
   links: CourseLinks
   images: CourseImages
   variant: CourseVariant
+}
+
+export const LEVEL_LABELS: Record<CourseLevel, string> = {
+  basic: 'Básico',
+  intermediate: 'Intermediário',
+  advanced: 'Avançado',
 }
 
 const courses: Course[] = [
@@ -39,10 +60,48 @@ const courses: Course[] = [
     id: 'tmr',
     abbreviation: 'TMR',
     title: 'Tactical Medical Responder - Operador de Emergência Tática',
-    description:
-      'Formação completa de Operadores de Emergência Tática em APH Tático e protocolos TECC. Curso avançado para operadores médicos táticos focado em operações de alto risco, ambientes hostis e cenários críticos. Desenvolva habilidades essenciais para salvar vidas sob pressão extrema com certificação internacional reconhecida.',
+    levels: [
+      {
+        level: 'basic',
+        code: 'TMR:1',
+        name: 'First Response',
+        namePt: 'Primeira Resposta',
+        duration: '20 horas',
+        immersivity: 3,
+        difficulty: 4,
+        skill: 5,
+        description:
+          'Planejado para indivíduos que necessitam de conhecimentos básicos em atendimento de emergência tática, aguardando suporte especializado.',
+        enrollmentStatus: 'open',
+      },
+      {
+        level: 'intermediate',
+        code: 'TMR:2',
+        name: 'Tactical Response',
+        namePt: 'Resposta Tática',
+        duration: '40 horas',
+        immersivity: 5,
+        difficulty: 7,
+        skill: 7,
+        description:
+          'Elaborado para equipes que atuam em cenários táticos integrando protocolos TECC com ações de atendimento sob pressão.',
+        enrollmentStatus: 'interest',
+      },
+      {
+        level: 'advanced',
+        code: 'TMR:3',
+        name: 'Advanced Operations',
+        namePt: 'Operações Avançadas',
+        duration: '60 horas',
+        immersivity: 9,
+        difficulty: 9,
+        skill: 10,
+        description:
+          'Formatado para operadores que trabalham em ambientes de alto risco, requerendo técnicas avançadas de medicina tática e extração.',
+        enrollmentStatus: 'interest',
+      },
+    ],
     metadata: {
-      duration: '40 horas',
       certification: 'Certificação Internacional TMR',
       location: 'In-Company ou Sede EMR',
     },
@@ -61,10 +120,48 @@ const courses: Course[] = [
     abbreviation: 'WMR',
     title:
       'Wilderness Medical Responder - Operador de Emergências em Áreas Remotas',
-    description:
-      'Formação especializada em emergências em áreas remotas com certificação internacional. Curso de Wilderness Medicine para operadores de campo, guias de turismo de aventura e profissionais de resgate outdoor. Prepare-se para atuar em ambientes silvestres onde os recursos são limitados, o acesso é difícil e a estabilização prolongada é necessária.',
+    levels: [
+      {
+        level: 'basic',
+        code: 'WEC:1',
+        name: 'First Aid',
+        namePt: 'Primeiros Socorros',
+        duration: '20 horas',
+        immersivity: 3,
+        difficulty: 4,
+        skill: 5,
+        description:
+          'Planejado para indivíduos não profissionais que necessitam de condições mínimas para atendimento inicial, aguardando chegada do serviço especializado.',
+        enrollmentStatus: 'open',
+      },
+      {
+        level: 'intermediate',
+        code: 'WEC:2',
+        name: 'Rapid Response',
+        namePt: 'Resposta Rápida',
+        duration: '40 horas',
+        immersivity: 5,
+        difficulty: 7,
+        skill: 7,
+        description:
+          'Elaborado para times de resgate que promovem serviços de emergência integrando ações de atendimento e evacuação com suporte de equipe profissional.',
+        enrollmentStatus: 'interest',
+      },
+      {
+        level: 'advanced',
+        code: 'WEC:3',
+        name: 'Technical Operation',
+        namePt: 'Operação Técnica',
+        duration: '60 horas',
+        immersivity: 9,
+        difficulty: 9,
+        skill: 10,
+        description:
+          'Formatado para profissionais que trabalham em cenários intensos com ambientes de difícil acesso, onde requerem recursos técnicos, segurança sistêmica e complexidade.',
+        enrollmentStatus: 'interest',
+      },
+    ],
     metadata: {
-      duration: '50 horas',
       certification: 'Certificação Internacional Wilderness',
       location: 'In-Company ou Sede EMR',
     },
