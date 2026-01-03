@@ -39,6 +39,8 @@ export const CourseActions = memo(
 
         <AccessibleLink
           href={brochureLink}
+          target='_blank'
+          rel='noopener noreferrer'
           className={`flex items-center justify-center w-full py-2 text-sm font-medium ${styles.secondary} ${styles.secondaryHover} ${styles.ring} transition-colors gap-2`}
           aria-label={`Baixar brochura em PDF do curso ${title}`}
         >
