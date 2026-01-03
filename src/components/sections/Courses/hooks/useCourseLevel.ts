@@ -14,7 +14,9 @@ interface UsCourseLevelReturn {
 /* eslint-enable no-unused-vars */
 
 export const useCourseLevel = (course: Course): UsCourseLevelReturn => {
-  const [selectedLevel, setSelectedLevel] = useState<CourseLevel>('basic')
+  const [selectedLevel, setSelectedLevel] = useState<CourseLevel>(
+    course.levels[0]?.level || 'basic'
+  )
 
   const currentLevel = useMemo(
     () =>
