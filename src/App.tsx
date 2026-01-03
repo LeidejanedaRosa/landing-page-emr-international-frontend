@@ -8,6 +8,7 @@ import PromoBannerCarousel from './components/sections/PromoBannerCarousel'
 import { JsonLdScript } from './components/seo/JsonLdScript'
 import { ORGANIZATION_STRUCTURED_DATA } from './components/seo/organizationSchema'
 import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
+import FloatingContact from './components/widgets/FloatingContact'
 import { PRODUCTS_MODAL_CONFIG, productsData } from './data/productsData'
 import { useScrollTrigger } from './hooks/useScrollTrigger'
 import SEO from './utils/SEO'
@@ -79,6 +80,7 @@ function App() {
         subtitle={PRODUCTS_MODAL_CONFIG.subtitle}
         ctaText={PRODUCTS_MODAL_CONFIG.ctaText}
       />
+      <FloatingContact />
     </ErrorBoundary>
   )
 }
