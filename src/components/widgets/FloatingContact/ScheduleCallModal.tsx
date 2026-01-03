@@ -19,6 +19,7 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({
   const {
     formData,
     errors,
+    popupBlockedError,
     handleSubmit,
     handleInputChange,
     handlePhoneChange,
@@ -31,7 +32,6 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({
       <div
         className='fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50 p-4'
         onClick={onClose}
-        role='presentation'
       >
         <div
           className='relative w-full max-w-md animate-[slideUp_0.3s_ease-out] rounded-2xl bg-white shadow-2xl'
@@ -48,6 +48,18 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({
           />
 
           <BusinessHoursInfo />
+
+          {popupBlockedError && (
+            <div
+              className='mx-6 mb-4 rounded-lg border-2 border-error bg-error-50 p-4'
+              role='alert'
+              aria-live='assertive'
+            >
+              <p className='text-sm font-semibold text-error'>
+                {popupBlockedError}
+              </p>
+            </div>
+          )}
 
           <ScheduleCallForm
             formData={formData}
