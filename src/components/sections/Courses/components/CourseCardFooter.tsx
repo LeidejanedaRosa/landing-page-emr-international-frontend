@@ -1,0 +1,42 @@
+import { memo } from 'react'
+
+import type { EnrollmentStatus } from '../../../../data/coursesData'
+import type { CourseStyleConfig } from '../types'
+import { CourseActions } from './CourseActions'
+import { CourseLocation } from './CourseLocation'
+
+interface CourseCardFooterProps {
+  location: string
+  whatsappUrl: string
+  title: string
+  levelCode: string
+  brochureLink: string
+  styles: CourseStyleConfig
+  enrollmentStatus: EnrollmentStatus
+}
+
+export const CourseCardFooter = memo(
+  ({
+    location,
+    whatsappUrl,
+    title,
+    levelCode,
+    brochureLink,
+    styles,
+    enrollmentStatus,
+  }: CourseCardFooterProps) => (
+    <footer className='space-y-4 mt-auto border-t border-primary-700/50 pt-4'>
+      <CourseLocation location={location} icon={styles.icon} />
+      <CourseActions
+        whatsappUrl={whatsappUrl}
+        title={title}
+        levelCode={levelCode}
+        brochureLink={brochureLink}
+        styles={styles}
+        enrollmentStatus={enrollmentStatus}
+      />
+    </footer>
+  )
+)
+
+CourseCardFooter.displayName = 'CourseCardFooter'
