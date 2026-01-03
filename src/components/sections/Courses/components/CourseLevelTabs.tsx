@@ -1,9 +1,7 @@
 import React, { memo, useCallback } from 'react'
 
-import { type CourseLevel, LEVEL_LABELS } from '../../../../data/coursesData'
+import { LEVEL_LABELS } from '../../../../data/coursesData'
 import type { CourseLevelTabsProps } from '../types'
-
-const LEVEL_KEYS: CourseLevel[] = ['basic', 'intermediate', 'advanced']
 
 export const CourseLevelTabs = memo(
   ({
@@ -19,26 +17,26 @@ export const CourseLevelTabs = memo(
           case 'ArrowRight': {
             e.preventDefault()
             const nextIndex = (currentIndex + 1) % levels.length
-            onLevelChange(LEVEL_KEYS[nextIndex])
+            onLevelChange(levels[nextIndex].level)
             break
           }
           case 'ArrowLeft': {
             e.preventDefault()
             const prevIndex = (currentIndex - 1 + levels.length) % levels.length
-            onLevelChange(LEVEL_KEYS[prevIndex])
+            onLevelChange(levels[prevIndex].level)
             break
           }
           case 'Home':
             e.preventDefault()
-            onLevelChange('basic')
+            onLevelChange(levels[0].level)
             break
           case 'End':
             e.preventDefault()
-            onLevelChange('advanced')
+            onLevelChange(levels[levels.length - 1].level)
             break
         }
       },
-      [levels.length, onLevelChange]
+      [levels, onLevelChange]
     )
 
     return (
