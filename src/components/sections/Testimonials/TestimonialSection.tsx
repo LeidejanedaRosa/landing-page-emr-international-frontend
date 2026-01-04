@@ -128,13 +128,13 @@ const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
       <header className='text-center mb-8 md:mb-16'>
         <h2
           id='testimonials-heading'
-          className='text-3xl md:text-5xl font-bold text-white mb-4'
+          className='text-3xl md:text-5xl text-white mb-4'
         >
           O que dizem sobre <span className='font-capture-it'>nós</span>
         </h2>
         <p className='text-primary-300 text-base md:text-lg max-w-2xl mx-auto'>
-          <span className='font-capture-it'>Histórias</span> reais de empresas e
-          profissionais que se capacitaram conosco
+          <span className='font-capture-it text-3xl'>Histórias</span> reais de
+          empresas e profissionais que se capacitaram conosco
         </p>
       </header>
 
