@@ -10,12 +10,10 @@ export const CoursesHeader = memo(
       </span>
       <h2
         id={titleId}
-        className='text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white tracking-tight'
+        className='text-3xl md:text-4xl lg:text-5xl mb-6 text-white tracking-tight'
       >
         <span className='font-capture-it'>Cursos</span> de APH Tático e{' '}
-        <span lang='en' className='font-capture-it'>
-          Wilderness Medicine
-        </span>
+        <span lang='en'>Wilderness Medicine</span>
       </h2>
       <p
         id={descriptionId}

@@ -29,7 +29,7 @@ export const CourseCardHeader = memo(
     <header className='mb-4'>
       <h3
         id={`${cardId}-title`}
-        className='text-xl font-bold text-white mb-3 leading-tight'
+        className='text-xl text-white mb-3 leading-tight'
       >
         <span className='font-capture-it text-2xl'>{abbreviation}</span>
         {' - '}
