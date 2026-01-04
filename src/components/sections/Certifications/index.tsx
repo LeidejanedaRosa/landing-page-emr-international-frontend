@@ -129,12 +129,10 @@ const CertificationsSectionHeader: React.FC = memo(() => {
       </div>
       <h2
         id='certifications-heading'
-        className='text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4'
+        className='text-3xl md:text-4xl lg:text-5xl text-black mb-4'
       >
         <span className='font-capture-it'>Credenciamento</span> Internacional em{' '}
-        <span lang='en' className='font-capture-it'>
-          Wilderness Medicine
-        </span>
+        <span lang='en'>Wilderness Medicine</span>
       </h2>
       <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
         Certificações reconhecidas mundialmente em APH Tático, atendimento de
