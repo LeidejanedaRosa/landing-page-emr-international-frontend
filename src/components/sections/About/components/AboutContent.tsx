@@ -4,10 +4,7 @@ import { InstructorHero } from './InstructorHero'
 
 export function AboutContent() {
   return (
-    <article
-      className='w-full px-6 py-6 sm:px-8 lg:px-10 space-y-4'
-      aria-labelledby='about-heading'
-    >
+    <article className='w-full px-6 py-6 sm:px-8 lg:px-10 space-y-4'>
       <InstructorHero />
 
       <div className='space-y-4'>
