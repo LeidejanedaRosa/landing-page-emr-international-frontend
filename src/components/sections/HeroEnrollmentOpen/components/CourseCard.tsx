@@ -37,7 +37,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
         onMouseLeave={onMouseLeave}
         onFocus={onFocus}
         onBlur={onBlur}
-        aria-label={`Curso ${title}: ${subtitle}`}
+        aria-label={subtitle ? `Curso ${title}: ${subtitle}` : `Curso ${title}`}
       >
         <div className='relative h-[55%] min-h-[180px] lg:absolute lg:inset-0 lg:h-full'>
           <CourseImage

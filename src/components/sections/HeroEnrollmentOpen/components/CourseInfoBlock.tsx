@@ -32,16 +32,9 @@ export const CourseInfoBlock: React.FC<CourseInfoBlockProps> = ({
         className='text-4xl lg:text-5xl
                  font-bold text-white mb-2 md:mb-3 leading-tight tracking-tight'
       >
-        {subtitle}
+        <div>{subtitle}</div>
+        {subtitle2 && <div>{subtitle2}</div>}
       </h3>
-      {subtitle2 && (
-        <h3
-          className='text-4xl lg:text-5xl
-                   font-bold text-white mb-2 md:mb-3 leading-tight tracking-tight'
-        >
-          {subtitle2}
-        </h3>
-      )}
       <p className='text-sm sm:text-base md:text-lg text-white/90 mb-4 md:mb-6 lg:mb-8 font-medium'>
         Certificação Internacional
       </p>
