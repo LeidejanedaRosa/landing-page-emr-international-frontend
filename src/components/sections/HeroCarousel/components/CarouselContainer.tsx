@@ -41,7 +41,7 @@ export const CarouselContainer = ({
       aria-label={HERO_CAROUSEL_A11Y.ariaLabel}
     >
       <div
-        className='relative h-[calc(100svh-150px)]'
+        className='relative min-h-screen h-[150vh] lg:h-[calc(100svh-150px)]'
         onMouseEnter={onPause}
         onMouseLeave={onResume}
         onFocus={onPause}
