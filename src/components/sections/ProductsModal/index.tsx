@@ -4,10 +4,9 @@ import { createPortal } from 'react-dom'
 
 import FocusLock from 'react-focus-lock'
 
+import { buildWhatsAppMessageUrl } from '../../../utils/whatsapp'
 import { ProductCard } from './ProductCard'
 import { ProductsModalProps } from './types'
-
-const WHATSAPP_NUMBER = '5519971575640'
 
 interface ModalHeaderProps {
   title: string
@@ -68,8 +67,7 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   ctaText,
   whatsappMessage,
 }) => {
-  const encodedMessage = encodeURIComponent(whatsappMessage)
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`
+  const whatsappUrl = buildWhatsAppMessageUrl(whatsappMessage)
 
   return (
     <a

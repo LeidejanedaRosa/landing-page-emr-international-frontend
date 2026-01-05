@@ -1,9 +1,6 @@
 import type { Course } from '../../../data/coursesData'
 import type { CourseStyleConfig } from './types'
 
-export const WHATSAPP_NUMBER = '5519971575640'
-export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
-
 export const INDICATOR_SEGMENTS = 10
 
 export const getVariantStyles = (

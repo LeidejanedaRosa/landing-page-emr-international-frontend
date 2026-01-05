@@ -1,18 +1,15 @@
 import React, { memo } from 'react'
 
 import { useUniqueId } from '../../hooks/useAccessibility'
-
-const WHATSAPP_NUMBER = '5519971575640'
-const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`
+import { buildWhatsAppMessageUrl } from '../../utils/whatsapp'
 
 const CallToAction: React.FC = memo(() => {
   const titleId = useUniqueId('cta-title')
   const descriptionId = useUniqueId('cta-description')
 
-  const whatsappMessage = encodeURIComponent(
+  const whatsappUrl = buildWhatsAppMessageUrl(
     'Olá! Gostaria de saber mais sobre os treinamentos da EMR Internacional.'
   )
-  const whatsappUrl = `${WHATSAPP_BASE_URL}?text=${whatsappMessage}`
 
   return (
     <section
