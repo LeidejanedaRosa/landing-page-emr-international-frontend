@@ -16,7 +16,7 @@ import SEO from './utils/SEO'
 const WhyItMattersSection = React.lazy(
   () => import('./components/sections/WhyItMatters')
 )
-const About = React.lazy(() => import('./components/sections/About'))
+const About = React.lazy(() => import('./components/sections/About/index'))
 const Certifications = React.lazy(
   () => import('./components/sections/Certifications')
 )
