@@ -10,7 +10,7 @@ interface FloatingButtonsProps {
 
 const FloatingButtons: React.FC<FloatingButtonsProps> = ({ onPhoneClick }) => {
   return (
-    <div className='fixed bottom-6 right-6 z-[9998] flex flex-col gap-3'>
+    <div className='fixed bottom-6 right-3 z-[9998] flex flex-col gap-3 sm:right-6'>
       <button
         onClick={onPhoneClick}
         className='group flex h-14 w-14 items-center justify-center rounded-full bg-cta text-white shadow-lg transition-all duration-300 hover:scale-110 hover:bg-cta-800 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cta focus-visible:ring-offset-2'
