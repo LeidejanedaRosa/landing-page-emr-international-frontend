@@ -14,7 +14,7 @@ import { useScrollTrigger } from './hooks/useScrollTrigger'
 import SEO from './utils/SEO'
 
 const WhyItMattersSection = React.lazy(
-  () => import('./components/sections/WhyItMatters')
+  () => import('./components/sections/WhyItMatters/index')
 )
 const About = React.lazy(() => import('./components/sections/About/index'))
 const Certifications = React.lazy(
