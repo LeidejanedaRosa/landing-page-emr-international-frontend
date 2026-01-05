@@ -3,7 +3,6 @@ import React, { memo } from 'react'
 import type { CourseCardProps } from '../types'
 import { CourseContent } from './CourseContent'
 import { CourseImage } from './CourseImage'
-import { EnrollmentBadge } from './EnrollmentBadge'
 
 export const CourseCard: React.FC<CourseCardProps> = memo(
   ({
@@ -32,7 +31,7 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
 
     return (
       <article
-        className={`relative group overflow-hidden flex-1 max-h-[85vh] ${scaleClass} ${scale}`}
+        className={`relative group overflow-hidden flex-1 flex flex-col lg:block lg:max-h-[85vh] ${scaleClass} ${scale}`}
         tabIndex={0}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -40,34 +39,34 @@ export const CourseCard: React.FC<CourseCardProps> = memo(
         onBlur={onBlur}
         aria-label={`Curso ${title}: ${subtitle}`}
       >
-        <CourseImage
-          imageAvif={imageAvif}
-          imageWebp={imageWebp}
-          imageJpg={imageJpg}
-          title={title}
-          subtitle={subtitle}
-        />
+        <div className='relative h-[55%] min-h-[180px] lg:absolute lg:inset-0 lg:h-full'>
+          <CourseImage
+            imageAvif={imageAvif}
+            imageWebp={imageWebp}
+            imageJpg={imageJpg}
+            title={title}
+            subtitle={subtitle}
+          />
+        </div>
 
         <div
-          className='absolute inset-0 bg-gradient-to-t from-black via-black/60 via-35% to-transparent 
+          className='hidden lg:block absolute inset-0 bg-gradient-to-t from-black via-black/60 via-35% to-transparent
                      group-hover:from-black/95 group-hover:via-black/70 transition-all duration-700 ease-out'
           aria-hidden='true'
         />
-        <EnrollmentBadge
-          accentColor={accentColor}
-          prefersReducedMotion={prefersReducedMotion}
-        />
+
         <CourseContent
-          title={title}
-          subtitle={subtitle}
-          subtitle2={subtitle2}
-          date={date}
-          month={month}
-          monthNumber={monthNumber}
-          year={year}
           accentColor={accentColor}
           ctaLabel='INSCREVA-SE AGORA'
           ctaAriaLabel={`Inscrever-se no curso ${title}`}
+          date={date}
+          month={month}
+          monthNumber={monthNumber}
+          prefersReducedMotion={prefersReducedMotion}
+          subtitle={subtitle}
+          subtitle2={subtitle2}
+          title={title}
+          year={year}
         />
       </article>
     )
