@@ -1,12 +1,12 @@
 import { BookOpen } from 'lucide-react'
 
+import { useScrollTo } from '../../../../hooks/useScrollTo'
 import { AccessibleButton } from '../../../ui/AccessibleButton'
 import { ABOUT_METRICS } from '../constants'
-import { useScrollToSection } from '../hooks/useScrollToSection'
 import { MetricCard } from './MetricCard'
 
 export function AboutMetrics() {
-  const { scrollTo } = useScrollToSection()
+  const { scrollTo } = useScrollTo()
 
   const handleScrollToCourses = () => {
     scrollTo('courses')

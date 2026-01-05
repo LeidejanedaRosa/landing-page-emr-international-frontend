@@ -1,5 +1,6 @@
 import heroSideImageJpg from '../../../assets/bg_hero_section.jpg'
 import heroSideImageWebp from '../../../assets/bg_hero_section.webp'
+import { useScrollTo } from '../../../hooks/useScrollTo'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
 import {
   HeroCTA,
@@ -8,8 +9,7 @@ import {
   SocialProof,
   TrustBadge,
 } from './components'
-import { HERO_CONTENT, HERO_SECTION_ID } from './constants'
-import { useHeroNavigation } from './hooks/useHeroNavigation'
+import { COURSES_SECTION_ID, HERO_CONTENT, HERO_SECTION_ID } from './constants'
 
 const heroImages = {
   jpg: heroSideImageJpg,
@@ -17,7 +17,7 @@ const heroImages = {
 }
 
 const Hero = () => {
-  const { scrollToCourses } = useHeroNavigation()
+  const { scrollTo } = useScrollTo()
   const headingId = `${HERO_SECTION_ID}-heading`
 
   return (
@@ -49,7 +49,7 @@ const Hero = () => {
         >
           <TrustBadge />
           <HeroHeadline />
-          <HeroCTA onClick={scrollToCourses} />
+          <HeroCTA onClick={() => scrollTo(COURSES_SECTION_ID)} />
           <SocialProof />
         </div>
       </div>
