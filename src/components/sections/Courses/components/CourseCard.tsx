@@ -1,8 +1,8 @@
 import { memo } from 'react'
 
 import { useUniqueId } from '../../../../hooks/useAccessibility'
+import { useCourseLevel } from '../../../../hooks/useCourseLevel'
 import { getVariantStyles } from '../constants'
-import { useCourseLevel } from '../hooks/useCourseLevel'
 import type { CourseCardProps } from '../types'
 import { CourseCardContent } from './CourseCardContent'
 import { CourseCardFooter } from './CourseCardFooter'
