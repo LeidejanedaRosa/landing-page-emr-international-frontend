@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
 
 import { useAccessibilityPreferences } from '../../../hooks/useAccessibility'
+import { useHover } from '../../../hooks/useHover'
 import { JsonLdScript } from '../../seo/JsonLdScript'
 import { CourseCard } from './components'
 import { COURSES_DATA } from './constants'
-import { useCourseHover } from './hooks/useCourseHover'
 
 interface HeroEnrollmentOpenProps {
   courseIndex: number
@@ -13,7 +13,7 @@ interface HeroEnrollmentOpenProps {
 export const HeroEnrollmentOpen: React.FC<HeroEnrollmentOpenProps> = memo(
   ({ courseIndex }) => {
     const { prefersReducedMotion } = useAccessibilityPreferences()
-    const { createHoverHandlers, hoveredCard } = useCourseHover()
+    const { createHoverHandlers, hoveredItem: hoveredCard } = useHover()
 
     const course = COURSES_DATA[courseIndex]
 
