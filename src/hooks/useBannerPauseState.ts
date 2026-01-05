@@ -17,9 +17,7 @@ export const useBannerPauseState = (
   announce: ReturnType<typeof useScreenReaderAnnouncement>['announce']
 ): BannerPauseState => {
   const [isPaused, setIsPaused] = useState(prefersReducedMotion)
-  const [pauseSource, setPauseSource] = useState<PauseSource>(
-    prefersReducedMotion ? 'auto' : 'manual'
-  )
+  const [pauseSource, setPauseSource] = useState<PauseSource>('auto')
   const prevPrefersReducedMotion = useRef(prefersReducedMotion)
 
   useEffect(() => {
