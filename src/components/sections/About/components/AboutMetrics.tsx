@@ -30,7 +30,7 @@ export function AboutMetrics() {
             highlight={highlight}
           />
         ))}
-        <div className='flex-1 backdrop-blur-sm bg-cta-600 hover:bg-cta-700 px-2 py-3 sm:px-4 sm:py-4 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer group'>
+        <div className='flex-1 backdrop-blur-sm bg-cta-600 hover:bg-cta-700 px-2 py-3 sm:px-4 sm:py-4 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group'>
           <AccessibleButton
             onClick={handleScrollToCourses}
             variant='ghost'
