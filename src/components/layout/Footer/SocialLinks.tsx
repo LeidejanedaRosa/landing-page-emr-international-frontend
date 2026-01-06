@@ -22,6 +22,10 @@ export const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
 }) => {
   const IconComponent = ICON_MAP[social.iconName]
 
+  if (!IconComponent) {
+    return null
+  }
+
   return (
     <a
       href={social.href}
