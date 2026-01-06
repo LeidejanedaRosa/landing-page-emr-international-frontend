@@ -70,7 +70,7 @@ const TestimonialSection = memo(() => {
       id='depoimentos'
       data-section='depoimentos'
       className='min-h-svh flex flex-col justify-center bg-gradient-to-b from-primary-950 via-primary-900 to-cta-700 py-12 md:py-20 px-4 sm:px-6 lg:px-8'
-      aria-labelledby='testimonials-heading'
+      aria-labelledby='depoimentos-heading'
       aria-roledescription={TESTIMONIALS_A11Y.roleDescription}
     >
       <TestimonialSectionContent
@@ -127,7 +127,7 @@ const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
     <div className='w-full max-w-screen-2xl mx-auto'>
       <header className='text-center mb-8 md:mb-16'>
         <h2
-          id='testimonials-heading'
+          id='depoimentos-heading'
           className='text-3xl md:text-5xl text-white mb-4'
         >
           O que dizem sobre <span className='font-capture-it'>nós</span>

@@ -13,7 +13,7 @@ export function InstructorHero() {
       </div>
 
       <h2
-        id='about-heading'
+        id='sobre-heading'
         className='font-capture-it text-4xl sm:text-5xl md:text-6xl text-white leading-tight'
       >
         {INSTRUCTOR_INFO.name}

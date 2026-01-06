@@ -6,7 +6,7 @@ export default function About() {
       id='sobre'
       data-section='sobre'
       className='relative min-h-screen bg-black'
-      aria-labelledby='about-heading'
+      aria-labelledby='sobre-heading'
     >
       <div className='max-w-screen-2xl mx-auto flex flex-col lg:flex-row lg:h-screen'>
         <div className='relative w-full lg:w-1/2 min-h-[280px] sm:min-h-[350px] lg:min-h-0 lg:h-full'>
