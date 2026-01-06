@@ -1,7 +1,7 @@
 import { BookOpen } from 'lucide-react'
 
 import { useScrollTo } from '../../../../hooks/useScrollTo'
-import { AccessibleButton } from '../../../ui/AccessibleButton'
+import { AccessibleButton } from '../../../ui/Accessibility'
 import { ABOUT_METRICS } from '../constants'
 import { MetricCard } from './MetricCard'
 

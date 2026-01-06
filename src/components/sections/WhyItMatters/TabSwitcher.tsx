@@ -1,5 +1,5 @@
 import { type TabData } from '../../../data/whyItMattersData'
-import { AccessibleButton } from '../../ui/AccessibleButton'
+import { AccessibleButton } from '../../ui/Accessibility'
 
 interface TabSwitcherProps {
   tabs: TabData[]

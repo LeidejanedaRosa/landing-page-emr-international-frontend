@@ -2,7 +2,7 @@ import { memo } from 'react'
 
 import { ArrowRight } from 'lucide-react'
 
-import { AccessibleButton } from '../../../ui/AccessibleButton'
+import { AccessibleButton } from '../../../ui/Accessibility'
 import { HERO_CONTENT } from '../constants'
 import type { HeroCTAProps } from '../types'
 

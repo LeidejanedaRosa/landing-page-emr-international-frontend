@@ -1,5 +1,5 @@
 import { useScrollTo } from '../../../hooks/useScrollTo'
-import { AccessibleButton } from '../../ui/AccessibleButton'
+import { AccessibleButton } from '../../ui/Accessibility'
 
 export function CallToAction() {
   const { scrollTo } = useScrollTo()

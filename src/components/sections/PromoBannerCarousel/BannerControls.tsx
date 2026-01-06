@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AccessibleButton } from '../../ui/AccessibleButton'
+import { AccessibleButton } from '../../ui/Accessibility'
 import { PauseIcon, PlayIcon } from '../../ui/icons'
 
 interface BannerControlsProps {
