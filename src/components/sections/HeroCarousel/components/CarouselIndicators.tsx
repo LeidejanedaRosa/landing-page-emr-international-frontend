@@ -1,11 +1,12 @@
-import { type KeyboardEvent, memo, useCallback, useMemo, useRef } from 'react'
+import { type KeyboardEvent, memo, useCallback, useRef } from 'react'
 
 import { getSlideLabels } from '../constants'
 import type { CarouselIndicatorsProps } from '../types'
 
+const slideLabels = getSlideLabels()
+
 export const CarouselIndicators = memo<CarouselIndicatorsProps>(
   ({ currentSlide, totalSlides, onSelect }) => {
-    const slideLabels = useMemo(() => getSlideLabels(), [])
     const buttonsRef = useRef<(HTMLButtonElement | null)[]>([])
 
     const handleKeyDown = useCallback(
