@@ -1,11 +1,21 @@
+import CemiterioAvif from '../assets/testimonials/cemiterio.avif'
 import CemiterioJpg from '../assets/testimonials/cemiterio.jpg'
+import CemiterioWebp from '../assets/testimonials/cemiterio.webp'
+import CorpoDeBombeirosAvif from '../assets/testimonials/corpo-de-bombeiros.avif'
 import CorpoDeBombeirosJpg from '../assets/testimonials/corpo-de-bombeiros.jpg'
 import CorpoDeBombeirosWebp from '../assets/testimonials/corpo-de-bombeiros.webp'
+import GuiaTuristicoAvif from '../assets/testimonials/guia-turistico.avif'
 import GuiaTuristicoJpg from '../assets/testimonials/guia-turistico.jpg'
+import GuiaTuristicoWebp from '../assets/testimonials/guia-turistico.webp'
+import MergulhadoresAvif from '../assets/testimonials/mergulhadores.avif'
 import MergulhadoresJpg from '../assets/testimonials/mergulhadores.jpg'
+import MergulhadoresWebp from '../assets/testimonials/mergulhadores.webp'
+import MundakaAventuraAvif from '../assets/testimonials/mundaka-aventura.avif'
 import MundakaAventuraJpg from '../assets/testimonials/mundaka-aventura.jpg'
 import MundakaAventuraWebp from '../assets/testimonials/mundaka-aventura.webp'
+import PousadaAvif from '../assets/testimonials/pousada.avif'
 import PousadaJpg from '../assets/testimonials/pousada.jpg'
+import PousadaWebp from '../assets/testimonials/pousada.webp'
 import type { Testimonial } from '../components/sections/Testimonials/types'
 
 export const testimonials: Testimonial[] = [
@@ -20,6 +30,8 @@ export const testimonials: Testimonial[] = [
     authorRole: 'Bombeiro Civil',
     rating: 5,
     images: {
+      avif: CemiterioAvif,
+      webp: CemiterioWebp,
       jpg: CemiterioJpg,
       alt: 'Foto de Carlos A.',
     },
@@ -35,6 +47,8 @@ export const testimonials: Testimonial[] = [
     authorRole: 'Coordenadora de Segurança',
     rating: 5,
     images: {
+      avif: PousadaAvif,
+      webp: PousadaWebp,
       jpg: PousadaJpg,
       alt: 'Foto de Fernanda S.',
     },
@@ -50,8 +64,9 @@ export const testimonials: Testimonial[] = [
     authorRole: 'Médico Socorrista',
     rating: 5,
     images: {
-      jpg: MundakaAventuraJpg,
+      avif: MundakaAventuraAvif,
       webp: MundakaAventuraWebp,
+      jpg: MundakaAventuraJpg,
       alt: 'Foto de Roberto M.',
     },
   },
@@ -66,6 +81,8 @@ export const testimonials: Testimonial[] = [
     authorRole: 'Diretora de Emergência',
     rating: 5,
     images: {
+      avif: MergulhadoresAvif,
+      webp: MergulhadoresWebp,
       jpg: MergulhadoresJpg,
       alt: 'Foto de Dra. Ana Paula L.',
     },
@@ -81,8 +98,9 @@ export const testimonials: Testimonial[] = [
     authorRole: 'Comandante de Operações',
     rating: 5,
     images: {
-      jpg: CorpoDeBombeirosJpg,
+      avif: CorpoDeBombeirosAvif,
       webp: CorpoDeBombeirosWebp,
+      jpg: CorpoDeBombeirosJpg,
       alt: 'Foto de Tenente João C.',
     },
   },
@@ -97,6 +115,8 @@ export const testimonials: Testimonial[] = [
     authorRole: 'Oficial de Saúde',
     rating: 5,
     images: {
+      avif: GuiaTuristicoAvif,
+      webp: GuiaTuristicoWebp,
       jpg: GuiaTuristicoJpg,
       alt: 'Foto de Cap. Marcos R.',
     },
@@ -117,6 +137,8 @@ export const testimonials: Testimonial[] = [
     courseType: 'remoto',
     companyName: 'Petrobras - Plataforma P-52',
     images: {
+      avif: MergulhadoresAvif,
+      webp: MergulhadoresWebp,
       jpg: MergulhadoresJpg,
       alt: 'Equipe de resgate da Petrobras em treinamento',
     },
@@ -137,8 +159,9 @@ export const testimonials: Testimonial[] = [
     courseType: 'tatico',
     companyName: 'SAMU - São Paulo',
     images: {
-      jpg: CorpoDeBombeirosJpg,
+      avif: CorpoDeBombeirosAvif,
       webp: CorpoDeBombeirosWebp,
+      jpg: CorpoDeBombeirosJpg,
       alt: 'Equipe do SAMU em treinamento tático',
     },
   },

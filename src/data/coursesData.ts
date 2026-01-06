@@ -1,7 +1,11 @@
-import TMRImageJpg from '../assets/TMR.jpg'
-import TMRPdf from '../assets/TMR_Spec_Sheet.pdf'
-import WECPdf from '../assets/WEC_Spec_Sheet.pdf'
-import WMRImageJpg from '../assets/WMR.jpg'
+import TMRImageAvif from '../assets/courses/TMR.avif'
+import TMRImageJpg from '../assets/courses/TMR.jpg'
+import TMRImageWebp from '../assets/courses/TMR.webp'
+import TMRPdf from '../assets/courses/TMR_Spec_Sheet.pdf'
+import WECPdf from '../assets/courses/WEC_Spec_Sheet.pdf'
+import WMRImageAvif from '../assets/courses/WMR.avif'
+import WMRImageJpg from '../assets/courses/WMR.jpg'
+import WMRImageWebp from '../assets/courses/WMR.webp'
 
 export type CourseVariant = 'emergency' | 'wilderness'
 export type CourseLevel = 'basic' | 'intermediate' | 'advanced'
@@ -110,6 +114,8 @@ const courses: Course[] = [
       brochure: TMRPdf,
     },
     images: {
+      avif: TMRImageAvif,
+      webp: TMRImageWebp,
       jpg: TMRImageJpg,
       alt: 'Tactical medical responder applying tourniquet during simulated combat training',
     },
@@ -170,6 +176,8 @@ const courses: Course[] = [
       brochure: WECPdf,
     },
     images: {
+      avif: WMRImageAvif,
+      webp: WMRImageWebp,
       jpg: WMRImageJpg,
       alt: 'Wilderness rescuer performing first aid and patient transport in mountainous terrain',
     },

@@ -1,6 +1,9 @@
-import tmrImageJpg from '../../../assets/hero_section_TMR.jpg'
-import tmrImageWebp from '../../../assets/hero_section_TMR.webp'
-import wmrImageJpg from '../../../assets/hero_section_WMR.jpg'
+import tmrImageAvif from '../../../assets/hero/hero_section_TMR.avif'
+import tmrImageJpg from '../../../assets/hero/hero_section_TMR.jpg'
+import tmrImageWebp from '../../../assets/hero/hero_section_TMR.webp'
+import wmrImageAvif from '../../../assets/hero/hero_section_WMR.avif'
+import wmrImageJpg from '../../../assets/hero/hero_section_WMR.jpg'
+import wmrImageWebp from '../../../assets/hero/hero_section_WMR.webp'
 import type { CourseData } from './types'
 
 export const COURSES_DATA: CourseData[] = [
@@ -13,8 +16,9 @@ export const COURSES_DATA: CourseData[] = [
     month: 'DEZ',
     monthNumber: '12',
     year: '2025',
-    imageJpg: tmrImageJpg,
+    imageAvif: tmrImageAvif,
     imageWebp: tmrImageWebp,
+    imageJpg: tmrImageJpg,
     accentColor: 'red',
     ctaLabel: 'INSCREVA-SE AGORA',
     ctaAriaLabel: 'Inscrever-se no curso Tactical Medical Response',
@@ -28,6 +32,8 @@ export const COURSES_DATA: CourseData[] = [
     month: 'MAR',
     monthNumber: '03',
     year: '2026',
+    imageAvif: wmrImageAvif,
+    imageWebp: wmrImageWebp,
     imageJpg: wmrImageJpg,
     accentColor: 'yellow',
     ctaLabel: 'INSCREVA-SE AGORA',
