@@ -1,9 +1,9 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 import { useUniqueId } from '../../hooks/useAccessibility'
 import { buildWhatsAppMessageUrl } from '../../utils/whatsapp'
 
-const CallToAction: React.FC = memo(() => {
+const CallToAction: React.FC = () => {
   const titleId = useUniqueId('cta-title')
   const descriptionId = useUniqueId('cta-description')
 
@@ -41,8 +41,6 @@ const CallToAction: React.FC = memo(() => {
       </div>
     </section>
   )
-})
-
-CallToAction.displayName = 'CallToAction'
+}
 
 export default CallToAction

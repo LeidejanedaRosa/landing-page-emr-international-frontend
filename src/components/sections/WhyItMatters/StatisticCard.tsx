@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import { type StatisticData } from '../../../data/whyItMattersData'
 
 interface StatisticCardProps {
@@ -94,4 +92,4 @@ function StatisticCardComponent({
   )
 }
 
-export const StatisticCard = memo(StatisticCardComponent)
+export const StatisticCard = StatisticCardComponent
