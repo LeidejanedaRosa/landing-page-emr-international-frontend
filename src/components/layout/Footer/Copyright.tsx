@@ -13,7 +13,7 @@ export const Copyright: React.FC = () => {
           <strong className='text-white'>{COMPANY_LEGAL_INFO.legalName}</strong>
           <span>. Todos os direitos reservados.</span>
         </p>
-        <p className='text-gray-500 text-sm mt-2'>
+        <p className='text-gray-400 text-sm mt-2'>
           CNPJ: {COMPANY_LEGAL_INFO.cnpj} | Registro CREA:{' '}
           {COMPANY_LEGAL_INFO.creaRegistration}
         </p>

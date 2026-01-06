@@ -25,8 +25,8 @@ export const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
     name: 'WhatsApp',
     href: 'https://wa.me/5519971575640',
     ariaLabel: 'Entrar em contato via WhatsApp - Abre em nova aba',
-    bgColor: 'bg-[#25D366]',
-    hoverBgColor: 'hover:bg-[#128C7E]',
+    bgColor: 'bg-[#128C7E]',
+    hoverBgColor: 'hover:bg-[#075E54]',
     iconName: 'whatsapp',
   },
 ] as const

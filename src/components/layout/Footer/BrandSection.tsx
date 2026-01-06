@@ -22,7 +22,7 @@ export const BrandSection: React.FC = () => {
         className='my-4 h-1 w-full bg-cta-500 rounded-full'
         aria-hidden='true'
       />
-      <p className='text-gray-400 text-base text-center'>
+      <p className='text-gray-300 text-base text-center'>
         Treinamentos e operações onde o convencional não alcança.
       </p>
     </div>
