@@ -1,8 +1,8 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 import { COMPANY_LEGAL_INFO } from '../../../data/companyInfo'
 
-export const Copyright: React.FC = memo(() => {
+export const Copyright: React.FC = () => {
   const currentYear = new Date().getFullYear()
 
   return (
@@ -20,6 +20,4 @@ export const Copyright: React.FC = memo(() => {
       </div>
     </div>
   )
-})
-
-Copyright.displayName = 'Copyright'
+}

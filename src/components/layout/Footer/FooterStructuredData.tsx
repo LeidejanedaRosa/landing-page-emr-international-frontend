@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 import { COMPANY_LEGAL_INFO } from '../../../data/companyInfo'
 import { SOCIAL_LINKS } from './constants'
@@ -22,7 +22,7 @@ interface OrganizationSchema {
   }
 }
 
-export const FooterStructuredData: React.FC = memo(() => {
+export const FooterStructuredData: React.FC = () => {
   const organizationSchema: OrganizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -50,6 +50,4 @@ export const FooterStructuredData: React.FC = memo(() => {
       }}
     />
   )
-})
-
-FooterStructuredData.displayName = 'FooterStructuredData'
+}
