@@ -43,6 +43,8 @@ export const useTestimonialCarousel = () => {
   )
 
   useEffect(() => {
+    if (!currentTestimonial) return
+
     const name: string =
       currentTestimonial.authorName ??
       currentTestimonial.companyName ??
@@ -51,13 +53,7 @@ export const useTestimonialCarousel = () => {
       TESTIMONIALS_A11Y.slideAnnouncement(name, currentIndex + 1, totalSlides),
       'polite'
     )
-  }, [
-    currentIndex,
-    announce,
-    currentTestimonial.authorName,
-    currentTestimonial.companyName,
-    totalSlides,
-  ])
+  }, [currentIndex, announce, currentTestimonial, totalSlides])
 
   return {
     currentIndex,
