@@ -23,7 +23,7 @@ export function CourseListSchema({ courses }: CourseListSchemaProps) {
       },
       hasCourseInstance: {
         '@type': 'CourseInstance' as const,
-        courseMode: 'Presencial',
+        courseMode: 'onsite',
         courseWorkload: level.duration,
         inLanguage: 'pt-BR',
       },
@@ -35,8 +35,14 @@ export function CourseListSchema({ courses }: CourseListSchemaProps) {
             : 'Advanced',
       about:
         course.variant === 'emergency'
-          ? 'Atendimento Pré-Hospitalar Tático'
-          : 'Emergência em Áreas Remotas',
+          ? {
+              '@type': 'Thing' as const,
+              name: 'Atendimento Pré-Hospitalar Tático',
+            }
+          : {
+              '@type': 'Thing' as const,
+              name: 'Emergência em Áreas Remotas',
+            },
       teaches:
         course.variant === 'emergency'
           ? ['APH Tático', 'Protocolos TECC', 'Medicina Tática']
@@ -53,7 +59,6 @@ export function CourseListSchema({ courses }: CourseListSchemaProps) {
       image: course.images.jpg,
       offers: {
         '@type': 'Offer' as const,
-        category: course.metadata.certification,
         availability:
           level.enrollmentStatus === 'open'
             ? 'https://schema.org/InStock'
