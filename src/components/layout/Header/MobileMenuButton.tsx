@@ -15,7 +15,7 @@ const MobileMenuButton: React.FC<MobileMenuButtonProps> = ({
       onClick={onClick}
       aria-expanded={isMobileMenuOpen}
       aria-controls='mobile-menu'
-      aria-label='Toggle mobile menu'
+      aria-label='Alternar menu de navegação'
       type='button'
     >
       <svg
