@@ -51,30 +51,30 @@ export default {
         },
         // Estados de notificação
         success: {
-          DEFAULT: '#28A745', // Verde Escuro Sóbrio
+          DEFAULT: '#1a7f37', // Verde com contraste WCAG AA (4.5:1 com branco)
           50: '#f0fdf4',
           100: '#dcfce7',
           200: '#bbf7d0',
           300: '#86efac',
-          400: '#4ade80',
-          500: '#28A745', // Verde Escuro Sóbrio
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+          400: '#22c55e',
+          500: '#1a7f37', // Verde com contraste WCAG AA
+          600: '#15803d',
+          700: '#166534',
+          800: '#14532d',
+          900: '#052e16',
         },
         error: {
-          DEFAULT: '#DC3545', // Vermelho de Erro
+          DEFAULT: '#c42b3a', // Vermelho com contraste WCAG AA (4.5:1 com branco)
           50: '#fef2f2',
           100: '#fee2e2',
           200: '#fecaca',
           300: '#fca5a5',
           400: '#f87171',
-          500: '#DC3545', // Vermelho de Erro
-          600: '#dc2626',
-          700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
+          500: '#c42b3a', // Vermelho com contraste WCAG AA
+          600: '#b91c1c',
+          700: '#991b1b',
+          800: '#7f1d1d',
+          900: '#6b1515',
         },
         warning: {
           DEFAULT: '#FFC107', // Amarelo Dourado
@@ -90,17 +90,17 @@ export default {
           900: '#78350f',
         },
         info: {
-          DEFAULT: '#17A2B8', // Azul Sóbrio
+          DEFAULT: '#0077a3', // Azul com contraste WCAG AA (4.5:1 com branco)
           50: '#f0f9ff',
           100: '#e0f2fe',
           200: '#bae6fd',
           300: '#7dd3fc',
           400: '#38bdf8',
-          500: '#17A2B8', // Azul Sóbrio
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+          500: '#0077a3', // Azul com contraste WCAG AA
+          600: '#0369a1',
+          700: '#075985',
+          800: '#0c4a6e',
+          900: '#083344',
         },
       },
       fontFamily: {
