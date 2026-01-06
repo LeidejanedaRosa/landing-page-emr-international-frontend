@@ -150,7 +150,7 @@ Detecta automaticamente qual seção está visível no viewport baseado no scrol
 import { useCurrentSection } from './hooks/useCurrentSection'
 
 function App() {
-  const currentSection = useCurrentSection(['hero', 'about', 'certifications', 'courses', 'contact'])
+  const currentSection = useCurrentSection(['inicio', 'sobre', 'certificacoes', 'cursos', 'contato'])
 
   return <Header currentSection={currentSection} />
 }
@@ -272,7 +272,7 @@ import { AccessibleLink } from './components/ui/Accessibility'
 import Header from './components/layout/Header'
 
 function App() {
-  const currentSection = useCurrentSection(['hero', 'about', 'certifications', 'courses', 'contact'])
+  const currentSection = useCurrentSection(['inicio', 'sobre', 'certificacoes', 'cursos', 'contato'])
 
   return (
     <div>
@@ -282,8 +282,8 @@ function App() {
         <ul>
           <li>
             <AccessibleLink
-              href="#hero"
-              ariaCurrent={currentSection === 'hero' ? 'page' : undefined}
+              href="#inicio"
+              ariaCurrent={currentSection === 'inicio' ? 'page' : undefined}
             >
               Início
             </AccessibleLink>
@@ -291,7 +291,7 @@ function App() {
           <li>
             <AccessibleLink
               href="#sobre"
-              ariaCurrent={currentSection === 'about' ? 'page' : undefined}
+              ariaCurrent={currentSection === 'sobre' ? 'page' : undefined}
             >
               Sobre
             </AccessibleLink>
@@ -299,7 +299,7 @@ function App() {
           <li>
             <AccessibleLink
               href="#cursos"
-              ariaCurrent={currentSection === 'courses' ? 'page' : undefined}
+              ariaCurrent={currentSection === 'cursos' ? 'page' : undefined}
             >
               Cursos
             </AccessibleLink>
