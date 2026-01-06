@@ -1,8 +1,6 @@
-import { memo } from 'react'
-
 import type { CourseImageProps } from '../types'
 
-export const CourseImage = memo(({ images }: CourseImageProps) => (
+export const CourseImage = ({ images }: CourseImageProps) => (
   <picture className='w-full h-full'>
     {images.avif && (
       <source
@@ -28,6 +26,4 @@ export const CourseImage = memo(({ images }: CourseImageProps) => (
       height={600}
     />
   </picture>
-))
-
-CourseImage.displayName = 'CourseImage'
+)

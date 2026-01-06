@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import type {
   CourseLevelData,
   CourseVariant,
@@ -18,39 +16,35 @@ interface CourseCardContentProps {
   styles: CourseStyleConfig
 }
 
-export const CourseCardContent = memo(
-  ({
-    cardId,
-    selectedLevel,
-    currentLevel,
-    variant,
-    certification,
-    styles,
-  }: CourseCardContentProps) => (
-    <div
-      id={`${cardId}-panel-${selectedLevel}`}
-      role='tabpanel'
-      aria-labelledby={`${cardId}-tab-${selectedLevel}`}
-      className='flex-grow flex flex-col'
-    >
-      <CourseStatusBadge
-        status={currentLevel.enrollmentStatus}
-        variant={variant}
-      />
+export const CourseCardContent = ({
+  cardId,
+  selectedLevel,
+  currentLevel,
+  variant,
+  certification,
+  styles,
+}: CourseCardContentProps) => (
+  <div
+    id={`${cardId}-panel-${selectedLevel}`}
+    role='tabpanel'
+    aria-labelledby={`${cardId}-tab-${selectedLevel}`}
+    className='flex-grow flex flex-col'
+  >
+    <CourseStatusBadge
+      status={currentLevel.enrollmentStatus}
+      variant={variant}
+    />
 
-      <CourseLevelInfo
-        currentLevel={currentLevel}
-        certification={certification}
-        styles={styles}
-      />
+    <CourseLevelInfo
+      currentLevel={currentLevel}
+      certification={certification}
+      styles={styles}
+    />
 
-      <LevelIndicators levelData={currentLevel} styles={styles} />
+    <LevelIndicators levelData={currentLevel} styles={styles} />
 
-      <p className='text-primary-200 text-sm leading-relaxed mb-4 flex-grow'>
-        {currentLevel.description}
-      </p>
-    </div>
-  )
+    <p className='text-primary-200 text-sm leading-relaxed mb-4 flex-grow'>
+      {currentLevel.description}
+    </p>
+  </div>
 )
-
-CourseCardContent.displayName = 'CourseCardContent'

@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import { useUniqueId } from '../../../../hooks/useAccessibility'
 import { useCourseLevel } from '../../../../hooks/useCourseLevel'
 import { getVariantStyles } from '../constants'
@@ -9,7 +7,7 @@ import { CourseCardFooter } from './CourseCardFooter'
 import { CourseCardHeader } from './CourseCardHeader'
 import { CourseImage } from './CourseImage'
 
-export const CourseCard = memo(({ course }: CourseCardProps) => {
+export const CourseCard = ({ course }: CourseCardProps) => {
   const { id, abbreviation, title, levels, metadata, images, variant } = course
   const cardId = useUniqueId(`course-${id}`)
   const styles = getVariantStyles(variant)
@@ -67,6 +65,4 @@ export const CourseCard = memo(({ course }: CourseCardProps) => {
       </div>
     </article>
   )
-})
-
-CourseCard.displayName = 'CourseCard'
+}
