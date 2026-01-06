@@ -46,7 +46,7 @@ export const FooterStructuredData: React.FC = memo(() => {
     <script
       type='application/ld+json'
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(organizationSchema),
+        __html: JSON.stringify(organizationSchema).replace(/</g, '\\u003c'),
       }}
     />
   )
