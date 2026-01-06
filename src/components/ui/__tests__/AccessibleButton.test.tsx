@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import { render, screen, userEvent } from '../../../test/test-utils'
-import { AccessibleButton } from '../AccessibleButton'
+import { AccessibleButton } from '../Accessibility'
 
 // eslint-disable-next-line max-lines-per-function
 describe('AccessibleButton', () => {
