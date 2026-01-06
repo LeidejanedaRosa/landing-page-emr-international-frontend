@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'CaptureIt';
-  src: url('/assets/fonts/CaptureIt.ttf') format('truetype');
-  font-weight: normal;
+  src: url('/assets/fonts/CaptureIt.woff2') format('woff2');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
