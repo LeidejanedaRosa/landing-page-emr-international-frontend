@@ -1,5 +1,6 @@
-import heroSideImageJpg from '../../../assets/bg_hero_section.jpg'
-import heroSideImageWebp from '../../../assets/bg_hero_section.webp'
+import heroSideImageAvif from '../../../assets/hero/bg_hero_section.avif'
+import heroSideImageJpg from '../../../assets/hero/bg_hero_section.jpg'
+import heroSideImageWebp from '../../../assets/hero/bg_hero_section.webp'
 import { useScrollTo } from '../../../hooks/useScrollTo'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
 import {
@@ -12,6 +13,7 @@ import {
 import { COURSES_SECTION_ID, HERO_CONTENT, HERO_SECTION_ID } from './constants'
 
 const heroImages = {
+  avif: heroSideImageAvif,
   jpg: heroSideImageJpg,
   webp: heroSideImageWebp,
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import type { CertificationLogo } from '../../../data/certificationsData'
 import { CertificationModal } from './CertificationModal'
 
 interface CertificationCardProps {
@@ -7,7 +8,7 @@ interface CertificationCardProps {
   organization: string
   description: string
   year: string
-  logo: string
+  logo: CertificationLogo
   index: number
   certifiedLabel?: string
   readMoreLabel?: string
@@ -35,15 +36,28 @@ export const CertificationCard: React.FC<CertificationCardProps> = ({
         aria-label={`Certificação ${name}`}
       >
         <figure className='w-full h-40 flex items-center justify-center mb-4 flex-shrink-0'>
-          <img
-            src={logo}
-            alt={`Logo ${organization}`}
-            width={300}
-            height={160}
-            className={`object-contain mx-auto ${isCTECC ? 'max-w-[60%] max-h-[70%]' : 'max-w-[80%] max-h-full'}`}
-            loading={index < 4 ? 'eager' : 'lazy'}
-            decoding='async'
-          />
+          <picture>
+            <source
+              srcSet={logo.avif}
+              type='image/avif'
+              sizes='(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 300px'
+            />
+            <source
+              srcSet={logo.webp}
+              type='image/webp'
+              sizes='(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 300px'
+            />
+            <img
+              src={logo.jpg}
+              alt={`Logo ${organization}`}
+              width={300}
+              height={160}
+              sizes='(max-width: 640px) 80vw, (max-width: 1024px) 40vw, 300px'
+              className={`object-contain mx-auto ${isCTECC ? 'max-w-[60%] max-h-[70%]' : 'max-w-[80%] max-h-full'}`}
+              loading={index < 4 ? 'eager' : 'lazy'}
+              decoding='async'
+            />
+          </picture>
         </figure>
         <div className='text-center flex-1 flex flex-col justify-between w-full'>
           <div className='flex-1'>
