@@ -1,22 +1,19 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
-/**
- * Hook para gerenciar o estado do menu mobile
- */
 export const useMobileMenu = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  const toggleMobileMenu = useCallback(() => {
+  const toggleMobileMenu = () => {
     setIsMobileMenuOpen(prev => !prev)
-  }, [])
+  }
 
-  const closeMobileMenu = useCallback(() => {
+  const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
-  }, [])
+  }
 
-  const openMobileMenu = useCallback(() => {
+  const openMobileMenu = () => {
     setIsMobileMenuOpen(true)
-  }, [])
+  }
 
   return {
     isMobileMenuOpen,
