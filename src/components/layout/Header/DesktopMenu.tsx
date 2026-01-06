@@ -1,60 +1,19 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 import {
   useScreenReaderAnnouncement,
   useUniqueId,
 } from '../../../hooks/useAccessibility'
 import { AccessibleLink } from '../../ui/Accessibility'
+import { NAVIGATION_ITEMS, NavigationItem } from './config/navigationConfig'
 
 interface DesktopMenuProps {
   currentSection?: string
 }
 
-interface NavigationItem {
-  id: string
-  href: string
-  label: string
-  ariaLabel: string
-}
-
-const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
+const DesktopMenu: React.FC<DesktopMenuProps> = ({ currentSection }) => {
   const { announce } = useScreenReaderAnnouncement()
   const menuId = useUniqueId('desktop-menu')
-
-  const navigationItems: NavigationItem[] = [
-    {
-      id: 'sobre',
-      href: '#sobre',
-      label: 'Sobre',
-      ariaLabel:
-        'Navegar para seção Sobre - Informações sobre a EMR Internacional',
-    },
-    {
-      id: 'certificacoes',
-      href: '#certificacoes',
-      label: 'Certificações',
-      ariaLabel:
-        'Navegar para seção Certificações - Certificações internacionais',
-    },
-    {
-      id: 'cursos',
-      href: '#cursos',
-      label: 'Cursos',
-      ariaLabel: 'Navegar para seção Cursos - Nossos cursos especializados',
-    },
-    {
-      id: 'depoimentos',
-      href: '#depoimentos',
-      label: 'Depoimentos',
-      ariaLabel: 'Navegar para seção Depoimentos - O que dizem nossos alunos',
-    },
-    {
-      id: 'contato',
-      href: '#contato',
-      label: 'Contato',
-      ariaLabel: 'Navegar para seção Contato - Fale conosco',
-    },
-  ]
 
   const handleNavigation = (item: NavigationItem) => {
     announce(`Navegando para ${item.label}`, 'polite')
@@ -66,7 +25,7 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
         Menu principal de navegação
       </span>
       <ul className='flex space-x-8'>
-        {navigationItems.map(item => {
+        {NAVIGATION_ITEMS.map(item => {
           const isCurrent = currentSection === item.id
           return (
             <li key={item.id}>
@@ -90,6 +49,8 @@ const DesktopMenu: React.FC<DesktopMenuProps> = memo(({ currentSection }) => {
       </ul>
     </nav>
   )
-})
+}
+
 DesktopMenu.displayName = 'DesktopMenu'
+
 export default DesktopMenu
