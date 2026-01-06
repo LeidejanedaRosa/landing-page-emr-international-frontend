@@ -7,6 +7,10 @@ import { ProductsModal } from './components/sections/ProductsModal'
 import PromoBannerCarousel from './components/sections/PromoBannerCarousel/index'
 import { JsonLdScript } from './components/seo/JsonLdScript'
 import { ORGANIZATION_STRUCTURED_DATA } from './components/seo/organizationSchema'
+import {
+  BreadcrumbSchema,
+  DEFAULT_BREADCRUMBS,
+} from './components/seo/schemas/BreadcrumbSchema'
 import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
 import FloatingContact from './components/widgets/FloatingContact'
 import { PRODUCTS_MODAL_CONFIG, productsData } from './data/productsData'
@@ -40,6 +44,7 @@ function App() {
     <ErrorBoundary>
       <SEO />
       <JsonLdScript data={ORGANIZATION_STRUCTURED_DATA} />
+      <BreadcrumbSchema items={DEFAULT_BREADCRUMBS} />
       <div className='min-h-screen bg-gray-50'>
         <Header />
         <PromoBannerCarousel />

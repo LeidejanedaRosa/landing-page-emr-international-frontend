@@ -1,96 +1,78 @@
-import React, { memo, useCallback, useEffect } from 'react'
+import React, { memo } from 'react'
 
 import { testimonials } from '../../../data/testimonialsData'
-import { useScreenReaderAnnouncement } from '../../../hooks/useAccessibility'
-import { useCarousel } from '../../../hooks/useCarousel'
-import { useIndicatorKeyboard } from '../../../hooks/useIndicatorKeyboard'
+import { TestimonialsSchema } from '../../seo/schemas'
 import {
   TestimonialCard,
   TestimonialIndicators,
   TestimonialNavigation,
 } from './components'
 import { TESTIMONIALS_A11Y, TESTIMONIALS_CONFIG } from './constants'
+import { useTestimonialCarousel } from './hooks/useTestimonialCarousel'
 import type { TestimonialIndicatorsProps } from './types'
 
 const TestimonialSection = memo(() => {
-  const { announce } = useScreenReaderAnnouncement()
-  const totalSlides = testimonials.length
-
   const {
     currentIndex,
+    totalSlides,
+    currentTestimonial,
     isAutoPlaying,
     nextSlide,
     previousSlide,
     goToSlide,
     pauseAutoPlay,
     resumeAutoPlay,
-  } = useCarousel({
-    totalItems: totalSlides,
-    autoPlayDelay: TESTIMONIALS_CONFIG.autoPlayDelay,
-    enableAutoPlay: true,
-  })
-
-  const { buttonsRef, handleKeyDown: handleIndicatorKeyDown } =
-    useIndicatorKeyboard({ totalSlides, goToSlide })
-
-  const currentTestimonial = testimonials[currentIndex]
-
-  const handleKeyDown: React.KeyboardEventHandler = useCallback(
-    event => {
-      if (event.key === 'ArrowLeft') {
-        previousSlide()
-        event.preventDefault()
-      } else if (event.key === 'ArrowRight') {
-        nextSlide()
-        event.preventDefault()
-      }
-    },
-    [nextSlide, previousSlide]
-  )
-
-  useEffect(() => {
-    const name: string =
-      currentTestimonial.authorName ??
-      currentTestimonial.companyName ??
-      `Slide ${currentIndex + 1}`
-    announce(
-      TESTIMONIALS_A11Y.slideAnnouncement(name, currentIndex + 1, totalSlides),
-      'polite'
-    )
-  }, [
-    currentIndex,
-    announce,
-    currentTestimonial.authorName,
-    currentTestimonial.companyName,
-    totalSlides,
-  ])
+    buttonsRef,
+    handleIndicatorKeyDown,
+    handleKeyDown,
+  } = useTestimonialCarousel()
 
   return (
-    <section
-      id='depoimentos'
-      data-section='depoimentos'
-      className='min-h-svh flex flex-col justify-center bg-gradient-to-b from-primary-950 via-primary-900 to-cta-700 py-12 md:py-20 px-4 sm:px-6 lg:px-8'
-      aria-labelledby='depoimentos-heading'
-      aria-roledescription={TESTIMONIALS_A11Y.roleDescription}
-    >
-      <TestimonialSectionContent
-        currentIndex={currentIndex}
-        totalSlides={totalSlides}
-        currentTestimonial={currentTestimonial}
-        onKeyDown={handleKeyDown}
-        onPauseAutoPlay={pauseAutoPlay}
-        onResumeAutoPlay={resumeAutoPlay}
-        onPrev={previousSlide}
-        onNext={nextSlide}
-        onSelect={goToSlide}
-        buttonsRef={buttonsRef}
-        handleIndicatorKeyDown={handleIndicatorKeyDown}
-        isAutoPlaying={isAutoPlaying}
-        autoPlayDelay={TESTIMONIALS_CONFIG.autoPlayDelay}
-      />
-    </section>
+    <>
+      <TestimonialsSchema testimonials={testimonials} />
+      <section
+        id='depoimentos'
+        data-section='depoimentos'
+        className='min-h-svh flex flex-col justify-center bg-gradient-to-b from-primary-950 via-primary-900 to-cta-700 py-12 md:py-20 px-4 sm:px-6 lg:px-8'
+        aria-labelledby='depoimentos-heading'
+        aria-roledescription={TESTIMONIALS_A11Y.roleDescription}
+      >
+        <TestimonialSectionContent
+          currentIndex={currentIndex}
+          totalSlides={totalSlides}
+          currentTestimonial={currentTestimonial}
+          onKeyDown={handleKeyDown}
+          onPauseAutoPlay={pauseAutoPlay}
+          onResumeAutoPlay={resumeAutoPlay}
+          onPrev={previousSlide}
+          onNext={nextSlide}
+          onSelect={goToSlide}
+          buttonsRef={buttonsRef}
+          handleIndicatorKeyDown={handleIndicatorKeyDown}
+          isAutoPlaying={isAutoPlaying}
+          autoPlayDelay={TESTIMONIALS_CONFIG.autoPlayDelay}
+        />
+      </section>
+    </>
   )
 })
+
+const TestimonialHeader = memo(() => (
+  <header className='text-center mb-8 md:mb-16'>
+    <h2
+      id='depoimentos-heading'
+      className='text-3xl md:text-5xl text-white mb-4'
+    >
+      O que dizem sobre <span className='font-capture-it'>nós</span>
+    </h2>
+    <p className='text-primary-300 text-base md:text-lg max-w-2xl mx-auto'>
+      <span className='font-capture-it text-3xl'>Histórias</span> reais de
+      empresas e profissionais que se capacitaram conosco
+    </p>
+  </header>
+))
+
+TestimonialHeader.displayName = 'TestimonialHeader'
 
 interface TestimonialSectionContentProps {
   currentIndex: number
@@ -125,18 +107,7 @@ const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
     autoPlayDelay,
   }) => (
     <div className='w-full max-w-screen-2xl mx-auto'>
-      <header className='text-center mb-8 md:mb-16'>
-        <h2
-          id='depoimentos-heading'
-          className='text-3xl md:text-5xl text-white mb-4'
-        >
-          O que dizem sobre <span className='font-capture-it'>nós</span>
-        </h2>
-        <p className='text-primary-300 text-base md:text-lg max-w-2xl mx-auto'>
-          <span className='font-capture-it text-3xl'>Histórias</span> reais de
-          empresas e profissionais que se capacitaram conosco
-        </p>
-      </header>
+      <TestimonialHeader />
 
       <div
         className='relative lg:px-12 xl:px-16'
