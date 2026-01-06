@@ -32,7 +32,7 @@ const Footer = React.lazy(() => import('./components/layout/Footer/index'))
 function App() {
   const { hasTriggered: showProductsModal, resetTrigger: closeProductsModal } =
     useScrollTrigger({
-      targetSectionId: 'courses',
+      targetSectionId: 'cursos',
       storageKey: 'productsModalShown',
     })
 

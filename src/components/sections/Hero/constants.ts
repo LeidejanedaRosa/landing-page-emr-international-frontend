@@ -1,4 +1,4 @@
-export const HERO_SECTION_ID = 'hero' as const
+export const HERO_SECTION_ID = 'inicio' as const
 export const HERO_MAIN_TITLE_ID = 'hero-main-title' as const
 export const ABOUT_SECTION_ID = 'sobre' as const
 export const CERTIFICATIONS_SECTION_ID = 'certificacoes' as const

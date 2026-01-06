@@ -25,7 +25,7 @@ interface LogoProps {
 const CompanyLogoComponent: React.FC<LogoProps> = ({ logoId }) => {
   return (
     <a
-      href='#hero'
+      href='#inicio'
       className='flex items-center rounded-lg p-2 -m-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
       aria-label='EMR Internacional - Voltar ao início'
     >
@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = () => {
   const { announce } = useScreenReaderAnnouncement()
   const { skipToContent, skipToNavigation } = useSkipLinks()
   const currentSection = useCurrentSection([
-    'hero',
+    'inicio',
     'sobre',
     'certificacoes',
     'cursos',
@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = () => {
   const { containerRef } = useFocusTrap(isMobileMenuOpen)
 
   useEffect(() => {
-    if (currentSection && currentSection !== 'hero') {
+    if (currentSection && currentSection !== 'inicio') {
       const sectionNames = {
         about: 'Sobre',
         certifications: 'Certificações',
