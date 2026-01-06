@@ -42,8 +42,8 @@ export function useScrollTo(options: UseScrollToOptions = {}) {
 
       element.scrollIntoView({ behavior, block })
 
-      if (sectionId && window.history.pushState) {
-        window.history.pushState(null, '', `#${sectionId}`)
+      if (sectionId && window.history.replaceState) {
+        window.history.replaceState(null, '', `#${sectionId}`)
       }
     },
     [behavior, block]
