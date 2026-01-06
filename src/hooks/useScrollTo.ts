@@ -18,17 +18,21 @@ export function useScrollTo(options: UseScrollToOptions = {}) {
   const scrollTo = useCallback(
     (target: ScrollTarget | string) => {
       let element: Element | null = null
+      let sectionId = ''
 
       if (typeof target === 'string') {
         element =
           document.getElementById(target) ||
           document.querySelector(`[data-section="${CSS.escape(target)}"]`)
+        sectionId = target
       } else if ('id' in target) {
         element = document.getElementById(target.id)
+        sectionId = target.id
       } else if ('dataSection' in target) {
         element = document.querySelector(
           `[data-section="${CSS.escape(target.dataSection)}"]`
         )
+        sectionId = target.dataSection
       }
 
       if (!element) {
@@ -37,6 +41,10 @@ export function useScrollTo(options: UseScrollToOptions = {}) {
       }
 
       element.scrollIntoView({ behavior, block })
+
+      if (sectionId && window.history.pushState) {
+        window.history.pushState(null, '', `#${sectionId}`)
+      }
     },
     [behavior, block]
   )

@@ -271,8 +271,8 @@ const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> 
     }) => {
       return (
         <section
-          id='certifications'
-          data-section='certifications'
+          id='certificacoes'
+          data-section='certificacoes'
           className='w-full py-16 px-4 bg-gray-50'
           aria-labelledby='certifications-heading'
           onMouseEnter={pauseAutoPlay}

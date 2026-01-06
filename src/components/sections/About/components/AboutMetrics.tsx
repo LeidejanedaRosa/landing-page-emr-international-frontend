@@ -9,7 +9,7 @@ export function AboutMetrics() {
   const { scrollTo } = useScrollTo()
 
   const handleScrollToCourses = () => {
-    scrollTo('courses')
+    scrollTo('cursos')
   }
 
   return (

@@ -54,11 +54,11 @@ const Header: React.FC<HeaderProps> = () => {
   const { skipToContent, skipToNavigation } = useSkipLinks()
   const currentSection = useCurrentSection([
     'hero',
-    'about',
-    'certifications',
-    'courses',
-    'testimonials',
-    'contact',
+    'sobre',
+    'certificacoes',
+    'cursos',
+    'depoimentos',
+    'contato',
   ])
   const headerId = useUniqueId('main-header')
   const logoId = useUniqueId('company-logo')

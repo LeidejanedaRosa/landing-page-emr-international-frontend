@@ -240,7 +240,7 @@ O sistema de navegação implementa o padrão ARIA `aria-current` para melhor ac
 import { AccessibleLink } from './components/ui/Accessibility'
 
 // Link da página atual
-<AccessibleLink href="#about" ariaCurrent="page">
+<AccessibleLink href="#sobre" ariaCurrent="page">
   Sobre
 </AccessibleLink>
 
@@ -290,7 +290,7 @@ function App() {
           </li>
           <li>
             <AccessibleLink
-              href="#about"
+              href="#sobre"
               ariaCurrent={currentSection === 'about' ? 'page' : undefined}
             >
               Sobre
@@ -298,7 +298,7 @@ function App() {
           </li>
           <li>
             <AccessibleLink
-              href="#courses"
+              href="#cursos"
               ariaCurrent={currentSection === 'courses' ? 'page' : undefined}
             >
               Cursos
@@ -334,7 +334,7 @@ import { AccessibleButton } from './components/ui/Accessibility'
 import { AccessibleLink } from './components/ui/Accessibility'
 
 <AccessibleLink
-  href="#contact"
+  href="#contato"
   variant="primary"
   ariaCurrent="page"
 >

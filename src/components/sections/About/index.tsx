@@ -3,8 +3,8 @@ import { AboutContent, AboutMetrics, InstructorMedia } from './components'
 export default function About() {
   return (
     <section
-      id='about'
-      data-section='about'
+      id='sobre'
+      data-section='sobre'
       className='relative min-h-screen bg-black'
       aria-labelledby='about-heading'
     >

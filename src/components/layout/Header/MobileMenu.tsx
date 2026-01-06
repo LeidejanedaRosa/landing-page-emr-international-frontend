@@ -12,7 +12,7 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
     <div id='mobile-menu' className='md:hidden flex justify-center'>
       <div className='flex justify-center items-center flex-wrap gap-2 w-[90vw] px-2 pt-2 pb-3 sm:px-3 bg-white/20'>
         <AccessibleLink
-          href='#about'
+          href='#sobre'
           className='px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'
           ariaCurrent={currentSection === 'about' ? 'page' : undefined}
@@ -21,7 +21,7 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
           Sobre
         </AccessibleLink>
         <AccessibleLink
-          href='#certifications'
+          href='#certificacoes'
           className='px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'
           ariaCurrent={currentSection === 'certifications' ? 'page' : undefined}
@@ -30,7 +30,7 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
           Certificações
         </AccessibleLink>
         <AccessibleLink
-          href='#courses'
+          href='#cursos'
           className='px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'
           ariaCurrent={currentSection === 'courses' ? 'page' : undefined}
@@ -39,7 +39,7 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
           Cursos
         </AccessibleLink>
         <AccessibleLink
-          href='#testimonials'
+          href='#depoimentos'
           className='px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'
           ariaCurrent={currentSection === 'testimonials' ? 'page' : undefined}
@@ -48,7 +48,7 @@ const MobileMenu: React.FC<MobileMenuProps> = React.memo(
           Depoimentos
         </AccessibleLink>
         <AccessibleLink
-          href='#contact'
+          href='#contato'
           className='px-3 py-2 rounded-md transition-colors duration-200 focus:bg-white/30 active:bg-white/40'
           variant='ghost'
           ariaCurrent={currentSection === 'contact' ? 'page' : undefined}

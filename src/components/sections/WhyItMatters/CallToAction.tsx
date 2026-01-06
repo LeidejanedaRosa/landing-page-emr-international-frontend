@@ -5,7 +5,7 @@ export function CallToAction() {
   const { scrollTo } = useScrollTo()
 
   const handleNavigateToTraining = () => {
-    scrollTo({ dataSection: 'courses' })
+    scrollTo({ dataSection: 'cursos' })
   }
 
   return (

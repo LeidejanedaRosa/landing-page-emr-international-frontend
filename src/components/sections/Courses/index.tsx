@@ -9,8 +9,8 @@ const Courses = () => {
 
   return (
     <section
-      id='courses'
-      data-section='courses'
+      id='cursos'
+      data-section='cursos'
       className='relative bg-primary-900 text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden'
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
