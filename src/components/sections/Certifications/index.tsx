@@ -10,6 +10,7 @@ import {
 } from '../../../hooks/useAccessibility'
 import { useCarousel } from '../../../hooks/useCarousel'
 import { useResponsiveItems } from '../../../hooks/useResponsiveItems'
+import { useTouchSwipe } from '../../../hooks/useTouchSwipe'
 import { ScreenReaderOnly } from '../../ui/Accessibility'
 import { CertificationCard } from './CertificationCard'
 
@@ -250,7 +251,9 @@ interface CertificationsSectionContentProps {
   handleNext: () => void
   realCurrentIndex: number
   totalItems: number
-  handleGoToSlide: (arg: number) => void // eslint-disable-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
+  handleGoToSlide: (arg: number) => void
+  touchHandlers: React.DOMAttributes<HTMLElement>
 }
 
 const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> =
@@ -268,6 +271,7 @@ const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> 
       realCurrentIndex,
       totalItems,
       handleGoToSlide,
+      touchHandlers,
     }) => {
       return (
         <section
@@ -279,6 +283,7 @@ const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> 
           onMouseLeave={resumeAutoPlay}
           onFocus={pauseAutoPlay}
           onBlur={resumeAutoPlay}
+          {...touchHandlers}
         >
           <div className='max-w-screen-2xl mx-auto'>
             <CertificationsSectionHeader />
@@ -315,24 +320,29 @@ const CertificationsSectionContent: React.FC<CertificationsSectionContentProps> 
 
 CertificationsSectionContent.displayName = 'CertificationsSectionContent'
 
-const Certifications: React.FC = () => {
+const getRealIndex = (
+  index: number,
+  maxIndex: number,
+  totalSlides: number
+): number => {
+  if (index === 0) return maxIndex
+  if (index > maxIndex + 1) return 0
+  return (((index - 1) % totalSlides) + totalSlides) % totalSlides
+}
+
+const getExtendedCertifications = (itemsVisible: number) => [
+  ...certifications.slice(-itemsVisible),
+  ...certifications,
+  ...certifications.slice(0, itemsVisible),
+]
+
+const useCertificationsLogic = () => {
   const { prefersReducedMotion } = useAccessibilityPreferences()
   const { announce } = useScreenReaderAnnouncement()
   const hasAnnouncedAutoPlayRef = useRef(false)
-
   const itemsVisible = useResponsiveItems({ mobile: 1, tablet: 2, desktop: 4 })
 
-  const {
-    currentIndex,
-    maxIndex,
-    hasMultiplePages,
-    isTransitioning,
-    nextSlide,
-    previousSlide,
-    goToSlide,
-    pauseAutoPlay,
-    resumeAutoPlay,
-  } = useCarousel({
+  const carouselState = useCarousel({
     totalItems: certifications.length,
     enableAutoPlay: !prefersReducedMotion,
     autoPlayDelay: 4000,
@@ -350,6 +360,24 @@ const Certifications: React.FC = () => {
     }
   }, [prefersReducedMotion, announce])
 
+  return { ...carouselState, itemsVisible, announce }
+}
+
+const Certifications: React.FC = () => {
+  const {
+    currentIndex,
+    maxIndex,
+    hasMultiplePages,
+    isTransitioning,
+    nextSlide,
+    previousSlide,
+    goToSlide,
+    pauseAutoPlay,
+    resumeAutoPlay,
+    itemsVisible,
+    announce,
+  } = useCertificationsLogic()
+
   const { handlePrevious, handleNext, handleGoToSlide } =
     useCertificationsHandlers({
       announce,
@@ -360,22 +388,15 @@ const Certifications: React.FC = () => {
       maxIndex,
     })
 
-  const extendedCertifications = [
-    ...certifications.slice(-itemsVisible),
-    ...certifications,
-    ...certifications.slice(0, itemsVisible),
-  ]
+  const touchHandlers = useTouchSwipe({
+    onSwipeLeft: handleNext,
+    onSwipeRight: handlePrevious,
+    enabled: hasMultiplePages,
+  })
 
-  const showNavigation = hasMultiplePages
   const totalSlides = maxIndex + 1
-
-  const getRealIndex = (index: number): number => {
-    if (index === 0) return maxIndex
-    if (index > maxIndex + 1) return 0
-    return (((index - 1) % totalSlides) + totalSlides) % totalSlides
-  }
-
-  const realCurrentIndex = getRealIndex(currentIndex)
+  const realCurrentIndex = getRealIndex(currentIndex, maxIndex, totalSlides)
+  const extendedCertifications = getExtendedCertifications(itemsVisible)
 
   return (
     <CertificationsSectionContent
@@ -385,12 +406,13 @@ const Certifications: React.FC = () => {
       currentIndex={currentIndex}
       itemsVisible={itemsVisible}
       isTransitioning={isTransitioning}
-      showNavigation={showNavigation}
+      showNavigation={hasMultiplePages}
       handlePrevious={handlePrevious}
       handleNext={handleNext}
       realCurrentIndex={realCurrentIndex}
       totalItems={totalSlides}
       handleGoToSlide={handleGoToSlide}
+      touchHandlers={touchHandlers}
     />
   )
 }
