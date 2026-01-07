@@ -7,7 +7,7 @@ export const HeroVisual = memo<HeroVisualProps>(
   ({ images, alt = HERO_CONTENT.visual.alt, className = '' }) => {
     return (
       <div
-        className={`relative h-full w-full min-h-0 group overflow-hidden rounded-sm lg:rounded-none ${className}`}
+        className={`relative h-full w-full min-h-0 group overflow-hidden rounded-sm md:rounded-none ${className}`}
       >
         <picture>
           {images.avif && (
@@ -32,7 +32,7 @@ export const HeroVisual = memo<HeroVisualProps>(
             loading='eager'
             decoding='async'
             fetchPriority='high'
-            className='absolute w-full h-full object-cover object-[center_25%] lg:object-[center_30%] scale-100 transition-transform duration-700 group-hover:scale-105'
+            className='absolute w-full h-full object-cover object-[center_25%] md:object-[center_30%] scale-100 transition-transform duration-700 group-hover:scale-105'
           />
         </picture>
 
@@ -42,7 +42,7 @@ export const HeroVisual = memo<HeroVisualProps>(
         />
 
         <div
-          className='absolute bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-10 lg:right-10'
+          className='absolute bottom-4 right-4 sm:bottom-6 sm:right-6 md:bottom-10 md:right-10'
           role='status'
           aria-label={HERO_CONTENT.visual.badge.ariaLabel}
         >
