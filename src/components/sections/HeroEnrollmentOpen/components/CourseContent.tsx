@@ -39,11 +39,13 @@ export const CourseContent: React.FC<CourseContentProps> = ({
   return (
     <div
       className='relative flex flex-1 flex-col bg-black py-6
-                        sm:px-6 sm:py-8
-                        md:px-10 md:py-12
-                        lg:absolute lg:inset-x-0 lg:bottom-0 lg:block lg:bg-transparent lg:px-16 lg:pb-16 lg:pt-0'
+                  sm:px-6 sm:py-8
+                  md:py-12 md:absolute md:inset-x-0 md:bottom-0 md:block md:bg-transparent md:px-16 md:pb-16 md:pt-0'
     >
-      <div className='max-w-screen-2xl lg:mx-auto mx-4 flex flex-1 flex-col justify-evenly gap-2 lg:flex-none lg:justify-normal'>
+      <div
+        className='max-w-screen-2xl mx-4 flex flex-1 flex-col justify-evenly gap-2 
+                    md:mx-auto md:flex-none md:justify-normal'
+      >
         <div className='flex mb-4'>
           <EnrollmentBadge
             accentColor={accentColor}

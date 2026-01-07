@@ -30,7 +30,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
 
   return (
     <article
-      className={`relative group overflow-hidden flex-1 flex flex-col lg:block lg:max-h-[85vh] ${scaleClass} ${scale}`}
+      className={`relative group overflow-hidden flex-1 flex flex-col md:block md:max-h-[85vh] ${scaleClass} ${scale}`}
       tabIndex={0}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -38,7 +38,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
       onBlur={onBlur}
       aria-label={subtitle ? `Curso ${title}: ${subtitle}` : `Curso ${title}`}
     >
-      <div className='relative h-[55%] min-h-[180px] lg:absolute lg:inset-0 lg:h-full'>
+      <div className='relative min-h-[250px] md:absolute md:inset-0 md:h-full'>
         <CourseImage
           imageAvif={imageAvif}
           imageWebp={imageWebp}
@@ -49,7 +49,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
       </div>
 
       <div
-        className='hidden lg:block absolute inset-0 bg-gradient-to-t from-black via-black/60 via-35% to-transparent
+        className='hidden md:block absolute inset-0 bg-gradient-to-t from-black via-black/60 via-35% to-transparent
                      group-hover:from-black/95 group-hover:via-black/70 transition-all duration-700 ease-out'
         aria-hidden='true'
       />
