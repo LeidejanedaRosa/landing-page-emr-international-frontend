@@ -61,8 +61,8 @@ export const CourseContent: React.FC<CourseContentProps> = ({
 
         <div
           className='flex flex-col gap-3 
-                        sm:flex-row sm:items-center sm:gap-4 
-                        md:items-end md:justify-between'
+                      sm:flex-row sm:items-center sm:gap-4 
+                      md:items-end md:justify-between'
         >
           <CourseCTAButton
             courseTitle={title}
