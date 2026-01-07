@@ -34,10 +34,12 @@ const Hero = () => {
 
       <div
         className='h-full flex flex-col gap-0 relative w-full max-w-screen-2xl mx-auto overflow-hidden
+                        landscape-mobile:flex-row
                         md:grid md:grid-cols-2'
       >
         <aside
           className='relative min-h-[50vh] flex-shrink-0 w-full order-1
+                        landscape-mobile:min-h-full landscape-mobile:w-1/2 landscape-mobile:order-2
                         md:h-full md:order-2'
           aria-label={HERO_CONTENT.visual.ariaLabel}
         >
@@ -45,6 +47,7 @@ const Hero = () => {
         </aside>
         <div
           className='flex-1 min-h-0 relative z-20 flex flex-col justify-center gap-6 px-4 py-4 order-2
+                        landscape-mobile:w-1/2 landscape-mobile:gap-3 landscape-mobile:py-8 landscape-mobile:px-8 landscape-mobile:order-1
                         sm:px-6
                         md:py-16 md:order-1 md:justify-between'
         >
