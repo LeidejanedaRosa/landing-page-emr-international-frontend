@@ -121,6 +121,14 @@ export default {
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
+      screens: {
+        'landscape-mobile': {
+          raw: '(max-width: 767px) and (orientation: landscape)',
+        },
+        'landscape-tablet': {
+          raw: '(min-width: 768px) and (max-width: 1023px) and (orientation: landscape)',
+        },
+      },
     },
   },
   plugins: [],
