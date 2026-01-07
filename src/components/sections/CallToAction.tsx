@@ -13,6 +13,7 @@ const CallToAction: React.FC = () => {
 
   return (
     <section
+      id='call-to-action'
       className='py-20 md:py-24 bg-cta-600 text-white'
       aria-labelledby={titleId}
     >
