@@ -19,12 +19,12 @@ const createIntersectionObserver = (
   return new IntersectionObserver(
     entries => {
       entries.forEach(entry => {
-        if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+        if (entry.isIntersecting) {
           onTrigger()
         }
       })
     },
-    { threshold: 0 }
+    { threshold: 0.3 }
   )
 }
 

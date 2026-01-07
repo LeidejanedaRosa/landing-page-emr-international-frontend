@@ -36,7 +36,7 @@ const Footer = React.lazy(() => import('./components/layout/Footer/index'))
 function App() {
   const { hasTriggered: showProductsModal, resetTrigger: closeProductsModal } =
     useScrollTrigger({
-      targetSectionId: 'cursos',
+      targetSectionId: 'call-to-action',
       storageKey: 'productsModalShown',
     })
 
