@@ -52,7 +52,10 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ socialLinks }) => {
   }
 
   return (
-    <ul className='flex gap-4' aria-label='Redes sociais da EMR Internacional'>
+    <ul
+      className='flex gap-1 sm:gap-4'
+      aria-label='Redes sociais da EMR Internacional'
+    >
       {socialLinks.map(social => (
         <li key={social.id}>
           <SocialLinkButton social={social} onNavigate={handleSocialClick} />
