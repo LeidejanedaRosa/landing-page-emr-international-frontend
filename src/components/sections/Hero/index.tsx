@@ -37,7 +37,7 @@ const Hero = () => {
                         md:grid md:grid-cols-2'
       >
         <aside
-          className='relative min-h-[250px] flex-shrink-0 w-full order-1
+          className='relative min-h-[50vh] flex-shrink-0 w-full order-1
                         md:h-full md:order-2'
           aria-label={HERO_CONTENT.visual.ariaLabel}
         >
