@@ -125,20 +125,20 @@ export default defineConfig({
       output: {
         manualChunks: id => {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'vendor'
-            }
-            if (id.includes('react-helmet-async')) {
+            if (id.includes('/react-helmet-async/')) {
               return 'helmet'
             }
-            if (id.includes('lucide-react')) {
+            if (id.includes('/lucide-react/')) {
               return 'icons'
             }
-            if (id.includes('web-vitals')) {
+            if (id.includes('/web-vitals/')) {
               return 'web-vitals'
             }
-            if (id.includes('@sentry')) {
+            if (id.includes('/@sentry/')) {
               return 'sentry'
+            }
+            if (id.includes('/react/') || id.includes('/react-dom/')) {
+              return 'vendor'
             }
           }
         },
