@@ -123,10 +123,24 @@ export default defineConfig({
     target: 'es2022',
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          helmet: ['react-helmet-async'],
-          icons: ['lucide-react'],
+        manualChunks: id => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor'
+            }
+            if (id.includes('react-helmet-async')) {
+              return 'helmet'
+            }
+            if (id.includes('lucide-react')) {
+              return 'icons'
+            }
+            if (id.includes('web-vitals')) {
+              return 'web-vitals'
+            }
+            if (id.includes('@sentry')) {
+              return 'sentry'
+            }
+          }
         },
         assetFileNames: assetInfo => {
           if (!assetInfo.name) return `assets/[name]-[hash][extname]`
