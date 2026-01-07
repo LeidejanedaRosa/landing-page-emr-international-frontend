@@ -38,7 +38,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
       onBlur={onBlur}
       aria-label={subtitle ? `Curso ${title}: ${subtitle}` : `Curso ${title}`}
     >
-      <div className='relative min-h-[250px] md:absolute md:inset-0 md:h-full'>
+      <div className='relative min-h-[250px] landscape-mobile:absolute landscape-mobile:inset-0 landscape-mobile:h-full md:absolute md:inset-0 md:h-full'>
         <CourseImage
           imageAvif={imageAvif}
           imageWebp={imageWebp}
@@ -47,12 +47,6 @@ export const CourseCard: React.FC<CourseCardProps> = ({
           subtitle={subtitle}
         />
       </div>
-
-      <div
-        className='hidden md:block absolute inset-0 bg-gradient-to-t from-black via-black/60 via-35% to-transparent
-                     group-hover:from-black/95 group-hover:via-black/70 transition-all duration-700 ease-out'
-        aria-hidden='true'
-      />
 
       <CourseContent
         accentColor={accentColor}
