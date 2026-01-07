@@ -4,6 +4,7 @@ import { testimonials } from '../../../../data/testimonialsData'
 import { useScreenReaderAnnouncement } from '../../../../hooks/useAccessibility'
 import { useCarousel } from '../../../../hooks/useCarousel'
 import { useIndicatorKeyboard } from '../../../../hooks/useIndicatorKeyboard'
+import { useTouchSwipe } from '../../../../hooks/useTouchSwipe'
 import { TESTIMONIALS_A11Y, TESTIMONIALS_CONFIG } from '../constants'
 
 export const useTestimonialCarousel = () => {
@@ -26,6 +27,12 @@ export const useTestimonialCarousel = () => {
 
   const { buttonsRef, handleKeyDown: handleIndicatorKeyDown } =
     useIndicatorKeyboard({ totalSlides, goToSlide })
+
+  const touchHandlers = useTouchSwipe({
+    onSwipeLeft: nextSlide,
+    onSwipeRight: previousSlide,
+    enabled: totalSlides > 1,
+  })
 
   const currentTestimonial = testimonials[currentIndex]
 
@@ -68,5 +75,6 @@ export const useTestimonialCarousel = () => {
     buttonsRef,
     handleIndicatorKeyDown,
     handleKeyDown,
+    touchHandlers,
   }
 }

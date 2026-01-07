@@ -25,6 +25,7 @@ const TestimonialSection = memo(() => {
     buttonsRef,
     handleIndicatorKeyDown,
     handleKeyDown,
+    touchHandlers,
   } = useTestimonialCarousel()
 
   return (
@@ -51,6 +52,7 @@ const TestimonialSection = memo(() => {
           handleIndicatorKeyDown={handleIndicatorKeyDown}
           isAutoPlaying={isAutoPlaying}
           autoPlayDelay={TESTIMONIALS_CONFIG.autoPlayDelay}
+          touchHandlers={touchHandlers}
         />
       </section>
     </>
@@ -88,6 +90,7 @@ interface TestimonialSectionContentProps {
   handleIndicatorKeyDown: TestimonialIndicatorsProps['handleKeyDown']
   isAutoPlaying: boolean
   autoPlayDelay: number
+  touchHandlers: React.DOMAttributes<HTMLElement>
 }
 
 const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
@@ -105,6 +108,7 @@ const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
     handleIndicatorKeyDown,
     isAutoPlaying,
     autoPlayDelay,
+    touchHandlers,
   }) => (
     <div className='w-full max-w-screen-2xl mx-auto'>
       <TestimonialHeader />
@@ -116,6 +120,7 @@ const TestimonialSectionContent = memo<TestimonialSectionContentProps>(
         onFocus={onPauseAutoPlay}
         onBlur={onResumeAutoPlay}
         onKeyDown={onKeyDown}
+        {...touchHandlers}
       >
         <div
           className='overflow-hidden rounded-2xl bg-primary-900/60 backdrop-blur-sm border border-primary-700/50 shadow-2xl'
