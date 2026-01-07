@@ -19,6 +19,7 @@ interface CarouselContainerProps {
   onPause: () => void
   onResume: () => void
   onKeyDown: React.KeyboardEventHandler
+  touchHandlers?: React.DOMAttributes<HTMLElement>
 }
 
 export const CarouselContainer = ({
@@ -30,6 +31,7 @@ export const CarouselContainer = ({
   onPause,
   onResume,
   onKeyDown,
+  touchHandlers,
 }: CarouselContainerProps) => {
   const { shouldRenderSlide, getSlideClassName } =
     useSlideTransition(currentSlide)
@@ -47,6 +49,7 @@ export const CarouselContainer = ({
         onFocus={onPause}
         onBlur={onResume}
         onKeyDown={onKeyDown}
+        {...touchHandlers}
       >
         {shouldRenderSlide(0) && (
           <div

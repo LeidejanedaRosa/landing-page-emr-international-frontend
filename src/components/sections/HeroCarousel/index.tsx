@@ -2,6 +2,7 @@ import { type KeyboardEvent, useEffect } from 'react'
 
 import { useScreenReaderAnnouncement } from '../../../hooks/useAccessibility'
 import { useCarousel } from '../../../hooks/useCarousel'
+import { useTouchSwipe } from '../../../hooks/useTouchSwipe'
 import Hero from '../Hero'
 import { COURSES_DATA } from '../HeroEnrollmentOpen/constants'
 import { CarouselContainer } from './components'
@@ -30,6 +31,12 @@ const HeroCarousel = () => {
     totalItems: totalSlides,
     autoPlayDelay: HERO_CAROUSEL_CONFIG.autoPlayDelay,
     enableAutoPlay: hasOpenEnrollment,
+  })
+
+  const touchHandlers = useTouchSwipe({
+    onSwipeLeft: nextSlide,
+    onSwipeRight: previousSlide,
+    enabled: hasOpenEnrollment && totalSlides > 1,
   })
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -74,6 +81,7 @@ const HeroCarousel = () => {
       onPause={pauseAutoPlay}
       onResume={resumeAutoPlay}
       onKeyDown={handleKeyDown}
+      touchHandlers={touchHandlers}
     />
   )
 }
