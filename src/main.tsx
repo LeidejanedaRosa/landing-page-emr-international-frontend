@@ -21,10 +21,6 @@ if (import.meta.env.PROD) {
   }
 }
 
-initWebVitals({
-  debug: import.meta.env.DEV,
-})
-
 /* eslint-disable no-console */
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
@@ -69,3 +65,20 @@ createRoot(document.getElementById('root')!).render(
     </HelmetProvider>
   </StrictMode>
 )
+
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(
+    () => {
+      initWebVitals({
+        debug: import.meta.env.DEV,
+      })
+    },
+    { timeout: 100 }
+  )
+} else {
+  setTimeout(() => {
+    initWebVitals({
+      debug: import.meta.env.DEV,
+    })
+  }, 0)
+}

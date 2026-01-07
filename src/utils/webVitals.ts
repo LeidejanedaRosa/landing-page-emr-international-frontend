@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { type Metric, onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals'
+import { type Metric } from 'web-vitals'
 
 export interface WebVitalsConfig {
   endpoint?: string
@@ -147,9 +147,11 @@ let currentConfig: WebVitalsConfig | null = null
  * Only reinitializes if config changes (deep comparison).
  * In production, call once at app startup for best performance.
  *
+ * Loads web-vitals library asynchronously to avoid blocking initial render.
+ *
  * @see https://web.dev/articles/vitals
  */
-export const initWebVitals = (config: WebVitalsConfig = {}) => {
+export const initWebVitals = async (config: WebVitalsConfig = {}) => {
   const configKey = JSON.stringify(config)
   const existingKey = currentConfig ? JSON.stringify(currentConfig) : null
 
@@ -166,12 +168,20 @@ export const initWebVitals = (config: WebVitalsConfig = {}) => {
 
   const sendMetric = (metric: Metric) => sendToAnalytics(metric, defaultConfig)
 
-  onCLS(sendMetric)
-  onINP(sendMetric)
-  onLCP(sendMetric)
+  try {
+    const { onCLS, onINP, onLCP, onFCP, onTTFB } = await import('web-vitals')
 
-  onFCP(sendMetric)
-  onTTFB(sendMetric)
+    onCLS(sendMetric)
+    onINP(sendMetric)
+    onLCP(sendMetric)
+    onFCP(sendMetric)
+    onTTFB(sendMetric)
+  } catch (error) {
+    if (defaultConfig.debug) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to load web-vitals:', error)
+    }
+  }
 }
 
 export const useWebVitals = (config: WebVitalsConfig = {}) => {
