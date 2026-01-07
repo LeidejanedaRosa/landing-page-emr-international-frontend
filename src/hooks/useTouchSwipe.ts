@@ -10,7 +10,7 @@ interface UseTouchSwipeOptions {
 interface TouchHandlers {
   onTouchStart: React.TouchEventHandler
   onTouchMove: React.TouchEventHandler
-  onTouchEnd: () => void
+  onTouchEnd: React.TouchEventHandler
 }
 
 const DEFAULT_MINIMUM_SWIPE_DISTANCE = 50
@@ -46,6 +46,30 @@ const isValidHorizontalSwipe = (
   )
 }
 
+const handleSwipeAction = (
+  horizontalDistance: number,
+  onSwipeLeft?: () => void,
+  onSwipeRight?: () => void
+) => {
+  if (horizontalDistance > 0 && onSwipeLeft) {
+    onSwipeLeft()
+  } else if (horizontalDistance < 0 && onSwipeRight) {
+    onSwipeRight()
+  }
+}
+
+const resetTouchPositions = (
+  startXRef: React.MutableRefObject<number | null>,
+  endXRef: React.MutableRefObject<number | null>,
+  startYRef: React.MutableRefObject<number | null>,
+  endYRef: React.MutableRefObject<number | null>
+) => {
+  startXRef.current = null
+  endXRef.current = null
+  startYRef.current = null
+  endYRef.current = null
+}
+
 export const useTouchSwipe = ({
   onSwipeLeft,
   onSwipeRight,
@@ -79,46 +103,43 @@ export const useTouchSwipe = ({
     [enabled]
   )
 
-  const handleTouchEnd = useCallback(() => {
-    if (!enabled) return
+  const handleTouchEnd = useCallback(
+    (touchEvent: React.TouchEvent) => {
+      touchEvent // Required by React.TouchEventHandler interface
+      if (!enabled) return
 
-    if (
-      !isTouchDataComplete(
-        touchStartX.current,
-        touchEndX.current,
-        touchStartY.current,
-        touchEndY.current
-      )
-    ) {
-      return
-    }
-
-    const { horizontalDistance, verticalDistance } = calculateSwipeDistances(
-      touchStartX.current!,
-      touchEndX.current!,
-      touchStartY.current!,
-      touchEndY.current!
-    )
-
-    if (
-      isValidHorizontalSwipe(
-        horizontalDistance,
-        verticalDistance,
-        minimumSwipeDistance
-      )
-    ) {
-      if (horizontalDistance > 0 && onSwipeLeft) {
-        onSwipeLeft()
-      } else if (horizontalDistance < 0 && onSwipeRight) {
-        onSwipeRight()
+      if (
+        !isTouchDataComplete(
+          touchStartX.current,
+          touchEndX.current,
+          touchStartY.current,
+          touchEndY.current
+        )
+      ) {
+        return
       }
-    }
 
-    touchStartX.current = null
-    touchEndX.current = null
-    touchStartY.current = null
-    touchEndY.current = null
-  }, [enabled, onSwipeLeft, onSwipeRight, minimumSwipeDistance])
+      const { horizontalDistance, verticalDistance } = calculateSwipeDistances(
+        touchStartX.current!,
+        touchEndX.current!,
+        touchStartY.current!,
+        touchEndY.current!
+      )
+
+      if (
+        isValidHorizontalSwipe(
+          horizontalDistance,
+          verticalDistance,
+          minimumSwipeDistance
+        )
+      ) {
+        handleSwipeAction(horizontalDistance, onSwipeLeft, onSwipeRight)
+      }
+
+      resetTouchPositions(touchStartX, touchEndX, touchStartY, touchEndY)
+    },
+    [enabled, onSwipeLeft, onSwipeRight, minimumSwipeDistance]
+  )
 
   return {
     onTouchStart: handleTouchStart,
