@@ -136,23 +136,29 @@ test.describe('Performance & Core Web Vitals Tests', () => {
         }
 
         const parent = await img.evaluateHandle(el => el.parentElement)
-        const parentTagName = await parent.evaluate(el =>
-          el?.tagName.toLowerCase()
-        )
+        try {
+          const parentTagName = await parent.evaluate(el =>
+            el?.tagName.toLowerCase()
+          )
 
-        if (parentTagName === 'picture') {
-          const sources = await parent.evaluate(el => {
-            const sourceElements = el?.querySelectorAll('source')
-            return Array.from(sourceElements || []).map(
-              s => s.getAttribute('type') || ''
-            )
-          })
+          if (parentTagName === 'picture') {
+            const sources = await parent.evaluate(el => {
+              const sourceElements = el?.querySelectorAll('source')
+              return Array.from(sourceElements || []).map(
+                s => s.getAttribute('type') || ''
+              )
+            })
 
-          if (
-            sources.some(type => type.includes('webp') || type.includes('avif'))
-          ) {
-            modernFormatCount++
+            if (
+              sources.some(
+                type => type.includes('webp') || type.includes('avif')
+              )
+            ) {
+              modernFormatCount++
+            }
           }
+        } finally {
+          await parent.dispose()
         }
       }
 
