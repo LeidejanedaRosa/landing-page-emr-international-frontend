@@ -47,26 +47,28 @@ function App() {
       <BreadcrumbSchema items={DEFAULT_BREADCRUMBS} />
       <div className='min-h-screen bg-gray-50'>
         <Header />
-        <PromoBannerCarousel />
-        <HeroCarousel />
-        <Suspense fallback={<SectionSkeleton />}>
-          <WhyItMattersSection />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <About />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <Certifications />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <Courses />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <Testimonials />
-        </Suspense>
-        <Suspense fallback={<SectionSkeleton />}>
-          <CallToAction />
-        </Suspense>
+        <main role='main' aria-label='Conteúdo principal'>
+          <PromoBannerCarousel />
+          <HeroCarousel />
+          <Suspense fallback={<SectionSkeleton />}>
+            <WhyItMattersSection />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <About />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <Certifications />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <Courses />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <Testimonials />
+          </Suspense>
+          <Suspense fallback={<SectionSkeleton />}>
+            <CallToAction />
+          </Suspense>
+        </main>
         <Suspense
           fallback={
             <div className='py-8'>
