@@ -3,6 +3,7 @@ import { type KeyboardEvent } from 'react'
 import { act, renderHook } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import * as testimonialsDataModule from '../../../../../data/testimonialsData'
 import { testimonials } from '../../../../../data/testimonialsData'
 import * as useAccessibilityModule from '../../../../../hooks/useAccessibility'
 import * as useCarouselModule from '../../../../../hooks/useCarousel'
@@ -206,7 +207,6 @@ describe('useTestimonialCarousel', () => {
       )
 
       if (testimonialIndex === -1) {
-        // Se não houver nenhum depoimento apenas com companyName, pula o teste
         return
       }
 
@@ -236,13 +236,25 @@ describe('useTestimonialCarousel', () => {
     })
 
     it('deve usar número do slide quando nem authorName nem companyName estão disponíveis', () => {
-      const mockTestimonialWithoutNames = {
-        ...testimonials[0],
+      const mockTestimonialWithoutNames: (typeof testimonials)[0] = {
+        id: 'test-1',
+        variant: 'image-only',
+        courseType: 'tatico',
+        images: {
+          jpg: 'test.jpg',
+          alt: 'Test image',
+        },
         authorName: undefined,
         companyName: undefined,
       }
 
-      // Mock temporário para simular um depoimento sem nome
+      const testimonialsSpy = vi
+        .spyOn(testimonialsDataModule, 'testimonials', 'get')
+        .mockReturnValue([
+          mockTestimonialWithoutNames,
+          ...testimonials.slice(1),
+        ])
+
       vi.spyOn(useCarouselModule, 'useCarousel').mockReturnValue({
         currentIndex: 0,
         isAutoPlaying: true,
@@ -256,10 +268,6 @@ describe('useTestimonialCarousel', () => {
         resumeAutoPlay: mockResumeAutoPlay,
       })
 
-      // Precisamos mockar o testimonial atual
-      const originalTestimonial = testimonials[0]
-      Object.assign(testimonials[0], mockTestimonialWithoutNames)
-
       renderHook(() => useTestimonialCarousel())
 
       const expectedMessage = TESTIMONIALS_A11Y.slideAnnouncement(
@@ -270,8 +278,7 @@ describe('useTestimonialCarousel', () => {
 
       expect(mockAnnounce).toHaveBeenCalledWith(expectedMessage, 'polite')
 
-      // Restaura o depoimento original
-      Object.assign(testimonials[0], originalTestimonial)
+      testimonialsSpy.mockRestore()
     })
   })
 
@@ -375,7 +382,6 @@ describe('useTestimonialCarousel', () => {
 
       expect(result.current.currentTestimonial).toBe(testimonials[0])
 
-      // Simula mudança de índice
       vi.spyOn(useCarouselModule, 'useCarousel').mockReturnValue({
         currentIndex: 3,
         isAutoPlaying: true,
