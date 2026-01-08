@@ -143,21 +143,18 @@ describe('useBannerPauseState', () => {
         useBannerPauseState(false, mockAnnounce)
       )
 
-      // Pausa manualmente primeiro
       act(() => {
         result.current.handleTogglePause()
       })
 
       expect(result.current.pauseSource).toBe('manual')
 
-      // Retoma
       act(() => {
         result.current.handleTogglePause()
       })
 
       expect(result.current.isPaused).toBe(false)
 
-      // Tenta pausar com mouse (não deve alterar pauseSource para hover)
       const pauseSourceBeforeHover = result.current.pauseSource
 
       act(() => {
@@ -174,7 +171,6 @@ describe('useBannerPauseState', () => {
         useBannerPauseState(false, mockAnnounce)
       )
 
-      // Pausa com hover
       act(() => {
         result.current.handleMouseEnter()
       })
@@ -182,7 +178,6 @@ describe('useBannerPauseState', () => {
       expect(result.current.isPaused).toBe(true)
       expect(result.current.pauseSource).toBe('hover')
 
-      // Remove hover
       act(() => {
         result.current.handleMouseLeave()
       })
@@ -195,7 +190,6 @@ describe('useBannerPauseState', () => {
         useBannerPauseState(false, mockAnnounce)
       )
 
-      // Pausa manualmente
       act(() => {
         result.current.handleTogglePause()
       })
@@ -203,7 +197,6 @@ describe('useBannerPauseState', () => {
       expect(result.current.isPaused).toBe(true)
       expect(result.current.pauseSource).toBe('manual')
 
-      // Tenta retomar com mouse leave
       act(() => {
         result.current.handleMouseLeave()
       })
@@ -212,32 +205,26 @@ describe('useBannerPauseState', () => {
     })
 
     it('não deve retomar se prefersReducedMotion é true', () => {
-      const { result } = renderHook(() =>
-        useBannerPauseState(true, mockAnnounce)
+      const { result, rerender } = renderHook(
+        ({ prefersReducedMotion }) =>
+          useBannerPauseState(prefersReducedMotion, mockAnnounce),
+        { initialProps: { prefersReducedMotion: false } }
       )
-
-      // Força pauseSource como hover (cenário hipotético)
-      act(() => {
-        result.current.handleTogglePause() // Retoma
-      })
-
-      expect(result.current.isPaused).toBe(false)
 
       act(() => {
         result.current.handleMouseEnter()
       })
 
-      // Agora tenta fazer mouseLeave com prefersReducedMotion = true
-      const { result: result2 } = renderHook(() =>
-        useBannerPauseState(true, mockAnnounce)
-      )
+      expect(result.current.isPaused).toBe(true)
+      expect(result.current.pauseSource).toBe('hover')
+
+      rerender({ prefersReducedMotion: true })
 
       act(() => {
-        result2.current.handleMouseLeave()
+        result.current.handleMouseLeave()
       })
 
-      // Deve manter pausado devido a prefersReducedMotion
-      expect(result2.current.isPaused).toBe(true)
+      expect(result.current.isPaused).toBe(true)
     })
   })
 
@@ -270,17 +257,14 @@ describe('useBannerPauseState', () => {
         { initialProps: { prefersReducedMotion: false } }
       )
 
-      // Pausa manualmente
       act(() => {
         result.current.handleTogglePause()
       })
 
       mockAnnounce.mockClear()
 
-      // Muda prefersReducedMotion
       rerender({ prefersReducedMotion: true })
 
-      // Não deve anunciar novamente pois já estava pausado
       expect(mockAnnounce).not.toHaveBeenCalled()
     })
 
@@ -295,7 +279,6 @@ describe('useBannerPauseState', () => {
 
       rerender({ prefersReducedMotion: false })
 
-      // Deve manter pausado (não retoma automaticamente)
       expect(result.current.isPaused).toBe(true)
     })
   })
@@ -306,10 +289,8 @@ describe('useBannerPauseState', () => {
         useBannerPauseState(false, mockAnnounce)
       )
 
-      // Estado inicial: não pausado
       expect(result.current.isPaused).toBe(false)
 
-      // Hover: pausa
       act(() => {
         result.current.handleMouseEnter()
       })
@@ -317,7 +298,6 @@ describe('useBannerPauseState', () => {
       expect(result.current.isPaused).toBe(true)
       expect(result.current.pauseSource).toBe('hover')
 
-      // Manual toggle: retoma
       act(() => {
         result.current.handleTogglePause()
       })
@@ -325,7 +305,6 @@ describe('useBannerPauseState', () => {
       expect(result.current.isPaused).toBe(false)
       expect(result.current.pauseSource).toBe('manual')
 
-      // Hover novamente: não deve pausar (source é manual)
       act(() => {
         result.current.handleMouseEnter()
       })
@@ -338,14 +317,12 @@ describe('useBannerPauseState', () => {
         useBannerPauseState(false, mockAnnounce)
       )
 
-      // Pausa manualmente
       act(() => {
         result.current.handleTogglePause()
       })
 
       expect(result.current.pauseSource).toBe('manual')
 
-      // Mouse leave não deve retomar
       act(() => {
         result.current.handleMouseLeave()
       })
