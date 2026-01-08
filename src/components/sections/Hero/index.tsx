@@ -2,7 +2,6 @@ import heroSideImageAvif from '../../../assets/hero/bg_hero_section.avif'
 import heroSideImageJpg from '../../../assets/hero/bg_hero_section.jpg'
 import heroSideImageWebp from '../../../assets/hero/bg_hero_section.webp'
 import { useScrollTo } from '../../../hooks/useScrollTo'
-import { ScreenReaderOnly } from '../../ui/Accessibility'
 import {
   HeroCTA,
   HeroHeadline,
@@ -10,7 +9,7 @@ import {
   SocialProof,
   TrustBadge,
 } from './components'
-import { COURSES_SECTION_ID, HERO_CONTENT, HERO_SECTION_ID } from './constants'
+import { COURSES_SECTION_ID, HERO_CONTENT } from './constants'
 
 const heroImages = {
   avif: heroSideImageAvif,
@@ -20,18 +19,12 @@ const heroImages = {
 
 const Hero = () => {
   const { scrollTo } = useScrollTo()
-  const headingId = `${HERO_SECTION_ID}-heading`
 
   return (
     <section
-      aria-labelledby={headingId}
+      aria-labelledby='hero-main-title'
       className='relative w-full h-full bg-black'
     >
-      <ScreenReaderOnly>
-        <h2 id={headingId}>{HERO_CONTENT.seo.title}</h2>
-        <p>{HERO_CONTENT.seo.contextDescription}</p>
-      </ScreenReaderOnly>
-
       <div
         className='h-full flex flex-col gap-0 relative w-full max-w-screen-2xl mx-auto overflow-hidden
                         landscape-mobile:flex-row
@@ -57,11 +50,6 @@ const Hero = () => {
           <SocialProof />
         </div>
       </div>
-
-      <ScreenReaderOnly>
-        <h3>{HERO_CONTENT.about.title}</h3>
-        <p>{HERO_CONTENT.about.description}</p>
-      </ScreenReaderOnly>
     </section>
   )
 }
