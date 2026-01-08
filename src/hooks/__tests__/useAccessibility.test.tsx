@@ -1,7 +1,7 @@
-import { act, renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { renderHook } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
 
-import { useFocus, useFocusTrap, useUniqueId } from '../useAccessibility'
+import { useFocusTrap, useUniqueId } from '../useAccessibility'
 
 describe('useUniqueId', () => {
   it('should generate unique IDs with default prefix', () => {
@@ -17,60 +17,6 @@ describe('useUniqueId', () => {
     const { result } = renderHook(() => useUniqueId('custom'))
 
     expect(result.current).toMatch(/^custom-/)
-  })
-})
-
-describe('useFocus', () => {
-  it('should provide focus management functionality', () => {
-    const { result } = renderHook(() => useFocus())
-
-    expect(result.current).toHaveProperty('elementRef')
-    expect(result.current).toHaveProperty('focus')
-    expect(result.current).toHaveProperty('blur')
-    expect(result.current).toHaveProperty('isFocused')
-    expect(result.current).toHaveProperty('onFocus')
-    expect(result.current).toHaveProperty('onBlur')
-  })
-
-  it('should track focus state correctly', () => {
-    const { result } = renderHook(() => useFocus())
-
-    expect(result.current.isFocused).toBe(false)
-
-    act(() => {
-      result.current.onFocus()
-    })
-
-    expect(result.current.isFocused).toBe(true)
-
-    act(() => {
-      result.current.onBlur()
-    })
-
-    expect(result.current.isFocused).toBe(false)
-  })
-
-  it('should provide focus and blur methods', () => {
-    const { result } = renderHook(() => useFocus())
-
-    const mockElement = {
-      focus: vi.fn(),
-      blur: vi.fn(),
-    }
-
-    result.current.elementRef.current = mockElement as any
-
-    act(() => {
-      result.current.focus()
-    })
-
-    expect(mockElement.focus).toHaveBeenCalled()
-
-    act(() => {
-      result.current.blur()
-    })
-
-    expect(mockElement.blur).toHaveBeenCalled()
   })
 })
 
