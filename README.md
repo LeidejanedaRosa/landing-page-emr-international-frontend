@@ -156,24 +156,6 @@ function App() {
 }
 ```
 
-#### `useFocus()`
-
-Gerencia estado e controle de foco de elementos.
-
-```typescript
-import { useFocus } from './hooks/useAccessibility'
-
-function Component() {
-  const { elementRef, focus, blur, isFocused, onFocus, onBlur } = useFocus()
-
-  return (
-    <button ref={elementRef} onFocus={onFocus} onBlur={onBlur}>
-      {isFocused ? 'Focado' : 'Não focado'}
-    </button>
-  )
-}
-```
-
 #### `useFocusTrap(isActive: boolean)`
 
 Implementa armadilha de foco para modais e overlays.
