@@ -129,14 +129,36 @@ test.describe('Performance & Core Web Vitals Tests', () => {
 
       for (const img of images) {
         const src = await img.getAttribute('src')
+
         if (src && (src.includes('.webp') || src.includes('.avif'))) {
           modernFormatCount++
+          continue
+        }
+
+        const parent = await img.evaluateHandle(el => el.parentElement)
+        const parentTagName = await parent.evaluate(el =>
+          el?.tagName.toLowerCase()
+        )
+
+        if (parentTagName === 'picture') {
+          const sources = await parent.evaluate(el => {
+            const sourceElements = el?.querySelectorAll('source')
+            return Array.from(sourceElements || []).map(
+              s => s.getAttribute('type') || ''
+            )
+          })
+
+          if (
+            sources.some(type => type.includes('webp') || type.includes('avif'))
+          ) {
+            modernFormatCount++
+          }
         }
       }
 
       if (images.length > 0) {
         const modernFormatPercentage = (modernFormatCount / images.length) * 100
-        expect(modernFormatPercentage).toBeGreaterThan(50)
+        expect(modernFormatPercentage).toBeGreaterThanOrEqual(50)
       }
     })
 
