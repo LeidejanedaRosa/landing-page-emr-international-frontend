@@ -1,10 +1,14 @@
 import { act, renderHook } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { useBannerPauseState } from '../useBannerPauseState'
 
 describe('useBannerPauseState', () => {
   const mockAnnounce = vi.fn()
+
+  beforeEach(() => {
+    mockAnnounce.mockClear()
+  })
 
   describe('inicialização', () => {
     it('deve inicializar pausado quando prefersReducedMotion é true', () => {
@@ -80,7 +84,6 @@ describe('useBannerPauseState', () => {
     })
 
     it('deve anunciar "Banner pausado" quando pausar', () => {
-      mockAnnounce.mockClear()
       const { result } = renderHook(() =>
         useBannerPauseState(false, mockAnnounce)
       )
@@ -93,7 +96,6 @@ describe('useBannerPauseState', () => {
     })
 
     it('deve anunciar "Banner retomado" quando retomar', () => {
-      mockAnnounce.mockClear()
       const { result } = renderHook(() =>
         useBannerPauseState(true, mockAnnounce)
       )
@@ -230,7 +232,6 @@ describe('useBannerPauseState', () => {
 
   describe('efeito de prefersReducedMotion', () => {
     it('deve pausar automaticamente quando prefersReducedMotion muda para true', () => {
-      mockAnnounce.mockClear()
       const { result, rerender } = renderHook(
         ({ prefersReducedMotion }) =>
           useBannerPauseState(prefersReducedMotion, mockAnnounce),
@@ -250,7 +251,6 @@ describe('useBannerPauseState', () => {
     })
 
     it('não deve pausar novamente se já está pausado', () => {
-      mockAnnounce.mockClear()
       const { result, rerender } = renderHook(
         ({ prefersReducedMotion }) =>
           useBannerPauseState(prefersReducedMotion, mockAnnounce),
