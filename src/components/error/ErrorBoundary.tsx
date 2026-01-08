@@ -1,5 +1,7 @@
 import React, { ErrorInfo, ReactNode } from 'react'
 
+import * as Sentry from '@sentry/react'
+
 interface ErrorBoundaryState {
   hasError: boolean
   error?: Error
@@ -32,8 +34,31 @@ class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    // Em produção, enviar erro para o Sentry com contexto completo
+    if (import.meta.env.PROD) {
+      Sentry.withScope(scope => {
+        // Tags para facilitar filtragem no Sentry
+        scope.setTag('errorBoundary', 'custom')
+        scope.setTag('environment', import.meta.env.MODE)
+
+        // Contexto adicional sobre o erro
+        scope.setContext('errorInfo', {
+          componentStack: errorInfo.componentStack,
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+          url: window.location.href,
+        })
+
+        // Nível do erro
+        scope.setLevel('error')
+
+        // Capturar exceção no Sentry
+        Sentry.captureException(error)
+      })
+    }
+
     // Em desenvolvimento, log do erro para debugging
-    if (import.meta.env.MODE === 'development') {
+    if (import.meta.env.DEV) {
       // eslint-disable-next-line no-console
       console.error('ErrorBoundary caught an error:', error, errorInfo)
     }
