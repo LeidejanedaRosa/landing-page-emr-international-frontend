@@ -46,3 +46,4 @@ SEO-GUIDE.md
 # Test results
 playwright-report/
 test-results/
+coverage/
