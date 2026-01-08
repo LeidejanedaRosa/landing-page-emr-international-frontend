@@ -165,6 +165,7 @@ describe('useTestimonialCarousel', () => {
     it('deve anunciar o depoimento atual ao montar', () => {
       renderHook(() => useTestimonialCarousel())
 
+      expect(testimonials[0].authorName).toBeDefined()
       const expectedName = testimonials[0].authorName!
       const expectedMessage = TESTIMONIALS_A11Y.slideAnnouncement(
         expectedName,
@@ -191,6 +192,7 @@ describe('useTestimonialCarousel', () => {
 
       renderHook(() => useTestimonialCarousel())
 
+      expect(testimonials[2].authorName).toBeDefined()
       const expectedName = testimonials[2].authorName!
       const expectedMessage = TESTIMONIALS_A11Y.slideAnnouncement(
         expectedName,
@@ -202,42 +204,8 @@ describe('useTestimonialCarousel', () => {
     })
 
     it('deve usar companyName quando authorName não está disponível', () => {
-      const testimonialIndex = testimonials.findIndex(
-        t => !t.authorName && t.companyName
-      )
-
-      if (testimonialIndex === -1) {
-        return
-      }
-
-      vi.spyOn(useCarouselModule, 'useCarousel').mockReturnValue({
-        currentIndex: testimonialIndex,
-        isAutoPlaying: true,
-        isTransitioning: false,
-        maxIndex: testimonials.length - 1,
-        hasMultiplePages: true,
-        nextSlide: mockNextSlide,
-        previousSlide: mockPreviousSlide,
-        goToSlide: mockGoToSlide,
-        pauseAutoPlay: mockPauseAutoPlay,
-        resumeAutoPlay: mockResumeAutoPlay,
-      })
-
-      renderHook(() => useTestimonialCarousel())
-
-      const expectedName = testimonials[testimonialIndex].companyName!
-      const expectedMessage = TESTIMONIALS_A11Y.slideAnnouncement(
-        expectedName,
-        testimonialIndex + 1,
-        testimonials.length
-      )
-
-      expect(mockAnnounce).toHaveBeenCalledWith(expectedMessage, 'polite')
-    })
-
-    it('deve usar número do slide quando nem authorName nem companyName estão disponíveis', () => {
-      const mockTestimonialWithoutNames: (typeof testimonials)[0] = {
-        id: 'test-1',
+      const mockTestimonialWithCompanyOnly: (typeof testimonials)[0] = {
+        id: 'test-company',
         variant: 'image-only',
         courseType: 'tatico',
         images: {
@@ -245,13 +213,13 @@ describe('useTestimonialCarousel', () => {
           alt: 'Test image',
         },
         authorName: undefined,
-        companyName: undefined,
+        companyName: 'Test Company',
       }
 
       const testimonialsSpy = vi
         .spyOn(testimonialsDataModule, 'testimonials', 'get')
         .mockReturnValue([
-          mockTestimonialWithoutNames,
+          mockTestimonialWithCompanyOnly,
           ...testimonials.slice(1),
         ])
 
@@ -270,8 +238,9 @@ describe('useTestimonialCarousel', () => {
 
       renderHook(() => useTestimonialCarousel())
 
+      const expectedName = 'Test Company'
       const expectedMessage = TESTIMONIALS_A11Y.slideAnnouncement(
-        'Slide 1',
+        expectedName,
         1,
         testimonials.length
       )
@@ -279,6 +248,56 @@ describe('useTestimonialCarousel', () => {
       expect(mockAnnounce).toHaveBeenCalledWith(expectedMessage, 'polite')
 
       testimonialsSpy.mockRestore()
+    })
+
+    it('deve usar número do slide quando nem authorName nem companyName estão disponíveis', () => {
+      const mockTestimonialWithoutNames: (typeof testimonials)[0] = {
+        id: 'test-1',
+        variant: 'image-only',
+        courseType: 'tatico',
+        images: {
+          jpg: 'test.jpg',
+          alt: 'Test image',
+        },
+        authorName: undefined,
+        companyName: undefined,
+      }
+
+      let testimonialsSpy: ReturnType<typeof vi.spyOn> | undefined
+
+      try {
+        testimonialsSpy = vi
+          .spyOn(testimonialsDataModule, 'testimonials', 'get')
+          .mockReturnValue([
+            mockTestimonialWithoutNames,
+            ...testimonials.slice(1),
+          ])
+
+        vi.spyOn(useCarouselModule, 'useCarousel').mockReturnValue({
+          currentIndex: 0,
+          isAutoPlaying: true,
+          isTransitioning: false,
+          maxIndex: testimonials.length - 1,
+          hasMultiplePages: true,
+          nextSlide: mockNextSlide,
+          previousSlide: mockPreviousSlide,
+          goToSlide: mockGoToSlide,
+          pauseAutoPlay: mockPauseAutoPlay,
+          resumeAutoPlay: mockResumeAutoPlay,
+        })
+
+        renderHook(() => useTestimonialCarousel())
+
+        const expectedMessage = TESTIMONIALS_A11Y.slideAnnouncement(
+          'Slide 1',
+          1,
+          testimonials.length
+        )
+
+        expect(mockAnnounce).toHaveBeenCalledWith(expectedMessage, 'polite')
+      } finally {
+        testimonialsSpy?.mockRestore()
+      }
     })
   })
 
