@@ -12,7 +12,7 @@ describe('useTouchSwipe', () => {
   ): React.TouchEvent => {
     return {
       touches: [{ clientX, clientY }],
-    } as React.TouchEvent
+    } as unknown as React.TouchEvent
   }
 
   describe('inicialização', () => {
