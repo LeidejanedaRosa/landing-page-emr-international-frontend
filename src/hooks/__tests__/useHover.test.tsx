@@ -127,7 +127,6 @@ describe('useHover', () => {
       const handlers1 = result.current.createHoverHandlers('item-1')
       const handlers1Again = result.current.createHoverHandlers('item-1')
 
-      // createHoverHandlers deve retornar novos objetos mas com funções estáveis
       expect(handlers1).not.toBe(handlers1Again)
     })
   })
@@ -144,14 +143,12 @@ describe('useHover', () => {
 
       expect(result.current.hoveredItem).toBe('item-1')
 
-      // Foco também funciona
       act(() => {
         handlers.onFocus()
       })
 
       expect(result.current.hoveredItem).toBe('item-1')
 
-      // Blur limpa
       act(() => {
         handlers.onBlur()
       })
@@ -165,21 +162,18 @@ describe('useHover', () => {
       const handlers1 = result.current.createHoverHandlers('item-1')
       const handlers2 = result.current.createHoverHandlers('item-2')
 
-      // Mouse hover no item 1
       act(() => {
         handlers1.onMouseEnter()
       })
 
       expect(result.current.hoveredItem).toBe('item-1')
 
-      // Mouse leave
       act(() => {
         handlers1.onMouseLeave()
       })
 
       expect(result.current.hoveredItem).toBe(null)
 
-      // Foco no item 2
       act(() => {
         handlers2.onFocus()
       })
