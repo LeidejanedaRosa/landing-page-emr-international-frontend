@@ -76,7 +76,6 @@ class ErrorBoundary extends React.Component<
 
   render() {
     if (this.state.hasError) {
-      // Fallback customizado ou padrão
       if (this.props.fallback) {
         return this.props.fallback
       }
@@ -118,7 +117,7 @@ class ErrorBoundary extends React.Component<
             >
               Recarregar página
             </button>
-            {import.meta.env.MODE === 'development' && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <details className='mt-4 p-3 bg-gray-100 rounded text-xs'>
                 <summary className='cursor-pointer font-medium'>
                   Detalhes do erro (desenvolvimento)
