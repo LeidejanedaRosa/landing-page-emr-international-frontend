@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -108,6 +109,32 @@ export default defineConfig({
           }),
         ]
       : []),
+    ...(process.env.NODE_ENV === 'production' &&
+    process.env.SENTRY_AUTH_TOKEN &&
+    process.env.SENTRY_ORG &&
+    process.env.SENTRY_PROJECT
+      ? [
+          sentryVitePlugin({
+            org: process.env.SENTRY_ORG,
+            project: process.env.SENTRY_PROJECT,
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+            sourcemaps: {
+              assets: './dist/**',
+              ignore: ['node_modules'],
+              filesToDeleteAfterUpload: ['./dist/**/*.map'],
+            },
+            release: {
+              name: process.env.VITE_APP_VERSION || 'development',
+              cleanArtifacts: true,
+              setCommits: {
+                auto: true,
+                ignoreMissing: true,
+              },
+            },
+            telemetry: false,
+          }),
+        ]
+      : []),
   ],
   optimizeDeps: {
     exclude: ['lucide-react'],
@@ -119,7 +146,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: false,
+    sourcemap: process.env.NODE_ENV === 'production' ? 'hidden' : false,
     target: 'es2022',
     rollupOptions: {
       output: {
