@@ -124,8 +124,14 @@ export default defineConfig({
               filesToDeleteAfterUpload: ['./dist/**/*.map'],
             },
             release: {
-              name: process.env.VITE_APP_VERSION || 'development',
-              cleanArtifacts: true,
+              name: (() => {
+                if (!process.env.VITE_APP_VERSION) {
+                  throw new Error(
+                    'VITE_APP_VERSION environment variable must be set for production builds with Sentry tracking'
+                  )
+                }
+                return process.env.VITE_APP_VERSION
+              })(),
               setCommits: {
                 auto: true,
                 ignoreMissing: true,
