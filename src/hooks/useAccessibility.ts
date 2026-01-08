@@ -10,38 +10,6 @@ export const useUniqueId = (prefix = 'element'): string => {
   return `${prefix}-${id}`
 }
 
-export const useFocus = () => {
-  const elementRef = useRef<HTMLElement>(null)
-  const [focused, setFocused] = useState(false)
-
-  const focus = useCallback(() => {
-    elementRef.current?.focus()
-  }, [])
-
-  const blur = useCallback(() => {
-    elementRef.current?.blur()
-  }, [])
-
-  const onFocus = useCallback(() => {
-    setFocused(true)
-  }, [])
-
-  const onBlur = useCallback(() => {
-    setFocused(false)
-  }, [])
-
-  const isFocused = focused
-
-  return {
-    elementRef,
-    focus,
-    blur,
-    isFocused,
-    onFocus,
-    onBlur,
-  }
-}
-
 export const useFocusTrap = (isActive: boolean) => {
   const containerRef = useRef<HTMLElement>(null)
   const previousFocusRef = useRef<HTMLElement | null>(null)
@@ -107,4 +75,4 @@ export const useAccessibilityPreferences = () => {
   }
 }
 
-export { useListNavigation, useSkipLinks } from './useAccessibilityNavigation'
+export { useSkipLinks } from './useAccessibilityNavigation'
