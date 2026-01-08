@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { useCarousel } from '../useCarousel'
 
@@ -7,6 +7,10 @@ describe('useCarousel', () => {
   beforeEach(() => {
     vi.clearAllTimers()
     vi.useFakeTimers()
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
   })
 
   describe('inicialização', () => {
@@ -149,7 +153,6 @@ describe('useCarousel', () => {
       )
 
       act(() => {
-        // Vai para o último clone (totalItems + 1)
         result.current.goToSlide(4)
         result.current.nextSlide()
       })
