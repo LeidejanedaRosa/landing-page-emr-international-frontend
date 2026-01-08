@@ -307,29 +307,3 @@ const ExternalLinkIcon = () => (
     <path d='M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z' />
   </svg>
 )
-
-interface LiveRegionProps extends AccessibilityProps {
-  children: React.ReactNode
-  priority?: 'polite' | 'assertive'
-  atomic?: boolean
-  className?: string
-}
-
-export const LiveRegion = forwardRef<HTMLDivElement, LiveRegionProps>(
-  (
-    { children, priority = 'polite', atomic = true, className = '', ...props },
-    ref
-  ) => (
-    <div
-      ref={ref}
-      aria-live={priority}
-      aria-atomic={atomic}
-      className={`sr-only ${className}`}
-      {...props}
-    >
-      {children}
-    </div>
-  )
-)
-
-LiveRegion.displayName = 'LiveRegion'

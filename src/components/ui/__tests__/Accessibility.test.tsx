@@ -81,4 +81,51 @@ describe('ScreenReaderOnly', () => {
     const element = container.firstChild
     expect(element).toHaveClass('sr-only')
   })
+
+  it('should render as span by default', () => {
+    const { container } = render(
+      <ScreenReaderOnly>Hidden content</ScreenReaderOnly>
+    )
+
+    const element = container.firstChild
+    expect(element?.nodeName).toBe('SPAN')
+  })
+
+  it('should clone child element when asChild is true', () => {
+    render(
+      <ScreenReaderOnly asChild>
+        <div data-testid='child-element'>Hidden content</div>
+      </ScreenReaderOnly>
+    )
+
+    const element = screen.getByTestId('child-element')
+    expect(element).toBeInTheDocument()
+    expect(element).toHaveClass('sr-only')
+    expect(element.nodeName).toBe('DIV')
+  })
+
+  it('should preserve existing className when asChild is true', () => {
+    render(
+      <ScreenReaderOnly asChild>
+        <div className='existing-class' data-testid='existing-class-element'>
+          Hidden content
+        </div>
+      </ScreenReaderOnly>
+    )
+
+    const element = screen.getByTestId('existing-class-element')
+    expect(element).toHaveClass('sr-only', 'existing-class')
+  })
+
+  it('should handle child without className when asChild is true', () => {
+    render(
+      <ScreenReaderOnly asChild>
+        <button data-testid='button-child'>Click me</button>
+      </ScreenReaderOnly>
+    )
+
+    const button = screen.getByTestId('button-child')
+    expect(button).toHaveClass('sr-only')
+    expect(button.nodeName).toBe('BUTTON')
+  })
 })
