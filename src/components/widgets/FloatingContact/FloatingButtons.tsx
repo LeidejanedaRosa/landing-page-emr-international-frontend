@@ -25,8 +25,8 @@ const FloatingButtons: React.FC<FloatingButtonsProps> = ({ onPhoneClick }) => {
         target='_blank'
         rel='noopener noreferrer'
         className='group flex h-14 w-14 items-center justify-center rounded-full bg-success text-white shadow-lg transition-all duration-300 hover:scale-110 hover:bg-success-600 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-success focus-visible:ring-offset-2'
-        aria-label='Conversar no WhatsApp'
-        title='Conversar no WhatsApp'
+        aria-label='Conversar no WhatsApp (abre em nova janela)'
+        title='Conversar no WhatsApp (abre em nova janela)'
       >
         <MessageCircle className='h-6 w-6 transition-transform duration-300 group-hover:scale-110' />
       </a>

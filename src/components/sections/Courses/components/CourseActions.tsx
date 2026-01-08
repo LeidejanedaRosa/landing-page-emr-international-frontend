@@ -26,8 +26,8 @@ export const CourseActions = ({
         } ${styles.ring}`}
         aria-label={
           isOpen
-            ? `Inscreva-se no curso ${title} - ${levelCode} via WhatsApp`
-            : `Manifestar interesse no curso ${title} - ${levelCode} via WhatsApp`
+            ? `Inscreva-se no curso ${title} - ${levelCode} via WhatsApp (abre em nova janela)`
+            : `Manifestar interesse no curso ${title} - ${levelCode} via WhatsApp (abre em nova janela)`
         }
       >
         {isOpen ? 'Inscreva-se' : 'Tenho Interesse'}
@@ -39,7 +39,7 @@ export const CourseActions = ({
         target='_blank'
         rel='noopener noreferrer'
         className={`flex items-center justify-center w-full py-2 text-sm font-medium ${styles.secondary} ${styles.secondaryHover} ${styles.ring} transition-colors gap-2`}
-        aria-label={`Baixar brochura em PDF do curso ${title}`}
+        aria-label={`Baixar brochura em PDF do curso ${title} (abre em nova janela)`}
       >
         <Download className='w-4 h-4' aria-hidden='true' />
         <span>Baixar PDF técnico</span>

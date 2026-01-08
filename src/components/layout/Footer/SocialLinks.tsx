@@ -32,7 +32,7 @@ export const SocialLinkButton: React.FC<SocialLinkButtonProps> = ({
       target='_blank'
       rel='noopener noreferrer'
       className={`flex items-center justify-center w-11 h-11 rounded-lg text-white ${social.bgColor} ${social.hoverBgColor} transition-all duration-200 hover:opacity-90 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black`}
-      aria-label={social.ariaLabel}
+      aria-label={`${social.ariaLabel} (abre em nova janela)`}
       onClick={() => onNavigate(social.name)}
     >
       <IconComponent />

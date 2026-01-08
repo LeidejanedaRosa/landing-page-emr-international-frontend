@@ -30,7 +30,7 @@ export const CourseCTAButton: React.FC<CourseCTAButtonProps> = ({
                   transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]
                   ${colors.button} text-white font-bold text-center
                   focus:outline-none focus:ring-4 ${colors.focusRing}`}
-      aria-label={ctaAriaLabel}
+      aria-label={`${ctaAriaLabel} (abre em nova janela)`}
     >
       {ctaLabel} →
     </a>

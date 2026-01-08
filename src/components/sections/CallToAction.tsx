@@ -35,7 +35,7 @@ const CallToAction: React.FC = () => {
           target='_blank'
           rel='noopener noreferrer'
           className='inline-block bg-white text-cta-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg uppercase tracking-wider text-sm transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-cta-600'
-          aria-label='Entrar em contato via WhatsApp para se inscrever nos treinamentos'
+          aria-label='Entrar em contato via WhatsApp para se inscrever nos treinamentos (abre em nova janela)'
         >
           Quero me inscrever agora
         </a>

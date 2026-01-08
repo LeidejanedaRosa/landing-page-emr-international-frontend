@@ -74,6 +74,7 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
       href={whatsappUrl}
       target='_blank'
       rel='noopener noreferrer'
+      aria-label={`${ctaText} (abre em nova janela)`}
       className='inline-flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors'
     >
       <svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24'>
