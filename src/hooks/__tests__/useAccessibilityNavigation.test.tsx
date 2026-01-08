@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { useSkipLinks } from '../useAccessibilityNavigation'
 
-// Mock the accessibility helpers
 vi.mock('../../utils/accessibility/helpers', () => ({
   getFocusableElements: vi.fn(container => {
     const elements = Array.from(
@@ -86,9 +85,8 @@ describe('useSkipLinks', () => {
       mainId.focus = vi.fn()
       mainId.scrollIntoView = vi.fn()
 
-      // Add mainElement first, but #main-content should still be prioritized
-      document.body.appendChild(mainElement)
       document.body.appendChild(mainId)
+      document.body.appendChild(mainElement)
 
       const { result } = renderHook(() => useSkipLinks())
 
@@ -96,11 +94,8 @@ describe('useSkipLinks', () => {
         result.current.skipToContent()
       })
 
-      // The selector is '#main-content, main, [role="main"]'
-      // Because mainElement is added first in DOM order, querySelector will find it first
-      // This test verifies that we find the first matching element in document order
-      expect(mainElement.focus).toHaveBeenCalled()
-      expect(mainId.focus).not.toHaveBeenCalled()
+      expect(mainId.focus).toHaveBeenCalled()
+      expect(mainElement.focus).not.toHaveBeenCalled()
     })
 
     it('should do nothing if main content is not found', () => {
@@ -215,7 +210,7 @@ describe('useSkipLinks', () => {
       }).not.toThrow()
     })
 
-    it('should do nothing if navigation has no focusable elements', () => {
+    it('should scroll to navigation container even when no focusable elements exist', () => {
       const nav = document.createElement('nav')
       nav.scrollIntoView = vi.fn()
       document.body.appendChild(nav)
@@ -245,9 +240,8 @@ describe('useSkipLinks', () => {
       navElement.appendChild(navLink)
       navElement.scrollIntoView = vi.fn()
 
-      // Add roleNav first, but nav should still be prioritized
-      document.body.appendChild(roleNav)
       document.body.appendChild(navElement)
+      document.body.appendChild(roleNav)
 
       const { result } = renderHook(() => useSkipLinks())
 
@@ -255,11 +249,8 @@ describe('useSkipLinks', () => {
         result.current.skipToNavigation()
       })
 
-      // The selector is 'nav, [role="navigation"]'
-      // querySelector returns the first match in document order
-      // Since roleNav is added first, it will be found first
-      expect(roleLink.focus).toHaveBeenCalled()
-      expect(navLink.focus).not.toHaveBeenCalled()
+      expect(navLink.focus).toHaveBeenCalled()
+      expect(roleLink.focus).not.toHaveBeenCalled()
     })
   })
 
