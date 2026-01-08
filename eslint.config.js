@@ -169,4 +169,28 @@ export default [
       'no-var': 'error',
     },
   },
+  // Test files - allow longer functions and more nested callbacks
+  {
+    files: [
+      '**/__tests__/**/*.{ts,tsx}',
+      '**/*.test.{ts,tsx}',
+      '**/*.spec.{ts,tsx}',
+    ],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: './tsconfig.json',
+        ecmaFeatures: { jsx: true },
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+    rules: {
+      'max-lines-per-function': 'off',
+      'max-nested-callbacks': 'off',
+      'sonarjs/no-duplicate-string': 'off',
+    },
+  },
 ]
