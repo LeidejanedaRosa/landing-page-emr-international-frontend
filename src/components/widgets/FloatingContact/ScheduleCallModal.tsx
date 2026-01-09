@@ -30,6 +30,7 @@ const ScheduleCallModal: React.FC<ScheduleCallModalProps> = ({
   return createPortal(
     <FocusLock returnFocus={false} autoFocus>
       <div
+        data-testid='modal-overlay'
         className='fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50 p-4'
         onClick={onClose}
       >
