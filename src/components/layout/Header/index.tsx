@@ -15,11 +15,7 @@ import { useMobileMenu } from './hooks/useMobileMenu'
 import MobileMenu from './MobileMenu'
 import MobileMenuButton from './MobileMenuButton'
 
-interface HeaderProps {
-  className?: string
-}
-
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC = () => {
   const { isMobileMenuOpen, toggleMobileMenu, closeMobileMenu } =
     useMobileMenu()
   const { announce } = useScreenReaderAnnouncement()
@@ -52,7 +48,12 @@ const Header: React.FC<HeaderProps> = () => {
         Pular para navegação
       </SkipLink>
 
-      <header id={headerId} className='p-4 bg-black' role='banner'>
+      <header
+        id={headerId}
+        className='p-4 bg-black'
+        role='banner'
+        data-testid='header'
+      >
         <nav
           id={navId}
           className='max-w-screen-2xl mx-auto'
