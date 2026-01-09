@@ -68,6 +68,16 @@ describe('LoadingSpinner', () => {
 
     expect(wrapper).toHaveClass('items-center', 'justify-center')
   })
+
+  it('should have proper accessibility attributes for screen readers', () => {
+    const { container } = render(<LoadingSpinner />)
+    const spinner = container.querySelector('[role="status"]')
+    const svg = container.querySelector('svg')
+
+    expect(spinner).toBeInTheDocument()
+    expect(spinner).toHaveAttribute('aria-label', 'Carregando conteúdo')
+    expect(svg).toHaveAttribute('aria-hidden', 'true')
+  })
 })
 
 describe('SectionSkeleton', () => {
@@ -94,12 +104,10 @@ describe('SectionSkeleton', () => {
   })
 
   it('should render skeleton header elements', () => {
-    const { container } = render(<SectionSkeleton />)
-    const skeletonBlocks = container.querySelectorAll('.bg-gray-200')
+    const { getByTestId } = render(<SectionSkeleton />)
+    const headerBlock = getByTestId('skeleton-header')
 
-    expect(skeletonBlocks.length).toBeGreaterThan(0)
-
-    const headerBlock = skeletonBlocks[0]
+    expect(headerBlock).toBeInTheDocument()
     expect(headerBlock).toHaveClass(
       'h-8',
       'rounded',
@@ -110,10 +118,10 @@ describe('SectionSkeleton', () => {
   })
 
   it('should render skeleton description element', () => {
-    const { container } = render(<SectionSkeleton />)
-    const skeletonBlocks = container.querySelectorAll('.bg-gray-200')
+    const { getByTestId } = render(<SectionSkeleton />)
+    const descriptionBlock = getByTestId('skeleton-description')
 
-    const descriptionBlock = skeletonBlocks[1]
+    expect(descriptionBlock).toBeInTheDocument()
     expect(descriptionBlock).toHaveClass(
       'h-4',
       'rounded',
@@ -157,5 +165,13 @@ describe('SectionSkeleton', () => {
     expect(container.querySelector('.max-w-screen-2xl')).toBeInTheDocument()
     expect(container.querySelector('.animate-pulse')).toBeInTheDocument()
     expect(container.querySelector('.grid')).toBeInTheDocument()
+  })
+
+  it('should have proper accessibility attributes for screen readers', () => {
+    const { container } = render(<SectionSkeleton />)
+    const skeleton = container.querySelector('[role="status"]')
+
+    expect(skeleton).toBeInTheDocument()
+    expect(skeleton).toHaveAttribute('aria-label', 'Carregando seção')
   })
 })
