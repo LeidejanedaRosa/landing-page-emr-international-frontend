@@ -4,6 +4,8 @@ import { render, screen, userEvent } from '../../../../test/test-utils'
 import { PromoBannerCarousel } from '../PromoBannerCarousel'
 
 const mockAnnounce = vi.fn()
+const mockHandleMouseEnter = vi.fn()
+const mockHandleMouseLeave = vi.fn()
 let mockPrefersReducedMotion = false
 
 vi.mock('../../../../hooks/useAccessibility', () => ({
@@ -25,8 +27,8 @@ vi.mock('../../../../hooks/useBannerPauseState', () => ({
         handleTogglePause: () => {
           announce()
         },
-        handleMouseEnter: vi.fn(),
-        handleMouseLeave: vi.fn(),
+        handleMouseEnter: mockHandleMouseEnter,
+        handleMouseLeave: mockHandleMouseLeave,
       }
     }
   ),
@@ -35,6 +37,8 @@ vi.mock('../../../../hooks/useBannerPauseState', () => ({
 describe('PromoBannerCarousel', () => {
   beforeEach(() => {
     mockAnnounce.mockClear()
+    mockHandleMouseEnter.mockClear()
+    mockHandleMouseLeave.mockClear()
     mockPrefersReducedMotion = false
   })
 
@@ -236,13 +240,29 @@ describe('PromoBannerCarousel', () => {
   })
 
   describe('Mouse Interaction', () => {
-    it('should have mouse event handlers on section', () => {
+    it('should call handleMouseEnter on hover', async () => {
+      const user = userEvent.setup()
       render(<PromoBannerCarousel />)
 
       const section = screen.getByRole('region', {
         name: 'Banner promocional da EMR Internacional',
       })
-      expect(section).toBeInTheDocument()
+
+      await user.hover(section)
+      expect(mockHandleMouseEnter).toHaveBeenCalled()
+    })
+
+    it('should call handleMouseLeave on unhover', async () => {
+      const user = userEvent.setup()
+      render(<PromoBannerCarousel />)
+
+      const section = screen.getByRole('region', {
+        name: 'Banner promocional da EMR Internacional',
+      })
+
+      await user.hover(section)
+      await user.unhover(section)
+      expect(mockHandleMouseLeave).toHaveBeenCalled()
     })
   })
 })
