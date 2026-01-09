@@ -24,6 +24,7 @@ test.describe('Semantic HTML Structure Tests', () => {
     })
 
     test('should have at least one footer element', async ({ page }) => {
+      await page.locator('footer').first().waitFor({ timeout: 10000 })
       const footerCount = await page.locator('footer').count()
       expect(footerCount).toBeGreaterThanOrEqual(1)
     })
@@ -111,6 +112,10 @@ test.describe('Semantic HTML Structure Tests', () => {
     })
 
     test('page should have contentinfo landmark (footer)', async ({ page }) => {
+      await page
+        .locator('footer, [role="contentinfo"]')
+        .first()
+        .waitFor({ timeout: 10000 })
       const contentinfo = await page
         .locator('footer, [role="contentinfo"]')
         .count()
