@@ -20,7 +20,11 @@ const DesktopMenu: React.FC<DesktopMenuProps> = ({ currentSection }) => {
   }
 
   return (
-    <nav className='hidden md:flex' aria-labelledby={`${menuId}-label`}>
+    <nav
+      className='hidden md:flex'
+      aria-labelledby={`${menuId}-label`}
+      data-testid='desktop-menu'
+    >
       <span id={`${menuId}-label`} className='sr-only'>
         Menu principal de navegação
       </span>

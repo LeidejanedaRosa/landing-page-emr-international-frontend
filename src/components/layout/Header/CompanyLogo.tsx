@@ -12,6 +12,7 @@ const CompanyLogo: React.FC<CompanyLogoProps> = ({ logoId }) => {
       href='#inicio'
       className='flex items-center rounded-lg p-2 -m-2 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
       aria-label='EMR Internacional - Voltar ao início'
+      data-testid='company-logo-link'
     >
       <img
         id={logoId}
