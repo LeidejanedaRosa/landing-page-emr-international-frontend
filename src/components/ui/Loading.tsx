@@ -16,12 +16,17 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   }
 
   return (
-    <div className={`flex items-center justify-center ${className}`}>
+    <div
+      className={`flex items-center justify-center ${className}`}
+      role='status'
+      aria-label='Carregando conteúdo'
+    >
       <svg
         className={`animate-spin text-primary-600 ${sizeClasses[size]}`}
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
         viewBox='0 0 24 24'
+        aria-hidden='true'
       >
         <circle
           className='opacity-25'
@@ -42,11 +47,17 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 }
 
 const SectionSkeleton: React.FC = () => (
-  <div className='py-24 bg-gray-50'>
+  <div className='py-24 bg-gray-50' role='status' aria-label='Carregando seção'>
     <div className='max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8'>
       <div className='animate-pulse'>
-        <div className='h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8' />
-        <div className='h-4 bg-gray-200 rounded w-2/3 mx-auto mb-12' />
+        <div
+          data-testid='skeleton-header'
+          className='h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8'
+        />
+        <div
+          data-testid='skeleton-description'
+          className='h-4 bg-gray-200 rounded w-2/3 mx-auto mb-12'
+        />
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {[...Array(3)].map((_, index) => (
             <div key={index} className='bg-white p-8 rounded-xl shadow-lg'>
