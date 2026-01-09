@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, userEvent } from '../../../../test/test-utils'
 import Footer from '../index'
 
-// Mock dos hooks de acessibilidade
 const mockAnnounce = vi.fn()
 
 vi.mock('../../../../hooks/useAccessibility', () => ({
@@ -13,7 +12,6 @@ vi.mock('../../../../hooks/useAccessibility', () => ({
   useUniqueId: vi.fn((prefix: string) => `${prefix}-test-id`),
 }))
 
-// Mock do logo
 vi.mock('../../../../assets/logo_emr_internacional.svg', () => ({
   default: 'mocked-logo.svg',
 }))
@@ -237,7 +235,8 @@ describe('Footer', () => {
     it('should have decorative divider hidden from screen readers', () => {
       render(<Footer />)
 
-      const divider = document.querySelector('[aria-hidden="true"]')
+      const footer = screen.getByRole('contentinfo')
+      const divider = footer.querySelector('[aria-hidden="true"]')
       expect(divider).toBeInTheDocument()
     })
 
@@ -253,7 +252,9 @@ describe('Footer', () => {
     it('should have SVG icons hidden from assistive technology', () => {
       render(<Footer />)
 
-      const svgs = document.querySelectorAll('svg')
+      const footer = screen.getByRole('contentinfo')
+      const svgs = footer.querySelectorAll('svg')
+      expect(svgs.length).toBeGreaterThan(0)
       svgs.forEach(svg => {
         expect(svg).toHaveAttribute('aria-hidden', 'true')
       })
