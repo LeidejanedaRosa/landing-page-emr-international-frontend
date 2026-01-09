@@ -119,8 +119,8 @@ describe('CertificationCard', () => {
       expect(sources[1]).toHaveAttribute('srcSet', defaultProps.logo.webp)
     })
 
-    it('should have eager loading for first 4 images', () => {
-      render(<CertificationCard {...defaultProps} index={0} />)
+    it.each([0, 1, 2, 3])('should have eager loading for index %i', index => {
+      render(<CertificationCard {...defaultProps} index={index} />)
 
       const image = screen.getByAltText(`Logo ${defaultProps.organization}`)
       expect(image).toHaveAttribute('loading', 'eager')

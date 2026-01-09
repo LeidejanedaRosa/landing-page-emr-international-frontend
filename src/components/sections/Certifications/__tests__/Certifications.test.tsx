@@ -190,6 +190,21 @@ describe('Certifications', () => {
     })
 
     it('should navigate to previous slide when clicking previous button', async () => {
+      const { useCarousel } = await import('../../../../hooks/useCarousel')
+      const mockPreviousSlide = vi.fn()
+      vi.mocked(useCarousel).mockReturnValue({
+        currentIndex: 1,
+        maxIndex: 4,
+        hasMultiplePages: true,
+        isTransitioning: false,
+        nextSlide: vi.fn(),
+        previousSlide: mockPreviousSlide,
+        goToSlide: vi.fn(),
+        pauseAutoPlay: vi.fn(),
+        resumeAutoPlay: vi.fn(),
+        isAutoPlaying: false,
+      })
+
       const user = userEvent.setup()
       render(<Certifications />)
 
@@ -197,10 +212,26 @@ describe('Certifications', () => {
         name: 'Certificação anterior',
       })
 
-      await expect(user.click(prevButton)).resolves.not.toThrow()
+      await user.click(prevButton)
+      expect(mockPreviousSlide).toHaveBeenCalledTimes(1)
     })
 
     it('should navigate to next slide when clicking next button', async () => {
+      const { useCarousel } = await import('../../../../hooks/useCarousel')
+      const mockNextSlide = vi.fn()
+      vi.mocked(useCarousel).mockReturnValue({
+        currentIndex: 1,
+        maxIndex: 4,
+        hasMultiplePages: true,
+        isTransitioning: false,
+        nextSlide: mockNextSlide,
+        previousSlide: vi.fn(),
+        goToSlide: vi.fn(),
+        pauseAutoPlay: vi.fn(),
+        resumeAutoPlay: vi.fn(),
+        isAutoPlaying: false,
+      })
+
       const user = userEvent.setup()
       render(<Certifications />)
 
@@ -208,7 +239,8 @@ describe('Certifications', () => {
         name: 'Próxima certificação',
       })
 
-      await expect(user.click(nextButton)).resolves.not.toThrow()
+      await user.click(nextButton)
+      expect(mockNextSlide).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -275,6 +307,21 @@ describe('Certifications', () => {
     })
 
     it('should navigate to specific slide when clicking indicator', async () => {
+      const { useCarousel } = await import('../../../../hooks/useCarousel')
+      const mockGoToSlide = vi.fn()
+      vi.mocked(useCarousel).mockReturnValue({
+        currentIndex: 1,
+        maxIndex: 4,
+        hasMultiplePages: true,
+        isTransitioning: false,
+        nextSlide: vi.fn(),
+        previousSlide: vi.fn(),
+        goToSlide: mockGoToSlide,
+        pauseAutoPlay: vi.fn(),
+        resumeAutoPlay: vi.fn(),
+        isAutoPlaying: false,
+      })
+
       const user = userEvent.setup()
       render(<Certifications />)
 
@@ -284,7 +331,8 @@ describe('Certifications', () => {
       const indicators = indicatorGroup.querySelectorAll('button')
 
       if (indicators.length > 1) {
-        await expect(user.click(indicators[1])).resolves.not.toThrow()
+        await user.click(indicators[1])
+        expect(mockGoToSlide).toHaveBeenCalledWith(1)
       }
     })
   })
