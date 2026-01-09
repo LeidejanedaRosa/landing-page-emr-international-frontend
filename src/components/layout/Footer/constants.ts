@@ -69,8 +69,3 @@ export const BUSINESS_HOURS: BusinessHours = {
   days: 'Segunda a Sexta',
   hours: '8h às 18h',
 }
-
-export const ICON_SIZE = {
-  social: 'w-11 h-11',
-  socialIcon: 'w-5 h-5',
-} as const
