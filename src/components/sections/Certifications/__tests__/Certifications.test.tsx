@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { act, render, screen, userEvent } from '../../../../test/test-utils'
+import { render, screen, userEvent } from '../../../../test/test-utils'
 import Certifications from '../index'
 
 vi.mock('../../../../data/certificationsData', () => {
@@ -106,10 +106,11 @@ describe('Certifications', () => {
     it('should render English terms with lang attribute', () => {
       render(<Certifications />)
 
-      const englishTerms = screen.getAllByText('Wilderness Medicine')
-      englishTerms.forEach(term => {
-        expect(term).toHaveAttribute('lang', 'en')
-      })
+      const description = screen.getByText(
+        /certificações reconhecidas mundialmente/i
+      )
+      const spanElements = description.querySelectorAll('span[lang="en"]')
+      expect(spanElements.length).toBeGreaterThan(0)
     })
   })
 
@@ -183,7 +184,7 @@ describe('Certifications', () => {
 
       await user.click(prevButton)
 
-      expect(prevButton).toBeInTheDocument()
+      expect(mockAnnounce).toHaveBeenCalled()
     })
 
     it('should navigate to next slide when clicking next button', async () => {
@@ -196,7 +197,7 @@ describe('Certifications', () => {
 
       await user.click(nextButton)
 
-      expect(nextButton).toBeInTheDocument()
+      expect(mockAnnounce).toHaveBeenCalled()
     })
   })
 
@@ -273,7 +274,8 @@ describe('Certifications', () => {
 
       if (indicators.length > 1) {
         await user.click(indicators[1])
-        expect(indicators[1]).toBeInTheDocument()
+        expect(indicators[1]).toHaveAttribute('aria-current', 'true')
+        expect(mockAnnounce).toHaveBeenCalled()
       }
     })
   })
@@ -354,62 +356,32 @@ describe('Certifications', () => {
   })
 
   describe('Mouse Interaction', () => {
-    it('should pause autoplay on mouse enter', async () => {
+    it('should handle mouse enter and leave events without errors', async () => {
       render(<Certifications />)
 
       const section = screen.getByRole('region', {
         name: /credenciamento internacional/i,
       })
 
-      await act(async () => {
+      expect(() => {
         section.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }))
-      })
-
-      expect(section).toBeInTheDocument()
-    })
-
-    it('should resume autoplay on mouse leave', async () => {
-      render(<Certifications />)
-
-      const section = screen.getByRole('region', {
-        name: /credenciamento internacional/i,
-      })
-
-      await act(async () => {
         section.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true }))
-      })
-
-      expect(section).toBeInTheDocument()
+      }).not.toThrow()
     })
   })
 
   describe('Focus Interaction', () => {
-    it('should pause autoplay on focus', async () => {
+    it('should handle focus and blur events without errors', async () => {
       render(<Certifications />)
 
       const section = screen.getByRole('region', {
         name: /credenciamento internacional/i,
       })
 
-      await act(async () => {
+      expect(() => {
         section.dispatchEvent(new FocusEvent('focus', { bubbles: true }))
-      })
-
-      expect(section).toBeInTheDocument()
-    })
-
-    it('should resume autoplay on blur', async () => {
-      render(<Certifications />)
-
-      const section = screen.getByRole('region', {
-        name: /credenciamento internacional/i,
-      })
-
-      await act(async () => {
         section.dispatchEvent(new FocusEvent('blur', { bubbles: true }))
-      })
-
-      expect(section).toBeInTheDocument()
+      }).not.toThrow()
     })
   })
 
