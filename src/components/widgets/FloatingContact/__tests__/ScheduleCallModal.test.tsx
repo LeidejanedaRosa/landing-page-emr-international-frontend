@@ -1,5 +1,6 @@
 import React from 'react'
 
+import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { render, screen, within } from '../../../../test/test-utils'
@@ -113,11 +114,10 @@ describe('ScheduleCallModal', () => {
     const mockOnClose = vi.fn()
     const { user } = setupTest(true, mockOnClose)
 
-    const overlay = document.querySelector('.fixed.inset-0')
-    if (overlay) {
-      await user.click(overlay as HTMLElement)
-      expect(mockOnClose).toHaveBeenCalled()
-    }
+    const overlay = screen.getByTestId('modal-overlay')
+    expect(overlay).toBeInTheDocument()
+    await user.click(overlay)
+    expect(mockOnClose).toHaveBeenCalled()
   })
 
   it('should not close when clicking inside modal content', async () => {
@@ -178,7 +178,7 @@ describe('ScheduleCallModal', () => {
 })
 
 function setupTest(isOpen: boolean, onClose: () => void) {
-  const user = require('@testing-library/user-event').default.setup()
+  const user = userEvent.setup()
   render(<ScheduleCallModal isOpen={isOpen} onClose={onClose} />)
   return { user }
 }
