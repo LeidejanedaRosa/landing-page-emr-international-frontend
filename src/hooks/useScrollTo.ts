@@ -36,6 +36,7 @@ export function useScrollTo(options: UseScrollToOptions = {}) {
       }
 
       if (!element) {
+        // eslint-disable-next-line no-console
         console.warn(`Scroll target not found:`, target)
         return
       }
