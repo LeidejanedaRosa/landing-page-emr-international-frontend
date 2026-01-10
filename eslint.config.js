@@ -21,6 +21,8 @@ export default [
       'vite.config.ts',
       'vite.config.d.ts',
       'src/**/*.d.ts',
+      'tests/**',
+      'coverage/**',
     ],
   },
   // Plugin files use Node.js types from tsconfig.node.json
