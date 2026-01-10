@@ -21,7 +21,6 @@ export default [
       'vite.config.ts',
       'vite.config.d.ts',
       'src/**/*.d.ts',
-      'tests/**',
       'coverage/**',
     ],
   },
@@ -171,12 +170,44 @@ export default [
       'no-var': 'error',
     },
   },
+  // Playwright E2E tests - no TypeScript project reference needed
+  {
+    files: ['tests/**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+      prettier: prettier,
+      'unused-imports': unusedImports,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...prettierConfig.rules,
+      'prettier/prettier': 'error',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': 'warn',
+      'max-lines-per-function': 'off',
+      'max-nested-callbacks': 'off',
+      'sonarjs/no-duplicate-string': 'off',
+      'no-console': 'off',
+    },
+  },
   // Test files - allow longer functions and more nested callbacks
   {
     files: [
       '**/__tests__/**/*.{ts,tsx}',
       '**/*.test.{ts,tsx}',
-      '**/*.spec.{ts,tsx}',
+      'src/**/*.spec.{ts,tsx}',
     ],
     languageOptions: {
       parser: tsParser,
