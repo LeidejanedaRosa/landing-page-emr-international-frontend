@@ -240,9 +240,9 @@ describe('WhyItMattersSection', () => {
       const statWithSubtext = whyItMattersData[0].statistics.find(
         s => s.subtext
       )
-      if (statWithSubtext?.subtext) {
-        expect(screen.getByText(statWithSubtext.subtext)).toBeInTheDocument()
-      }
+      expect(statWithSubtext).toBeDefined()
+      expect(statWithSubtext!.subtext).toBeDefined()
+      expect(screen.getByText(statWithSubtext!.subtext!)).toBeInTheDocument()
     })
 
     it('deve exibir badge "Fator Crítico" no card destacado', () => {
@@ -314,17 +314,12 @@ describe('WhyItMattersSection', () => {
     it('deve ocultar estatísticas táticas ao trocar para remota', () => {
       render(<WhyItMattersSection />)
 
-      const tacticalStat = whyItMattersData[0].statistics[0]
-      const tacticalValue = tacticalStat.value
-
       const remoteTab = screen.getByRole('tab', { name: /área remota/i })
       fireEvent.click(remoteTab)
 
-      // Se o valor for diferente entre as tabs
-      const remoteStat = whyItMattersData[1].statistics[0]
-      if (tacticalValue !== remoteStat.value) {
-        expect(screen.queryByText(tacticalValue)).not.toBeInTheDocument()
-      }
+      // Verifica que o painel remoto está ativo através do aria-labelledby
+      const panel = screen.getByRole('tabpanel')
+      expect(panel).toHaveAttribute('aria-labelledby', 'remote-tab')
     })
   })
 

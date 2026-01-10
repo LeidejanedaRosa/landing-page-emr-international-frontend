@@ -98,14 +98,6 @@ describe('CallToAction (WhyItMatters)', () => {
         'Navegar para seção de treinamentos disponíveis'
       )
     })
-
-    it('deve ter variante primary', () => {
-      render(<CallToAction />)
-
-      const button = screen.getByRole('button')
-      // AccessibleButton com variant="primary" deve ter estilos primários
-      expect(button).toBeInTheDocument()
-    })
   })
 
   describe('Interação', () => {
@@ -232,14 +224,13 @@ describe('CallToAction (WhyItMatters)', () => {
       expect(button).toBeInTheDocument()
     })
 
-    it('não deve ter outline desabilitado sem alternativa de foco', () => {
+    it('deve ter indicadores de foco visíveis', () => {
       render(<CallToAction />)
 
       const button = screen.getByRole('button')
-      // Se tem focus:outline-none, deve ter focus:ring ou similar
-      if (button.className.includes('focus:outline-none')) {
-        expect(button.className).toMatch(/focus:ring|focus-visible:ring/)
-      }
+      const hasFocusStyling = button.className.match(/focus:|focus-visible:/)
+
+      expect(hasFocusStyling).toBeTruthy()
     })
   })
 })
