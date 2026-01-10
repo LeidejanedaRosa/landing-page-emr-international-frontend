@@ -39,7 +39,9 @@ describe('HeroHeadline', () => {
     it('should render third line', () => {
       render(<HeroHeadline />)
 
-      expect(screen.getByText(/você está/i)).toBeInTheDocument()
+      expect(
+        screen.getByText(HERO_CONTENT.headline.thirdLine)
+      ).toBeInTheDocument()
     })
 
     it('should render fourth line', () => {
@@ -89,9 +91,9 @@ describe('HeroHeadline', () => {
 
   describe('Accessibility', () => {
     it('should be the main heading of the page', () => {
-      render(<HeroHeadline />)
+      const { container } = render(<HeroHeadline />)
 
-      const h1Elements = document.querySelectorAll('h1')
+      const h1Elements = container.querySelectorAll('h1')
       expect(h1Elements.length).toBe(1)
     })
 
