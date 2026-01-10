@@ -148,19 +148,15 @@ describe('TestimonialIndicators', () => {
     it('deve mostrar barra de progresso quando autoPlaying é true', () => {
       render(<TestimonialIndicators {...defaultProps} isAutoPlaying={true} />)
 
-      const progressBar = document.querySelector(
-        '[style*="animation: progress"]'
-      )
+      const progressBar = screen.queryByTestId('progress-bar')
       expect(progressBar).toBeInTheDocument()
     })
 
     it('não deve mostrar barra de progresso quando autoPlaying é false', () => {
       render(<TestimonialIndicators {...defaultProps} isAutoPlaying={false} />)
 
-      const progressBars = document.querySelectorAll(
-        '[style*="animation: progress"]'
-      )
-      expect(progressBars).toHaveLength(0)
+      const progressBar = screen.queryByTestId('progress-bar')
+      expect(progressBar).not.toBeInTheDocument()
     })
 
     it('deve usar autoPlayDelay na animação', () => {
@@ -172,10 +168,8 @@ describe('TestimonialIndicators', () => {
         />
       )
 
-      const progressBar = document.querySelector(
-        '[style*="animation: progress 3000ms"]'
-      )
-      expect(progressBar).toBeInTheDocument()
+      const progressBar = screen.getByTestId('progress-bar')
+      expect(progressBar).toHaveStyle({ animation: 'progress 3000ms linear' })
     })
   })
 

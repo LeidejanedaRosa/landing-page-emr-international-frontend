@@ -6,30 +6,30 @@ import { StarRating } from '../StarRating'
 describe('StarRating', () => {
   describe('Renderização', () => {
     it('deve renderizar o número correto de estrelas para rating 5', () => {
-      render(<StarRating rating={5} />)
+      const { container } = render(<StarRating rating={5} />)
 
-      const stars = document.querySelectorAll('svg')
+      const stars = container.querySelectorAll('svg')
       expect(stars).toHaveLength(5)
     })
 
     it('deve renderizar o número correto de estrelas para rating 3', () => {
-      render(<StarRating rating={3} />)
+      const { container } = render(<StarRating rating={3} />)
 
-      const stars = document.querySelectorAll('svg')
+      const stars = container.querySelectorAll('svg')
       expect(stars).toHaveLength(3)
     })
 
     it('deve renderizar o número correto de estrelas para rating 1', () => {
-      render(<StarRating rating={1} />)
+      const { container } = render(<StarRating rating={1} />)
 
-      const stars = document.querySelectorAll('svg')
+      const stars = container.querySelectorAll('svg')
       expect(stars).toHaveLength(1)
     })
 
     it('deve renderizar 0 estrelas para rating 0', () => {
-      render(<StarRating rating={0} />)
+      const { container } = render(<StarRating rating={0} />)
 
-      const stars = document.querySelectorAll('svg')
+      const stars = container.querySelectorAll('svg')
       expect(stars).toHaveLength(0)
     })
   })
@@ -61,9 +61,9 @@ describe('StarRating', () => {
     })
 
     it('deve ter aria-hidden nas estrelas SVG', () => {
-      render(<StarRating rating={3} />)
+      const { container } = render(<StarRating rating={3} />)
 
-      const stars = document.querySelectorAll('svg')
+      const stars = container.querySelectorAll('svg')
       stars.forEach(star => {
         expect(star).toHaveAttribute('aria-hidden', 'true')
       })
@@ -72,16 +72,16 @@ describe('StarRating', () => {
 
   describe('Limites', () => {
     it('não deve renderizar mais estrelas que o maxRating', () => {
-      render(<StarRating rating={10} maxRating={5} />)
+      const { container } = render(<StarRating rating={10} maxRating={5} />)
 
-      const stars = document.querySelectorAll('svg')
+      const stars = container.querySelectorAll('svg')
       expect(stars).toHaveLength(5)
     })
 
     it('não deve renderizar estrelas negativas', () => {
-      render(<StarRating rating={-3} />)
+      const { container } = render(<StarRating rating={-3} />)
 
-      const stars = document.querySelectorAll('svg')
+      const stars = container.querySelectorAll('svg')
       expect(stars).toHaveLength(0)
     })
 
@@ -95,9 +95,9 @@ describe('StarRating', () => {
     })
 
     it('deve limitar ao maxRating customizado', () => {
-      render(<StarRating rating={15} maxRating={10} />)
+      const { container } = render(<StarRating rating={15} maxRating={10} />)
 
-      const stars = document.querySelectorAll('svg')
+      const stars = container.querySelectorAll('svg')
       expect(stars).toHaveLength(10)
     })
   })
@@ -112,23 +112,23 @@ describe('StarRating', () => {
     })
 
     it('deve ter estrelas com cor amarela', () => {
-      render(<StarRating rating={1} />)
+      const { container } = render(<StarRating rating={1} />)
 
-      const star = document.querySelector('svg')
+      const star = container.querySelector('svg')
       expect(star?.getAttribute('class')).toContain('text-yellow-400')
     })
 
     it('deve ter estrelas com fill-current', () => {
-      render(<StarRating rating={1} />)
+      const { container } = render(<StarRating rating={1} />)
 
-      const star = document.querySelector('svg')
+      const star = container.querySelector('svg')
       expect(star?.getAttribute('class')).toContain('fill-current')
     })
 
     it('deve ter estrelas com tamanho consistente', () => {
-      render(<StarRating rating={1} />)
+      const { container } = render(<StarRating rating={1} />)
 
-      const star = document.querySelector('svg')
+      const star = container.querySelector('svg')
       expect(star?.getAttribute('class')).toContain('w-6')
       expect(star?.getAttribute('class')).toContain('h-6')
     })
@@ -136,17 +136,17 @@ describe('StarRating', () => {
 
   describe('SVG Path', () => {
     it('deve renderizar path de estrela', () => {
-      render(<StarRating rating={1} />)
+      const { container } = render(<StarRating rating={1} />)
 
-      const path = document.querySelector('svg path')
+      const path = container.querySelector('svg path')
       expect(path).toBeInTheDocument()
       expect(path).toHaveAttribute('d')
     })
 
     it('deve ter viewBox correto', () => {
-      render(<StarRating rating={1} />)
+      const { container } = render(<StarRating rating={1} />)
 
-      const svg = document.querySelector('svg')
+      const svg = container.querySelector('svg')
       expect(svg).toHaveAttribute('viewBox', '0 0 20 20')
     })
   })
