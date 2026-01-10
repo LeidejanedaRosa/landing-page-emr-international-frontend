@@ -39,7 +39,7 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
       onMouseLeave={handleMouseLeave}
     >
       <ScreenReaderOnly>
-        <div aria-live='polite'>
+        <div id={`${bannerId}-status`} aria-live='polite'>
           {isPaused ? 'Banner pausado' : 'Banner em movimento'}
         </div>
       </ScreenReaderOnly>
