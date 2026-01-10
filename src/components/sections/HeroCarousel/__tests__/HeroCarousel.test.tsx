@@ -1,0 +1,6 @@
+import './suites/accessibility.test'
+import './suites/keyboard.test'
+import './suites/navigation.test'
+import './suites/rendering.test'
+import './suites/slideCalculations.test'
+import './suites/touchSwipe.test'
