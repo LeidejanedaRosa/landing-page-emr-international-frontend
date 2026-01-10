@@ -40,7 +40,7 @@ describe('HeroHeadline', () => {
       render(<HeroHeadline />)
 
       expect(
-        screen.getByText(HERO_CONTENT.headline.thirdLine)
+        screen.getByText(HERO_CONTENT.headline.thirdLine.trim())
       ).toBeInTheDocument()
     })
 
