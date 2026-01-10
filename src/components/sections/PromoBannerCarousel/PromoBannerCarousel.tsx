@@ -39,9 +39,9 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
       onMouseLeave={handleMouseLeave}
     >
       <ScreenReaderOnly>
-        <h2 id={`${bannerId}-heading`}>
+        <p id={`${bannerId}-heading`}>
           Banner promocional da EMR Internacional
-        </h2>
+        </p>
         <div id={`${bannerId}-status`} aria-live='polite'>
           {isPaused ? 'Banner pausado' : 'Banner em movimento'}
         </div>
