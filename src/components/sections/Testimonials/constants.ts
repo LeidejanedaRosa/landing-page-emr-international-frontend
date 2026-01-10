@@ -16,12 +16,6 @@ export const TESTIMONIALS_A11Y = {
     `Depoimento ${current} de ${total}`,
 } as const
 
-export const TESTIMONIALS_CONTENT = {
-  title: 'O que dizem sobre nós',
-  subtitle:
-    'Histórias reais de empresas e profissionais que se capacitaram conosco',
-} as const
-
 export const PROGRESS_KEYFRAMES = `
   @keyframes progress {
     from { width: 0%; }
