@@ -1,23 +1,7 @@
-/* eslint-disable no-unused-vars */
-export interface UseHeroCarouselOptions {
-  totalSlides: number
-  autoPlayDelay?: number
-  enableAutoPlay?: boolean
-}
-
-export interface UseHeroCarouselReturn {
-  currentSlide: number
-  isAutoPlaying: boolean
-  nextSlide: () => void
-  previousSlide: () => void
-  goToSlide: (index: number) => void
-  pauseAutoPlay: () => void
-  resumeAutoPlay: () => void
-}
-
 export interface CarouselIndicatorsProps {
   currentSlide: number
   totalSlides: number
+  // eslint-disable-next-line no-unused-vars
   onSelect: (index: number) => void
 }
 

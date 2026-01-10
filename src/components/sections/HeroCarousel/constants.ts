@@ -27,3 +27,7 @@ export const getSlideLabels = (): Record<number, string> => {
 export const getTotalSlides = (): number => {
   return 1 + COURSES_DATA.length
 }
+
+export const hasOpenEnrollment = (): boolean => {
+  return COURSES_DATA.length > 0
+}

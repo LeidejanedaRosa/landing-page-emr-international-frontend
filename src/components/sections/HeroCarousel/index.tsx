@@ -1,21 +1,21 @@
-import { type KeyboardEvent, useEffect } from 'react'
+import { type KeyboardEvent, memo, useEffect } from 'react'
 
 import { useScreenReaderAnnouncement } from '../../../hooks/useAccessibility'
 import { useCarousel } from '../../../hooks/useCarousel'
 import { useTouchSwipe } from '../../../hooks/useTouchSwipe'
 import Hero from '../Hero'
-import { COURSES_DATA } from '../HeroEnrollmentOpen/constants'
 import { CarouselContainer } from './components'
 import {
   getSlideLabels,
   getTotalSlides,
+  hasOpenEnrollment,
   HERO_CAROUSEL_A11Y,
   HERO_CAROUSEL_CONFIG,
 } from './constants'
 
 const HeroCarousel = () => {
   const { announce } = useScreenReaderAnnouncement()
-  const hasOpenEnrollment = COURSES_DATA.length > 0
+  const isEnrollmentOpen = hasOpenEnrollment()
 
   const totalSlides = getTotalSlides()
   const slideLabels = getSlideLabels()
@@ -30,13 +30,13 @@ const HeroCarousel = () => {
   } = useCarousel({
     totalItems: totalSlides,
     autoPlayDelay: HERO_CAROUSEL_CONFIG.autoPlayDelay,
-    enableAutoPlay: hasOpenEnrollment,
+    enableAutoPlay: isEnrollmentOpen,
   })
 
   const touchHandlers = useTouchSwipe({
     onSwipeLeft: nextSlide,
     onSwipeRight: previousSlide,
-    enabled: hasOpenEnrollment && totalSlides > 1,
+    enabled: isEnrollmentOpen && totalSlides > 1,
   })
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -50,7 +50,7 @@ const HeroCarousel = () => {
   }
 
   useEffect(() => {
-    if (hasOpenEnrollment) {
+    if (isEnrollmentOpen) {
       const label = slideLabels[currentSlide] || `Slide ${currentSlide + 1}`
       announce(
         HERO_CAROUSEL_A11Y.slideAnnouncement(
@@ -61,9 +61,9 @@ const HeroCarousel = () => {
         'polite'
       )
     }
-  }, [currentSlide, announce, hasOpenEnrollment, slideLabels, totalSlides])
+  }, [currentSlide, announce, isEnrollmentOpen, slideLabels, totalSlides])
 
-  if (!hasOpenEnrollment) {
+  if (!isEnrollmentOpen) {
     return (
       <div className='h-[100svh] landscape-mobile:h-auto landscape-mobile:min-h-[150vh] md:h-[calc(100svh-150px)]'>
         <Hero />
@@ -86,4 +86,6 @@ const HeroCarousel = () => {
   )
 }
 
-export default HeroCarousel
+HeroCarousel.displayName = 'HeroCarousel'
+
+export default memo(HeroCarousel)
