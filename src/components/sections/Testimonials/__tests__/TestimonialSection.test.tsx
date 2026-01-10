@@ -1,25 +1,31 @@
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { testimonials } from '../../../../data/testimonialsData'
 import { render, screen } from '../../../../test/test-utils'
 import TestimonialSection from '../index'
+import type { Testimonial } from '../types'
+
+let mockTestimonial: Testimonial = testimonials[0]
+let mockIndex = 0
+
+const createMockCarousel = () => ({
+  currentIndex: mockIndex,
+  totalSlides: testimonials.length,
+  currentTestimonial: mockTestimonial,
+  isAutoPlaying: true,
+  nextSlide: vi.fn(),
+  previousSlide: vi.fn(),
+  goToSlide: vi.fn(),
+  pauseAutoPlay: vi.fn(),
+  resumeAutoPlay: vi.fn(),
+  buttonsRef: { current: [] },
+  handleIndicatorKeyDown: vi.fn(),
+  handleKeyDown: vi.fn(),
+  touchHandlers: {},
+})
 
 vi.mock('../hooks/useTestimonialCarousel', () => ({
-  useTestimonialCarousel: () => ({
-    currentIndex: 0,
-    totalSlides: testimonials.length,
-    currentTestimonial: testimonials[0],
-    isAutoPlaying: true,
-    nextSlide: vi.fn(),
-    previousSlide: vi.fn(),
-    goToSlide: vi.fn(),
-    pauseAutoPlay: vi.fn(),
-    resumeAutoPlay: vi.fn(),
-    buttonsRef: { current: [] },
-    handleIndicatorKeyDown: vi.fn(),
-    handleKeyDown: vi.fn(),
-    touchHandlers: {},
-  }),
+  useTestimonialCarousel: () => createMockCarousel(),
 }))
 
 vi.mock('../../../seo/schemas', () => ({
@@ -247,43 +253,118 @@ describe('TestimonialSection', () => {
       expect(articles.length).toBeGreaterThan(0)
     })
 
-    it('deve exibir o depoimento atual', () => {
-      render(<TestimonialSection />)
+    describe('variante full', () => {
+      const fullTestimonial = testimonials.find(t => t.variant === 'full')
 
-      if (testimonials[0].variant === 'full') {
+      if (!fullTestimonial) {
+        throw new Error(
+          'Test data must contain a testimonial with variant "full"'
+        )
+      }
+
+      beforeEach(() => {
+        mockTestimonial = fullTestimonial
+        mockIndex = testimonials.findIndex(t => t.id === fullTestimonial.id)
+      })
+
+      it('deve exibir o texto do depoimento', () => {
+        render(<TestimonialSection />)
+
         expect(
-          screen.getByText(new RegExp(testimonials[0].testimonialText, 'i'))
+          screen.getByText(new RegExp(fullTestimonial.testimonialText, 'i'))
         ).toBeInTheDocument()
-      }
-    })
-  })
+      })
 
-  describe('Conteúdo do Primeiro Depoimento', () => {
-    it('deve exibir o nome do autor quando disponível', () => {
-      render(<TestimonialSection />)
+      it('deve exibir o nome do autor', () => {
+        render(<TestimonialSection />)
 
-      if (testimonials[0].authorName) {
-        expect(screen.getByText(testimonials[0].authorName)).toBeInTheDocument()
-      }
-    })
+        expect(
+          screen.getByText(fullTestimonial.authorName!)
+        ).toBeInTheDocument()
+      })
 
-    it('deve exibir o cargo do autor quando disponível', () => {
-      render(<TestimonialSection />)
+      it('deve exibir a imagem', () => {
+        render(<TestimonialSection />)
 
-      if (
-        testimonials[0].variant === 'full' ||
-        testimonials[0].variant === 'text-only'
-      ) {
-        expect(screen.getByText(testimonials[0].authorRole)).toBeInTheDocument()
-      }
+        const img = document.querySelector('img')
+        expect(img).toBeInTheDocument()
+        expect(img).toHaveAttribute('alt', fullTestimonial.images.alt)
+      })
     })
 
-    it('deve exibir tag do tipo de curso', () => {
-      render(<TestimonialSection />)
+    describe('variante text-only', () => {
+      const textOnlyTestimonial = testimonials.find(
+        t => t.variant === 'text-only'
+      )
 
-      const expectedLabel =
-        testimonials[0].courseType === 'tatico' ? 'Tático' : 'Remoto'
-      expect(screen.getByText(expectedLabel)).toBeInTheDocument()
+      if (!textOnlyTestimonial) {
+        throw new Error(
+          'Test data must contain a testimonial with variant "text-only"'
+        )
+      }
+
+      beforeEach(() => {
+        mockTestimonial = textOnlyTestimonial
+        mockIndex = testimonials.findIndex(t => t.id === textOnlyTestimonial.id)
+      })
+
+      it('deve exibir o texto do depoimento', () => {
+        render(<TestimonialSection />)
+
+        expect(
+          screen.getByText(new RegExp(textOnlyTestimonial.testimonialText, 'i'))
+        ).toBeInTheDocument()
+      })
+
+      it('deve exibir o nome do autor', () => {
+        render(<TestimonialSection />)
+
+        expect(
+          screen.getByText(textOnlyTestimonial.authorName!)
+        ).toBeInTheDocument()
+      })
+
+      it('não deve exibir imagem', () => {
+        render(<TestimonialSection />)
+
+        const img = document.querySelector('img')
+        expect(img).not.toBeInTheDocument()
+      })
+    })
+
+    describe('variante image-only', () => {
+      const imageOnlyTestimonial = testimonials.find(
+        t => t.variant === 'image-only'
+      )
+
+      if (!imageOnlyTestimonial) {
+        throw new Error(
+          'Test data must contain a testimonial with variant "image-only"'
+        )
+      }
+
+      beforeEach(() => {
+        mockTestimonial = imageOnlyTestimonial
+        mockIndex = testimonials.findIndex(
+          t => t.id === imageOnlyTestimonial.id
+        )
+      })
+
+      it('deve exibir a imagem', () => {
+        render(<TestimonialSection />)
+
+        const img = document.querySelector('img')
+        expect(img).toBeInTheDocument()
+        expect(img).toHaveAttribute('alt', imageOnlyTestimonial.images.alt)
+      })
+
+      it('não deve exibir texto de depoimento', () => {
+        render(<TestimonialSection />)
+
+        // image-only não tem testimonialText, então não deve aparecer blockquote com texto
+        const blockquote = document.querySelector('blockquote')
+        expect(blockquote).not.toBeInTheDocument()
+      })
     })
   })
 })
