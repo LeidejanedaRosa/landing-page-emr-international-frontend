@@ -67,6 +67,7 @@ const IndicatorButton = memo<IndicatorButtonProps>(
         <span className={getDotClasses(isSmall, isActive)}>
           {showProgress && (
             <span
+              data-testid='progress-bar'
               className='block h-full bg-cta-500 rounded-full'
               style={{ animation: `progress ${autoPlayDelay}ms linear` }}
             />
