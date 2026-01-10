@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest'
 import { render, screen, userEvent } from '../../../test/test-utils'
 import { AccessibleButton } from '../Accessibility'
 
-// eslint-disable-next-line max-lines-per-function
 describe('AccessibleButton', () => {
   it('should render button with correct text', () => {
     render(<AccessibleButton>Click me</AccessibleButton>)
