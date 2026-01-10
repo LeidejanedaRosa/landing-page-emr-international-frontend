@@ -4,7 +4,7 @@ export function InstructorHero() {
   return (
     <header className='w-full space-y-4 mb-6'>
       <div className='space-y-1'>
-        <p className='text-xs sm:text-sm font-bold text-cta-600 uppercase tracking-wider'>
+        <p className='text-xs sm:text-sm font-bold text-cta-500 uppercase tracking-wider'>
           Quem está por trás da
         </p>
         <p className='text-xl sm:text-2xl font-extrabold text-white leading-tight'>
