@@ -34,15 +34,12 @@ export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
       id={bannerId}
       className={`w-full max-w-full max-h-10 bg-white border-t border-b border-gray-200 overflow-hidden relative z-50 ${className}`}
       role='region'
-      aria-labelledby={`${bannerId}-heading`}
+      aria-label='Banner promocional da EMR Internacional'
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <ScreenReaderOnly>
-        <p id={`${bannerId}-heading`}>
-          Banner promocional da EMR Internacional
-        </p>
-        <div id={`${bannerId}-status`} aria-live='polite'>
+        <div aria-live='polite'>
           {isPaused ? 'Banner pausado' : 'Banner em movimento'}
         </div>
       </ScreenReaderOnly>
