@@ -3,6 +3,7 @@ import tseslint from '@typescript-eslint/eslint-plugin'
 import tsParser from '@typescript-eslint/parser'
 import prettierConfig from 'eslint-config-prettier'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
+import playwright from 'eslint-plugin-playwright'
 import prettier from 'eslint-plugin-prettier'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -188,10 +189,13 @@ export default [
       '@typescript-eslint': tseslint,
       prettier: prettier,
       'unused-imports': unusedImports,
+      sonarjs: sonarjs,
+      playwright: playwright,
     },
     rules: {
       ...js.configs.recommended.rules,
       ...prettierConfig.rules,
+      ...playwright.configs['flat/recommended'].rules,
       'prettier/prettier': 'error',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
@@ -200,6 +204,9 @@ export default [
       'max-nested-callbacks': 'off',
       'sonarjs/no-duplicate-string': 'off',
       'no-console': 'off',
+      'playwright/no-conditional-in-test': 'off',
+      'playwright/no-conditional-expect': 'off',
+      'playwright/no-skipped-test': 'off',
     },
   },
   // Test files - allow longer functions and more nested callbacks

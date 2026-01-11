@@ -156,25 +156,6 @@ export default defineConfig({
     target: 'es2022',
     rollupOptions: {
       output: {
-        manualChunks: id => {
-          if (id.includes('node_modules')) {
-            if (id.includes('/react-helmet-async/')) {
-              return 'helmet'
-            }
-            if (id.includes('/lucide-react/')) {
-              return 'icons'
-            }
-            if (id.includes('/web-vitals/')) {
-              return 'web-vitals'
-            }
-            if (id.includes('/@sentry/')) {
-              return 'sentry'
-            }
-            if (id.includes('/react/') || id.includes('/react-dom/')) {
-              return 'vendor'
-            }
-          }
-        },
         assetFileNames: assetInfo => {
           if (!assetInfo.name) return `assets/[name]-[hash][extname]`
           const info = assetInfo.name.split('.')
