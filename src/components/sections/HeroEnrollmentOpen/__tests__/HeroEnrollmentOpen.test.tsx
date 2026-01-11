@@ -292,7 +292,7 @@ describe('HeroEnrollmentOpen', () => {
   })
 
   describe('Reduced Motion Support', () => {
-    it('should pass prefersReducedMotion to CourseCard', async () => {
+    it('should not apply transition classes when prefersReducedMotion is true', async () => {
       const { useAccessibilityPreferences } =
         await import('../../../../hooks/useAccessibility')
       vi.mocked(useAccessibilityPreferences).mockReturnValueOnce({
@@ -300,13 +300,14 @@ describe('HeroEnrollmentOpen', () => {
         prefersHighContrast: false,
       })
 
-      const { container } = render(<HeroEnrollmentOpen courseIndex={0} />)
+      render(<HeroEnrollmentOpen courseIndex={0} />)
 
-      const article = container.querySelector('article')
-      expect(article).toBeTruthy()
+      const article = screen.getByRole('article')
+      expect(article).not.toHaveClass('transition-transform')
+      expect(article).not.toHaveClass('duration-500')
     })
 
-    it('should handle false prefersReducedMotion', async () => {
+    it('should apply transition classes when prefersReducedMotion is false', async () => {
       const { useAccessibilityPreferences } =
         await import('../../../../hooks/useAccessibility')
       vi.mocked(useAccessibilityPreferences).mockReturnValueOnce({
@@ -314,10 +315,12 @@ describe('HeroEnrollmentOpen', () => {
         prefersHighContrast: false,
       })
 
-      const { container } = render(<HeroEnrollmentOpen courseIndex={0} />)
+      render(<HeroEnrollmentOpen courseIndex={0} />)
 
-      const article = container.querySelector('article')
-      expect(article).toBeTruthy()
+      const article = screen.getByRole('article')
+      expect(article).toHaveClass('transition-transform')
+      expect(article).toHaveClass('duration-500')
+      expect(article).toHaveClass('ease-out')
     })
   })
 
