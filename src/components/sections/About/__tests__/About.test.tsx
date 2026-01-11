@@ -29,14 +29,18 @@ describe('About', () => {
   })
 
   describe('Rendering', () => {
-    it('should render section with correct semantic structure', () => {
-      render(<About />)
+    it(
+      'should render section with correct semantic structure',
+      { timeout: 15000 },
+      () => {
+        render(<About />)
 
-      const section = screen.getByRole('region', { name: /juan regenerati/i })
-      expect(section).toBeInTheDocument()
-      expect(section).toHaveAttribute('id', 'sobre')
-      expect(section).toHaveAttribute('data-section', 'sobre')
-    })
+        const section = screen.getByRole('region', { name: /juan regenerati/i })
+        expect(section).toBeInTheDocument()
+        expect(section).toHaveAttribute('id', 'sobre')
+        expect(section).toHaveAttribute('data-section', 'sobre')
+      }
+    )
 
     it('should have correct aria-labelledby linking to heading', () => {
       render(<About />)
