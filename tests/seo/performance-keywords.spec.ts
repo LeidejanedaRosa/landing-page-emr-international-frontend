@@ -46,7 +46,7 @@ test.describe('Performance & Core Web Vitals Tests', () => {
     test('should have acceptable Cumulative Layout Shift (CLS)', async ({
       page,
     }) => {
-      await page.waitForLoadState('networkidle')
+      await page.waitForLoadState('load')
 
       const cls = await page.evaluate(() => {
         return new Promise<number>(resolve => {
@@ -162,10 +162,9 @@ test.describe('Performance & Core Web Vitals Tests', () => {
         }
       }
 
-      if (images.length > 0) {
-        const modernFormatPercentage = (modernFormatCount / images.length) * 100
-        expect(modernFormatPercentage).toBeGreaterThanOrEqual(50)
-      }
+      expect(images.length).toBeGreaterThan(0)
+      const modernFormatPercentage = (modernFormatCount / images.length) * 100
+      expect(modernFormatPercentage).toBeGreaterThanOrEqual(50)
     })
 
     test('images should have width and height attributes', async ({ page }) => {
@@ -197,9 +196,9 @@ test.describe('Performance & Core Web Vitals Tests', () => {
         }
       }
 
-      if (images.length > 3) {
-        expect(lazyLoadCount).toBeGreaterThan(0)
-      }
+      const hasEnoughImages = images.length > 3
+      const shouldHaveLazyLoad = hasEnoughImages ? lazyLoadCount > 0 : true
+      expect(shouldHaveLazyLoad).toBeTruthy()
     })
   })
 
@@ -221,7 +220,7 @@ test.describe('Performance & Core Web Vitals Tests', () => {
     })
 
     test('should not have long tasks', async ({ page }) => {
-      await page.waitForLoadState('networkidle')
+      await page.waitForLoadState('load')
 
       const longTasks = await page.evaluate(() => {
         return new Promise<number>(resolve => {
@@ -255,11 +254,8 @@ test.describe('Performance & Core Web Vitals Tests', () => {
         return navigationEntry.nextHopProtocol
       })
 
-      if (isLocalDev) {
-        console.log(`Local dev environment detected. Protocol: ${protocol}`)
-      } else {
-        expect(protocol).toMatch(/h2|h3/)
-      }
+      test.skip(isLocalDev, 'HTTP/2 not available in local dev')
+      expect(protocol).toMatch(/h2|h3/)
     })
 
     test('should have acceptable page load time', async ({ page }) => {
@@ -294,9 +290,8 @@ test.describe('Performance & Core Web Vitals Tests', () => {
 
       for (const button of buttons.slice(0, 5)) {
         const box = await button.boundingBox()
-        if (box) {
-          expect(box.height).toBeGreaterThanOrEqual(44)
-        }
+        expect(box).not.toBeNull()
+        expect(box!.height).toBeGreaterThanOrEqual(44)
       }
     })
   })
@@ -349,9 +344,7 @@ test.describe('SEO Content Quality Tests', () => {
         .all()
 
       for (const link of internalLinks) {
-        const href = await link.getAttribute('href')
-        expect(href).not.toBe('#')
-        expect(href).toBeTruthy()
+        await expect(link).not.toHaveAttribute('href', '#')
       }
     })
   })
@@ -391,16 +384,16 @@ test.describe('SEO Content Quality Tests', () => {
 
     test('should have keyword-rich section headings', async ({ page }) => {
       const headings = await page.locator('h2, h3').all()
-      let keywordHeadings = 0
 
       const keywords = ['emergência', 'tático', 'curso', 'treinamento', 'APH']
 
+      let keywordHeadings = 0
       for (const heading of headings) {
         const text = await heading.textContent()
         const hasKeyword = keywords.some(keyword =>
           text?.toLowerCase().includes(keyword.toLowerCase())
         )
-        if (hasKeyword) keywordHeadings++
+        keywordHeadings += hasKeyword ? 1 : 0
       }
 
       expect(keywordHeadings).toBeGreaterThan(2)
@@ -425,9 +418,9 @@ test.describe('SEO Content Quality Tests', () => {
         const content = await element.textContent()
 
         expect(content).not.toBeNull()
-        expect(content).toBeTruthy()
+        expect(content?.trim()).toBeTruthy()
 
-        expect(() => JSON.parse(content!)).not.toThrow()
+        expect(() => JSON.parse(content ?? '')).not.toThrow()
       }
     })
 
@@ -440,16 +433,17 @@ test.describe('SEO Content Quality Tests', () => {
       for (const element of jsonLdElements) {
         const content = await element.textContent()
 
-        if (!content || content.trim().length === 0) {
-          continue
-        }
+        const trimmedContent = content?.trim() || ''
+
+        if (trimmedContent.length === 0) continue
 
         try {
-          const data = JSON.parse(content)
-          if (
+          const data = JSON.parse(trimmedContent)
+          const isOrganization =
             data['@type'] === 'Organization' ||
             data['@type']?.includes('Organization')
-          ) {
+
+          if (isOrganization) {
             hasOrgSchema = true
             break
           }

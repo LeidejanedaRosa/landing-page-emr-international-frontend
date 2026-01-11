@@ -117,7 +117,7 @@ test.describe('Performance Tests', () => {
 
     await page.goto('/')
 
-    await page.waitForLoadState('networkidle')
+    await page.waitForLoadState('load')
 
     const loadTime = Date.now() - startTime
 
@@ -134,7 +134,7 @@ test.describe('Performance Tests', () => {
     })
 
     await page.goto('/')
-    await page.waitForLoadState('networkidle')
+    await page.waitForLoadState('load')
 
     const criticalErrors = consoleErrors.filter(
       error =>

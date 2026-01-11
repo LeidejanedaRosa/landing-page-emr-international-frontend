@@ -7,8 +7,8 @@ test.describe('SEO Metadata Tests', () => {
 
   test.describe('Essential Meta Tags - WCAG 2.1 & Google SEO Guidelines', () => {
     test('should have valid html lang attribute', async ({ page }) => {
-      const htmlLang = await page.getAttribute('html', 'lang')
-      expect(htmlLang).toBe('pt-BR')
+      const htmlLang = page.locator('html')
+      await expect(htmlLang).toHaveAttribute('lang', 'pt-BR')
     })
 
     test('should have proper document title', async ({ page }) => {
@@ -20,144 +20,124 @@ test.describe('SEO Metadata Tests', () => {
     })
 
     test('should have meta description', async ({ page }) => {
-      const description = await page.getAttribute(
-        'meta[name="description"]',
-        'content'
-      )
-      expect(description).toBeTruthy()
-      expect(description!.length).toBeGreaterThan(50)
-      expect(description!.length).toBeLessThanOrEqual(160)
+      const description = page.locator('meta[name="description"]')
+      await expect(description).toHaveAttribute('content')
+      const content = await description.getAttribute('content')
+      expect(content!.length).toBeGreaterThan(50)
+      expect(content!.length).toBeLessThanOrEqual(160)
     })
 
     test('should have viewport meta tag', async ({ page }) => {
-      const viewport = await page.getAttribute(
-        'meta[name="viewport"]',
-        'content'
-      )
-      expect(viewport).toContain('width=device-width')
-      expect(viewport).toContain('initial-scale=1')
+      const viewport = page.locator('meta[name="viewport"]')
+      await expect(viewport).toHaveAttribute('content')
+      const content = await viewport.getAttribute('content')
+      expect(content).toContain('width=device-width')
+      expect(content).toContain('initial-scale=1')
     })
 
     test('should have charset declaration', async ({ page }) => {
-      const charset = await page.getAttribute('meta[charset]', 'charset')
-      expect(charset?.toLowerCase()).toBe('utf-8')
+      const charset = page.locator('meta[charset]')
+      const charsetValue = await charset.getAttribute('charset')
+      expect(charsetValue?.toLowerCase()).toBe('utf-8')
     })
   })
 
   test.describe('Open Graph Tags - Social Media SEO', () => {
     test('should have og:title', async ({ page }) => {
-      const ogTitle = await page.getAttribute(
-        'meta[property="og:title"]',
-        'content'
-      )
-      expect(ogTitle).toBeTruthy()
-      expect(ogTitle!.length).toBeGreaterThan(10)
+      const ogTitle = page.locator('meta[property="og:title"]')
+      await expect(ogTitle).toHaveAttribute('content')
+      const content = await ogTitle.getAttribute('content')
+      expect(content!.length).toBeGreaterThan(10)
     })
 
     test('should have og:description', async ({ page }) => {
-      const ogDescription = await page.getAttribute(
-        'meta[property="og:description"]',
-        'content'
-      )
-      expect(ogDescription).toBeTruthy()
-      expect(ogDescription!.length).toBeGreaterThan(50)
+      const ogDescription = page.locator('meta[property="og:description"]')
+      await expect(ogDescription).toHaveAttribute('content')
+      const content = await ogDescription.getAttribute('content')
+      expect(content!.length).toBeGreaterThan(50)
     })
 
     test('should have og:image', async ({ page }) => {
-      const ogImage = await page.getAttribute(
-        'meta[property="og:image"]',
-        'content'
-      )
-      expect(ogImage).toBeTruthy()
-      expect(ogImage).toMatch(/\.(jpg|jpeg|png|webp|avif)(\?[^?]*)?$/i)
+      const ogImage = page.locator('meta[property="og:image"]')
+      await expect(ogImage).toHaveAttribute('content')
+      const content = await ogImage.getAttribute('content')
+      expect(content).toMatch(/\.(jpg|jpeg|png|webp|avif)(\?[^?]*)?$/i)
     })
 
     test('should have og:url', async ({ page }) => {
-      const ogUrl = await page.getAttribute(
-        'meta[property="og:url"]',
-        'content'
-      )
-      expect(ogUrl).toBeTruthy()
-      expect(ogUrl).toMatch(/^https?:\/\//)
+      const ogUrl = page.locator('meta[property="og:url"]')
+      await expect(ogUrl).toHaveAttribute('content')
+      const content = await ogUrl.getAttribute('content')
+      expect(content).toMatch(/^https?:\/\//)
     })
 
     test('should have og:type', async ({ page }) => {
-      const ogType = await page.getAttribute(
-        'meta[property="og:type"]',
-        'content'
-      )
-      expect(ogType).toBeTruthy()
-      expect(['website', 'article', 'business.business']).toContain(ogType)
+      const ogType = page.locator('meta[property="og:type"]')
+      await expect(ogType).toHaveAttribute('content')
+      const content = await ogType.getAttribute('content')
+      expect(['website', 'article', 'business.business']).toContain(content)
     })
 
     test('should have og:locale', async ({ page }) => {
-      const ogLocale = await page.getAttribute(
-        'meta[property="og:locale"]',
-        'content'
-      )
-      expect(ogLocale).toBe('pt_BR')
+      const ogLocale = page.locator('meta[property="og:locale"]')
+      await expect(ogLocale).toHaveAttribute('content', 'pt_BR')
     })
   })
 
   test.describe('Twitter Card Tags', () => {
     test('should have twitter:card', async ({ page }) => {
-      const twitterCard = await page.getAttribute(
-        'meta[name="twitter:card"]',
-        'content'
-      )
-      expect(twitterCard).toBeTruthy()
-      expect(['summary', 'summary_large_image']).toContain(twitterCard)
+      const twitterCard = page.locator('meta[name="twitter:card"]')
+      await expect(twitterCard).toHaveAttribute('content')
+      const content = await twitterCard.getAttribute('content')
+      expect(['summary', 'summary_large_image']).toContain(content)
     })
 
     test('should have twitter:title', async ({ page }) => {
-      const twitterTitle = await page.getAttribute(
-        'meta[name="twitter:title"]',
-        'content'
-      )
-      expect(twitterTitle).toBeTruthy()
+      const twitterTitle = page.locator('meta[name="twitter:title"]')
+      await expect(twitterTitle).toHaveAttribute('content')
     })
 
     test('should have twitter:description', async ({ page }) => {
-      const twitterDesc = await page.getAttribute(
-        'meta[name="twitter:description"]',
-        'content'
-      )
-      expect(twitterDesc).toBeTruthy()
+      const twitterDesc = page.locator('meta[name="twitter:description"]')
+      await expect(twitterDesc).toHaveAttribute('content')
     })
 
     test('should have twitter:image', async ({ page }) => {
-      const twitterImage = await page.getAttribute(
-        'meta[name="twitter:image"]',
-        'content'
-      )
-      expect(twitterImage).toBeTruthy()
+      const twitterImage = page.locator('meta[name="twitter:image"]')
+      await expect(twitterImage).toHaveAttribute('content')
     })
   })
 
   test.describe('Canonical URL', () => {
     test('should have canonical link', async ({ page }) => {
-      const canonical = await page.getAttribute('link[rel="canonical"]', 'href')
-      expect(canonical).toBeTruthy()
-      expect(canonical).toMatch(/^https?:\/\//)
+      const canonical = page.locator('link[rel="canonical"]')
+      await expect(canonical).toHaveAttribute('href')
+      const href = await canonical.getAttribute('href')
+      expect(href).toMatch(/^https?:\/\//)
     })
 
     test('canonical should not have query parameters', async ({ page }) => {
-      const canonical = await page.getAttribute('link[rel="canonical"]', 'href')
-      expect(canonical).not.toContain('?')
+      const canonical = page.locator('link[rel="canonical"]')
+      await expect(canonical).toHaveAttribute('href')
+      const href = await canonical.getAttribute('href')
+      expect(href).not.toContain('?')
     })
   })
 
   test.describe('Robots Meta Tag', () => {
     test('should have robots meta tag', async ({ page }) => {
-      const robots = await page.getAttribute('meta[name="robots"]', 'content')
-      expect(robots).toBeTruthy()
+      const robots = page.locator('meta[name="robots"]')
+      await expect(robots).toHaveAttribute('content')
     })
 
     test('should allow indexing and following', async ({ page }) => {
-      const robots = await page.getAttribute('meta[name="robots"]', 'content')
-      expect(robots).toBeTruthy()
+      const robots = page.locator('meta[name="robots"]')
+      await expect(robots).toHaveAttribute('content')
+      const content = await robots.getAttribute('content')
 
-      const tokens = robots!.split(',').map(token => token.trim().toLowerCase())
+      const tokens = content!
+        .split(',')
+        .map(token => token.trim().toLowerCase())
 
       expect(tokens).toContain('index')
       expect(tokens).toContain('follow')
@@ -188,13 +168,9 @@ test.describe('SEO Metadata Tests', () => {
     test('should contain relevant keywords in description', async ({
       page,
     }) => {
-      const description = await page.getAttribute(
-        'meta[name="description"]',
-        'content'
-      )
-
-      expect(description).not.toBeNull()
-      expect(description).toBeTruthy()
+      const descriptionLocator = page.locator('meta[name="description"]')
+      await expect(descriptionLocator).toHaveAttribute('content')
+      const description = await descriptionLocator.getAttribute('content')
 
       const keywords = [
         'aph tático',
@@ -220,11 +196,10 @@ test.describe('SEO Metadata Tests', () => {
     test('should not use keyword stuffing in meta description', async ({
       page,
     }) => {
-      const description = await page.getAttribute(
-        'meta[name="description"]',
-        'content'
-      )
-      expect(description).toBeTruthy()
+      const descriptionLocator = page.locator('meta[name="description"]')
+      await expect(descriptionLocator).toHaveAttribute('content')
+      const description = await descriptionLocator.getAttribute('content')
+
       expect(description!.trim().length).toBeGreaterThan(0)
       const words = description!
         .toLowerCase()

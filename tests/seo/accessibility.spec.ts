@@ -17,21 +17,15 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
       expect(accessibilityScanResults.violations).toEqual([])
     })
 
-    test.skip('should pass best practices checks (optional)', async ({
-      page,
-    }) => {
+    test('should pass best practices checks (optional)', async ({ page }) => {
       const accessibilityScanResults = await new AxeBuilder({ page })
         .withTags(['best-practice'])
         .analyze()
 
-      if (accessibilityScanResults.violations.length > 0) {
-        console.warn(
-          'Best practice violations:',
-          accessibilityScanResults.violations.map(v => v.id)
-        )
-      }
-
-      expect(accessibilityScanResults.violations.length).toBeLessThan(10)
+      const BEST_PRACTICE_THRESHOLD = 10
+      expect(accessibilityScanResults.violations.length).toBeLessThan(
+        BEST_PRACTICE_THRESHOLD
+      )
     })
   })
 
@@ -85,13 +79,8 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
     test('should have skip navigation link', async ({ page }) => {
       const skipLink = page.locator('a[href^="#"]').first()
       await expect(skipLink).toBeVisible()
-      const skipLinkText = await skipLink.textContent()
 
-      const hasSkipLink =
-        skipLinkText?.toLowerCase().includes('skip') ||
-        skipLinkText?.toLowerCase().includes('pular')
-
-      expect(hasSkipLink).toBeTruthy()
+      await expect(skipLink).toContainText(/skip|pular/i)
     })
   })
 
@@ -117,33 +106,21 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
     }) => {
       await page.emulateMedia({ reducedMotion: 'reduce' })
 
-      if (browserName === 'chromium') {
-        const client = await page.context().newCDPSession(page)
-        await client.send('Emulation.setPageScaleFactor', {
-          pageScaleFactor: 2.0,
-        })
-      } else {
-        await page.evaluate(() => {
+      await page.evaluate(browser => {
+        if (browser === 'chromium') {
+          document.documentElement.style.zoom = '200%'
+        } else {
           document.documentElement.style.transform = 'scale(2)'
           document.documentElement.style.transformOrigin = 'top left'
           document.documentElement.style.width = '50%'
-        })
-      }
+        }
+      }, browserName)
 
-      await page.waitForLoadState('networkidle')
-      await page.waitForTimeout(500)
+      await page.waitForLoadState('load')
 
       const mainLocator = page.locator('main').first()
-      const mainExists = await mainLocator.count()
-
-      expect(mainExists).toBeGreaterThan(0)
-
-      if (mainExists > 0) {
-        await expect(mainLocator).toBeVisible()
-        const mainContent = await mainLocator.textContent()
-        expect(mainContent).toBeTruthy()
-        expect(mainContent!.length).toBeGreaterThan(0)
-      }
+      await expect(mainLocator).toBeVisible()
+      await expect(mainLocator).not.toBeEmpty()
 
       const hasHorizontalScroll = await page.evaluate(() => {
         const scrollWidth = document.documentElement.scrollWidth
@@ -166,8 +143,9 @@ test.describe('WCAG 2.1 AA Accessibility Tests - Axe-core', () => {
     })
 
     test('page should have lang attribute', async ({ page }) => {
-      const lang = await page.getAttribute('html', 'lang')
-      expect(lang).toBeTruthy()
+      const htmlLocator = page.locator('html')
+      await expect(htmlLocator).toHaveAttribute('lang')
+      const lang = await htmlLocator.getAttribute('lang')
       expect(lang).toMatch(/^[a-z]{2,3}(-[A-Za-z]{4})?(-[A-Z]{2})?$/i)
     })
   })

@@ -66,14 +66,12 @@ test.describe('Semantic HTML Structure Tests', () => {
         })
       )
 
-      let previousLevel = 0
-      for (const level of headingLevels) {
-        if (previousLevel === 0) {
-          expect(level).toBe(1)
-        } else {
-          expect(level - previousLevel).toBeLessThanOrEqual(1)
-        }
-        previousLevel = level
+      expect(headingLevels[0]).toBe(1)
+
+      for (let i = 1; i < headingLevels.length; i++) {
+        const previousLevel = headingLevels[i - 1]
+        const currentLevel = headingLevels[i]
+        expect(currentLevel - previousLevel).toBeLessThanOrEqual(1)
       }
     })
 
@@ -159,13 +157,11 @@ test.describe('Semantic HTML Structure Tests', () => {
         const ariaLabel = await input.getAttribute('aria-label')
         const ariaLabelledby = await input.getAttribute('aria-labelledby')
 
-        if (id) {
-          const hasLabel =
-            (await page.locator(`label[for="${id}"]`).count()) > 0
-          expect(hasLabel || ariaLabel || ariaLabelledby).toBeTruthy()
-        } else {
-          expect(ariaLabel || ariaLabelledby).toBeTruthy()
-        }
+        const hasLabel = id
+          ? (await page.locator(`label[for="${id}"]`).count()) > 0
+          : false
+
+        expect(hasLabel || ariaLabel || ariaLabelledby).toBeTruthy()
       }
     })
 
@@ -206,9 +202,8 @@ test.describe('Semantic HTML Structure Tests', () => {
         const hasContent = text || ariaLabel || title
         expect(hasContent).toBeTruthy()
 
-        if (text) {
-          expect(genericTexts.includes(text)).toBeFalsy()
-        }
+        const textIsGeneric = text ? genericTexts.includes(text) : false
+        expect(textIsGeneric).toBeFalsy()
       }
     })
 
@@ -216,10 +211,9 @@ test.describe('Semantic HTML Structure Tests', () => {
       const links = await page.locator('a').all()
 
       for (const link of links) {
-        const href = await link.getAttribute('href')
-        expect(href).toBeTruthy()
-        expect(href).not.toBe('#')
-        expect(href).not.toBe('javascript:void(0)')
+        await expect(link).toHaveAttribute('href')
+        await expect(link).not.toHaveAttribute('href', '#')
+        await expect(link).not.toHaveAttribute('href', 'javascript:void(0)')
       }
     })
 
@@ -288,10 +282,10 @@ test.describe('Semantic HTML Structure Tests', () => {
 
       for (const table of tables) {
         const headerCells = await table.locator('th').count()
-        if (headerCells > 0) {
-          const hasScope = await table.locator('th[scope]').count()
-          expect(hasScope).toBeGreaterThan(0)
-        }
+        const hasScope = await table.locator('th[scope]').count()
+
+        const shouldHaveScope = headerCells > 0 ? hasScope > 0 : true
+        expect(shouldHaveScope).toBeTruthy()
       }
     })
   })
@@ -320,9 +314,12 @@ test.describe('Semantic HTML Structure Tests', () => {
       const deprecatedTags = await page.locator('b, i').count()
       const semanticTags = await page.locator('strong, em').count()
 
-      if (deprecatedTags > 0) {
-        expect(semanticTags).toBeGreaterThan(deprecatedTags)
-      }
+      const hasDeprecatedTags = deprecatedTags > 0
+      const usesSemanticAlternatives = hasDeprecatedTags
+        ? semanticTags > deprecatedTags
+        : true
+
+      expect(usesSemanticAlternatives).toBeTruthy()
     })
   })
 })
