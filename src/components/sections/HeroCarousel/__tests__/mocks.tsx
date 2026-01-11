@@ -39,7 +39,9 @@ interface CarouselContainerMockProps {
   touchHandlers?: React.DOMAttributes<HTMLElement>
 }
 
-export const mockCarouselContainer = () => ({
+export const mockCarouselContainer = (): {
+  CarouselContainer: React.FC<CarouselContainerMockProps>
+} => ({
   CarouselContainer: ({
     currentSlide,
     totalSlides,
@@ -60,7 +62,7 @@ export const mockCarouselContainer = () => ({
       <button data-testid='next-button' onClick={onNext}>
         Next
       </button>
-      <button data-testid='select-button' onClick={() => onSelect(1)}>
+      <button data-testid='select-button' onClick={() => onSelect(0)}>
         Select
       </button>
       <button data-testid='pause-button' onClick={onPause}>
@@ -74,6 +76,7 @@ export const mockCarouselContainer = () => ({
         onKeyDown={onKeyDown}
         tabIndex={0}
         role='region'
+        aria-label='Carousel keyboard controls'
       />
       {touchHandlers && (
         <div
