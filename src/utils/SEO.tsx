@@ -1,7 +1,3 @@
-import React from 'react'
-
-import { Helmet } from 'react-helmet-async'
-
 interface SEOProps {
   title?: string
   description?: string
@@ -16,52 +12,66 @@ interface SEOProps {
   canonical?: string
 }
 
-const DEFAULT_TITLE =
-  'EMR Internacional | APH Tático e Emergência em Áreas Remotas'
-const DEFAULT_DESCRIPTION =
-  'Formação de Operadores de Emergência Tática e APH Tático (TECC). Cursos de Wilderness Medicine e emergências em áreas remotas. Treinamentos onde o convencional não alcança.'
-const DEFAULT_KEYWORDS =
-  'APH Tático, operador de emergência tática, TECC, Emergência, Áreas Remotas, Atendimento Pré-Hospitalar, Treinamento Tático, EMR Internacional, socorrista tático, medicina tática, TCCC, medicina de combate'
-const DEFAULT_IMAGE = 'https://www.emrinternacional.com/social-image.jpg'
-const DEFAULT_URL = 'https://www.emrinternacional.com/'
+const DEFAULTS = {
+  title: 'EMR Internacional | APH Tático e Áreas Remotas',
+  description:
+    'Formação em Emergência Tática e APH Tático (TECC). Cursos de Wilderness Medicine e emergências em áreas remotas com certificação internacional.',
+  keywords:
+    'APH Tático, operador de emergência tática, TECC, Emergência, Áreas Remotas, Atendimento Pré-Hospitalar, Treinamento Tático, EMR Internacional, socorrista tático, medicina tática, TCCC, medicina de combate',
+  image: 'https://www.emrinternacional.com/social-image.jpg',
+  url: 'https://www.emrinternacional.com/',
+} as const
 
-const SEO: React.FC<SEOProps> = ({
-  title = DEFAULT_TITLE,
-  description = DEFAULT_DESCRIPTION,
-  keywords = DEFAULT_KEYWORDS,
-  ogTitle,
-  ogDescription,
-  ogImage = DEFAULT_IMAGE,
-  ogUrl = DEFAULT_URL,
-  twitterTitle,
-  twitterDescription,
-  twitterImage,
-  canonical = DEFAULT_URL,
-  // eslint-disable-next-line complexity
-}) => (
-  <Helmet>
-    <title>{title}</title>
+const resolveBaseProps = (props: SEOProps) => ({
+  title: props.title ?? DEFAULTS.title,
+  description: props.description ?? DEFAULTS.description,
+  keywords: props.keywords ?? DEFAULTS.keywords,
+  ogImage: props.ogImage ?? DEFAULTS.image,
+  ogUrl: props.ogUrl ?? DEFAULTS.url,
+  canonical: props.canonical ?? DEFAULTS.url,
+})
 
-    <meta name='description' content={description} />
-    <meta name='keywords' content={keywords} />
+const resolveSocialProps = (
+  props: SEOProps,
+  base: ReturnType<typeof resolveBaseProps>
+) => ({
+  ogTitle: props.ogTitle ?? base.title,
+  ogDescription: props.ogDescription ?? base.description,
+  twitterTitle: props.twitterTitle ?? base.title,
+  twitterDescription: props.twitterDescription ?? base.description,
+  twitterImage: props.twitterImage ?? base.ogImage,
+})
 
-    <meta property='og:type' content='website' />
-    <meta property='og:locale' content='pt_BR' />
-    <meta property='og:title' content={ogTitle || title} />
-    <meta property='og:description' content={ogDescription || description} />
-    <meta property='og:image' content={ogImage} />
-    <meta property='og:url' content={ogUrl} />
+const SEO = (props: SEOProps) => {
+  const base = resolveBaseProps(props)
+  const social = resolveSocialProps(props, base)
 
-    <meta name='twitter:card' content='summary_large_image' />
-    <meta name='twitter:title' content={twitterTitle || title} />
-    <meta
-      name='twitter:description'
-      content={twitterDescription || description}
-    />
-    <meta name='twitter:image' content={twitterImage || ogImage} />
+  return (
+    <>
+      <title>{base.title}</title>
 
-    <link rel='canonical' href={canonical} />
-  </Helmet>
-)
+      <meta name='description' content={base.description} />
+      <meta name='keywords' content={base.keywords} />
+      <meta name='robots' content='index, follow' />
+
+      <meta property='og:type' content='website' />
+      <meta property='og:locale' content='pt_BR' />
+      <meta property='og:site_name' content='EMR Internacional' />
+      <meta property='og:title' content={social.ogTitle} />
+      <meta property='og:description' content={social.ogDescription} />
+      <meta property='og:image' content={base.ogImage} />
+      <meta property='og:image:width' content='1200' />
+      <meta property='og:image:height' content='630' />
+      <meta property='og:url' content={base.ogUrl} />
+
+      <meta name='twitter:card' content='summary_large_image' />
+      <meta name='twitter:title' content={social.twitterTitle} />
+      <meta name='twitter:description' content={social.twitterDescription} />
+      <meta name='twitter:image' content={social.twitterImage} />
+
+      <link rel='canonical' href={base.canonical} />
+    </>
+  )
+}
 
 export default SEO
