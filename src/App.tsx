@@ -7,7 +7,7 @@ import { ProductsModal } from './components/sections/ProductsModal'
 import PromoBannerCarousel from './components/sections/PromoBannerCarousel/index'
 import { JsonLdScript } from './components/seo/JsonLdScript'
 import { ORGANIZATION_STRUCTURED_DATA } from './components/seo/organizationSchema'
-import { DEFAULT_BREADCRUMBS } from './components/seo/schemas/breadcrumbConstants'
+import { HOMEPAGE_BREADCRUMB } from './components/seo/schemas/breadcrumbConstants'
 import { BreadcrumbSchema } from './components/seo/schemas/BreadcrumbSchema'
 import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
 import FloatingContact from './components/widgets/FloatingContact'
@@ -42,7 +42,7 @@ function App() {
     <ErrorBoundary>
       <SEO />
       <JsonLdScript data={ORGANIZATION_STRUCTURED_DATA} />
-      <BreadcrumbSchema items={DEFAULT_BREADCRUMBS} />
+      <BreadcrumbSchema items={HOMEPAGE_BREADCRUMB} />
       <div className='min-h-screen bg-gray-50'>
         <Header />
         <main role='main' aria-label='Conteúdo principal'>

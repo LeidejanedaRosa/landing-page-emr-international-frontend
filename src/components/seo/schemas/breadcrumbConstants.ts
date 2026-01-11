@@ -5,7 +5,11 @@ export interface BreadcrumbItem {
   url?: string
 }
 
-export const DEFAULT_BREADCRUMBS: BreadcrumbItem[] = [
+export const HOMEPAGE_BREADCRUMB: BreadcrumbItem[] = [
+  { name: 'Home', url: COMPANY_URL },
+]
+
+export const SITE_NAVIGATION_ITEMS: BreadcrumbItem[] = [
   { name: 'Home', url: COMPANY_URL },
   { name: 'Sobre', url: `${COMPANY_URL}/#sobre` },
   { name: 'Certificações', url: `${COMPANY_URL}/#certificacoes` },
