@@ -178,13 +178,12 @@ describe('Header', () => {
         link.closest('[data-testid="desktop-menu"]')
       )
 
-      if (desktopCursosLink) {
-        await user.click(desktopCursosLink)
-        expect(mockAnnounce).toHaveBeenCalledWith(
-          'Navegando para Cursos',
-          'polite'
-        )
-      }
+      expect(desktopCursosLink).toBeDefined()
+      await user.click(desktopCursosLink!)
+      expect(mockAnnounce).toHaveBeenCalledWith(
+        'Navegando para Cursos',
+        'polite'
+      )
     })
 
     it('should be hidden on mobile (md:hidden)', () => {
@@ -330,10 +329,9 @@ describe('Header', () => {
       const mobileMenu = screen.getByTestId('mobile-menu')
       const cursosLink = mobileMenu.querySelector('a[href="#cursos"]')
 
-      if (cursosLink) {
-        await user.click(cursosLink)
-        expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument()
-      }
+      expect(cursosLink).toBeDefined()
+      await user.click(cursosLink!)
+      expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument()
     })
 
     it('should have aria-current on current section in mobile menu', async () => {
