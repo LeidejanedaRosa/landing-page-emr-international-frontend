@@ -130,7 +130,7 @@ export default [
       'src/**/*.spec.{ts,tsx}',
       'src/test/**/*.{ts,tsx}',
     ],
-    ignores: ['src/plugins/**/__tests__'],
+    ignores: ['src/plugins/**/__tests__/**'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
