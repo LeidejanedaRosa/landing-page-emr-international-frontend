@@ -16,7 +16,7 @@ export function TrainingCTA() {
       <AccessibleButton
         onClick={handleNavigateToTraining}
         variant='primary'
-        className='bg-cta-600 text-white hover:bg-cta-700 font-bold py-3 px-6 rounded-lg uppercase tracking-wider text-xs transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105'
+        className='bg-cta-600 text-white hover:bg-cta-700 py-3 px-6 uppercase tracking-wider text-xs shadow-lg hover:shadow-xl hover:scale-105'
         aria-label='Navegar para seção de treinamentos disponíveis'
       >
         Conhecer Treinamentos

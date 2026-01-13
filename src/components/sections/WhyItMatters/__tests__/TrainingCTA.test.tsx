@@ -142,26 +142,12 @@ describe('TrainingCTA (WhyItMatters)', () => {
       expect(button.className).toContain('hover:bg-cta-700')
     })
 
-    it('deve ter fonte bold', () => {
-      render(<TrainingCTA />)
-
-      const button = screen.getByRole('button')
-      expect(button.className).toContain('font-bold')
-    })
-
     it('deve ter padding correto', () => {
       render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('py-3')
       expect(button.className).toContain('px-6')
-    })
-
-    it('deve ter border-radius', () => {
-      render(<TrainingCTA />)
-
-      const button = screen.getByRole('button')
-      expect(button.className).toContain('rounded-lg')
     })
 
     it('deve ter texto uppercase', () => {
@@ -183,14 +169,6 @@ describe('TrainingCTA (WhyItMatters)', () => {
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('text-xs')
-    })
-
-    it('deve ter transição', () => {
-      render(<TrainingCTA />)
-
-      const button = screen.getByRole('button')
-      expect(button.className).toContain('transition-all')
-      expect(button.className).toContain('duration-300')
     })
 
     it('deve ter sombra', () => {
@@ -216,21 +194,48 @@ describe('TrainingCTA (WhyItMatters)', () => {
   })
 
   describe('Acessibilidade', () => {
-    it('deve usar AccessibleButton', () => {
+    it('deve usar AccessibleButton com suas classes base', () => {
       render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
-      // AccessibleButton deve estar presente
-      expect(button).toBeInTheDocument()
+
+      expect(button).toHaveClass('inline-flex')
+      expect(button).toHaveClass('items-center')
+      expect(button).toHaveClass('justify-center')
+      expect(button).toHaveClass('font-medium')
+      expect(button).toHaveClass('rounded-lg')
     })
 
-    it('deve ter indicadores de foco visíveis', () => {
+    it('deve ter atributo type button (padrão do AccessibleButton)', () => {
       render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
-      const hasFocusStyling = button.className.match(/focus:|focus-visible:/)
+      expect(button).toHaveAttribute('type', 'button')
+    })
 
-      expect(hasFocusStyling).toBeTruthy()
+    it('deve ter classes de transição do AccessibleButton', () => {
+      render(<TrainingCTA />)
+
+      const button = screen.getByRole('button')
+      expect(button).toHaveClass('transition-colors')
+      expect(button).toHaveClass('duration-200')
+    })
+
+    it('deve ter focus ring do AccessibleButton', () => {
+      render(<TrainingCTA />)
+
+      const button = screen.getByRole('button')
+      expect(button.className).toMatch(/focus:outline-none/)
+      expect(button.className).toMatch(/focus:ring-2/)
+      expect(button.className).toMatch(/focus:ring-offset-2/)
+    })
+
+    it('deve ter estados disabled do AccessibleButton', () => {
+      render(<TrainingCTA />)
+
+      const button = screen.getByRole('button')
+      expect(button.className).toMatch(/disabled:opacity-50/)
+      expect(button.className).toMatch(/disabled:cursor-not-allowed/)
     })
   })
 })
