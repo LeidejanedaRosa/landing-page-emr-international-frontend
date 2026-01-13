@@ -366,24 +366,14 @@ test.describe('SEO Content Quality Tests', () => {
         timeout: 15000,
       })
 
-      await Promise.all([
-        sections
-          .nth(1)
-          .waitFor({ state: 'visible', timeout: 15000 })
-          .catch(() => {}),
-        sections
-          .nth(2)
-          .waitFor({ state: 'visible', timeout: 15000 })
-          .catch(() => {}),
-        sections
-          .nth(3)
-          .waitFor({ state: 'visible', timeout: 15000 })
-          .catch(() => {}),
-        sections
-          .nth(4)
-          .waitFor({ state: 'visible', timeout: 15000 })
-          .catch(() => {}),
-      ])
+      const sectionPromises = [1, 2, 3, 4].map(index =>
+        sections.nth(index).waitFor({ state: 'visible', timeout: 15000 })
+      )
+
+      const results = await Promise.allSettled(sectionPromises)
+      const loadedSections = results.filter(r => r.status === 'fulfilled')
+
+      expect(loadedSections.length).toBeGreaterThanOrEqual(3)
 
       await page.locator('main section').last().waitFor({
         state: 'attached',
