@@ -11,9 +11,15 @@ interface ErrorBoundaryState {
 // eslint-disable-next-line no-unused-vars
 type ErrorHandler = (error: Error, errorInfo: ErrorInfo) => void
 
+interface FallbackProps {
+  error?: Error
+  resetError: () => void
+}
+
 interface ErrorBoundaryProps {
   children: ReactNode
-  fallback?: ReactNode
+  // eslint-disable-next-line no-unused-vars
+  fallback?: ReactNode | ((fallbackProps: FallbackProps) => ReactNode)
   onError?: ErrorHandler
 }
 
@@ -31,6 +37,10 @@ class ErrorBoundary extends React.Component<
       hasError: true,
       error,
     }
+  }
+
+  resetError = () => {
+    this.setState({ hasError: false, error: undefined, errorInfo: undefined })
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -77,6 +87,12 @@ class ErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       if (this.props.fallback) {
+        if (typeof this.props.fallback === 'function') {
+          return this.props.fallback({
+            error: this.state.error,
+            resetError: this.resetError,
+          })
+        }
         return this.props.fallback
       }
 
@@ -110,13 +126,22 @@ class ErrorBoundary extends React.Component<
               Ocorreu um erro inesperado. Nossa equipe foi notificada e está
               trabalhando para resolver o problema.
             </div>
-            <button
-              onClick={() => window.location.reload()}
-              className='w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200'
-              type='button'
-            >
-              Recarregar página
-            </button>
+            <div className='flex flex-col gap-2'>
+              <button
+                onClick={this.resetError}
+                className='w-full bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200'
+                type='button'
+              >
+                Tentar novamente
+              </button>
+              <button
+                onClick={() => window.location.reload()}
+                className='w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-md transition-colors duration-200'
+                type='button'
+              >
+                Recarregar página
+              </button>
+            </div>
             {import.meta.env.DEV && this.state.error && (
               <details className='mt-4 p-3 bg-gray-100 rounded text-xs'>
                 <summary className='cursor-pointer font-medium'>
@@ -138,3 +163,4 @@ class ErrorBoundary extends React.Component<
 }
 
 export default ErrorBoundary
+export type { FallbackProps }
