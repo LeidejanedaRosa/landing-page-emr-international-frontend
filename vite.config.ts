@@ -145,11 +145,6 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
-  server: {
-    port: 3000,
-    open: true,
-    host: true,
-  },
   build: {
     outDir: 'dist',
     sourcemap: process.env.NODE_ENV === 'production' ? 'hidden' : false,
@@ -170,6 +165,11 @@ export default defineConfig({
     },
     assetsInlineLimit: 0,
     cssCodeSplit: true,
+  },
+  server: {
+    port: 3000,
+    open: true,
+    host: true,
   },
   preview: {
     port: 3000,
