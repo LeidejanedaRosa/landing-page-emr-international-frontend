@@ -14,6 +14,7 @@ const CallToAction: React.FC = () => {
   return (
     <section
       id='call-to-action'
+      data-testid='call-to-action'
       className='py-20 md:py-24 bg-cta-600 text-white'
       aria-labelledby={titleId}
     >
@@ -30,6 +31,7 @@ const CallToAction: React.FC = () => {
         <AccessibleLink
           href={whatsappUrl}
           external
+          aria-label='Entrar em contato via WhatsApp para se inscrever nos treinamentos (abre em nova janela)'
           className='inline-block bg-white text-cta-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg uppercase tracking-wider text-sm transition-all duration-300 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-cta-600'
         >
           Quero me inscrever agora
