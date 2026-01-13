@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { fireEvent, render, screen } from '../../../../test/test-utils'
-import { CallToAction } from '../CallToAction'
+import { TrainingCTA } from '../TrainingCTA'
 
 const mockScrollTo = vi.fn()
 
@@ -11,28 +11,28 @@ vi.mock('../../../../hooks/useScrollTo', () => ({
   }),
 }))
 
-describe('CallToAction (WhyItMatters)', () => {
+describe('TrainingCTA (WhyItMatters)', () => {
   beforeEach(() => {
     mockScrollTo.mockClear()
   })
 
   describe('Estrutura Semântica', () => {
     it('deve renderizar como footer', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const footer = document.querySelector('footer')
       expect(footer).toBeInTheDocument()
     })
 
     it('deve ter classe text-center no footer', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const footer = document.querySelector('footer')
       expect(footer).toHaveClass('text-center')
     })
 
     it('deve ter margem superior no footer', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const footer = document.querySelector('footer')
       expect(footer?.className).toContain('mt-8')
@@ -41,7 +41,7 @@ describe('CallToAction (WhyItMatters)', () => {
 
   describe('Mensagem Motivacional', () => {
     it('deve renderizar a mensagem motivacional', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       expect(
         screen.getByText('Não faça parte das estatísticas. Seja a diferença.')
@@ -49,7 +49,7 @@ describe('CallToAction (WhyItMatters)', () => {
     })
 
     it('deve ter a mensagem como parágrafo', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const message = screen.getByText(
         'Não faça parte das estatísticas. Seja a diferença.'
@@ -58,7 +58,7 @@ describe('CallToAction (WhyItMatters)', () => {
     })
 
     it('deve ter estilo correto na mensagem', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const message = screen.getByText(
         'Não faça parte das estatísticas. Seja a diferença.'
@@ -69,7 +69,7 @@ describe('CallToAction (WhyItMatters)', () => {
     })
 
     it('deve ter margem inferior na mensagem', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const message = screen.getByText(
         'Não faça parte das estatísticas. Seja a diferença.'
@@ -80,7 +80,7 @@ describe('CallToAction (WhyItMatters)', () => {
 
   describe('Botão de Ação', () => {
     it('deve renderizar o botão com texto correto', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button', {
         name: /navegar para seção de treinamentos/i,
@@ -90,7 +90,7 @@ describe('CallToAction (WhyItMatters)', () => {
     })
 
     it('deve ter aria-label descritivo', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button).toHaveAttribute(
@@ -102,7 +102,7 @@ describe('CallToAction (WhyItMatters)', () => {
 
   describe('Interação', () => {
     it('deve chamar scrollTo ao clicar no botão', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       fireEvent.click(button)
@@ -111,7 +111,7 @@ describe('CallToAction (WhyItMatters)', () => {
     })
 
     it('deve navegar para seção de cursos ao clicar', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       fireEvent.click(button)
@@ -122,35 +122,35 @@ describe('CallToAction (WhyItMatters)', () => {
 
   describe('Estilos do Botão', () => {
     it('deve ter background CTA', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('bg-cta-600')
     })
 
     it('deve ter texto branco', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('text-white')
     })
 
     it('deve ter hover state', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('hover:bg-cta-700')
     })
 
     it('deve ter fonte bold', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('font-bold')
     })
 
     it('deve ter padding correto', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('py-3')
@@ -158,35 +158,35 @@ describe('CallToAction (WhyItMatters)', () => {
     })
 
     it('deve ter border-radius', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('rounded-lg')
     })
 
     it('deve ter texto uppercase', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('uppercase')
     })
 
     it('deve ter tracking wider', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('tracking-wider')
     })
 
     it('deve ter tamanho de fonte xs', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('text-xs')
     })
 
     it('deve ter transição', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('transition-all')
@@ -194,21 +194,21 @@ describe('CallToAction (WhyItMatters)', () => {
     })
 
     it('deve ter sombra', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('shadow-lg')
     })
 
     it('deve ter hover shadow', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('hover:shadow-xl')
     })
 
     it('deve ter hover scale', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       expect(button.className).toContain('hover:scale-105')
@@ -217,7 +217,7 @@ describe('CallToAction (WhyItMatters)', () => {
 
   describe('Acessibilidade', () => {
     it('deve usar AccessibleButton', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       // AccessibleButton deve estar presente
@@ -225,7 +225,7 @@ describe('CallToAction (WhyItMatters)', () => {
     })
 
     it('deve ter indicadores de foco visíveis', () => {
-      render(<CallToAction />)
+      render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       const hasFocusStyling = button.className.match(/focus:|focus-visible:/)

@@ -2,10 +2,10 @@ import { useState } from 'react'
 
 import { whyItMattersData } from '../../../data/whyItMattersData'
 import { useUniqueId } from '../../../hooks/useAccessibility'
-import { CallToAction } from './CallToAction'
 import { SectionHeader } from './SectionHeader'
 import { StatisticsGrid } from './StatisticsGrid'
 import { TabSwitcher } from './TabSwitcher'
+import { TrainingCTA } from './TrainingCTA'
 
 export default function WhyItMattersSection() {
   const [activeTabId, setActiveTabId] = useState('tactical')
@@ -66,7 +66,7 @@ export default function WhyItMattersSection() {
           />
         </div>
 
-        <CallToAction />
+        <TrainingCTA />
       </div>
     </section>
   )
