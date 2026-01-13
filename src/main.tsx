@@ -23,16 +23,20 @@ if (import.meta.env.PROD) {
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').catch(async error => {
-      const Sentry = await import('@sentry/react')
-      Sentry.captureException(error, {
-        tags: { component: 'service-worker' },
-        contexts: {
-          serviceWorker: {
-            action: 'registration',
-            environment: 'production',
+      try {
+        const Sentry = await import('@sentry/react')
+        Sentry.captureException(error, {
+          tags: { component: 'service-worker' },
+          contexts: {
+            serviceWorker: {
+              action: 'registration',
+              environment: 'production',
+            },
           },
-        },
-      })
+        })
+      } catch {
+        // Sentry unavailable; swallow gracefully
+      }
     })
   })
 } else if ('serviceWorker' in navigator && !import.meta.env.PROD) {
