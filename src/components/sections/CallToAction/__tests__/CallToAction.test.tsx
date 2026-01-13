@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import { render, screen } from '../../../../test/test-utils'
-import CallToAction from '../../CallToAction'
+import CallToAction from '../../CallToAction/CallToAction'
 
 vi.mock('../../../../utils/whatsapp', () => ({
   buildWhatsAppMessageUrl: vi.fn(
