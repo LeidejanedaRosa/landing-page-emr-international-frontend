@@ -79,7 +79,7 @@ describe('companyInfo', () => {
     })
 
     it('should strip non-digit characters before formatting', () => {
-      const result = formatCNPJ('12.345.678/0001-99')
+      const result = formatCNPJ('12-345-678-0001-99')
       expect(result).toBe('12.345.678/0001-99')
     })
 
