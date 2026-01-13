@@ -31,7 +31,7 @@ const createMockRequest = (
   }
 
   if (options.https) {
-    req.socket = { encrypted: true }
+    req.socket = { encrypted: true } as any
   }
 
   return req
@@ -53,7 +53,14 @@ const getMiddleware = (options?: SecurityHeadersOptions) => {
     },
   } as unknown as ViteDevServer
 
-  plugin.configureServer!(mockServer)
+  const configureServer = plugin.configureServer
+  if (configureServer) {
+    if (typeof configureServer === 'function') {
+      configureServer.call({} as any, mockServer)
+    } else if ('handler' in configureServer) {
+      configureServer.handler.call({} as any, mockServer)
+    }
+  }
   return middleware!
 }
 
