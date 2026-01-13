@@ -390,6 +390,10 @@ dist/
 Para informações detalhadas sobre padrões de código, acessibilidade e arquitetura, consulte:
 
 - **`.github/copilot-instructions.md`** - Instruções completas do projeto e padrões de desenvolvimento
+- **`docs/WEB-VITALS-SENTRY-INTEGRATION.md`** - Integração Web Vitals + Sentry para monitoramento de performance
+- **`docs/PERFORMANCE-OPTIMIZATION-GUIDE.md`** - Guia de otimização de performance
+- **`docs/CICD-SENTRY-SETUP.md`** - Configuração de CI/CD e Sentry
+- **`docs/TESTES-SEO.md`** - Guia de testes SEO
 
 ## 📄 Licença
 

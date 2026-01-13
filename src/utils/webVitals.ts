@@ -1,5 +1,6 @@
 import React from 'react'
 
+import * as Sentry from '@sentry/react'
 import { type Metric } from 'web-vitals'
 
 export interface WebVitalsConfig {
@@ -47,26 +48,8 @@ const classifyMetric = (
   return 'poor'
 }
 
-// Helper: Log de debug para métricas
-const logMetricDebug = (metric: Metric, rating: string) => {
-  // eslint-disable-next-line no-console
-  console.group(`📊 Web Vital: ${metric.name}`)
-  // eslint-disable-next-line no-console
-  console.log(`Value: ${metric.value}${metric.name === 'CLS' ? '' : 'ms'}`)
-  // eslint-disable-next-line no-console
-  console.log(`Rating: ${rating.toUpperCase()}`)
-  // eslint-disable-next-line no-console
-  console.log(`Delta: ${metric.delta}`)
-  // eslint-disable-next-line no-console
-  console.groupEnd()
-}
-
 // Helper: Envia métrica para endpoint
-const sendMetricToEndpoint = async (
-  endpoint: string,
-  data: MetricData,
-  debug: boolean
-) => {
+const sendMetricToEndpoint = async (endpoint: string, data: MetricData) => {
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), 5000)
 
@@ -77,11 +60,8 @@ const sendMetricToEndpoint = async (
       body: JSON.stringify(data),
       signal: controller.signal,
     })
-  } catch (error) {
-    if (debug) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to send Web Vitals:', error)
-    }
+  } catch {
+    // Silently fail - metrics are not critical for app functionality
   } finally {
     clearTimeout(timeoutId)
   }
@@ -108,6 +88,40 @@ const sendToGoogleAnalytics = (metric: Metric) => {
   })
 }
 
+const sendToSentry = (metric: Metric, rating: string) => {
+  if (import.meta.env.DEV) {
+    return
+  }
+
+  const measurement = {
+    name: metric.name,
+    value: metric.value,
+    unit: metric.name === 'CLS' ? 'ratio' : 'millisecond',
+  }
+
+  Sentry.setMeasurement(metric.name, metric.value, measurement.unit)
+
+  if (rating === 'poor') {
+    Sentry.captureMessage(`Poor Web Vital: ${metric.name}`, {
+      level: 'warning',
+      tags: {
+        metric_name: metric.name,
+        metric_rating: rating,
+      },
+      contexts: {
+        web_vitals: {
+          name: metric.name,
+          value: metric.value,
+          rating,
+          delta: metric.delta,
+          id: metric.id,
+          navigationType: metric.navigationType,
+        },
+      },
+    })
+  }
+}
+
 const sendToAnalytics = async (metric: Metric, config: WebVitalsConfig) => {
   const rating = classifyMetric(metric.name, metric.value)
 
@@ -123,21 +137,14 @@ const sendToAnalytics = async (metric: Metric, config: WebVitalsConfig) => {
     connection: (navigator as any).connection?.effectiveType || 'unknown',
   }
 
-  if (
-    config.debug &&
-    typeof import.meta !== 'undefined' &&
-    import.meta.env?.DEV
-  ) {
-    logMetricDebug(metric, rating)
-  }
-
   config.onMetric?.(metric)
 
   if (config.endpoint) {
-    await sendMetricToEndpoint(config.endpoint, data, config.debug || false)
+    await sendMetricToEndpoint(config.endpoint, data)
   }
 
   sendToGoogleAnalytics(metric)
+  sendToSentry(metric, rating)
 }
 
 let currentConfig: WebVitalsConfig | null = null
@@ -176,11 +183,8 @@ export const initWebVitals = async (config: WebVitalsConfig = {}) => {
     onLCP(sendMetric)
     onFCP(sendMetric)
     onTTFB(sendMetric)
-  } catch (error) {
-    if (defaultConfig.debug) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to load web-vitals:', error)
-    }
+  } catch {
+    // Silently fail if web-vitals library fails to load
   }
 }
 
