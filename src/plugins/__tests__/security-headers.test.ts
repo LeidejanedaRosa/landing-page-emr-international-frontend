@@ -39,10 +39,11 @@ const createMockRequest = (
 
 const getMiddleware = (options?: SecurityHeadersOptions) => {
   const plugin = securityHeaders(options)
+
   let middleware: (
-    req: IncomingMessage,
-    res: ServerResponse,
-    next: () => void
+    _req: IncomingMessage,
+    _res: ServerResponse,
+    _next: () => void
   ) => void
 
   const mockServer = {

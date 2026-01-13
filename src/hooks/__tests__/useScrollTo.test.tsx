@@ -335,7 +335,9 @@ describe('useScrollTo - atualização de dependências', () => {
       ({ options }) => useScrollTo(options),
       {
         initialProps: {
-          options: { behavior: 'smooth' as ScrollBehavior },
+          options: {
+            behavior: 'smooth' as 'smooth' | 'auto' | 'instant',
+          },
         },
       }
     )
@@ -349,7 +351,9 @@ describe('useScrollTo - atualização de dependências', () => {
 
     mockScrollIntoView.mockClear()
 
-    rerender({ options: { behavior: 'auto' as ScrollBehavior } })
+    rerender({
+      options: { behavior: 'auto' as 'smooth' | 'auto' | 'instant' },
+    })
 
     result.current.scrollTo(TEST_SECTION_ID)
 

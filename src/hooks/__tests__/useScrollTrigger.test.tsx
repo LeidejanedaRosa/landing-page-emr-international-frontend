@@ -6,8 +6,13 @@ import { useScrollTrigger } from '../useScrollTrigger'
 const TEST_SECTION_ID = 'test-section'
 const TEST_STORAGE_KEY = 'test-key'
 
+type ObserverCallback = (
+  _entries: IntersectionObserverEntry[],
+  _observer: IntersectionObserver
+) => void
+
 describe('useScrollTrigger', () => {
-  let intersectionObserverCallback: IntersectionObserverCallback
+  let intersectionObserverCallback: ObserverCallback
   let observeMock: ReturnType<typeof vi.fn>
   let disconnectMock: ReturnType<typeof vi.fn>
 
@@ -49,7 +54,7 @@ describe('useScrollTrigger', () => {
 
     // biome-ignore lint/suspicious/noExplicitAny: Required for test mocking
     globalThis.IntersectionObserver = class IntersectionObserver {
-      constructor(callback: IntersectionObserverCallback) {
+      constructor(callback: ObserverCallback) {
         intersectionObserverCallback = callback
       }
       observe = observeMock

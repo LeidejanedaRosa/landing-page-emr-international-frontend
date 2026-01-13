@@ -261,7 +261,7 @@ describe('WhyItMattersSection', () => {
     })
   })
 
-  describe('CallToAction', () => {
+  describe('TrainingCTA', () => {
     it('deve renderizar footer com CTA', () => {
       render(<WhyItMattersSection />)
 
