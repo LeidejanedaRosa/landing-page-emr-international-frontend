@@ -2,7 +2,10 @@ import { expect, test } from '@playwright/test'
 
 test.describe('Semantic HTML Structure Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'domcontentloaded' })
+    await page.locator('header').waitFor({ timeout: 15000 })
+    await page.locator('main').waitFor({ timeout: 15000 })
+    await page.waitForLoadState('load')
   })
 
   test.describe('HTML5 Semantic Elements - WCAG 1.3.1', () => {
