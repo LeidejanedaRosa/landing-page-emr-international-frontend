@@ -122,9 +122,52 @@ export default [
       'sonarjs/no-duplicate-string': 'off',
     },
   },
+  // Test files - must come BEFORE main src config to take precedence
+  {
+    files: [
+      'src/**/__tests__/*.{ts,tsx}',
+      'src/**/*.test.{ts,tsx}',
+      'src/**/*.spec.{ts,tsx}',
+    ],
+    ignores: ['src/plugins/**/__tests__'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: './tsconfig.test.json',
+        ecmaFeatures: { jsx: true },
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+      prettier: prettier,
+      'unused-imports': unusedImports,
+      sonarjs: sonarjs,
+      unicorn: unicorn,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...prettierConfig.rules,
+      'prettier/prettier': 'error',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': 'warn',
+      'max-lines-per-function': 'off',
+      'max-nested-callbacks': 'off',
+      'sonarjs/no-duplicate-string': 'off',
+    },
+  },
   {
     files: ['src/**/*.{ts,tsx}'],
-    ignores: ['src/plugins/**'],
+    ignores: [
+      'src/plugins/**',
+      'src/**/__tests__',
+      'src/**/*.test.{ts,tsx}',
+      'src/**/*.spec.{ts,tsx}',
+    ],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -242,31 +285,6 @@ export default [
       'playwright/no-conditional-in-test': 'off',
       'playwright/no-conditional-expect': 'off',
       'playwright/no-skipped-test': 'off',
-    },
-  },
-  // Test files - allow longer functions and more nested callbacks
-  {
-    files: [
-      '**/__tests__/**/*.{ts,tsx}',
-      '**/*.test.{ts,tsx}',
-      'src/**/*.spec.{ts,tsx}',
-    ],
-    ignores: ['src/plugins/**/__tests__/**'],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        project: './tsconfig.json',
-        ecmaFeatures: { jsx: true },
-      },
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-    },
-    rules: {
-      'max-lines-per-function': 'off',
-      'max-nested-callbacks': 'off',
-      'sonarjs/no-duplicate-string': 'off',
     },
   },
 ]
