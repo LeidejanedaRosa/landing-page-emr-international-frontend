@@ -51,28 +51,25 @@ describe('testimonialsData', () => {
 
     it('should have all required fields for full variant', () => {
       fullTestimonials.forEach((testimonial: Testimonial) => {
-        expect(testimonial.companyName).toBeDefined()
-        expect(testimonial.testimonialText).toBeDefined()
-        expect(testimonial.authorName).toBeDefined()
-        expect(testimonial.authorRole).toBeDefined()
-        expect(testimonial.rating).toBeDefined()
-        expect(testimonial.images).toBeDefined()
-      })
-    })
-
-    it('should have valid ratings', () => {
-      fullTestimonials.forEach((testimonial: Testimonial) => {
-        expect(testimonial.rating).toBeGreaterThanOrEqual(1)
-        expect(testimonial.rating).toBeLessThanOrEqual(5)
+        if (testimonial.variant === 'full') {
+          expect(testimonial.companyName).toBeDefined()
+          expect(testimonial.testimonialText).toBeDefined()
+          expect(testimonial.authorName).toBeDefined()
+          expect(testimonial.authorRole).toBeDefined()
+          expect(testimonial.rating).toBeDefined()
+          expect(testimonial.images).toBeDefined()
+        }
       })
     })
 
     it('should have images with all formats', () => {
       fullTestimonials.forEach((testimonial: Testimonial) => {
-        expect(testimonial.images).toHaveProperty('avif')
-        expect(testimonial.images).toHaveProperty('webp')
-        expect(testimonial.images).toHaveProperty('jpg')
-        expect(testimonial.images).toHaveProperty('alt')
+        if (testimonial.variant === 'full') {
+          expect(testimonial.images).toHaveProperty('avif')
+          expect(testimonial.images).toHaveProperty('webp')
+          expect(testimonial.images).toHaveProperty('jpg')
+          expect(testimonial.images).toHaveProperty('alt')
+        }
       })
     })
   })
@@ -88,17 +85,23 @@ describe('testimonialsData', () => {
 
     it('should have required fields for text-only variant', () => {
       textOnlyTestimonials.forEach((testimonial: Testimonial) => {
-        expect(testimonial.testimonialText).toBeDefined()
-        expect(testimonial.authorName).toBeDefined()
-        expect(testimonial.authorRole).toBeDefined()
-        expect(testimonial.rating).toBeDefined()
+        if (testimonial.variant === 'text-only') {
+          expect(testimonial.testimonialText).toBeDefined()
+          expect(testimonial.authorName).toBeDefined()
+          expect(testimonial.authorRole).toBeDefined()
+          expect(testimonial.rating).toBeDefined()
+        }
       })
     })
 
     it('should not require images for text-only', () => {
       textOnlyTestimonials.forEach((testimonial: Testimonial) => {
-        // Images are optional for text-only
-        expect(testimonial.variant).toBe('text-only')
+        if (testimonial.variant === 'text-only') {
+          // Verify images are not required (can be undefined or defined)
+          // This test passes regardless of images presence, confirming they're optional
+          expect(testimonial.testimonialText).toBeDefined()
+          expect(testimonial.variant).toBe('text-only')
+        }
       })
     })
   })
@@ -114,15 +117,19 @@ describe('testimonialsData', () => {
 
     it('should have required fields for image-only variant', () => {
       imageOnlyTestimonials.forEach((testimonial: Testimonial) => {
-        expect(testimonial.companyName).toBeDefined()
-        expect(testimonial.images).toBeDefined()
+        if (testimonial.variant === 'image-only') {
+          expect(testimonial.companyName).toBeDefined()
+          expect(testimonial.images).toBeDefined()
+        }
       })
     })
 
     it('should have images with alt text for accessibility', () => {
       imageOnlyTestimonials.forEach((testimonial: Testimonial) => {
-        expect(testimonial.images?.alt).toBeDefined()
-        expect(testimonial.images?.alt?.length).toBeGreaterThan(0)
+        if (testimonial.variant === 'image-only') {
+          expect(testimonial.images.alt).toBeDefined()
+          expect(testimonial.images.alt.length).toBeGreaterThan(0)
+        }
       })
     })
   })
@@ -149,7 +156,10 @@ describe('testimonialsData', () => {
   describe('content quality', () => {
     it('should have non-empty testimonial texts where applicable', () => {
       testimonials.forEach((testimonial: Testimonial) => {
-        if (testimonial.testimonialText) {
+        if (
+          testimonial.variant === 'full' ||
+          testimonial.variant === 'text-only'
+        ) {
           expect(testimonial.testimonialText.length).toBeGreaterThan(20)
         }
       })
@@ -168,7 +178,12 @@ describe('testimonialsData', () => {
 
     it('should all have 5-star ratings where applicable', () => {
       testimonials.forEach((testimonial: Testimonial) => {
-        if (testimonial.rating !== undefined) {
+        if (testimonial.variant === 'full') {
+          expect(testimonial.rating).toBe(5)
+        } else if (
+          testimonial.variant === 'text-only' &&
+          testimonial.rating !== undefined
+        ) {
           expect(testimonial.rating).toBe(5)
         }
       })
