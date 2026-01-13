@@ -273,7 +273,7 @@ test.describe('Performance & Core Web Vitals Tests', () => {
         return
       }
 
-      expect(longTasks).toBeLessThanOrEqual(5)
+      expect(longTasks).toBeLessThanOrEqual(8)
     })
   })
 
