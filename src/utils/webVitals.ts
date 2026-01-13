@@ -23,17 +23,17 @@ interface MetricData {
   connection: string
 }
 
-const THRESHOLDS = {
+export const THRESHOLDS = {
   // Largest Contentful Paint - Good: ≤2.5s
   LCP: { good: 2500, poor: 4000 },
   // Interaction to Next Paint - Good: ≤200ms
   INP: { good: 200, poor: 500 },
   // Cumulative Layout Shift - Good: ≤0.1
   CLS: { good: 0.1, poor: 0.25 },
-  // First Contentful Paint - Good: ≤1.5s
-  FCP: { good: 1500, poor: 3000 },
-  // Time to First Byte - Good: ≤200ms
-  TTFB: { good: 200, poor: 1800 },
+  // First Contentful Paint - Good: ≤1.8s
+  FCP: { good: 1800, poor: 3000 },
+  // Time to First Byte - Good: ≤800ms
+  TTFB: { good: 800, poor: 1800 },
 } as const
 
 const classifyMetric = (
@@ -93,32 +93,36 @@ const sendToSentry = (metric: Metric, rating: string) => {
     return
   }
 
-  const measurement = {
-    name: metric.name,
-    value: metric.value,
-    unit: metric.name === 'CLS' ? 'ratio' : 'millisecond',
-  }
+  try {
+    const measurement = {
+      name: metric.name,
+      value: metric.value,
+      unit: metric.name === 'CLS' ? 'ratio' : 'millisecond',
+    }
 
-  Sentry.setMeasurement(metric.name, metric.value, measurement.unit)
+    Sentry.setMeasurement(metric.name, metric.value, measurement.unit)
 
-  if (rating === 'poor') {
-    Sentry.captureMessage(`Poor Web Vital: ${metric.name}`, {
-      level: 'warning',
-      tags: {
-        metric_name: metric.name,
-        metric_rating: rating,
-      },
-      contexts: {
-        web_vitals: {
-          name: metric.name,
-          value: metric.value,
-          rating,
-          delta: metric.delta,
-          id: metric.id,
-          navigationType: metric.navigationType,
+    if (rating === 'poor') {
+      Sentry.captureMessage(`Poor Web Vital: ${metric.name}`, {
+        level: 'warning',
+        tags: {
+          metric_name: metric.name,
+          metric_rating: rating,
         },
-      },
-    })
+        contexts: {
+          web_vitals: {
+            name: metric.name,
+            value: metric.value,
+            rating,
+            delta: metric.delta,
+            id: metric.id,
+            navigationType: metric.navigationType,
+          },
+        },
+      })
+    }
+  } catch {
+    return
   }
 }
 

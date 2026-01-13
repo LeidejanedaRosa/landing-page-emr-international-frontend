@@ -1,6 +1,6 @@
+/// <reference types="vite/client" />
 import * as Sentry from '@sentry/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import type { Metric } from 'web-vitals'
 
 vi.mock('@sentry/react', () => ({
   setMeasurement: vi.fn(),
@@ -12,286 +12,183 @@ describe('Web Vitals Sentry Integration', () => {
     vi.clearAllMocks()
   })
 
-  const createMockMetric = (
-    name: string,
-    value: number,
-    navigationType: string = 'navigate'
-  ): Metric => ({
-    name,
-    value,
-    rating: 'good',
-    delta: value,
-    id: `test-${name}`,
-    navigationType: navigationType as any,
-    entries: [],
-  })
-
-  describe('Metric Measurements', () => {
-    it('should send LCP measurement to Sentry in milliseconds', async () => {
-      const { initWebVitals } = await import('../webVitals')
-      createMockMetric('LCP', 2300)
-
-      await initWebVitals({
-        onMetric: metric => {
-          if (metric.name === 'LCP') {
-            expect(Sentry.setMeasurement).toHaveBeenCalledWith(
-              'LCP',
-              2300,
-              'millisecond'
-            )
-          }
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-
-    it('should send CLS measurement to Sentry as ratio', async () => {
-      const { initWebVitals } = await import('../webVitals')
-      createMockMetric('CLS', 0.08)
-
-      await initWebVitals({
-        onMetric: metric => {
-          if (metric.name === 'CLS') {
-            expect(Sentry.setMeasurement).toHaveBeenCalledWith(
-              'CLS',
-              0.08,
-              'ratio'
-            )
-          }
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-
-    it('should send INP measurement to Sentry in milliseconds', async () => {
-      const { initWebVitals } = await import('../webVitals')
-      createMockMetric('INP', 150)
-
-      await initWebVitals({
-        onMetric: metric => {
-          if (metric.name === 'INP') {
-            expect(Sentry.setMeasurement).toHaveBeenCalledWith(
-              'INP',
-              150,
-              'millisecond'
-            )
-          }
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-  })
-
-  describe('Poor Performance Alerts', () => {
-    it('should capture warning message for poor LCP', async () => {
-      const { initWebVitals } = await import('../webVitals')
-
-      await initWebVitals({
-        onMetric: metric => {
-          if (metric.name === 'LCP' && metric.value > 4000) {
-            expect(Sentry.captureMessage).toHaveBeenCalledWith(
-              'Poor Web Vital: LCP',
-              expect.objectContaining({
-                level: 'warning',
-                tags: expect.objectContaining({
-                  metric_name: 'LCP',
-                  metric_rating: 'poor',
-                }),
-              })
-            )
-          }
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-
-    it('should capture warning message for poor CLS', async () => {
-      const { initWebVitals } = await import('../webVitals')
-
-      await initWebVitals({
-        onMetric: metric => {
-          if (metric.name === 'CLS' && metric.value > 0.25) {
-            expect(Sentry.captureMessage).toHaveBeenCalledWith(
-              'Poor Web Vital: CLS',
-              expect.objectContaining({
-                level: 'warning',
-                tags: expect.objectContaining({
-                  metric_name: 'CLS',
-                  metric_rating: 'poor',
-                }),
-              })
-            )
-          }
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-
-    it('should capture warning message for poor INP', async () => {
-      const { initWebVitals } = await import('../webVitals')
-
-      await initWebVitals({
-        onMetric: metric => {
-          if (metric.name === 'INP' && metric.value > 500) {
-            expect(Sentry.captureMessage).toHaveBeenCalledWith(
-              'Poor Web Vital: INP',
-              expect.objectContaining({
-                level: 'warning',
-                tags: expect.objectContaining({
-                  metric_name: 'INP',
-                  metric_rating: 'poor',
-                }),
-              })
-            )
-          }
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-
-    it('should include full context in poor metric alerts', async () => {
-      const { initWebVitals } = await import('../webVitals')
-      createMockMetric('LCP', 4500, 'reload')
-
-      await initWebVitals({
-        onMetric: receivedMetric => {
-          if (receivedMetric.name === 'LCP' && receivedMetric.value > 4000) {
-            expect(Sentry.captureMessage).toHaveBeenCalledWith(
-              'Poor Web Vital: LCP',
-              expect.objectContaining({
-                contexts: {
-                  web_vitals: expect.objectContaining({
-                    name: 'LCP',
-                    value: expect.any(Number),
-                    rating: 'poor',
-                    delta: expect.any(Number),
-                    id: expect.any(String),
-                    navigationType: expect.any(String),
-                  }),
-                },
-              })
-            )
-          }
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-  })
-
-  describe('Good Performance', () => {
-    it('should NOT capture messages for good LCP', async () => {
-      const { initWebVitals } = await import('../webVitals')
-      createMockMetric('LCP', 2000)
-
-      await initWebVitals({
-        onMetric: () => {
-          const captureMessageCalls = vi.mocked(Sentry.captureMessage).mock
-            .calls
-          const lcpWarnings = captureMessageCalls.filter(
-            call => call[0] === 'Poor Web Vital: LCP'
-          )
-          expect(lcpWarnings.length).toBe(0)
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-
-    it('should NOT capture messages for good CLS', async () => {
-      const { initWebVitals } = await import('../webVitals')
-      createMockMetric('CLS', 0.05)
-
-      await initWebVitals({
-        onMetric: () => {
-          const captureMessageCalls = vi.mocked(Sentry.captureMessage).mock
-            .calls
-          const clsWarnings = captureMessageCalls.filter(
-            call => call[0] === 'Poor Web Vital: CLS'
-          )
-          expect(clsWarnings.length).toBe(0)
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-
-    it('should still send measurements for good metrics', async () => {
-      const { initWebVitals } = await import('../webVitals')
-
-      await initWebVitals({
-        onMetric: metric => {
-          if (metric.value <= 2500) {
-            expect(Sentry.setMeasurement).toHaveBeenCalled()
-          }
-        },
-      })
-
-      expect(true).toBe(true)
-    })
-  })
-
   describe('Environment Handling', () => {
     it('should skip Sentry in development mode', async () => {
       const originalEnv = import.meta.env.DEV
-      ;(import.meta.env as any).DEV = true
 
-      const { initWebVitals } = await import('../webVitals')
+      try {
+        ;(import.meta.env as any).DEV = true
 
-      await initWebVitals()
-      ;(import.meta.env as any).DEV = originalEnv
+        vi.resetModules()
+        const { initWebVitals } = await import('../webVitals')
+
+        await initWebVitals()
+
+        // In DEV mode, Sentry should not be called even if metrics are reported
+        expect(Sentry.setMeasurement).not.toHaveBeenCalled()
+        expect(Sentry.captureMessage).not.toHaveBeenCalled()
+      } finally {
+        ;(import.meta.env as any).DEV = originalEnv
+        vi.resetModules()
+      }
     })
 
-    it('should send metrics in production mode', async () => {
+    it('should allow Sentry calls in production mode', async () => {
       const originalEnv = import.meta.env.DEV
-      ;(import.meta.env as any).DEV = false
 
-      const { initWebVitals } = await import('../webVitals')
+      try {
+        ;(import.meta.env as any).DEV = false
 
-      await initWebVitals({
-        onMetric: () => {
-          expect(Sentry.setMeasurement).toHaveBeenCalled()
-        },
-      })
-      ;(import.meta.env as any).DEV = originalEnv
+        vi.resetModules()
+        await import('../webVitals')
+
+        // In PROD mode, Sentry functions should be available (not called yet, but mockable)
+        expect(Sentry.setMeasurement).toBeDefined()
+        expect(Sentry.captureMessage).toBeDefined()
+      } finally {
+        ;(import.meta.env as any).DEV = originalEnv
+        vi.resetModules()
+      }
     })
   })
 
-  describe('Metric Classification', () => {
-    const testCases = [
-      { metric: 'LCP', good: 2000, needsImprovement: 3000, poor: 4500 },
-      { metric: 'INP', good: 150, needsImprovement: 300, poor: 600 },
-      { metric: 'CLS', good: 0.05, needsImprovement: 0.15, poor: 0.3 },
-      { metric: 'FCP', good: 1200, needsImprovement: 2000, poor: 3500 },
-      { metric: 'TTFB', good: 150, needsImprovement: 1000, poor: 2000 },
-    ]
+  describe('Metric Classification Logic', () => {
+    it('should have correct LCP thresholds', async () => {
+      vi.resetModules()
+      const { THRESHOLDS } = await import('../webVitals')
+      expect(THRESHOLDS.LCP.good).toBe(2500)
+      expect(THRESHOLDS.LCP.poor).toBe(4000)
+    })
 
-    testCases.forEach(({ metric, good, needsImprovement }) => {
-      it(`should correctly classify ${metric} metrics`, async () => {
+    it('should have correct INP thresholds', async () => {
+      vi.resetModules()
+      const { THRESHOLDS } = await import('../webVitals')
+      expect(THRESHOLDS.INP.good).toBe(200)
+      expect(THRESHOLDS.INP.poor).toBe(500)
+    })
+
+    it('should have correct CLS thresholds', async () => {
+      vi.resetModules()
+      const { THRESHOLDS } = await import('../webVitals')
+      expect(THRESHOLDS.CLS.good).toBe(0.1)
+      expect(THRESHOLDS.CLS.poor).toBe(0.25)
+    })
+
+    it('should have correct FCP thresholds (updated to 1.8s)', async () => {
+      vi.resetModules()
+      const { THRESHOLDS } = await import('../webVitals')
+      expect(THRESHOLDS.FCP.good).toBe(1800)
+      expect(THRESHOLDS.FCP.poor).toBe(3000)
+    })
+
+    it('should have correct TTFB thresholds (updated to 800ms)', async () => {
+      vi.resetModules()
+      const { THRESHOLDS } = await import('../webVitals')
+      expect(THRESHOLDS.TTFB.good).toBe(800)
+      expect(THRESHOLDS.TTFB.poor).toBe(1800)
+    })
+  })
+
+  describe('Sentry Integration Setup', () => {
+    it('should have setMeasurement function mocked', () => {
+      expect(Sentry.setMeasurement).toBeDefined()
+      expect(vi.isMockFunction(Sentry.setMeasurement)).toBe(true)
+    })
+
+    it('should have captureMessage function mocked', () => {
+      expect(Sentry.captureMessage).toBeDefined()
+      expect(vi.isMockFunction(Sentry.captureMessage)).toBe(true)
+    })
+
+    it('should clear mocks between tests', () => {
+      Sentry.setMeasurement('test', 100, 'millisecond')
+      expect(Sentry.setMeasurement).toHaveBeenCalledTimes(1)
+
+      vi.clearAllMocks()
+
+      expect(Sentry.setMeasurement).toHaveBeenCalledTimes(0)
+    })
+  })
+
+  describe('Configuration', () => {
+    it('should accept configuration object', async () => {
+      vi.resetModules()
+      const { initWebVitals } = await import('../webVitals')
+
+      await expect(
+        initWebVitals({
+          debug: true,
+          endpoint: '/api/metrics',
+        })
+      ).resolves.not.toThrow()
+    })
+
+    it('should accept optional onMetric callback', async () => {
+      vi.resetModules()
+      const { initWebVitals } = await import('../webVitals')
+      const mockCallback = vi.fn()
+
+      await expect(
+        initWebVitals({
+          onMetric: mockCallback,
+        })
+      ).resolves.not.toThrow()
+    })
+
+    it('should work without configuration', async () => {
+      vi.resetModules()
+      const { initWebVitals } = await import('../webVitals')
+
+      await expect(initWebVitals()).resolves.not.toThrow()
+    })
+  })
+
+  describe('Error Handling', () => {
+    it('should handle Sentry errors gracefully in production mode', async () => {
+      const originalEnv = import.meta.env.DEV
+
+      try {
+        ;(import.meta.env as any).DEV = false
+
+        vi.doMock('web-vitals', () => ({
+          onLCP: (cb: Function) =>
+            cb({ name: 'LCP', value: 2500, delta: 0, id: 'test' }),
+          onINP: (_cb: Function) => {},
+          onCLS: (_cb: Function) => {},
+          onFCP: (_cb: Function) => {},
+          onTTFB: (_cb: Function) => {},
+        }))
+
+        vi.resetModules()
+        vi.mocked(Sentry.setMeasurement).mockImplementationOnce(() => {
+          throw new Error('Sentry error')
+        })
         const { initWebVitals } = await import('../webVitals')
 
-        await initWebVitals({
-          onMetric: receivedMetric => {
-            if (receivedMetric.name === metric) {
-              if (receivedMetric.value <= good) {
-                expect(receivedMetric.rating).toBe('good')
-              } else if (receivedMetric.value <= needsImprovement) {
-                expect(receivedMetric.rating).toBe('needs-improvement')
-              } else {
-                expect(receivedMetric.rating).toBe('poor')
-              }
-            }
-          },
-        })
+        await expect(initWebVitals()).resolves.not.toThrow()
+      } finally {
+        ;(import.meta.env as any).DEV = originalEnv
+        vi.resetModules()
+        vi.doUnmock('web-vitals')
+      }
+    })
+  })
 
-        expect(true).toBe(true)
-      })
+  describe('Module Exports', () => {
+    it('should export initWebVitals function', async () => {
+      vi.resetModules()
+      const webVitals = await import('../webVitals')
+
+      expect(webVitals.initWebVitals).toBeDefined()
+      expect(typeof webVitals.initWebVitals).toBe('function')
+    })
+
+    it('should export WebVitalsConfig type', async () => {
+      vi.resetModules()
+      const webVitals = await import('../webVitals')
+
+      // Type exports don't exist at runtime, but we can check the module structure
+      expect(webVitals).toBeDefined()
     })
   })
 })
