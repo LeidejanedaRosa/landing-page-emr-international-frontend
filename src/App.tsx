@@ -13,7 +13,6 @@ import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
 import FloatingContact from './components/widgets/FloatingContact'
 import { PRODUCTS_MODAL_CONFIG, productsData } from './data/productsData'
 import { useScrollTrigger } from './hooks/useScrollTrigger'
-import SEO from './utils/SEO'
 
 const WhyItMattersSection = React.lazy(
   () => import('./components/sections/WhyItMatters/index')
@@ -40,7 +39,6 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <SEO />
       <JsonLdScript data={ORGANIZATION_STRUCTURED_DATA} />
       <BreadcrumbSchema items={HOMEPAGE_BREADCRUMB} />
       <div className='min-h-screen bg-gray-50'>

@@ -23,7 +23,7 @@ const CallToAction: React.FC = () => {
         >
           Prepare-se para salvar vidas
         </h2>
-        <p className='text-base md:text-lg mb-8 text-white/80'>
+        <p className='text-base md:text-lg mb-8 text-white'>
           Garanta sua vaga nos próximos treinamentos da EMR Internacional
         </p>
         <a
