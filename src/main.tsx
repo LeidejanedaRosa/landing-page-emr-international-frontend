@@ -12,35 +12,28 @@ if (import.meta.env.PROD) {
     initSentry()
   }
 
-  // Safari doesn't support requestIdleCallback, use setTimeout as fallback
+  // Delay Sentry initialization until after First Contentful Paint
   if ('requestIdleCallback' in window) {
-    requestIdleCallback(initSentryDeferred, { timeout: 2000 })
+    requestIdleCallback(initSentryDeferred, { timeout: 3000 })
   } else {
-    setTimeout(initSentryDeferred, 1)
+    setTimeout(initSentryDeferred, 2000)
   }
 }
 
-/* eslint-disable no-console */
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/sw.js')
-      .then(() => {
-        console.log('Service Worker registered successfully')
-      })
-      .catch(async error => {
-        console.error('Service Worker registration failed:', error)
-        const Sentry = await import('@sentry/react')
-        Sentry.captureException(error, {
-          tags: { component: 'service-worker' },
-          contexts: {
-            serviceWorker: {
-              action: 'registration',
-              environment: 'production',
-            },
+    navigator.serviceWorker.register('/sw.js').catch(async error => {
+      const Sentry = await import('@sentry/react')
+      Sentry.captureException(error, {
+        tags: { component: 'service-worker' },
+        contexts: {
+          serviceWorker: {
+            action: 'registration',
+            environment: 'production',
           },
-        })
+        },
       })
+    })
   })
 } else if ('serviceWorker' in navigator && !import.meta.env.PROD) {
   navigator.serviceWorker
@@ -50,12 +43,8 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
         registration.unregister()
       })
     })
-    .catch(error => {
-      console.error('Failed to unregister service workers:', error)
-      // Skip Sentry in dev mode - just log the error
-    })
+    .catch(() => {})
 }
-/* eslint-enable no-console */
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -28,7 +28,7 @@ const Testimonials = React.lazy(
   () => import('./components/sections/Testimonials')
 )
 const CallToAction = React.lazy(
-  () => import('./components/sections/CallToAction')
+  () => import('./components/sections/CallToAction/CallToAction')
 )
 const Footer = React.lazy(() => import('./components/layout/Footer/index'))
 

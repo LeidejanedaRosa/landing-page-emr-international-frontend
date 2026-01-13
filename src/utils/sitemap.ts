@@ -68,6 +68,3 @@ export const sitemapUrls: SitemapUrl[] = [
     priority: 0.6,
   },
 ]
-
-// Exemplo de uso:
-// console.log(generateSitemap(sitemapUrls))
