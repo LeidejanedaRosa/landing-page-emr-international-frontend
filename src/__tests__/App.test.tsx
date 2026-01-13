@@ -75,12 +75,7 @@ describe('App', () => {
       expect(screen.getByTestId('error-boundary')).toBeInTheDocument()
     })
 
-    it('should render within ErrorBoundary', () => {
-      render(<App />)
-      expect(screen.getByTestId('error-boundary')).toBeInTheDocument()
-    })
-
-    it('should render Header', async () => {
+    it('should render Header', () => {
       render(<App />)
       expect(screen.getByTestId('header')).toBeInTheDocument()
     })
