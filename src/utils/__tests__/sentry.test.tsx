@@ -260,6 +260,12 @@ describe('sentry', () => {
 
       expect(Sentry.withScope).toHaveBeenCalled()
       expect(Sentry.captureException).toHaveBeenCalledWith(error)
+
+      const scopeCallback = (Sentry.withScope as ReturnType<typeof vi.fn>).mock
+        .calls[0][0]
+      const mockScope = { setContext: vi.fn() }
+      scopeCallback(mockScope)
+      expect(mockScope.setContext).toHaveBeenCalledWith('errorContext', context)
     })
 
     it('should capture error without context in production', () => {
@@ -273,6 +279,12 @@ describe('sentry', () => {
 
       expect(Sentry.withScope).toHaveBeenCalled()
       expect(Sentry.captureException).toHaveBeenCalledWith(error)
+
+      const scopeCallback = (Sentry.withScope as ReturnType<typeof vi.fn>).mock
+        .calls[0][0]
+      const mockScope = { setContext: vi.fn() }
+      scopeCallback(mockScope)
+      expect(mockScope.setContext).not.toHaveBeenCalled()
     })
 
     it('should capture message with default level in production', () => {
