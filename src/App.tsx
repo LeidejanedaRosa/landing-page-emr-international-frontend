@@ -1,7 +1,9 @@
 import React, { Suspense } from 'react'
 
 import ErrorBoundary from './components/error/ErrorBoundary'
+import { SectionErrorFallback } from './components/error/SectionErrorFallback'
 import Header from './components/layout/Header'
+import { LazySection } from './components/layout/LazySection'
 import HeroCarousel from './components/sections/HeroCarousel'
 import { ProductsModal } from './components/sections/ProductsModal'
 import PromoBannerCarousel from './components/sections/PromoBannerCarousel/index'
@@ -9,7 +11,7 @@ import { JsonLdScript } from './components/seo/JsonLdScript'
 import { ORGANIZATION_STRUCTURED_DATA } from './components/seo/organizationSchema'
 import { HOMEPAGE_BREADCRUMB } from './components/seo/schemas/breadcrumbConstants'
 import { BreadcrumbSchema } from './components/seo/schemas/BreadcrumbSchema'
-import { LoadingSpinner, SectionSkeleton } from './components/ui/Loading'
+import { LoadingSpinner } from './components/ui/Loading'
 import FloatingContact from './components/widgets/FloatingContact'
 import { PRODUCTS_MODAL_CONFIG, productsData } from './data/productsData'
 import { useScrollTrigger } from './hooks/useScrollTrigger'
@@ -46,34 +48,34 @@ function App() {
         <main role='main' aria-label='Conteúdo principal'>
           <PromoBannerCarousel />
           <HeroCarousel />
-          <Suspense fallback={<SectionSkeleton />}>
-            <WhyItMattersSection />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
-            <About />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
-            <Certifications />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
-            <Courses />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
-            <Testimonials />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
-            <CallToAction />
-          </Suspense>
+          <LazySection
+            sectionName='Por que importa'
+            component={WhyItMattersSection}
+          />
+          <LazySection sectionName='Sobre' component={About} />
+          <LazySection sectionName='Certificações' component={Certifications} />
+          <LazySection sectionName='Cursos' component={Courses} />
+          <LazySection sectionName='Depoimentos' component={Testimonials} />
+          <LazySection
+            sectionName='Chamada para ação'
+            component={CallToAction}
+          />
         </main>
-        <Suspense
-          fallback={
-            <div className='py-8'>
-              <LoadingSpinner size='lg' />
-            </div>
-          }
+        <ErrorBoundary
+          fallback={({ resetError }) => (
+            <SectionErrorFallback sectionName='Rodapé' onRetry={resetError} />
+          )}
         >
-          <Footer />
-        </Suspense>
+          <Suspense
+            fallback={
+              <div className='py-8'>
+                <LoadingSpinner size='lg' />
+              </div>
+            }
+          >
+            <Footer />
+          </Suspense>
+        </ErrorBoundary>
       </div>
       <ProductsModal
         isOpen={showProductsModal}
