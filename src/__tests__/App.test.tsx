@@ -1,5 +1,6 @@
-import React from 'react'
+import { type ReactNode } from 'react'
 
+import '@testing-library/jest-dom'
 import { describe, expect, it, vi } from 'vitest'
 
 import App from '../App'
@@ -56,7 +57,7 @@ vi.mock('../components/widgets/FloatingContact', () => ({
 }))
 
 vi.mock('../components/error/ErrorBoundary', () => ({
-  default: ({ children }: { children: React.ReactNode }) => (
+  default: ({ children }: { children: ReactNode }) => (
     <div data-testid='error-boundary'>{children}</div>
   ),
 }))
@@ -72,7 +73,8 @@ describe('App', () => {
   describe('rendering', () => {
     it('should render without crashing', () => {
       render(<App />)
-      expect(screen.getByTestId('error-boundary')).toBeInTheDocument()
+      expect(screen.getByRole('main')).toBeInTheDocument()
+      expect(screen.getByTestId('header')).toBeInTheDocument()
     })
 
     it('should render Header', () => {
