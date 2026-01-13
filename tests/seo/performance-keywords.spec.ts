@@ -359,10 +359,46 @@ test.describe('SEO Content Quality Tests', () => {
   test.describe('Content Depth and Quality', () => {
     test('main content should have substantial text', async ({ page }) => {
       await page.waitForLoadState('load', { timeout: 30000 })
-      await page.locator('main section').first().waitFor({
-        state: 'attached',
+
+      const sections = page.locator('main section')
+      await sections.first().waitFor({
+        state: 'visible',
         timeout: 15000,
       })
+
+      await Promise.all([
+        sections
+          .nth(1)
+          .waitFor({ state: 'visible', timeout: 15000 })
+          .catch(() => {}),
+        sections
+          .nth(2)
+          .waitFor({ state: 'visible', timeout: 15000 })
+          .catch(() => {}),
+        sections
+          .nth(3)
+          .waitFor({ state: 'visible', timeout: 15000 })
+          .catch(() => {}),
+        sections
+          .nth(4)
+          .waitFor({ state: 'visible', timeout: 15000 })
+          .catch(() => {}),
+      ])
+
+      await page.locator('main section').last().waitFor({
+        state: 'attached',
+        timeout: 20000,
+      })
+
+      await page.waitForFunction(
+        () => {
+          const main = document.querySelector('main')
+          const wordCount =
+            main?.textContent?.split(/\s+/).filter(Boolean).length || 0
+          return wordCount > 100
+        },
+        { timeout: 30000 }
+      )
 
       const mainContent = await page.locator('main').textContent()
       const wordCount = mainContent?.split(/\s+/).filter(Boolean).length || 0
