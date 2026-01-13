@@ -56,7 +56,7 @@ export default [
       'unused-imports/no-unused-vars': 'warn',
 
       // Code Quality 🔍 (SonarJS)
-      'sonarjs/cognitive-complexity': ['error', 15],
+      'sonarjs/cognitive-complexity': ['error', 10],
       'sonarjs/no-duplicate-string': ['error', { threshold: 3 }],
       'sonarjs/no-identical-expressions': 'error',
       'sonarjs/prefer-immediate-return': 'error',
@@ -125,15 +125,17 @@ export default [
   // Test files - must come BEFORE main src config to take precedence
   {
     files: [
-      'src/**/__tests__/*.{ts,tsx}',
+      'src/**/__tests__/**/*.{ts,tsx}',
       'src/**/*.test.{ts,tsx}',
       'src/**/*.spec.{ts,tsx}',
+      'src/test/**/*.{ts,tsx}',
     ],
     ignores: ['src/plugins/**/__tests__'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: './tsconfig.test.json',
+        ecmaVersion: 'latest',
+        sourceType: 'module',
         ecmaFeatures: { jsx: true },
       },
       globals: {
@@ -153,6 +155,10 @@ export default [
       ...prettierConfig.rules,
       'prettier/prettier': 'error',
       '@typescript-eslint/no-unused-vars': 'off',
+      'no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': 'warn',
       'max-lines-per-function': 'off',
@@ -164,9 +170,10 @@ export default [
     files: ['src/**/*.{ts,tsx}'],
     ignores: [
       'src/plugins/**',
-      'src/**/__tests__',
+      'src/**/__tests__/**',
       'src/**/*.test.{ts,tsx}',
       'src/**/*.spec.{ts,tsx}',
+      'src/test/**',
     ],
     languageOptions: {
       parser: tsParser,
@@ -217,7 +224,7 @@ export default [
       'jsx-a11y/label-has-associated-control': 'error',
 
       // Code Quality 🔍 (SonarJS)
-      'sonarjs/cognitive-complexity': ['error', 15],
+      'sonarjs/cognitive-complexity': ['error', 10],
       'sonarjs/no-duplicate-string': ['error', { threshold: 3 }],
       'sonarjs/no-identical-expressions': 'error',
       'sonarjs/prefer-immediate-return': 'error',
@@ -244,7 +251,7 @@ export default [
       'max-depth': ['error', 4],
       'max-nested-callbacks': ['error', 3],
       'no-duplicate-imports': 'error',
-      'no-console': 'warn',
+      'no-console': 'error',
       'prefer-const': 'error',
       'no-var': 'error',
     },

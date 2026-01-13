@@ -1,5 +1,7 @@
 import { sentryVitePlugin } from '@sentry/vite-plugin'
 import react from '@vitejs/plugin-react'
+import path from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
@@ -141,7 +143,29 @@ export default defineConfig({
           }),
         ]
       : []),
+    ...(process.env.ANALYZE === 'true'
+      ? [
+          visualizer({
+            open: true,
+            filename: 'dist/stats.html',
+            gzipSize: true,
+            brotliSize: true,
+          }),
+        ]
+      : []),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@hooks': path.resolve(__dirname, './src/hooks'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@data': path.resolve(__dirname, './src/data'),
+      '@styles': path.resolve(__dirname, './src/styles'),
+      '@types': path.resolve(__dirname, './src/types'),
+      '@assets': path.resolve(__dirname, './src/assets'),
+    },
+  },
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
