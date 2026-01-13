@@ -263,10 +263,15 @@ test.describe('Performance & Core Web Vitals Tests', () => {
 
             setTimeout(() => resolve(tasks.length), 3000)
           } catch {
-            resolve(0)
+            resolve(-1)
           }
         })
       })
+
+      if (longTasks === -1) {
+        test.skip(true, 'PerformanceObserver for longtask not available')
+        return
+      }
 
       expect(longTasks).toBeLessThanOrEqual(5)
     })
