@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it } from 'vitest'
 
 import {
   type Course,
@@ -140,31 +140,44 @@ describe('coursesData', () => {
   })
 
   describe('TMR Course structure', () => {
-    const tmr = getCourseById('tmr')
+    let tmr: Course
+
+    beforeAll(() => {
+      const course = getCourseById('tmr')
+      if (!course) {
+        throw new Error('TMR course not found')
+      }
+      tmr = course
+    })
+
+    it('should exist', () => {
+      expect(tmr).toBeDefined()
+      expect(tmr.id).toBe('tmr')
+    })
 
     it('should have correct title', () => {
-      expect(tmr?.title).toContain('Tactical Medical Responder')
+      expect(tmr.title).toContain('Tactical Medical Responder')
     })
 
     it('should have metadata with certification and location', () => {
-      expect(tmr?.metadata.certification).toContain('TMR')
-      expect(tmr?.metadata.location).toBeDefined()
+      expect(tmr.metadata.certification).toContain('TMR')
+      expect(tmr.metadata.location).toBeDefined()
     })
 
     it('should have links with details and brochure', () => {
-      expect(tmr?.links.details).toContain('tmr')
-      expect(tmr?.links.brochure).toBeDefined()
+      expect(tmr.links.details).toContain('tmr')
+      expect(tmr.links.brochure).toBeDefined()
     })
 
     it('should have images with all formats', () => {
-      expect(tmr?.images.jpg).toBeDefined()
-      expect(tmr?.images.webp).toBeDefined()
-      expect(tmr?.images.avif).toBeDefined()
-      expect(tmr?.images.alt).toBeDefined()
+      expect(tmr.images.jpg).toBeDefined()
+      expect(tmr.images.webp).toBeDefined()
+      expect(tmr.images.avif).toBeDefined()
+      expect(tmr.images.alt).toBeDefined()
     })
 
     it('should have valid level data', () => {
-      tmr?.levels.forEach(level => {
+      tmr.levels.forEach(level => {
         expect(level.code).toBeDefined()
         expect(level.name).toBeDefined()
         expect(level.namePt).toBeDefined()
@@ -182,19 +195,32 @@ describe('coursesData', () => {
   })
 
   describe('WMR Course structure', () => {
-    const wmr = getCourseById('wmr')
+    let wmr: Course
+
+    beforeAll(() => {
+      const course = getCourseById('wmr')
+      if (!course) {
+        throw new Error('WMR course not found')
+      }
+      wmr = course
+    })
+
+    it('should exist', () => {
+      expect(wmr).toBeDefined()
+      expect(wmr.id).toBe('wmr')
+    })
 
     it('should have correct title', () => {
-      expect(wmr?.title).toContain('Wilderness Medical Responder')
+      expect(wmr.title).toContain('Wilderness Medical Responder')
     })
 
     it('should have metadata with certification and location', () => {
-      expect(wmr?.metadata.certification).toContain('Wilderness')
-      expect(wmr?.metadata.location).toBeDefined()
+      expect(wmr.metadata.certification).toContain('Wilderness')
+      expect(wmr.metadata.location).toBeDefined()
     })
 
     it('should have valid level data', () => {
-      wmr?.levels.forEach(level => {
+      wmr.levels.forEach(level => {
         expect(level.code).toBeDefined()
         expect(level.name).toBeDefined()
         expect(level.duration).toBeDefined()
