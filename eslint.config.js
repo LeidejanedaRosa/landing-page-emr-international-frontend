@@ -28,6 +28,7 @@ export default [
   // Plugin files use Node.js types from tsconfig.node.json
   {
     files: ['src/plugins/**/*.ts'],
+    ignores: ['src/plugins/**/__tests__/**'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
@@ -85,6 +86,40 @@ export default [
       'no-console': 'warn',
       'prefer-const': 'error',
       'no-var': 'error',
+    },
+  },
+  // Plugin test files without type checking
+  {
+    files: ['src/plugins/**/__tests__/**/*.{ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+      globals: { ...globals.node, ...globals.browser },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint,
+      prettier: prettier,
+      'unused-imports': unusedImports,
+      sonarjs: sonarjs,
+      unicorn: unicorn,
+      security: security,
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...prettierConfig.rules,
+      'prettier/prettier': 'error',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': 'off',
+      'no-duplicate-imports': 'error',
+      'security/detect-unsafe-regex': 'warn',
+      'max-lines-per-function': 'off',
+      'max-nested-callbacks': 'off',
+      'sonarjs/no-duplicate-string': 'off',
     },
   },
   {
@@ -216,6 +251,7 @@ export default [
       '**/*.test.{ts,tsx}',
       'src/**/*.spec.{ts,tsx}',
     ],
+    ignores: ['src/plugins/**/__tests__/**'],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
