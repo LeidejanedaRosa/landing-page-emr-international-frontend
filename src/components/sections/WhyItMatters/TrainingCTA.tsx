@@ -19,7 +19,7 @@ export function TrainingCTA() {
         className='bg-cta-600 text-white hover:bg-cta-700 py-3 px-6 uppercase tracking-wider text-xs shadow-lg hover:shadow-xl hover:scale-105'
         aria-label='Navegar para seção de treinamentos disponíveis'
       >
-        Conhecer Treinamentos
+        TREINAMENTOS
       </AccessibleButton>
     </footer>
   )
