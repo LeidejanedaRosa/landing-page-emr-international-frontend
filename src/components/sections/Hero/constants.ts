@@ -26,14 +26,14 @@ export const HERO_CONTENT = {
     fourthLine: 'REALMENTE PREPARADO?',
   },
   cta: {
-    text: 'Ver Cursos de Elite',
-    ariaLabel: 'Ver cursos de elite disponíveis',
+    text: 'CONHEÇA OS CURSOS',
+    ariaLabel: 'Ver cursos disponíveis',
   },
   visual: {
     alt: 'Operadores táticos em treinamento real de atendimento pré-hospitalar',
     ariaLabel: 'Imagem ilustrativa de treinamento tático',
     badge: {
-      label: 'Treinamento Real',
+      label: 'Simulação realística',
       ariaLabel: 'Indicador de treinamento em ambiente real',
     },
   },
