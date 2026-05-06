@@ -14,7 +14,7 @@ export const EnrollmentBadge: React.FC<EnrollmentBadgeProps> = ({
   const colorClass = accentColor === 'red' ? 'bg-red-500' : 'bg-yellow-500'
   return (
     <div
-      className={`inline-flex items-center gap-2.5 px-5 py-2.5 landscape-mobile:px-3 landscape-mobile:py-1.5 landscape-mobile:gap-1.5 md:px-6 md:py-3 rounded-full
+      className={`inline-flex items-center gap-1.5 px-3 py-1.5 landscape-mobile:px-3 landscape-mobile:py-1.5 landscape-mobile:gap-1.5 sm:px-5 sm:py-2.5 sm:gap-2.5 md:px-4 md:py-2 rounded-full
                    bg-white/95 backdrop-blur-md shadow-xl border border-white/20 ${
                      prefersReducedMotion
                        ? ''

@@ -38,7 +38,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
       onBlur={onBlur}
       aria-label={subtitle ? `Curso ${title}: ${subtitle}` : `Curso ${title}`}
     >
-      <div className='relative min-h-[250px] landscape-mobile:absolute landscape-mobile:inset-0 landscape-mobile:h-full md:absolute md:inset-0 md:h-full'>
+      <div className='relative min-h-[160px] sm:min-h-[200px] landscape-mobile:absolute landscape-mobile:inset-0 landscape-mobile:h-full md:absolute md:inset-0 md:h-full'>
         <CourseImage
           imageAvif={imageAvif}
           imageWebp={imageWebp}

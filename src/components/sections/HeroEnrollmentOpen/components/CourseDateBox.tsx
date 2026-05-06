@@ -28,8 +28,8 @@ export const CourseDateBox: React.FC<CourseDateBoxProps> = ({
                     shadow-2xl border border-white/10 flex-shrink-0
                     landscape-mobile:flex-col landscape-mobile:items-center landscape-mobile:gap-0 landscape-mobile:px-4 landscape-mobile:py-3
                     sm:px-4 sm:py-2.5
-                    md:flex-col md:items-center md:gap-0 md:px-6 md:py-4
-                    lg:px-8 lg:py-6
+                    md:flex-col md:items-center md:gap-0 md:px-4 md:py-2
+                    lg:px-5 lg:py-4
                   `}
       role='text'
       aria-label={`Data do curso: ${formattedDate}`}
@@ -38,13 +38,13 @@ export const CourseDateBox: React.FC<CourseDateBoxProps> = ({
         dateTime={isoDate}
         className='flex items-center gap-2 landscape-mobile:flex-col landscape-mobile:gap-0 md:flex-col md:gap-0'
       >
-        <span className='text-xl landscape-mobile:text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-white leading-none'>
+        <span className='text-xl landscape-mobile:text-2xl sm:text-2xl md:text-2xl lg:text-3xl font-black text-white leading-none'>
           {date}
         </span>
-        <span className='text-lg landscape-mobile:text-lg landscape-mobile:mt-1 sm:text-xl md:text-xl lg:text-2xl font-bold text-white uppercase md:mt-1'>
+        <span className='text-lg landscape-mobile:text-lg landscape-mobile:mt-1 sm:text-xl md:text-lg lg:text-xl font-bold text-white uppercase md:mt-1'>
           {month}
         </span>
-        <span className='text-lg landscape-mobile:text-sm landscape-mobile:mt-0.5 md:text-sm lg:text-lg font-semibold text-white/90 md:mt-0.5'>
+        <span className='text-lg landscape-mobile:text-sm landscape-mobile:mt-0.5 md:text-xs lg:text-sm font-semibold text-white/90 md:mt-0.5'>
           {year}
         </span>
       </time>
