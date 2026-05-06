@@ -1,9 +1,13 @@
 {
   "ci": {
     "collect": {
+      "startServerReadyPattern": "ready",
       "url": ["http://localhost:3000"],
-      "startServerCommand": "npm run dev",
-      "numberOfRuns": 3
+      "startServerCommand": "npm run build && npm run preview",
+      "numberOfRuns": 3,
+      "settings": {
+        "chromeFlags": "--no-sandbox --headless"
+      }
     },
     "assert": {
       "assertions": {
