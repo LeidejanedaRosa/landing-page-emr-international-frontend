@@ -86,7 +86,7 @@ describe('TrainingCTA (WhyItMatters)', () => {
         name: /navegar para seção de treinamentos/i,
       })
       expect(button).toBeInTheDocument()
-      expect(button).toHaveTextContent('Conhecer Treinamentos')
+      expect(button).toHaveTextContent('TREINAMENTOS')
     })
 
     it('deve ter aria-label descritivo', () => {

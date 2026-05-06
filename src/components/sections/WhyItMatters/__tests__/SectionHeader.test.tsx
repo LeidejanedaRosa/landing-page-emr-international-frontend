@@ -25,35 +25,6 @@ describe('SectionHeader', () => {
     })
   })
 
-  describe('Subtítulo', () => {
-    it('deve renderizar o subtítulo com texto correto', () => {
-      render(<SectionHeader {...defaultProps} />)
-
-      expect(screen.getByText('A Realidade dos Números')).toBeInTheDocument()
-    })
-
-    it('deve usar o ID passado via props', () => {
-      render(<SectionHeader {...defaultProps} />)
-
-      const subtitle = screen.getByText('A Realidade dos Números')
-      expect(subtitle).toHaveAttribute('id', 'test-subtitle-id')
-    })
-
-    it('deve ter estilo uppercase', () => {
-      render(<SectionHeader {...defaultProps} />)
-
-      const subtitle = screen.getByText('A Realidade dos Números')
-      expect(subtitle.className).toContain('uppercase')
-    })
-
-    it('deve ter cor vermelha', () => {
-      render(<SectionHeader {...defaultProps} />)
-
-      const subtitle = screen.getByText('A Realidade dos Números')
-      expect(subtitle.className).toContain('text-red-600')
-    })
-  })
-
   describe('Título Principal', () => {
     it('deve renderizar título com nível h2', () => {
       render(<SectionHeader {...defaultProps} />)
@@ -96,25 +67,27 @@ describe('SectionHeader', () => {
       render(<SectionHeader {...defaultProps} />)
 
       const description = screen.getByText(
-        /em operações táticas e emergências remotas/i
+        /em operações táticas e em áreas remotas/i
       )
       expect(description).toBeInTheDocument()
       expect(description.tagName).toBe('P')
     })
 
-    it('deve mencionar APH Tático e Wilderness Medicine', () => {
+    it('deve mencionar necessidade de sobrevivência', () => {
       render(<SectionHeader {...defaultProps} />)
 
-      const description = screen.getByText(/aph tático/i)
+      const description = screen.getByText(
+        /em operações táticas e em áreas remotas/i
+      )
       expect(description).toBeInTheDocument()
-      expect(description.textContent).toContain('Wilderness Medicine')
+      expect(description.textContent).toContain('necessidade de sobrevivência')
     })
 
     it('deve ter max-width para legibilidade', () => {
       render(<SectionHeader {...defaultProps} />)
 
       const description = screen.getByText(
-        /em operações táticas e emergências remotas/i
+        /em operações táticas e em áreas remotas/i
       )
       expect(description.className).toContain('max-w-2xl')
     })
@@ -123,7 +96,7 @@ describe('SectionHeader', () => {
       render(<SectionHeader {...defaultProps} />)
 
       const description = screen.getByText(
-        /em operações táticas e emergências remotas/i
+        /em operações táticas e em áreas remotas/i
       )
       expect(description.className).toContain('text-zinc-600')
     })
@@ -132,7 +105,7 @@ describe('SectionHeader', () => {
       render(<SectionHeader {...defaultProps} />)
 
       const description = screen.getByText(
-        /em operações táticas e emergências remotas/i
+        /em operações táticas e em áreas remotas/i
       )
       expect(description.className).toContain('text-sm')
       expect(description.className).toContain('md:text-base')
@@ -153,13 +126,6 @@ describe('SectionHeader', () => {
       const heading = screen.getByRole('heading', { level: 2 })
       expect(heading.className).toContain('font-extrabold')
     })
-
-    it('deve ter fonte bold no subtítulo', () => {
-      render(<SectionHeader {...defaultProps} />)
-
-      const subtitle = screen.getByText('A Realidade dos Números')
-      expect(subtitle.className).toContain('font-bold')
-    })
   })
 
   describe('Acessibilidade', () => {
@@ -167,10 +133,12 @@ describe('SectionHeader', () => {
       render(<SectionHeader titleId='unique-title' subtitleId='unique-sub' />)
 
       const title = screen.getByRole('heading', { level: 2 })
-      const subtitle = screen.getByText('A Realidade dos Números')
+      const description = screen.getByText(
+        /em operações táticas e em áreas remotas/i
+      )
 
       expect(title).toHaveAttribute('id', 'unique-title')
-      expect(subtitle).toHaveAttribute('id', 'unique-sub')
+      expect(description).toHaveAttribute('id', 'unique-sub')
     })
 
     it('deve ter hierarquia correta de elementos', () => {
@@ -179,10 +147,9 @@ describe('SectionHeader', () => {
       const header = document.querySelector('header')
       const children = Array.from(header?.children || [])
 
-      // Primeiro deve ser o subtítulo (p), depois h2, depois descrição (p)
-      expect(children[0].tagName).toBe('P')
-      expect(children[1].tagName).toBe('H2')
-      expect(children[2].tagName).toBe('P')
+      // Primeiro deve ser o h2, depois a descrição (p)
+      expect(children[0].tagName).toBe('H2')
+      expect(children[1].tagName).toBe('P')
     })
   })
 })
