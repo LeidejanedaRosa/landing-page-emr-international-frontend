@@ -41,7 +41,7 @@ export const CourseContent: React.FC<CourseContentProps> = ({
       className='relative flex flex-1 flex-col bg-black py-3
                   landscape-mobile:absolute landscape-mobile:inset-x-0 landscape-mobile:bottom-0 landscape-mobile:bg-transparent landscape-mobile:py-8 landscape-mobile:px-8
                   sm:px-6 sm:py-6
-                  md:py-6 md:absolute md:inset-x-0 md:bottom-0 md:block md:bg-transparent md:px-10 md:pb-6 md:pt-0'
+                  md:absolute md:inset-x-0 md:bottom-0 md:block md:bg-transparent md:px-10 md:pb-6 md:pt-0'
     >
       <div className='landscape-mobile:absolute landscape-mobile:bottom-8 landscape-mobile:right-8 landscape-mobile:z-10 hidden landscape-mobile:block'>
         <CourseDateBox
