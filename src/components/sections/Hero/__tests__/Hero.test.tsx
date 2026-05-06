@@ -96,10 +96,10 @@ describe('Hero', () => {
       render(<Hero />)
 
       const button = screen.getByRole('button', {
-        name: /ver cursos de elite disponíveis/i,
+        name: /ver cursos disponíveis/i,
       })
       expect(button).toBeInTheDocument()
-      expect(screen.getByText('Ver Cursos de Elite')).toBeInTheDocument()
+      expect(screen.getByText('CONHEÇA OS CURSOS')).toBeInTheDocument()
     })
 
     it('should scroll to courses section when CTA is clicked', async () => {
@@ -107,7 +107,7 @@ describe('Hero', () => {
       render(<Hero />)
 
       const button = screen.getByRole('button', {
-        name: /ver cursos de elite disponíveis/i,
+        name: /ver cursos disponíveis/i,
       })
       await user.click(button)
 
@@ -118,7 +118,7 @@ describe('Hero', () => {
       render(<Hero />)
 
       const button = screen.getByRole('button', {
-        name: /ver cursos de elite disponíveis/i,
+        name: /ver cursos disponíveis/i,
       })
       const svg = button.querySelector('svg')
       expect(svg).toHaveAttribute('aria-hidden', 'true')
@@ -147,7 +147,7 @@ describe('Hero', () => {
     it('should render training badge', () => {
       render(<Hero />)
 
-      expect(screen.getByText('Treinamento Real')).toBeInTheDocument()
+      expect(screen.getByText('Simulação realística')).toBeInTheDocument()
     })
 
     it('should have training badge with accessible status role', () => {

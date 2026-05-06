@@ -92,7 +92,7 @@ describe('Hero constants', () => {
 
     describe('cta', () => {
       it('should have text', () => {
-        expect(HERO_CONTENT.cta.text).toBe('Ver Cursos de Elite')
+        expect(HERO_CONTENT.cta.text).toBe('CONHEÇA OS CURSOS')
       })
 
       it('should have ariaLabel', () => {
@@ -111,7 +111,7 @@ describe('Hero constants', () => {
       })
 
       it('should have badge with label and ariaLabel', () => {
-        expect(HERO_CONTENT.visual.badge.label).toBe('Treinamento Real')
+        expect(HERO_CONTENT.visual.badge.label).toBe('Simulação realística')
         expect(HERO_CONTENT.visual.badge.ariaLabel).toBeDefined()
       })
     })
