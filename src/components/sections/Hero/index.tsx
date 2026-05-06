@@ -39,7 +39,7 @@ const Hero = () => {
           <HeroVisual images={heroImages} alt={HERO_CONTENT.visual.alt} />
         </aside>
         <div
-          className='flex-1 min-h-0 relative z-20 flex flex-col justify-center gap-2 px-4 py-3 order-2
+          className='flex-1 min-h-0 relative z-20 flex flex-col justify-around gap-2 px-4 py-3 order-2
                         landscape-mobile:w-1/2 landscape-mobile:gap-3 landscape-mobile:py-8 landscape-mobile:px-8 landscape-mobile:order-1
                         sm:gap-3 sm:px-6 sm:py-4
                         md:py-6 md:gap-4 md:order-1 md:justify-between'
