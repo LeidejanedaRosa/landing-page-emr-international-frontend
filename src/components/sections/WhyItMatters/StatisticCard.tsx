@@ -54,7 +54,7 @@ function StatisticCardComponent({
         <div className='text-[100px] md:text-[120px]'>{statistic.icon}</div>
       </div>
 
-      <div className='relative z-10 flex flex-col gap-2'>
+      <div className='relative z-10 flex flex-col gap-2 pr-16 md:pr-20'>
         {isHighlight && (
           <div className='flex items-center gap-2 mb-2 text-white/90'>
             <span className='uppercase tracking-widest text-[10px] font-bold border border-white/40 px-2 py-1 rounded bg-white/10'>
