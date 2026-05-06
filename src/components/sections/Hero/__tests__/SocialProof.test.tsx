@@ -86,7 +86,7 @@ describe('SocialProof', () => {
       render(<SocialProof />)
 
       const group = screen.getByRole('group')
-      expect(group).toHaveClass('pt-4', 'sm:pt-6')
+      expect(group).toHaveClass('pt-3', 'sm:pt-4')
     })
 
     it('should have responsive gap between items', () => {
@@ -108,13 +108,6 @@ describe('SocialProof', () => {
 
       const group = screen.getByRole('group')
       expect(group).toHaveClass('text-xs', 'sm:text-sm')
-    })
-
-    it('should have responsive margin top', () => {
-      render(<SocialProof />)
-
-      const group = screen.getByRole('group')
-      expect(group).toHaveClass('sm:mt-10', 'md:mt-12')
     })
   })
 

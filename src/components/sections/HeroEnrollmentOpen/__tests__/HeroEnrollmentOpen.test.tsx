@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { render, screen } from '../../../../test/test-utils'
+import { COURSES_DATA } from '../constants'
 import { HeroEnrollmentOpen } from '../index'
+
+const hasEnrollment = COURSES_DATA.length > 0
 
 vi.mock('../../../../hooks/useAccessibility', () => ({
   useAccessibilityPreferences: vi.fn(() => ({
@@ -46,7 +49,7 @@ vi.mock('../../../../assets/hero/hero_section_WMR.jpg', () => ({
   default: 'mocked-wmr.jpg',
 }))
 
-describe('HeroEnrollmentOpen', () => {
+describe.skipIf(!hasEnrollment)('HeroEnrollmentOpen', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })

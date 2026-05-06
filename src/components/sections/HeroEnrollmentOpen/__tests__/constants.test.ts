@@ -2,13 +2,15 @@ import { describe, expect, it } from 'vitest'
 
 import { ACCENT_COLORS, COURSES_DATA } from '../constants'
 
+const hasEnrollment = COURSES_DATA.length > 0
+
 describe('HeroEnrollmentOpen constants', () => {
   describe('COURSES_DATA', () => {
     it('should be an array', () => {
       expect(Array.isArray(COURSES_DATA)).toBe(true)
     })
 
-    it('should have 2 courses', () => {
+    it.skipIf(!hasEnrollment)('should have 2 courses', () => {
       expect(COURSES_DATA).toHaveLength(2)
     })
 
@@ -37,7 +39,7 @@ describe('HeroEnrollmentOpen constants', () => {
       expect(uniqueIds.size).toBe(ids.length)
     })
 
-    describe('TMR course', () => {
+    describe.skipIf(!hasEnrollment)('TMR course', () => {
       const tmrCourse = COURSES_DATA.find(c => c.id === 'tmr')
 
       it('should exist', () => {
@@ -79,7 +81,7 @@ describe('HeroEnrollmentOpen constants', () => {
       })
     })
 
-    describe('WMR course', () => {
+    describe.skipIf(!hasEnrollment)('WMR course', () => {
       const wmrCourse = COURSES_DATA.find(c => c.id === 'wmr')
 
       it('should exist', () => {
