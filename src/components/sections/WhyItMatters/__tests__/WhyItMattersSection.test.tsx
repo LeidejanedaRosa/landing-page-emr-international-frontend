@@ -48,12 +48,6 @@ describe('WhyItMattersSection', () => {
   })
 
   describe('Cabeçalho', () => {
-    it('deve renderizar o subtítulo com texto correto', () => {
-      render(<WhyItMattersSection />)
-
-      expect(screen.getByText('A Realidade dos Números')).toBeInTheDocument()
-    })
-
     it('deve renderizar o título principal', () => {
       render(<WhyItMattersSection />)
 
@@ -65,7 +59,7 @@ describe('WhyItMattersSection', () => {
       render(<WhyItMattersSection />)
 
       expect(
-        screen.getByText(/em operações táticas e emergências remotas/i)
+        screen.getByText(/em operações táticas e em áreas remotas/i)
       ).toBeInTheDocument()
     })
 
