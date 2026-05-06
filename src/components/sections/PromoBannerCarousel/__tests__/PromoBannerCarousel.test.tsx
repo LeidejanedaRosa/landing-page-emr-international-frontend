@@ -57,7 +57,7 @@ describe('PromoBannerCarousel', () => {
       render(<PromoBannerCarousel />)
 
       expect(
-        screen.getByText('Promoção atual: INSCRIÇÕES ABERTAS')
+        screen.getByText('Promoção atual: TREINAMENTOS COM 20% OFF')
       ).toBeInTheDocument()
     })
 
