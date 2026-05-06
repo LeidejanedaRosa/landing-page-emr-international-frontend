@@ -1,44 +1,40 @@
-import tmrImageAvif from '../../../assets/hero/hero_section_TMR.avif'
-import tmrImageJpg from '../../../assets/hero/hero_section_TMR.jpg'
-import tmrImageWebp from '../../../assets/hero/hero_section_TMR.webp'
-import wmrImageAvif from '../../../assets/hero/hero_section_WMR.avif'
-import wmrImageJpg from '../../../assets/hero/hero_section_WMR.jpg'
-import wmrImageWebp from '../../../assets/hero/hero_section_WMR.webp'
 import type { CourseData } from './types'
 
+// Turmas comentadas temporariamente — sem matrículas abertas no momento.
+// Descomentar quando novas datas forem confirmadas.
 export const COURSES_DATA: CourseData[] = [
-  {
-    id: 'tmr',
-    title: 'Tactical Medical Response',
-    subtitle: 'Emergências para ',
-    subtitle2: 'Áreas de Conflito',
-    date: '07',
-    month: 'DEZ',
-    monthNumber: '12',
-    year: '2025',
-    imageAvif: tmrImageAvif,
-    imageWebp: tmrImageWebp,
-    imageJpg: tmrImageJpg,
-    accentColor: 'red',
-    ctaLabel: 'INSCREVA-SE AGORA',
-    ctaAriaLabel: 'Inscrever-se no curso Tactical Medical Response',
-  },
-  {
-    id: 'wmr',
-    title: 'Wilderness Medical Response',
-    subtitle: 'Emergências em ',
-    subtitle2: 'Áreas Remotas',
-    date: '14',
-    month: 'MAR',
-    monthNumber: '03',
-    year: '2026',
-    imageAvif: wmrImageAvif,
-    imageWebp: wmrImageWebp,
-    imageJpg: wmrImageJpg,
-    accentColor: 'yellow',
-    ctaLabel: 'INSCREVA-SE AGORA',
-    ctaAriaLabel: 'Inscrever-se no curso Wilderness Medical Response',
-  },
+  // {
+  //   id: 'tmr',
+  //   title: 'Tactical Medical Response',
+  //   subtitle: 'Emergências para ',
+  //   subtitle2: 'Áreas de Conflito',
+  //   date: '07',
+  //   month: 'DEZ',
+  //   monthNumber: '12',
+  //   year: '2025',
+  //   imageAvif: tmrImageAvif,
+  //   imageWebp: tmrImageWebp,
+  //   imageJpg: tmrImageJpg,
+  //   accentColor: 'red',
+  //   ctaLabel: 'INSCREVA-SE AGORA',
+  //   ctaAriaLabel: 'Inscrever-se no curso Tactical Medical Response',
+  // },
+  // {
+  //   id: 'wmr',
+  //   title: 'Wilderness Medical Response',
+  //   subtitle: 'Emergências em ',
+  //   subtitle2: 'Áreas Remotas',
+  //   date: '14',
+  //   month: 'MAR',
+  //   monthNumber: '03',
+  //   year: '2026',
+  //   imageAvif: wmrImageAvif,
+  //   imageWebp: wmrImageWebp,
+  //   imageJpg: wmrImageJpg,
+  //   accentColor: 'yellow',
+  //   ctaLabel: 'INSCREVA-SE AGORA',
+  //   ctaAriaLabel: 'Inscrever-se no curso Wilderness Medical Response',
+  // },
 ]
 
 export const ACCENT_COLORS = {
