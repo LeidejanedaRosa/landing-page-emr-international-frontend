@@ -18,7 +18,7 @@ interface PromoBannerCarouselProps {
 }
 
 export const PromoBannerCarousel: React.FC<PromoBannerCarouselProps> = ({
-  text = 'INSCRIÇÕES ABERTAS',
+  text = 'TREINAMENTOS COM 20% OFF',
   speed = 15,
   className = '',
 }) => {
