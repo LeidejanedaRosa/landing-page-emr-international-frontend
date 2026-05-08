@@ -1,14 +1,25 @@
-import { vi } from 'vitest'
+import { type Mock, vi } from 'vitest'
 
 import * as useAccessibilityHook from '../../../../hooks/useAccessibility'
 import * as useCarouselHook from '../../../../hooks/useCarousel'
 import * as useTouchSwipeHook from '../../../../hooks/useTouchSwipe'
 import * as CoursesConstants from '../../HeroEnrollmentOpen/constants'
 import type { CourseData } from '../../HeroEnrollmentOpen/types'
-import { createMockCarouselReturn, createMockTouchHandlers } from './mocks'
+import {
+  createMockCarouselReturn,
+  createMockTouchHandlers,
+  type MockCarouselReturn,
+  type MockTouchHandlers,
+} from './mocks'
 
-export const setupHooks = () => {
-  const mockAnnounce = vi.fn()
+interface SetupHooksReturn {
+  mockAnnounce: Mock
+  mockCarouselReturn: MockCarouselReturn
+  mockTouchHandlers: MockTouchHandlers
+}
+
+export const setupHooks = (): SetupHooksReturn => {
+  const mockAnnounce: Mock = vi.fn()
   const mockCarouselReturn = createMockCarouselReturn()
   const mockTouchHandlers = createMockTouchHandlers()
 

@@ -1,8 +1,29 @@
 import React from 'react'
 
-import { vi } from 'vitest'
+import { type Mock, vi } from 'vitest'
 
-export const createMockCarouselReturn = (overrides = {}) => ({
+export interface MockCarouselReturn {
+  currentIndex: number
+  nextSlide: Mock
+  previousSlide: Mock
+  goToSlide: Mock
+  pauseAutoPlay: Mock
+  resumeAutoPlay: Mock
+  isAutoPlaying: boolean
+  isTransitioning: boolean
+  maxIndex: number
+  hasMultiplePages: boolean
+}
+
+export interface MockTouchHandlers {
+  onTouchStart: Mock
+  onTouchMove: Mock
+  onTouchEnd: Mock
+}
+
+export const createMockCarouselReturn = (
+  overrides = {}
+): MockCarouselReturn => ({
   currentIndex: 0,
   nextSlide: vi.fn(),
   previousSlide: vi.fn(),
@@ -16,7 +37,7 @@ export const createMockCarouselReturn = (overrides = {}) => ({
   ...overrides,
 })
 
-export const createMockTouchHandlers = () => ({
+export const createMockTouchHandlers = (): MockTouchHandlers => ({
   onTouchStart: vi.fn(),
   onTouchMove: vi.fn(),
   onTouchEnd: vi.fn(),

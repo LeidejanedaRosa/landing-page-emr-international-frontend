@@ -7,7 +7,7 @@ interface UseTouchSwipeOptions {
   enabled?: boolean
 }
 
-interface TouchHandlers {
+export interface TouchHandlers {
   onTouchStart: React.TouchEventHandler
   onTouchMove: React.TouchEventHandler
   onTouchEnd: React.TouchEventHandler
