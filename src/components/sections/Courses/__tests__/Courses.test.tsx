@@ -113,7 +113,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
       })
       expect(section).toBeInTheDocument()
       expect(section).toHaveAttribute('id', 'treinamentos')
@@ -124,7 +124,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
       })
       expect(section).toHaveAttribute('aria-labelledby')
       expect(section).toHaveAttribute('aria-describedby')
@@ -134,20 +134,10 @@ describe('Courses', () => {
       render(<Courses />)
 
       const heading = screen.getByRole('heading', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
         level: 2,
       })
       expect(heading).toBeInTheDocument()
-    })
-
-    it('should render section subtitle', () => {
-      render(<Courses />)
-
-      expect(
-        screen.getByText(
-          'Formação de Operadores de Emergência Tática e de Áreas Remotas'
-        )
-      ).toBeInTheDocument()
     })
 
     it('should render description paragraph', () => {
@@ -158,15 +148,6 @@ describe('Courses', () => {
           /capacitação profissional de excelência em resgate e emergências/i
         )
       ).toBeInTheDocument()
-    })
-
-    it('should render English term with lang attribute', () => {
-      render(<Courses />)
-
-      const heading = screen.getByRole('heading', { level: 2 })
-      const englishTerm = heading.querySelector('span[lang="en"]')
-      expect(englishTerm).toBeInTheDocument()
-      expect(englishTerm).toHaveTextContent('Wilderness Medicine')
     })
   })
 
@@ -266,7 +247,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
       })
       const decorativeBg = section.querySelector('[aria-hidden="true"]')
       expect(decorativeBg).toBeInTheDocument()
@@ -326,7 +307,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
       })
       const svgs = section.querySelectorAll('svg')
       svgs.forEach(svg => {
@@ -349,7 +330,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
       })
       expect(section).toHaveClass('px-4', 'sm:px-6', 'lg:px-8')
     })
@@ -358,7 +339,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
       })
       const container = section.querySelector('.max-w-screen-2xl')
       expect(container).toBeInTheDocument()
@@ -370,7 +351,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
       })
       expect(section).toHaveClass('bg-primary-900')
     })
@@ -379,7 +360,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
       })
       expect(section).toHaveClass('text-white')
     })
@@ -388,7 +369,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /treinamentos de aph tático/i,
+        name: /treinamentos de emergência tática/i,
       })
       expect(section).toHaveClass('overflow-hidden')
     })

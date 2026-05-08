@@ -18,16 +18,6 @@ describe('CoursesHeader', () => {
       expect(header).toHaveClass('text-center')
     })
 
-    it('should render subtitle badge', () => {
-      render(<CoursesHeader {...defaultProps} />)
-
-      expect(
-        screen.getByText(
-          'Formação de Operadores de Emergência Tática e de Áreas Remotas'
-        )
-      ).toBeInTheDocument()
-    })
-
     it('should render main heading with correct id', () => {
       render(<CoursesHeader {...defaultProps} />)
 
@@ -43,11 +33,11 @@ describe('CoursesHeader', () => {
       expect(heading).toHaveTextContent('Treinamentos')
     })
 
-    it('should render "APH Tático" in heading', () => {
+    it('should render "Emergência Tática e em Áreas Remotas" in heading', () => {
       render(<CoursesHeader {...defaultProps} />)
 
       const heading = screen.getByRole('heading', { level: 2 })
-      expect(heading).toHaveTextContent('APH Tático')
+      expect(heading).toHaveTextContent('Emergência Tática e em Áreas Remotas')
     })
 
     it('should render description paragraph with correct id', () => {
@@ -58,18 +48,6 @@ describe('CoursesHeader', () => {
       )
       expect(description).toBeInTheDocument()
       expect(description).toHaveAttribute('id', 'test-description-id')
-    })
-  })
-
-  describe('English Language Tag', () => {
-    it('should render "Wilderness Medicine" with lang="en" attribute', () => {
-      render(<CoursesHeader {...defaultProps} />)
-
-      const heading = screen.getByRole('heading', { level: 2 })
-      const englishSpan = heading.querySelector('span[lang="en"]')
-
-      expect(englishSpan).toBeInTheDocument()
-      expect(englishSpan).toHaveTextContent('Wilderness Medicine')
     })
   })
 
@@ -86,24 +64,6 @@ describe('CoursesHeader', () => {
 
       const heading = screen.getByRole('heading', { level: 2 })
       expect(heading).toHaveClass('text-white')
-    })
-
-    it('should have CTA color on subtitle', () => {
-      render(<CoursesHeader {...defaultProps} />)
-
-      const subtitle = screen.getByText(
-        'Formação de Operadores de Emergência Tática e de Áreas Remotas'
-      )
-      expect(subtitle).toHaveClass('text-cta-500')
-    })
-
-    it('should have uppercase styling on subtitle', () => {
-      render(<CoursesHeader {...defaultProps} />)
-
-      const subtitle = screen.getByText(
-        'Formação de Operadores de Emergência Tática e de Áreas Remotas'
-      )
-      expect(subtitle).toHaveClass('uppercase')
     })
 
     it('should have description with primary-300 color', () => {
