@@ -48,13 +48,13 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({ socialLinks }) => {
   const { announce } = useScreenReaderAnnouncement()
 
   const handleSocialClick = (socialName: string) => {
-    announce(`Abrindo ${socialName} da EMR Internacional`, 'polite')
+    announce(`Abrindo ${socialName} da EMR International`, 'polite')
   }
 
   return (
     <ul
       className='flex gap-1 sm:gap-4'
-      aria-label='Redes sociais da EMR Internacional'
+      aria-label='Redes sociais da EMR International'
     >
       {socialLinks.map(social => (
         <li key={social.id}>

@@ -32,7 +32,7 @@ export const COMPANY_LEGAL_INFO = {
    * Company legal name (Razão Social)
    * TODO: Verify if this matches official company registration documents
    */
-  legalName: 'EMR Internacional',
+  legalName: 'EMR International',
 
   /**
    * Full company address

@@ -9,7 +9,7 @@ export const CONTACT_SECTION_ID = 'contato' as const
 export const HERO_CONTENT = {
   seo: {
     title:
-      'EMR Internacional - Formação de Operadores de Emergência Tática e Wilderness',
+      'EMR International - Formação de Operadores de Emergência Tática e Wilderness',
     description:
       'Cursos de APH Tático, TECC e Wilderness Medicine. Prepare-se para o inesperado com instrutores de elite.',
     contextDescription:
@@ -43,7 +43,7 @@ export const HERO_CONTENT = {
     separator: '•',
   },
   about: {
-    title: 'Sobre a EMR Internacional',
+    title: 'Sobre a EMR International',
     description:
       'Somos referência em cursos de APH Tático, TECC e Wilderness Medicine. Prepare-se para o inesperado com instrutores de elite.',
   },

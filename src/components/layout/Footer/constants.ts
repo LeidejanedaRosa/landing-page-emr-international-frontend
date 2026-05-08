@@ -5,7 +5,7 @@ export const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
     id: 'instagram',
     name: 'Instagram',
     href: 'https://www.instagram.com/emr_international/',
-    ariaLabel: 'Seguir EMR Internacional no Instagram - Abre em nova aba',
+    ariaLabel: 'Seguir EMR International no Instagram - Abre em nova aba',
     bgColor: 'bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400',
     hoverBgColor:
       'hover:from-purple-700 hover:via-pink-600 hover:to-orange-500',
@@ -15,7 +15,7 @@ export const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
     id: 'linkedin',
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/juan-regenerati/',
-    ariaLabel: 'Conectar com EMR Internacional no LinkedIn - Abre em nova aba',
+    ariaLabel: 'Conectar com EMR International no LinkedIn - Abre em nova aba',
     bgColor: 'bg-[#0A66C2]',
     hoverBgColor: 'hover:bg-[#004182]',
     iconName: 'linkedin',

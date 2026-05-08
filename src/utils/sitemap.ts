@@ -44,25 +44,25 @@ export const generateSitemap = (urls: SitemapUrl[]): string => {
 
 export const sitemapUrls: SitemapUrl[] = [
   {
-    loc: 'https://www.emrinternacional.com/',
+    loc: 'https://www.emrinternational.com/',
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'weekly',
     priority: 1.0,
   },
   {
-    loc: 'https://www.emrinternacional.com/curso/aph-tatico',
+    loc: 'https://www.emrinternational.com/curso/aph-tatico',
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'monthly',
     priority: 0.8,
   },
   {
-    loc: 'https://www.emrinternacional.com/curso/emergencia-areas-remotas',
+    loc: 'https://www.emrinternational.com/curso/emergencia-areas-remotas',
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'monthly',
     priority: 0.8,
   },
   {
-    loc: 'https://www.emrinternacional.com/contact',
+    loc: 'https://www.emrinternational.com/contact',
     lastmod: new Date().toISOString().split('T')[0],
     changefreq: 'yearly',
     priority: 0.6,

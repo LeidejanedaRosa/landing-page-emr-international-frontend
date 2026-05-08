@@ -35,7 +35,7 @@ export function AboutMetrics() {
             onClick={handleScrollToCourses}
             variant='ghost'
             className='w-full h-full text-white hover:text-white hover:bg-transparent font-bold text-center flex flex-col items-center justify-center gap-2 focus:text-white focus:bg-transparent'
-            aria-label='Conheça os cursos de emergências médicas da EMR Internacional'
+            aria-label='Conheça os cursos de emergências médicas da EMR International'
           >
             <BookOpen
               className='w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white group-hover:text-white'

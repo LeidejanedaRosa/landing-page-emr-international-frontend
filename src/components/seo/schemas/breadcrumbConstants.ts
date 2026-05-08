@@ -1,4 +1,4 @@
-const COMPANY_URL = 'https://www.emrinternacional.com'
+const COMPANY_URL = 'https://www.emrinternational.com'
 
 export interface BreadcrumbItem {
   name: string

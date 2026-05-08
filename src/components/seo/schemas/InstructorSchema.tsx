@@ -1,6 +1,6 @@
 import { JsonLdScript } from '../JsonLdScript'
 
-const COMPANY_URL = 'https://www.emrinternacional.com'
+const COMPANY_URL = 'https://www.emrinternational.com'
 
 interface InstructorSchemaProps {
   name: string
@@ -30,7 +30,7 @@ export function InstructorSchema({
     worksFor: {
       '@type': 'Organization' as const,
       '@id': `${COMPANY_URL}/#organization`,
-      name: 'EMR Internacional',
+      name: 'EMR International',
     },
     knowsAbout: [
       'APH Tático',

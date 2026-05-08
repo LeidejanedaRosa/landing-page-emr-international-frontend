@@ -41,7 +41,7 @@ export const initSentry = () => {
 
       initialScope: {
         tags: {
-          component: 'EMR-Internacional-Frontend',
+          component: 'emr-international-Frontend',
         },
       },
     })

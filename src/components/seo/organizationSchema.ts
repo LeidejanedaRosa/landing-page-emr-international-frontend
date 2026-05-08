@@ -1,21 +1,21 @@
-const COMPANY_NAME = 'EMR Internacional'
-const COMPANY_URL = 'https://www.emrinternacional.com'
+const COMPANY_NAME = 'EMR International'
+const COMPANY_URL = 'https://www.emrinternational.com'
 const COMPANY_DESCRIPTION =
-  'EMR Internacional oferece cursos de Atendimento Pré-Hospitalar Tático (APH Tático) e Emergência em Áreas Remotas. Treinamentos onde o convencional não alcança.'
+  'EMR International oferece cursos de Atendimento Pré-Hospitalar Tático (APH Tático) e Emergência em Áreas Remotas. Treinamentos onde o convencional não alcança.'
 
 const organizationSchema = {
   '@type': 'Organization' as const,
   '@id': `${COMPANY_URL}/#organization`,
   name: COMPANY_NAME,
-  legalName: 'EMR Internacional',
+  legalName: 'EMR International',
   url: COMPANY_URL,
   logo: {
     '@type': 'ImageObject' as const,
-    url: `${COMPANY_URL}/logo_emr_internacional.svg`,
+    url: `${COMPANY_URL}/logo_emr_international.svg`,
     width: 200,
     height: 60,
   },
-  image: `${COMPANY_URL}/logo_emr_internacional.svg`,
+  image: `${COMPANY_URL}/logo_emr_international.svg`,
   description: COMPANY_DESCRIPTION,
   foundingDate: '2010',
   address: {
@@ -28,7 +28,7 @@ const organizationSchema = {
     {
       '@type': 'ContactPoint' as const,
       telephone: '+55-19-97157-5640',
-      email: 'contato@emrinternacional.com',
+      email: 'contato@emrinternational.com',
       contactType: 'customer service',
       availableLanguage: ['Portuguese', 'English', 'Spanish'],
     },
@@ -97,7 +97,7 @@ const webSiteSchema = {
   name: COMPANY_NAME,
   url: COMPANY_URL,
   description:
-    'A EMR Internacional oferece cursos de elite em Atendimento Pré-Hospitalar Tático e Emergência em Áreas Remotas.',
+    'A EMR International oferece cursos de elite em Atendimento Pré-Hospitalar Tático e Emergência em Áreas Remotas.',
   publisher: {
     '@id': `${COMPANY_URL}/#organization`,
   },

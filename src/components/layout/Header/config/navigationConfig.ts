@@ -11,7 +11,7 @@ export const NAVIGATION_ITEMS: readonly NavigationItem[] = [
     href: '#sobre',
     label: 'Sobre',
     ariaLabel:
-      'Navegar para seção Sobre - Informações sobre a EMR Internacional',
+      'Navegar para seção Sobre - Informações sobre a EMR International',
   },
   {
     id: 'certificacoes',

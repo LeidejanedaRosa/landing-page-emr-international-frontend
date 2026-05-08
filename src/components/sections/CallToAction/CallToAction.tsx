@@ -8,7 +8,7 @@ const CallToAction: React.FC = () => {
   const titleId = useUniqueId('cta-title')
 
   const whatsappUrl = buildWhatsAppMessageUrl(
-    'Olá! Gostaria de saber mais sobre os treinamentos da EMR Internacional.'
+    'Olá! Gostaria de saber mais sobre os treinamentos da EMR International.'
   )
 
   return (
@@ -26,7 +26,7 @@ const CallToAction: React.FC = () => {
           Prepare-se para salvar vidas
         </h2>
         <p className='text-base md:text-lg mb-8 text-white'>
-          Garanta sua vaga nos próximos treinamentos da EMR Internacional
+          Garanta sua vaga nos próximos treinamentos da EMR International
         </p>
         <AccessibleLink
           href={whatsappUrl}

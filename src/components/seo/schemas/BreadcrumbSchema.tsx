@@ -1,7 +1,7 @@
 import { JsonLdScript } from '../JsonLdScript'
 import type { BreadcrumbItem } from './breadcrumbConstants'
 
-const COMPANY_URL = 'https://www.emrinternacional.com'
+const COMPANY_URL = 'https://www.emrinternational.com'
 
 interface BreadcrumbSchemaProps {
   items: BreadcrumbItem[]

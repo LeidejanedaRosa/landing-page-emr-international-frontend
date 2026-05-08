@@ -27,7 +27,7 @@ export const HeroEnrollmentOpen: React.FC<HeroEnrollmentOpenProps> = ({
     description: 'Certificação Internacional',
     provider: {
       '@type': 'Organization',
-      name: 'EMR Internacional',
+      name: 'EMR International',
     },
     startDate: `${course.year}-${String(course.monthNumber).padStart(2, '0')}-${String(course.date).padStart(2, '0')}`,
     courseMode: 'Presencial',

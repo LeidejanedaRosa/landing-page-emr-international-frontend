@@ -1,8 +1,8 @@
 import type { Course } from '../../../data/coursesData'
 import { JsonLdScript } from '../JsonLdScript'
 
-const COMPANY_NAME = 'EMR Internacional'
-const COMPANY_URL = 'https://www.emrinternacional.com'
+const COMPANY_NAME = 'EMR International'
+const COMPANY_URL = 'https://www.emrinternational.com'
 
 interface CourseListSchemaProps {
   courses: Course[]
@@ -70,9 +70,9 @@ export function CourseListSchema({ courses }: CourseListSchemaProps) {
   const itemListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList' as const,
-    name: 'Cursos de Especialização EMR Internacional',
+    name: 'Cursos de Especialização EMR International',
     description:
-      'Lista de cursos de APH Tático e Emergência em Áreas Remotas oferecidos pela EMR Internacional',
+      'Lista de cursos de APH Tático e Emergência em Áreas Remotas oferecidos pela EMR International',
     numberOfItems: courseSchemas.length,
     itemListElement: courseSchemas.map((course, index) => ({
       '@type': 'ListItem' as const,

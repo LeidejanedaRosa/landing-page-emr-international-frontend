@@ -5,7 +5,7 @@ import type {
 } from '../../sections/Testimonials/types'
 import { JsonLdScript } from '../JsonLdScript'
 
-const COMPANY_URL = 'https://www.emrinternacional.com'
+const COMPANY_URL = 'https://www.emrinternational.com'
 
 interface TestimonialsSchemaProps {
   testimonials: Testimonial[]
@@ -61,7 +61,7 @@ export function TestimonialsSchema({ testimonials }: TestimonialsSchemaProps) {
     '@context': 'https://schema.org',
     '@type': 'Organization' as const,
     '@id': `${COMPANY_URL}/#organization`,
-    name: 'EMR Internacional',
+    name: 'EMR International',
     aggregateRating: {
       '@type': 'AggregateRating' as const,
       ratingValue: averageRating.toFixed(1),

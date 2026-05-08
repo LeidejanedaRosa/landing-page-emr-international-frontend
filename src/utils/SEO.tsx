@@ -13,13 +13,13 @@ interface SEOProps {
 }
 
 const DEFAULTS = {
-  title: 'EMR Internacional | APH Tático e Áreas Remotas',
+  title: 'EMR International | APH Tático e Áreas Remotas',
   description:
     'Formação em Emergência Tática e APH Tático (TECC). Cursos de Wilderness Medicine e emergências em áreas remotas com certificação internacional.',
   keywords:
-    'APH Tático, operador de emergência tática, TECC, Emergência, Áreas Remotas, Atendimento Pré-Hospitalar, Treinamento Tático, EMR Internacional, socorrista tático, medicina tática, TCCC, medicina de combate',
-  image: 'https://www.emrinternacional.com/social-image.jpg',
-  url: 'https://www.emrinternacional.com/',
+    'APH Tático, operador de emergência tática, TECC, Emergência, Áreas Remotas, Atendimento Pré-Hospitalar, Treinamento Tático, EMR International, socorrista tático, medicina tática, TCCC, medicina de combate',
+  image: 'https://www.emrinternational.com/social-image.jpg',
+  url: 'https://www.emrinternational.com/',
 } as const
 
 const resolveBaseProps = (props: SEOProps) => ({
@@ -56,7 +56,7 @@ const SEO = (props: SEOProps) => {
 
       <meta property='og:type' content='website' />
       <meta property='og:locale' content='pt_BR' />
-      <meta property='og:site_name' content='EMR Internacional' />
+      <meta property='og:site_name' content='EMR International' />
       <meta property='og:title' content={social.ogTitle} />
       <meta property='og:description' content={social.ogDescription} />
       <meta property='og:image' content={base.ogImage} />

@@ -14,7 +14,7 @@ export const HERO_CAROUSEL_A11Y = {
 
 export const getSlideLabels = (): Record<number, string> => {
   const labels: Record<number, string> = {
-    0: 'Página principal EMR Internacional',
+    0: 'Página principal EMR International',
   }
 
   COURSES_DATA.forEach((course, index) => {

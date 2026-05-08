@@ -1,13 +1,13 @@
 import React from 'react'
 
-import LogoEMR from '../../../assets/logo_emr_internacional.svg'
+import LogoEMR from '../../../assets/logo_emr_international.svg'
 
 export const BrandSection: React.FC = () => {
   return (
     <div className='flex flex-col items-center'>
       <img
         src={LogoEMR}
-        alt='EMR Internacional'
+        alt='EMR International'
         width='160'
         height='128'
         className='h-32 w-auto mb-4'

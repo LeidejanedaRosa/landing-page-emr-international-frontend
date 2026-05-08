@@ -4,11 +4,11 @@ export const INSTRUCTOR_IMAGE_ALT =
   'Juan Regenerati, paramédico e instrutor tático, fardado com equipamento de segurança em ambiente operacional'
 
 export const INSTRUCTOR_CAPTION =
-  'Fotografia profissional de Juan Regenerati, instrutor principal da EMR Internacional, especializado em emergências médicas e resgate tático em ambientes de alto risco'
+  'Fotografia profissional de Juan Regenerati, instrutor principal da EMR International, especializado em emergências médicas e resgate tático em ambientes de alto risco'
 
 export const INSTRUCTOR_INFO: InstructorInfo = {
   name: 'Juan Regenerati',
-  subtitle: 'EMR INTERNACIONAL',
+  subtitle: 'EMR INTERNATIONAL',
   title: 'Instrutor e operador de emergências, certificado internacionalmente',
   description:
     '. É graduando em segurança pública e pós-graduando em atendimento pré-hospitalar, resgate em locais de difícil e ambientes inóspitos e gestão de emergência em desastres.',
