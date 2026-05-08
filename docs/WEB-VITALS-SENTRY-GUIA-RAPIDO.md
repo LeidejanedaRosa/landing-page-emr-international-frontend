@@ -36,7 +36,7 @@ Nível: Warning
 Valor: 4523ms (ruim)
 Variação: 1200ms
 Navegação: navigate
-URL: https://emr-internacional.com/
+URL: https://emr-international.com/
 ```
 
 ## 📊 Entendendo os Valores

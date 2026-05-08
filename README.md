@@ -1,4 +1,4 @@
-# Landing Page EMR Internacional - Frontend
+# Landing Page EMR International - Frontend
 
 Uma landing page moderna e responsiva desenvolvida com Vite, React, TypeScript e Tailwind CSS, com foco em acessibilidade e performance.
 
@@ -19,7 +19,7 @@ Uma landing page moderna e responsiva desenvolvida com Vite, React, TypeScript e
 
 ```bash
 git clone <repository-url>
-cd landing-page-emr-internacional-frontend
+cd landing-page-emr-international-frontend
 ```
 
 2. Instale as dependências:
@@ -44,7 +44,7 @@ Antes de fazer deploy para produção, **atualize os dados legais da empresa** e
 export const COMPANY_LEGAL_INFO = {
   cnpj: '00.000.000/0000-00', // ⚠️ Atualizar com CNPJ real
   creaRegistration: '000000', // ⚠️ Atualizar com registro CREA real
-  legalName: 'EMR Internacional',
+  legalName: 'EMR International',
   address: {
     /* ... */
   }, // ⚠️ Adicionar endereço completo
@@ -396,7 +396,7 @@ Para informações detalhadas sobre padrões de código, acessibilidade e arquit
 
 ## 📄 Licença
 
-Este projeto é privado e pertence à EMR Internacional.
+Este projeto é privado e pertence à EMR International.
 
 # 📝 Upgrade Notes
 

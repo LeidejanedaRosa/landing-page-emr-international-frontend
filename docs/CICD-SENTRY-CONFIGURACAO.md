@@ -1,6 +1,6 @@
 # 🚀 Guia de Configuração CI/CD e Sentry
 
-Este guia explica como configurar completamente o pipeline de CI/CD e monitoramento com Sentry para o projeto EMR Internacional.
+Este guia explica como configurar completamente o pipeline de CI/CD e monitoramento com Sentry para o projeto EMR International.
 
 ## 📋 Índice
 
@@ -72,7 +72,7 @@ Sentry é uma plataforma de monitoramento de erros e performance em tempo real.
 1. Acesse [sentry.io](https://sentry.io) e crie uma conta
 2. Crie um novo projeto:
    - Platform: **React**
-   - Project Name: `emr-internacional-frontend`
+   - Project Name: `emr-international-frontend`
    - Alert Frequency: Configure conforme preferência
 
 3. Na tela de configuração, copie o **DSN** (Data Source Name)
@@ -159,7 +159,7 @@ Atualmente, os jobs de deploy estão com placeholders. Você precisa escolher e 
 
 1. Acesse [vercel.com](https://vercel.com) e faça login com GitHub
 2. Clique em **Add New** → **Project**
-3. Selecione o repositório `landing-page-emr-internacional-frontend`
+3. Selecione o repositório `landing-page-emr-international-frontend`
 4. Configure:
    - **Framework Preset:** Vite
    - **Root Directory:** `./`

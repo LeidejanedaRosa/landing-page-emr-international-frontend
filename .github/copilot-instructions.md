@@ -1,4 +1,4 @@
-# EMR Internacional Landing Page - AI Coding Agent Instructions
+# EMR International Landing Page - AI Coding Agent Instructions
 
 ## Core AI Assistant Behavior
 
@@ -35,7 +35,7 @@
 
 ---
 
-This is a modern React + TypeScript + Tailwind CSS landing page for EMR Internacional (emergency medical training company). Focus on accessibility, performance, and responsive design.
+This is a modern React + TypeScript + Tailwind CSS landing page for EMR International (emergency medical training company). Focus on accessibility, performance, and responsive design.
 
 ## Architecture Overview
 

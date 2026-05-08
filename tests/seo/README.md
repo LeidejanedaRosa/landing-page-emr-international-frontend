@@ -1,6 +1,6 @@
 # SEO & Accessibility Testing Suite
 
-Este diretório contém testes automatizados para garantir que a landing page EMR Internacional atenda aos padrões de SEO, acessibilidade e HTML semântico.
+Este diretório contém testes automatizados para garantir que a landing page EMR International atenda aos padrões de SEO, acessibilidade e HTML semântico.
 
 ## 📋 Estrutura dos Testes
 
