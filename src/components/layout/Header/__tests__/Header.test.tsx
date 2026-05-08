@@ -173,15 +173,17 @@ describe('Header', () => {
       const user = userEvent.setup()
       render(<Header />)
 
-      const cursosLinks = screen.getAllByRole('link', { name: /cursos/i })
-      const desktopCursosLink = cursosLinks.find(link =>
+      const treinamentosLinks = screen.getAllByRole('link', {
+        name: /treinamentos/i,
+      })
+      const desktopTreinamentosLink = treinamentosLinks.find(link =>
         link.closest('[data-testid="desktop-menu"]')
       )
 
-      expect(desktopCursosLink).toBeDefined()
-      await user.click(desktopCursosLink!)
+      expect(desktopTreinamentosLink).toBeDefined()
+      await user.click(desktopTreinamentosLink!)
       expect(mockAnnounce).toHaveBeenCalledWith(
-        'Navegando para Cursos',
+        'Navegando para Treinamentos',
         'polite'
       )
     })
@@ -327,10 +329,12 @@ describe('Header', () => {
       await user.click(mobileButton)
 
       const mobileMenu = screen.getByTestId('mobile-menu')
-      const cursosLink = mobileMenu.querySelector('a[href="#cursos"]')
+      const treinamentosLink = mobileMenu.querySelector(
+        'a[href="#treinamentos"]'
+      )
 
-      expect(cursosLink).toBeDefined()
-      await user.click(cursosLink!)
+      expect(treinamentosLink).toBeDefined()
+      await user.click(treinamentosLink!)
       expect(screen.queryByTestId('mobile-menu')).not.toBeInTheDocument()
     })
 

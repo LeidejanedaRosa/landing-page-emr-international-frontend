@@ -47,7 +47,7 @@ export const mockEmergencyCourse: Course = {
     location: 'In-Company ou Sede EMR',
   },
   links: {
-    details: '/cursos/tmr',
+    details: '/treinamentos/tmr',
     brochure: '/tmr.pdf',
   },
   images: {
@@ -83,7 +83,7 @@ export const mockWildernessCourse: Course = {
     location: 'In-Company ou Sede EMR',
   },
   links: {
-    details: '/cursos/wmr',
+    details: '/treinamentos/wmr',
     brochure: '/wmr.pdf',
   },
   images: {

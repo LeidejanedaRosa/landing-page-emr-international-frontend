@@ -78,12 +78,12 @@ describe('useCurrentSection', () => {
   it('should setup scroll listener and detect sections', () => {
     const mockInicio = createMockSection('inicio', 0, 500)
     const mockSobre = createMockSection('sobre', 500, 500)
-    const mockCursos = createMockSection('cursos', 1000, 500)
+    const mockTreinamentos = createMockSection('treinamentos', 1000, 500)
 
-    document.body.append(mockInicio, mockSobre, mockCursos)
+    document.body.append(mockInicio, mockSobre, mockTreinamentos)
 
     const { result } = renderHook(() =>
-      useCurrentSection(['inicio', 'sobre', 'cursos'])
+      useCurrentSection(['inicio', 'sobre', 'treinamentos'])
     )
 
     expect(window.addEventListener).toHaveBeenCalledWith(

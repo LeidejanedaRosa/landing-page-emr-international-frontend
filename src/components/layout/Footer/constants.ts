@@ -45,10 +45,10 @@ export const NAVIGATION_LINKS: ReadonlyArray<NavigationLink> = [
     ariaLabel: 'Navegar para seção de certificações',
   },
   {
-    id: 'cursos',
-    href: '#cursos',
-    label: 'Cursos',
-    ariaLabel: 'Navegar para seção de cursos',
+    id: 'treinamentos',
+    href: '#treinamentos',
+    label: 'Treinamentos',
+    ariaLabel: 'Navegar para seção de Treinamentos',
   },
   {
     id: 'depoimentos',

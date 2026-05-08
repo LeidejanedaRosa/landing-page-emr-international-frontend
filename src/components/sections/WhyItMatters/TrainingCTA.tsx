@@ -5,7 +5,7 @@ export function TrainingCTA() {
   const { scrollTo } = useScrollTo()
 
   const handleNavigateToTraining = () => {
-    scrollTo({ dataSection: 'cursos' })
+    scrollTo({ dataSection: 'treinamentos' })
   }
 
   return (

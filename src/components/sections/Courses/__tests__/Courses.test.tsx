@@ -40,7 +40,7 @@ vi.mock('../../../../data/coursesData', () => ({
         location: 'In-Company ou Sede EMR',
       },
       links: {
-        details: '/cursos/tmr',
+        details: '/treinamentos/tmr',
         brochure: '/tmr.pdf',
       },
       images: {
@@ -75,7 +75,7 @@ vi.mock('../../../../data/coursesData', () => ({
         location: 'In-Company ou Sede EMR',
       },
       links: {
-        details: '/cursos/wmr',
+        details: '/treinamentos/wmr',
         brochure: '/wmr.pdf',
       },
       images: {
@@ -113,18 +113,18 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
       })
       expect(section).toBeInTheDocument()
-      expect(section).toHaveAttribute('id', 'cursos')
-      expect(section).toHaveAttribute('data-section', 'cursos')
+      expect(section).toHaveAttribute('id', 'treinamentos')
+      expect(section).toHaveAttribute('data-section', 'treinamentos')
     })
 
     it('should have correct aria-labelledby and aria-describedby', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
       })
       expect(section).toHaveAttribute('aria-labelledby')
       expect(section).toHaveAttribute('aria-describedby')
@@ -134,7 +134,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const heading = screen.getByRole('heading', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
         level: 2,
       })
       expect(heading).toBeInTheDocument()
@@ -266,7 +266,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
       })
       const decorativeBg = section.querySelector('[aria-hidden="true"]')
       expect(decorativeBg).toBeInTheDocument()
@@ -326,7 +326,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
       })
       const svgs = section.querySelectorAll('svg')
       svgs.forEach(svg => {
@@ -349,7 +349,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
       })
       expect(section).toHaveClass('px-4', 'sm:px-6', 'lg:px-8')
     })
@@ -358,7 +358,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
       })
       const container = section.querySelector('.max-w-screen-2xl')
       expect(container).toBeInTheDocument()
@@ -370,7 +370,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
       })
       expect(section).toHaveClass('bg-primary-900')
     })
@@ -379,7 +379,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
       })
       expect(section).toHaveClass('text-white')
     })
@@ -388,7 +388,7 @@ describe('Courses', () => {
       render(<Courses />)
 
       const section = screen.getByRole('region', {
-        name: /cursos de aph tático/i,
+        name: /treinamentos de aph tático/i,
       })
       expect(section).toHaveClass('overflow-hidden')
     })

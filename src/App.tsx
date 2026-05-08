@@ -54,7 +54,7 @@ function App() {
           />
           <LazySection sectionName='Sobre' component={About} />
           <LazySection sectionName='Certificações' component={Certifications} />
-          <LazySection sectionName='Cursos' component={Courses} />
+          <LazySection sectionName='Treinamentos' component={Courses} />
           <LazySection sectionName='Depoimentos' component={Testimonials} />
           <LazySection
             sectionName='Chamada para ação'

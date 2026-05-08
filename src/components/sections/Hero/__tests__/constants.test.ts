@@ -32,7 +32,7 @@ describe('Hero constants', () => {
     })
 
     it('should have correct COURSES_SECTION_ID', () => {
-      expect(COURSES_SECTION_ID).toBe('cursos')
+      expect(COURSES_SECTION_ID).toBe('treinamentos')
     })
 
     it('should have correct TESTIMONIALS_SECTION_ID', () => {
@@ -92,7 +92,7 @@ describe('Hero constants', () => {
 
     describe('cta', () => {
       it('should have text', () => {
-        expect(HERO_CONTENT.cta.text).toBe('CONHEÇA OS CURSOS')
+        expect(HERO_CONTENT.cta.text).toBe('CONHEÇA NOSSOS TREINAMENTOS')
       })
 
       it('should have ariaLabel', () => {

@@ -146,7 +146,7 @@ describe('Footer constants', () => {
       const expectedOrder = [
         'sobre',
         'certificacoes',
-        'cursos',
+        'treinamentos',
         'depoimentos',
         'contato',
       ]

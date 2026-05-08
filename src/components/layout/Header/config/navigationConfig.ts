@@ -21,10 +21,10 @@ export const NAVIGATION_ITEMS: readonly NavigationItem[] = [
       'Navegar para seção Certificações - Certificações internacionais',
   },
   {
-    id: 'cursos',
-    href: '#cursos',
-    label: 'Cursos',
-    ariaLabel: 'Navegar para seção Cursos - Nossos cursos especializados',
+    id: 'treinamentos',
+    href: '#treinamentos',
+    label: 'Treinamentos',
+    ariaLabel: 'Navegar para seção Treinamentos - Nossos cursos especializados',
   },
   {
     id: 'depoimentos',

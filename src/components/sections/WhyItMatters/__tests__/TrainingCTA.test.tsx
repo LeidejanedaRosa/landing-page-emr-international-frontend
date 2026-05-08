@@ -110,13 +110,13 @@ describe('TrainingCTA (WhyItMatters)', () => {
       expect(mockScrollTo).toHaveBeenCalledTimes(1)
     })
 
-    it('deve navegar para seção de cursos ao clicar', () => {
+    it('deve navegar para seção de treinamentos ao clicar', () => {
       render(<TrainingCTA />)
 
       const button = screen.getByRole('button')
       fireEvent.click(button)
 
-      expect(mockScrollTo).toHaveBeenCalledWith({ dataSection: 'cursos' })
+      expect(mockScrollTo).toHaveBeenCalledWith({ dataSection: 'treinamentos' })
     })
   })
 

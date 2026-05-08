@@ -66,7 +66,7 @@ describe('navigationConfig', () => {
       const expectedOrder = [
         'sobre',
         'certificacoes',
-        'cursos',
+        'treinamentos',
         'depoimentos',
         'contato',
       ]
@@ -95,12 +95,14 @@ describe('navigationConfig', () => {
         expect(certItem?.ariaLabel).toContain('internacionais')
       })
 
-      it('should have correct "cursos" item', () => {
-        const cursosItem = NAVIGATION_ITEMS.find(item => item.id === 'cursos')
-        expect(cursosItem).toBeDefined()
-        expect(cursosItem?.label).toBe('Cursos')
-        expect(cursosItem?.href).toBe('#cursos')
-        expect(cursosItem?.ariaLabel).toContain('especializados')
+      it('should have correct "treinamentos" item', () => {
+        const treinamentosItem = NAVIGATION_ITEMS.find(
+          item => item.id === 'treinamentos'
+        )
+        expect(treinamentosItem).toBeDefined()
+        expect(treinamentosItem?.label).toBe('Treinamentos')
+        expect(treinamentosItem?.href).toBe('#treinamentos')
+        expect(treinamentosItem?.ariaLabel).toContain('especializados')
       })
 
       it('should have correct "depoimentos" item', () => {
@@ -146,7 +148,7 @@ describe('navigationConfig', () => {
       expect(SECTION_IDS).toEqual([
         'sobre',
         'certificacoes',
-        'cursos',
+        'treinamentos',
         'depoimentos',
         'contato',
       ])

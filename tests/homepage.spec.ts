@@ -20,7 +20,9 @@ test.describe('EMR Internacional - Homepage', () => {
     await expect(
       page.getByRole('link', { name: /certificações/i })
     ).toBeVisible()
-    await expect(page.getByRole('link', { name: /cursos/i })).toBeVisible()
+    await expect(
+      page.getByRole('link', { name: /treinamentos/i })
+    ).toBeVisible()
     await expect(page.getByRole('link', { name: /contato/i })).toBeVisible()
   })
 
@@ -29,8 +31,8 @@ test.describe('EMR Internacional - Homepage', () => {
 
     await expect(page.locator('#sobre')).toBeInViewport()
 
-    await page.getByRole('link', { name: /cursos/i }).click()
-    await expect(page.locator('#cursos')).toBeInViewport()
+    await page.getByRole('link', { name: /treinamentos/i }).click()
+    await expect(page.locator('#treinamentos')).toBeInViewport()
   })
 
   test('should have working contact form', async ({ page }) => {

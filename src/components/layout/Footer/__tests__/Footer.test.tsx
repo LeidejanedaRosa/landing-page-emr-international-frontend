@@ -81,7 +81,7 @@ describe('Footer', () => {
       expect(screen.getByText('Links Rápidos')).toBeInTheDocument()
       expect(screen.getByText('Sobre Nós')).toBeInTheDocument()
       expect(screen.getByText('Certificações')).toBeInTheDocument()
-      expect(screen.getByText('Cursos')).toBeInTheDocument()
+      expect(screen.getByText('Treinamentos')).toBeInTheDocument()
       expect(screen.getByText('Depoimentos')).toBeInTheDocument()
     })
 

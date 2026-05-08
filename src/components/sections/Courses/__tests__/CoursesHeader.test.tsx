@@ -36,11 +36,11 @@ describe('CoursesHeader', () => {
       expect(heading).toHaveAttribute('id', 'test-title-id')
     })
 
-    it('should render heading with "Cursos" text', () => {
+    it('should render heading with "Treinamentos" text', () => {
       render(<CoursesHeader {...defaultProps} />)
 
       const heading = screen.getByRole('heading', { level: 2 })
-      expect(heading).toHaveTextContent('Cursos')
+      expect(heading).toHaveTextContent('Treinamentos')
     })
 
     it('should render "APH Tático" in heading', () => {
@@ -124,13 +124,13 @@ describe('CoursesHeader', () => {
       expect(description).toHaveClass('max-w-2xl', 'mx-auto')
     })
 
-    it('should have font-capture-it on "Cursos" span', () => {
+    it('should have font-capture-it on "Treinamentos" span', () => {
       render(<CoursesHeader {...defaultProps} />)
 
       const heading = screen.getByRole('heading', { level: 2 })
-      const cursosSpan = heading.querySelector('.font-capture-it')
-      expect(cursosSpan).toBeInTheDocument()
-      expect(cursosSpan).toHaveTextContent('Cursos')
+      const treinamentosSpan = heading.querySelector('.font-capture-it')
+      expect(treinamentosSpan).toBeInTheDocument()
+      expect(treinamentosSpan).toHaveTextContent('Treinamentos')
     })
   })
 

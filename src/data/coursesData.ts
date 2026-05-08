@@ -110,7 +110,7 @@ const courses: Course[] = [
       location: 'In-Company ou Sede EMR',
     },
     links: {
-      details: '/cursos/tmr-tactical-medical-responder',
+      details: '/treinamentos/tmr-tactical-medical-responder',
       brochure: TMRPdf,
     },
     images: {
@@ -172,7 +172,7 @@ const courses: Course[] = [
       location: 'In-Company ou Sede EMR',
     },
     links: {
-      details: '/cursos/wmr-wilderness-medical-responder',
+      details: '/treinamentos/wmr-wilderness-medical-responder',
       brochure: WECPdf,
     },
     images: {

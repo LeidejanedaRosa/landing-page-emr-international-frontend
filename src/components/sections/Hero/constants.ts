@@ -2,7 +2,7 @@ export const HERO_SECTION_ID = 'inicio' as const
 export const HERO_MAIN_TITLE_ID = 'hero-main-title' as const
 export const ABOUT_SECTION_ID = 'sobre' as const
 export const CERTIFICATIONS_SECTION_ID = 'certificacoes' as const
-export const COURSES_SECTION_ID = 'cursos' as const
+export const COURSES_SECTION_ID = 'treinamentos' as const
 export const TESTIMONIALS_SECTION_ID = 'depoimentos' as const
 export const CONTACT_SECTION_ID = 'contato' as const
 
@@ -26,8 +26,8 @@ export const HERO_CONTENT = {
     fourthLine: 'REALMENTE PREPARADO?',
   },
   cta: {
-    text: 'CONHEÇA OS CURSOS',
-    ariaLabel: 'Ver cursos disponíveis',
+    text: 'CONHEÇA NOSSOS TREINAMENTOS',
+    ariaLabel: 'Ver treinamentos disponíveis',
   },
   visual: {
     alt: 'Operadores táticos em treinamento real de atendimento pré-hospitalar',

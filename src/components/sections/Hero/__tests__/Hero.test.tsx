@@ -96,10 +96,12 @@ describe('Hero', () => {
       render(<Hero />)
 
       const button = screen.getByRole('button', {
-        name: /ver cursos disponíveis/i,
+        name: /ver treinamentos disponíveis/i,
       })
       expect(button).toBeInTheDocument()
-      expect(screen.getByText('CONHEÇA OS CURSOS')).toBeInTheDocument()
+      expect(
+        screen.getByText('CONHEÇA NOSSOS TREINAMENTOS')
+      ).toBeInTheDocument()
     })
 
     it('should scroll to courses section when CTA is clicked', async () => {
@@ -107,18 +109,18 @@ describe('Hero', () => {
       render(<Hero />)
 
       const button = screen.getByRole('button', {
-        name: /ver cursos disponíveis/i,
+        name: /ver treinamentos disponíveis/i,
       })
       await user.click(button)
 
-      expect(mockScrollTo).toHaveBeenCalledWith('cursos')
+      expect(mockScrollTo).toHaveBeenCalledWith('treinamentos')
     })
 
     it('should render arrow icon hidden from assistive technology', () => {
       render(<Hero />)
 
       const button = screen.getByRole('button', {
-        name: /ver cursos disponíveis/i,
+        name: /ver treinamentos disponíveis/i,
       })
       const svg = button.querySelector('svg')
       expect(svg).toHaveAttribute('aria-hidden', 'true')

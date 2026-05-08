@@ -12,7 +12,7 @@ export const CoursesHeader = ({
       id={titleId}
       className='text-3xl md:text-4xl lg:text-5xl mb-6 text-white tracking-tight'
     >
-      <span className='font-capture-it'>Cursos</span> de APH Tático e{' '}
+      <span className='font-capture-it'>Treinamentos</span> de APH Tático e{' '}
       <span lang='en'>Wilderness Medicine</span>
     </h2>
     <p

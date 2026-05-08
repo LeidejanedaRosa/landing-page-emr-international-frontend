@@ -9,7 +9,7 @@ export function AboutMetrics() {
   const { scrollTo } = useScrollTo()
 
   const handleScrollToCourses = () => {
-    scrollTo('cursos')
+    scrollTo('treinamentos')
   }
 
   return (
@@ -42,7 +42,7 @@ export function AboutMetrics() {
               aria-hidden='true'
             />
             <span className='text-[8px] sm:text-[10px] md:text-xs uppercase tracking-wide text-white group-hover:text-white leading-tight'>
-              Conheça Nossos Cursos
+              Conheça Nossos Treinamentos{' '}
             </span>
           </AccessibleButton>
         </div>
