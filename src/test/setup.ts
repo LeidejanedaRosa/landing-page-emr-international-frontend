@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/vitest'
 import { cleanup } from '@testing-library/react'
 import { afterEach, beforeAll, vi } from 'vitest'
 
@@ -21,17 +21,19 @@ beforeAll(() => {
     })),
   })
 
-  global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+  const g = globalThis as any
+
+  g.IntersectionObserver = vi.fn().mockImplementation(() => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
     disconnect: vi.fn(),
   }))
 
-  global.ResizeObserver = vi.fn().mockImplementation(() => ({
+  g.ResizeObserver = vi.fn().mockImplementation(() => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
     disconnect: vi.fn(),
   }))
 
-  global.scrollTo = vi.fn()
+  g.scrollTo = vi.fn()
 })
