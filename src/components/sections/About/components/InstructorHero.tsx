@@ -28,7 +28,7 @@ export function InstructorHero() {
           Com formação técnica em Enfermagem e Segurança do Trabalho, possui
           qualificação ainda como Paramédico com extensão em resgate técnico e
           em áreas remotas. É graduando em segurança pública e pós-graduando em
-          atendimento pré-hopitalar, resgate em locais de difícil e ambientes
+          atendimento pré-hospitalar, resgate em locais de difícil e ambientes
           inóspitos e gestão de emergência em desastres.{' '}
           <strong className='text-white font-bold'>
             {INSTRUCTOR_INFO.highlight}
