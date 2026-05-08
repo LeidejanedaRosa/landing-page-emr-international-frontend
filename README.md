@@ -150,7 +150,7 @@ Detecta automaticamente qual seção está visível no viewport baseado no scrol
 import { useCurrentSection } from './hooks/useCurrentSection'
 
 function App() {
-  const currentSection = useCurrentSection(['inicio', 'sobre', 'certificacoes', 'cursos', 'contato'])
+  const currentSection = useCurrentSection(['inicio', 'sobre', 'certificacoes', 'treinamentos', 'contato'])
 
   return <Header currentSection={currentSection} />
 }
@@ -254,7 +254,7 @@ import { AccessibleLink } from './components/ui/Accessibility'
 import Header from './components/layout/Header'
 
 function App() {
-  const currentSection = useCurrentSection(['inicio', 'sobre', 'certificacoes', 'cursos', 'contato'])
+  const currentSection = useCurrentSection(['inicio', 'sobre', 'certificacoes', 'treinamentos', 'contato'])
 
   return (
     <div>
@@ -280,10 +280,10 @@ function App() {
           </li>
           <li>
             <AccessibleLink
-              href="#cursos"
-              ariaCurrent={currentSection === 'cursos' ? 'page' : undefined}
+              href="#treinamentos"
+              ariaCurrent={currentSection === 'treinamentos' ? 'page' : undefined}
             >
-              Cursos
+              Treinamentos
             </AccessibleLink>
           </li>
         </ul>
