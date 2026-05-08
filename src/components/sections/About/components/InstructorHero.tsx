@@ -7,9 +7,6 @@ export function InstructorHero() {
         <p className='text-xs sm:text-sm font-bold text-cta-500 uppercase tracking-wider'>
           Quem está por trás da {INSTRUCTOR_INFO.subtitle}
         </p>
-        {/* <p className='text-xl sm:text-2xl font-extrabold text-white leading-tight'>
-          {INSTRUCTOR_INFO.subtitle}
-        </p> */}
       </div>
 
       <h2
