@@ -62,9 +62,9 @@ describe('About constants', () => {
     })
 
     it('should have highlight mentioning specializations', () => {
-      expect(INSTRUCTOR_INFO.highlight).toContain('APH Tático')
-      expect(INSTRUCTOR_INFO.highlight).toContain('TECC')
-      expect(INSTRUCTOR_INFO.highlight).toContain('Wilderness Medicine')
+      expect(INSTRUCTOR_INFO.highlight).toContain('Paramédico')
+      expect(INSTRUCTOR_INFO.highlight).toContain('resgate técnico')
+      expect(INSTRUCTOR_INFO.highlight).toContain('áreas remotas')
     })
   })
 
