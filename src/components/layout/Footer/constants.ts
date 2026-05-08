@@ -48,7 +48,7 @@ export const NAVIGATION_LINKS: ReadonlyArray<NavigationLink> = [
     id: 'treinamentos',
     href: '#treinamentos',
     label: 'Treinamentos',
-    ariaLabel: 'Navegar para seção de Treinamentos',
+    ariaLabel: 'Navegar para seção de treinamentos',
   },
   {
     id: 'depoimentos',
