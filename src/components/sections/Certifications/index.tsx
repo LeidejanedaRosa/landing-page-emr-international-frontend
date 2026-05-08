@@ -122,10 +122,10 @@ const CertificationsSectionHeader: React.FC = memo(() => {
     <header className='text-center mb-12'>
       <div className='inline-block mb-4'>
         <span
-          className='text-xs font-bold uppercase tracking-wider text-gray-500 border-t-2 border-b-2 border-black py-2 px-4'
+          className='text-sm font-bold uppercase tracking-wider text-cta-500 py-2 px-4'
           aria-hidden='true'
         >
-          Certificações
+          ACERVO DE CERTIFICAÇÕES INTERNACIONAIS
         </span>
       </div>
       <h2
@@ -136,9 +136,9 @@ const CertificationsSectionHeader: React.FC = memo(() => {
         <span lang='en'>Wilderness Medicine</span>
       </h2>
       <p className='text-lg text-gray-600 max-w-3xl mx-auto'>
-        Certificações reconhecidas mundialmente em APH Tático, atendimento de
-        emergência (TECC), <span lang='en'>Wilderness Medicine</span> e formação
-        de operadores médicos táticos pela HSI e American College of Surgeons
+        Conheça nossas autorizações reconhecidas por agências mundialmente
+        capazes na área de atendimento de emergência e resgate nos ambientes
+        táticos e em área remota, com formação de operadores em todo o mundo.
       </p>
     </header>
   )
