@@ -11,9 +11,8 @@ export const INSTRUCTOR_INFO: InstructorInfo = {
   subtitle: 'EMR INTERNACIONAL',
   title: 'Instrutor e operador de emergências, certificado internacionalmente',
   description:
-    ', com treinamento de elite para profissionais que salvam vidas em cenários de alto risco e ambientes austeros.',
-  highlight:
-    'especialista em APH Tático, protocolos TECC, Wilderness Medicine e formação de operadores táticos e operadores de emergência em áreas remotas',
+    '. É graduando em segurança pública e pós-graduando em atendimento pré-hospitalar, resgate em locais de difícil e ambientes inóspitos e gestão de emergência em desastres.',
+  highlight: 'Paramédico com extensão em resgate técnico e em áreas remotas',
 }
 
 export const OPERATIONAL_FORCES: Credential[] = [
