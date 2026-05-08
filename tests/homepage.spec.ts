@@ -1,14 +1,14 @@
 import { expect, test } from '@playwright/test'
 
-test.describe('EMR Internacional - Homepage', () => {
+test.describe('EMR International - Homepage', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/')
   })
 
   test('should load homepage with correct title', async ({ page }) => {
-    await expect(page).toHaveTitle(/EMR Internacional/)
+    await expect(page).toHaveTitle(/EMR International/)
 
-    const logo = page.getByAltText(/EMR Internacional Logo/i)
+    const logo = page.getByAltText(/EMR International Logo/i)
     await expect(logo).toBeVisible()
   })
 

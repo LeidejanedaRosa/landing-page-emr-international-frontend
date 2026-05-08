@@ -16,7 +16,7 @@ test.describe('SEO Metadata Tests', () => {
       expect(title).toBeTruthy()
       expect(title.length).toBeGreaterThan(10)
       expect(title.length).toBeLessThanOrEqual(60)
-      expect(title).toContain('EMR Internacional')
+      expect(title).toContain('EMR International')
     })
 
     test('should have meta description', async ({ page }) => {
@@ -154,7 +154,7 @@ test.describe('SEO Metadata Tests', () => {
         'Tático',
         'Emergência',
         'EMR',
-        'Internacional',
+        'International',
         'Curso',
         'Operador',
         'Áreas Remotas',

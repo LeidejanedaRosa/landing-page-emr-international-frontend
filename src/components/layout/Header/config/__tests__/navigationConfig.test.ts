@@ -82,7 +82,7 @@ describe('navigationConfig', () => {
         expect(sobreItem).toBeDefined()
         expect(sobreItem?.label).toBe('Sobre')
         expect(sobreItem?.href).toBe('#sobre')
-        expect(sobreItem?.ariaLabel).toContain('EMR Internacional')
+        expect(sobreItem?.ariaLabel).toContain('EMR International')
       })
 
       it('should have correct "certificacoes" item', () => {

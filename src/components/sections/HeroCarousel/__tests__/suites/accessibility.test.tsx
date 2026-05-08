@@ -88,7 +88,7 @@ describe('HeroCarousel - Accessibility', () => {
       render(<HeroCarousel />)
 
       expect(mockAnnounce).toHaveBeenCalledWith(
-        'Página principal EMR Internacional - Slide 1 de 3',
+        'Página principal EMR International - Slide 1 de 3',
         'polite'
       )
     })

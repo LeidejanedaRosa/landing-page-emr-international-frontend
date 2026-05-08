@@ -61,8 +61,8 @@ describe('organizationSchema', () => {
       expect(organization).toHaveProperty('description')
     })
 
-    it('should have EMR Internacional as name', () => {
-      expect(organization?.name).toBe('EMR Internacional')
+    it('should have EMR International as name', () => {
+      expect(organization?.name).toBe('EMR International')
     })
 
     it('should have logo with ImageObject type', () => {

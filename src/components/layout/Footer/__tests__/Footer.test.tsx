@@ -12,7 +12,7 @@ vi.mock('../../../../hooks/useAccessibility', () => ({
   useUniqueId: vi.fn((prefix: string) => `${prefix}-test-id`),
 }))
 
-vi.mock('../../../../assets/logo_emr_internacional.svg', () => ({
+vi.mock('../../../../assets/logo_emr_international.svg', () => ({
   default: 'mocked-logo.svg',
 }))
 
@@ -44,7 +44,7 @@ describe('Footer', () => {
     it('should render company logo with alt text', () => {
       render(<Footer />)
 
-      const logo = screen.getByAltText('EMR Internacional')
+      const logo = screen.getByAltText('EMR International')
       expect(logo).toBeInTheDocument()
       expect(logo).toHaveAttribute('width', '160')
       expect(logo).toHaveAttribute('height', '128')
@@ -137,15 +137,15 @@ describe('Footer', () => {
       render(<Footer />)
 
       const socialList = screen.getByRole('list', {
-        name: /redes sociais da emr internacional/i,
+        name: /redes sociais da emr international/i,
       })
       expect(socialList).toBeInTheDocument()
 
       expect(
-        screen.getByLabelText(/seguir emr internacional no instagram/i)
+        screen.getByLabelText(/seguir emr international no instagram/i)
       ).toBeInTheDocument()
       expect(
-        screen.getByLabelText(/conectar com emr internacional no linkedin/i)
+        screen.getByLabelText(/conectar com emr international no linkedin/i)
       ).toBeInTheDocument()
       expect(
         screen.getByLabelText(/entrar em contato via whatsapp/i)
@@ -156,10 +156,10 @@ describe('Footer', () => {
       render(<Footer />)
 
       const instagramLink = screen.getByLabelText(
-        /seguir emr internacional no instagram/i
+        /seguir emr international no instagram/i
       )
       const linkedinLink = screen.getByLabelText(
-        /conectar com emr internacional no linkedin/i
+        /conectar com emr international no linkedin/i
       )
       const whatsappLink = screen.getByLabelText(
         /entrar em contato via whatsapp/i
@@ -183,7 +183,7 @@ describe('Footer', () => {
       render(<Footer />)
 
       const instagramLink = screen.getByLabelText(
-        /seguir emr internacional no instagram/i
+        /seguir emr international no instagram/i
       )
 
       expect(instagramLink).toHaveAttribute('target', '_blank')
@@ -195,12 +195,12 @@ describe('Footer', () => {
       render(<Footer />)
 
       const instagramLink = screen.getByLabelText(
-        /seguir emr internacional no instagram/i
+        /seguir emr international no instagram/i
       )
       await user.click(instagramLink)
 
       expect(mockAnnounce).toHaveBeenCalledWith(
-        'Abrindo Instagram da EMR Internacional',
+        'Abrindo Instagram da EMR International',
         'polite'
       )
     })
@@ -217,7 +217,7 @@ describe('Footer', () => {
     it('should render company legal name', () => {
       render(<Footer />)
 
-      expect(screen.getByText('EMR Internacional')).toBeInTheDocument()
+      expect(screen.getByText('EMR International')).toBeInTheDocument()
       expect(
         screen.getByText('. Todos os direitos reservados.')
       ).toBeInTheDocument()

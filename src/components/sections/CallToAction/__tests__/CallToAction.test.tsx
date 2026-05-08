@@ -37,7 +37,7 @@ describe('CallToAction', () => {
 
       expect(
         screen.getByText(
-          'Garanta sua vaga nos próximos treinamentos da EMR Internacional'
+          'Garanta sua vaga nos próximos treinamentos da EMR International'
         )
       ).toBeInTheDocument()
     })
@@ -102,7 +102,7 @@ describe('CallToAction', () => {
 
       const link = screen.getByRole('link')
       const expectedMessage = encodeURIComponent(
-        'Olá! Gostaria de saber mais sobre os treinamentos da EMR Internacional.'
+        'Olá! Gostaria de saber mais sobre os treinamentos da EMR International.'
       )
 
       expect(link).toHaveAttribute(

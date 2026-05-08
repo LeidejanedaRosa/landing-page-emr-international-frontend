@@ -47,7 +47,7 @@ describe('PromoBannerCarousel', () => {
       render(<PromoBannerCarousel />)
 
       const section = screen.getByRole('region', {
-        name: 'Banner promocional da EMR Internacional',
+        name: 'Banner promocional da EMR International',
       })
       expect(section).toBeInTheDocument()
       expect(section).toHaveAttribute('id', 'promo-banner-test-id')
@@ -73,7 +73,7 @@ describe('PromoBannerCarousel', () => {
       render(<PromoBannerCarousel className='custom-class' />)
 
       const section = screen.getByRole('region', {
-        name: 'Banner promocional da EMR Internacional',
+        name: 'Banner promocional da EMR International',
       })
       expect(section).toHaveClass('custom-class')
     })
@@ -100,7 +100,7 @@ describe('PromoBannerCarousel', () => {
       render(<PromoBannerCarousel />)
 
       const section = screen.getByRole('region', {
-        name: 'Banner promocional da EMR Internacional',
+        name: 'Banner promocional da EMR International',
       })
       const leftOverlay = section.querySelector('.left-0')
       const rightOverlay = section.querySelector('.right-0')
@@ -113,7 +113,7 @@ describe('PromoBannerCarousel', () => {
       render(<PromoBannerCarousel />)
 
       const section = screen.getByRole('region', {
-        name: 'Banner promocional da EMR Internacional',
+        name: 'Banner promocional da EMR International',
       })
       const overlays = section.querySelectorAll(
         '.pointer-events-none[aria-hidden="true"]'
@@ -245,7 +245,7 @@ describe('PromoBannerCarousel', () => {
       render(<PromoBannerCarousel />)
 
       const section = screen.getByRole('region', {
-        name: 'Banner promocional da EMR Internacional',
+        name: 'Banner promocional da EMR International',
       })
 
       await user.hover(section)
@@ -257,7 +257,7 @@ describe('PromoBannerCarousel', () => {
       render(<PromoBannerCarousel />)
 
       const section = screen.getByRole('region', {
-        name: 'Banner promocional da EMR Internacional',
+        name: 'Banner promocional da EMR International',
       })
 
       await user.hover(section)

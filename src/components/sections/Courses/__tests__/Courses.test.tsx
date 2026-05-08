@@ -294,7 +294,7 @@ describe('Courses', () => {
       const jsonContent = JSON.parse(script?.textContent || '{}')
       expect(jsonContent['@type']).toBe('ItemList')
       expect(jsonContent.name).toBe(
-        'Cursos de Especialização EMR Internacional'
+        'Cursos de Especialização EMR International'
       )
     })
 

@@ -58,7 +58,7 @@ describe('Hero constants', () => {
     describe('seo', () => {
       it('should have title', () => {
         expect(HERO_CONTENT.seo.title).toBeDefined()
-        expect(HERO_CONTENT.seo.title).toContain('EMR Internacional')
+        expect(HERO_CONTENT.seo.title).toContain('EMR International')
       })
 
       it('should have description', () => {
@@ -134,7 +134,7 @@ describe('Hero constants', () => {
 
     describe('about', () => {
       it('should have title', () => {
-        expect(HERO_CONTENT.about.title).toBe('Sobre a EMR Internacional')
+        expect(HERO_CONTENT.about.title).toBe('Sobre a EMR International')
       })
 
       it('should have description', () => {

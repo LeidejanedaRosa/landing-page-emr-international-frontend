@@ -20,7 +20,7 @@ describe('companyInfo', () => {
 
     it('should have legalName property', () => {
       expect(COMPANY_LEGAL_INFO).toHaveProperty('legalName')
-      expect(COMPANY_LEGAL_INFO.legalName).toBe('EMR Internacional')
+      expect(COMPANY_LEGAL_INFO.legalName).toBe('EMR International')
     })
 
     it('should have address object with required fields', () => {

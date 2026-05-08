@@ -186,7 +186,7 @@ describe('sentry', () => {
         expect.objectContaining({
           initialScope: {
             tags: {
-              component: 'EMR-Internacional-Frontend',
+              component: 'emr-international-Frontend',
             },
           },
         })

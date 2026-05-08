@@ -22,7 +22,7 @@ vi.mock('../../../../hooks/useCurrentSection', () => ({
   useCurrentSection: vi.fn(() => 'sobre'),
 }))
 
-vi.mock('../../../../assets/logo_emr_internacional.svg', () => ({
+vi.mock('../../../../assets/logo_emr_international.svg', () => ({
   default: 'mocked-logo.svg',
 }))
 
@@ -105,7 +105,7 @@ describe('Header', () => {
       const logoLink = screen.getByTestId('company-logo-link')
       expect(logoLink).toHaveAttribute(
         'aria-label',
-        'EMR Internacional - Voltar ao início'
+        'EMR International - Voltar ao início'
       )
     })
 
@@ -113,7 +113,7 @@ describe('Header', () => {
       render(<Header />)
 
       const logoImage = screen.getByAltText(
-        'EMR Internacional - Especialistas em Emergências Médicas e Resgate Tático'
+        'EMR International - Especialistas em Emergências Médicas e Resgate Tático'
       )
       expect(logoImage).toBeInTheDocument()
     })
@@ -121,14 +121,14 @@ describe('Header', () => {
     it('should have unique logo id', () => {
       render(<Header />)
 
-      const logoImage = screen.getByRole('img', { name: /emr internacional/i })
+      const logoImage = screen.getByRole('img', { name: /emr international/i })
       expect(logoImage).toHaveAttribute('id', 'company-logo-test-id')
     })
 
     it('should have correct image dimensions', () => {
       render(<Header />)
 
-      const logoImage = screen.getByRole('img', { name: /emr internacional/i })
+      const logoImage = screen.getByRole('img', { name: /emr international/i })
       expect(logoImage).toHaveAttribute('width', '120')
       expect(logoImage).toHaveAttribute('height', '128')
     })

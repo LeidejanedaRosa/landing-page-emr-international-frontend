@@ -65,7 +65,7 @@ describe('About', () => {
     it('should render subtitle', () => {
       render(<About />)
 
-      expect(screen.getByText(/EMR INTERNACIONAL/)).toBeInTheDocument()
+      expect(screen.getByText(/EMR INTERNATIONAL/)).toBeInTheDocument()
     })
 
     it('should render instructor title', () => {
@@ -111,7 +111,7 @@ describe('About', () => {
 
       expect(
         screen.getByText(
-          /fotografia profissional de juan regenerati, instrutor principal da emr internacional/i
+          /fotografia profissional de juan regenerati, instrutor principal da emr international/i
         )
       ).toBeInTheDocument()
     })

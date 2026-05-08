@@ -126,7 +126,7 @@ describe.skipIf(!hasEnrollment)('HeroEnrollmentOpen', () => {
         expect(data['@type']).toBe('Course')
         expect(data.name).toContain('Tactical Medical Response')
         expect(data.description).toBe('Certificação Internacional')
-        expect(data.provider.name).toBe('EMR Internacional')
+        expect(data.provider.name).toBe('EMR International')
         expect(data.startDate).toBe('2025-12-07')
         expect(data.courseMode).toBe('Presencial')
       }

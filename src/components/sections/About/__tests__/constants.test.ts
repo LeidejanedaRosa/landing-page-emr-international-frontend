@@ -35,8 +35,8 @@ describe('About constants', () => {
       expect(INSTRUCTOR_CAPTION).toContain('Juan Regenerati')
     })
 
-    it('should mention EMR Internacional', () => {
-      expect(INSTRUCTOR_CAPTION).toContain('EMR Internacional')
+    it('should mention EMR International', () => {
+      expect(INSTRUCTOR_CAPTION).toContain('EMR International')
     })
   })
 
@@ -53,8 +53,8 @@ describe('About constants', () => {
       expect(INSTRUCTOR_INFO.name).toBe('Juan Regenerati')
     })
 
-    it('should have EMR Internacional as subtitle', () => {
-      expect(INSTRUCTOR_INFO.subtitle).toBe('EMR INTERNACIONAL')
+    it('should have EMR International as subtitle', () => {
+      expect(INSTRUCTOR_INFO.subtitle).toBe('EMR INTERNATIONAL')
     })
 
     it('should have title mentioning key roles', () => {

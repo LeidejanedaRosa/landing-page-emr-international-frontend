@@ -449,7 +449,7 @@ test.describe('SEO Content Quality Tests', () => {
       const h1Text = await page.locator('h1').first().textContent()
       const primaryKeywords = [
         'EMR',
-        'Internacional',
+        'International',
         'APH',
         'Tático',
         'preparado',
