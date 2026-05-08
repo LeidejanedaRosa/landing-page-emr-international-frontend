@@ -48,7 +48,6 @@ export const mockEmergencyCourse: Course = {
   },
   links: {
     details: '/treinamentos/tmr',
-    brochure: '/tmr.pdf',
   },
   images: {
     avif: 'tmr.avif',
@@ -84,7 +83,6 @@ export const mockWildernessCourse: Course = {
   },
   links: {
     details: '/treinamentos/wmr',
-    brochure: '/wmr.pdf',
   },
   images: {
     avif: 'wmr.avif',

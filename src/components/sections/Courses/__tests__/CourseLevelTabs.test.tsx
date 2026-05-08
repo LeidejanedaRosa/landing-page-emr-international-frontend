@@ -186,15 +186,6 @@ describe('CourseActions', () => {
     expect(interestLink).toHaveTextContent('Tenho Interesse')
   })
 
-  it('should render brochure download link', () => {
-    render(<CourseCard course={mockEmergencyCourse} />)
-    const brochureLink = screen.getByRole('link', {
-      name: /baixar brochura em pdf/i,
-    })
-    expect(brochureLink).toBeInTheDocument()
-    expect(brochureLink).toHaveAttribute('href')
-  })
-
   it('should have icons hidden from assistive technology in actions', () => {
     render(<CourseCard course={mockEmergencyCourse} />)
     const links = screen.getAllByRole('link')

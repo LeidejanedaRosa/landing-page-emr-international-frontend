@@ -28,7 +28,6 @@ describe('useCourseLevel', () => {
         skill: 1,
         description: 'Basic level course',
         enrollmentStatus: 'open',
-        brochure: 'basic-brochure.pdf',
       },
       {
         level: 'intermediate',
@@ -53,7 +52,6 @@ describe('useCourseLevel', () => {
         skill: 3,
         description: 'Advanced level course',
         enrollmentStatus: 'closed',
-        brochure: 'advanced-brochure.pdf',
       },
     ],
     metadata: {
@@ -62,7 +60,6 @@ describe('useCourseLevel', () => {
     },
     links: {
       details: 'details.html',
-      brochure: 'default-brochure.pdf',
     },
     images: {
       jpg: 'test.jpg',
@@ -128,28 +125,6 @@ describe('useCourseLevel', () => {
     expect(decodedNewUrl).toContain('Teste Intermediário')
   })
 
-  it('should use level-specific brochure when available', () => {
-    const { result } = renderHook(() => useCourseLevel(mockCourse))
-
-    expect(result.current.brochureLink).toBe('basic-brochure.pdf')
-
-    act(() => {
-      result.current.setSelectedLevel('advanced')
-    })
-
-    expect(result.current.brochureLink).toBe('advanced-brochure.pdf')
-  })
-
-  it('should fallback to course default brochure when level brochure is not available', () => {
-    const { result } = renderHook(() => useCourseLevel(mockCourse))
-
-    act(() => {
-      result.current.setSelectedLevel('intermediate')
-    })
-
-    expect(result.current.brochureLink).toBe('default-brochure.pdf')
-  })
-
   it('should handle course with single level', () => {
     const singleLevelCourse: Course = {
       ...mockCourse,
@@ -193,7 +168,6 @@ describe('useCourseLevel', () => {
     expect(result.current).toHaveProperty('setSelectedLevel')
     expect(result.current).toHaveProperty('currentLevel')
     expect(result.current).toHaveProperty('whatsappUrl')
-    expect(result.current).toHaveProperty('brochureLink')
   })
 
   it('should preserve setSelectedLevel function identity', () => {

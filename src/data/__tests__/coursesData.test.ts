@@ -164,9 +164,8 @@ describe('coursesData', () => {
       expect(tmr.metadata.location).toBeDefined()
     })
 
-    it('should have links with details and brochure', () => {
+    it('should have links with details', () => {
       expect(tmr.links.details).toContain('tmr')
-      expect(tmr.links.brochure).toBeDefined()
     })
 
     it('should have images with all formats', () => {
