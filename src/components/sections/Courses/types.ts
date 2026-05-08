@@ -66,7 +66,6 @@ export interface CourseActionsProps {
   whatsappUrl: string
   title: string
   levelCode: string
-  brochureLink: string
   styles: CourseStyleConfig
   enrollmentStatus: EnrollmentStatus
 }

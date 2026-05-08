@@ -11,13 +11,8 @@ export const CourseCard = ({ course }: CourseCardProps) => {
   const { id, abbreviation, title, levels, metadata, images, variant } = course
   const cardId = useUniqueId(`course-${id}`)
   const styles = getVariantStyles(variant)
-  const {
-    selectedLevel,
-    setSelectedLevel,
-    currentLevel,
-    whatsappUrl,
-    brochureLink,
-  } = useCourseLevel(course)
+  const { selectedLevel, setSelectedLevel, currentLevel, whatsappUrl } =
+    useCourseLevel(course)
   const courseTitle = title.split(' - ')[1] || title
 
   return (
@@ -58,7 +53,6 @@ export const CourseCard = ({ course }: CourseCardProps) => {
           whatsappUrl={whatsappUrl}
           title={title}
           levelCode={currentLevel.code}
-          brochureLink={brochureLink}
           styles={styles}
           enrollmentStatus={currentLevel.enrollmentStatus}
         />

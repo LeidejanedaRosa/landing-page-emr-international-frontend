@@ -15,13 +15,10 @@ export function useCourseLevel(course: Course) {
     `Olá! Tenho interesse no curso ${course.title} - ${currentLevel.code} (${currentLevel.namePt}). Gostaria de mais informações.`
   )
 
-  const brochureLink = currentLevel.brochure || course.links.brochure
-
   return {
     selectedLevel,
     setSelectedLevel,
     currentLevel,
     whatsappUrl,
-    brochureLink,
   }
 }

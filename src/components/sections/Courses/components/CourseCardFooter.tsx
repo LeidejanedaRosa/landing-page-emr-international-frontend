@@ -8,7 +8,6 @@ interface CourseCardFooterProps {
   whatsappUrl: string
   title: string
   levelCode: string
-  brochureLink: string
   styles: CourseStyleConfig
   enrollmentStatus: EnrollmentStatus
 }
@@ -18,7 +17,6 @@ export const CourseCardFooter = ({
   whatsappUrl,
   title,
   levelCode,
-  brochureLink,
   styles,
   enrollmentStatus,
 }: CourseCardFooterProps) => (
@@ -28,7 +26,6 @@ export const CourseCardFooter = ({
       whatsappUrl={whatsappUrl}
       title={title}
       levelCode={levelCode}
-      brochureLink={brochureLink}
       styles={styles}
       enrollmentStatus={enrollmentStatus}
     />
