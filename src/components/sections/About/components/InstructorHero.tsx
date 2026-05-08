@@ -5,11 +5,11 @@ export function InstructorHero() {
     <header className='w-full space-y-4 mb-6'>
       <div className='space-y-1'>
         <p className='text-xs sm:text-sm font-bold text-cta-500 uppercase tracking-wider'>
-          Quem está por trás da
+          Quem está por trás da {INSTRUCTOR_INFO.subtitle}
         </p>
-        <p className='text-xl sm:text-2xl font-extrabold text-white leading-tight'>
+        {/* <p className='text-xl sm:text-2xl font-extrabold text-white leading-tight'>
           {INSTRUCTOR_INFO.subtitle}
-        </p>
+        </p> */}
       </div>
 
       <h2
@@ -25,7 +25,11 @@ export function InstructorHero() {
 
       <div className='bg-black/40 border-l-4 border-cta-600 pl-4 py-3'>
         <p className='text-sm sm:text-base text-gray-100 leading-snug font-medium'>
-          Com formação em Saúde e Segurança do Trabalho,{' '}
+          Com formação técnica em Enfermagem e Segurança do Trabalho, possui
+          qualificação ainda como Paramédico com extensão em resgate técnico e
+          em áreas remotas. É graduando em segurança pública e pós-graduando em
+          atendimento pré-hopitalar, resgate em locais de difícil e ambientes
+          inóspitos e gestão de emergência em desastres.{' '}
           <strong className='text-white font-bold'>
             {INSTRUCTOR_INFO.highlight}
           </strong>

@@ -9,8 +9,7 @@ export const INSTRUCTOR_CAPTION =
 export const INSTRUCTOR_INFO: InstructorInfo = {
   name: 'Juan Regenerati',
   subtitle: 'EMR INTERNACIONAL',
-  title:
-    'Paramédico | Operador de Emergência Tática | Instrutor Certificado Internacional',
+  title: 'Instrutor e operador de emergências, certificado Internacionalmente',
   description:
     ', com treinamento de elite para profissionais que salvam vidas em cenários de alto risco e ambientes austeros.',
   highlight:

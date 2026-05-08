@@ -65,7 +65,7 @@ describe('About', () => {
     it('should render subtitle', () => {
       render(<About />)
 
-      expect(screen.getByText('EMR INTERNACIONAL')).toBeInTheDocument()
+      expect(screen.getByText(/EMR INTERNACIONAL/)).toBeInTheDocument()
     })
 
     it('should render instructor title', () => {
@@ -73,7 +73,7 @@ describe('About', () => {
 
       expect(
         screen.getByText(
-          'Paramédico | Operador de Emergência Tática | Instrutor Certificado Internacional'
+          'Instrutor e operador de emergências, certificado Internacionalmente'
         )
       ).toBeInTheDocument()
     })
@@ -267,14 +267,14 @@ describe('About', () => {
       })
       await user.click(buttons[0])
 
-      expect(mockScrollTo).toHaveBeenCalledWith('cursos')
+      expect(mockScrollTo).toHaveBeenCalledWith('treinamentos')
     })
 
     it('should render BookOpen icon hidden from assistive technology', () => {
       render(<About />)
 
       const svgs = document.querySelectorAll(
-        '[aria-label*="conheça os cursos"] svg, button svg'
+        '[aria-label*="conheça nossos treinamentos"] svg, button svg'
       )
       svgs.forEach(svg => {
         if (svg.closest('button')) {

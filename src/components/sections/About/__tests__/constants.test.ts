@@ -58,7 +58,6 @@ describe('About constants', () => {
     })
 
     it('should have title mentioning key roles', () => {
-      expect(INSTRUCTOR_INFO.title).toContain('Paramédico')
       expect(INSTRUCTOR_INFO.title).toContain('Instrutor')
     })
 
