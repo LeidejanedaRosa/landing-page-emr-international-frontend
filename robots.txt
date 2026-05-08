@@ -1,4 +1,4 @@
-# robots.txt para EMR Internacional
+# robots.txt para EMR International
 #
 # Permite o acesso a todos os robôs (User-agent: *)
 #
@@ -18,4 +18,4 @@ Disallow: /src/
 # Disallow: /demo/
 
 # Indica a localização do seu SITEMAP (Essencial!)
-Sitemap: https://www.emrinternacional.com/sitemap.xml
+Sitemap: https://www.emrinternational.com/sitemap.xml

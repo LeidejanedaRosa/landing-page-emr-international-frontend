@@ -36,8 +36,8 @@ export default defineConfig({
               'pwa-512x512.png',
             ],
             manifest: {
-              name: 'EMR Internacional - APH Tático',
-              short_name: 'EMR Internacional',
+              name: 'EMR International - APH Tático',
+              short_name: 'EMR International',
               description:
                 'Cursos de Atendimento Pré-Hospitalar Tático e Emergência em Áreas Remotas',
               theme_color: '#000000',
