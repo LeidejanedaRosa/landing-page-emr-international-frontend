@@ -23,10 +23,7 @@ export function InstructorHero() {
       <div className='bg-black/40 border-l-4 border-cta-600 pl-4 py-3'>
         <p className='text-sm sm:text-base text-gray-100 leading-snug font-medium'>
           Com formação técnica em Enfermagem e Segurança do Trabalho, possui
-          qualificação ainda como Paramédico com extensão em resgate técnico e
-          em áreas remotas. É graduando em segurança pública e pós-graduando em
-          atendimento pré-hospitalar, resgate em locais de difícil e ambientes
-          inóspitos e gestão de emergência em desastres.{' '}
+          qualificação ainda como{' '}
           <strong className='text-white font-bold'>
             {INSTRUCTOR_INFO.highlight}
           </strong>
