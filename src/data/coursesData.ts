@@ -1,8 +1,6 @@
 import TMRImageAvif from '../assets/courses/TMR.avif'
 import TMRImageJpg from '../assets/courses/TMR.jpg'
 import TMRImageWebp from '../assets/courses/TMR.webp'
-import TMRPdf from '../assets/courses/TMR_Spec_Sheet.pdf'
-import WECPdf from '../assets/courses/WEC_Spec_Sheet.pdf'
 import WMRImageAvif from '../assets/courses/WMR.avif'
 import WMRImageJpg from '../assets/courses/WMR.jpg'
 import WMRImageWebp from '../assets/courses/WMR.webp'
@@ -18,7 +16,6 @@ export interface CourseMetadata {
 
 export interface CourseLinks {
   details: string
-  brochure: string
 }
 
 export interface CourseImages {
@@ -39,7 +36,6 @@ export interface CourseLevelData {
   skill: number
   description: string
   enrollmentStatus: EnrollmentStatus
-  brochure?: string
 }
 
 export interface Course {
@@ -111,7 +107,6 @@ const courses: Course[] = [
     },
     links: {
       details: '/treinamentos/tmr-tactical-medical-responder',
-      brochure: TMRPdf,
     },
     images: {
       avif: TMRImageAvif,
@@ -173,7 +168,6 @@ const courses: Course[] = [
     },
     links: {
       details: '/treinamentos/wmr-wilderness-medical-responder',
-      brochure: WECPdf,
     },
     images: {
       avif: WMRImageAvif,
