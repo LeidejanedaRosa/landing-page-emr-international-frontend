@@ -15,7 +15,7 @@ echo ""
 
 # 2. TypeScript type checking (fast - ~5-10s)
 echo "🔍 Running TypeScript type check..."
-npx tsc --noEmit || {
+npx tsc -b || {
   echo "❌ TypeScript errors found! Fix type errors before pushing."
   exit 1
 }
