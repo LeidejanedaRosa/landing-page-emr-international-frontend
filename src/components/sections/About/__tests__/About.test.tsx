@@ -83,7 +83,7 @@ describe('About', () => {
 
       expect(
         screen.getByText(
-          /especialista em aph tático, protocolos tecc, wilderness medicine/i
+          /paramédico com extensão em resgate técnico e em áreas remotas/i
         )
       ).toBeInTheDocument()
     })
