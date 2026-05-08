@@ -73,7 +73,7 @@ describe('About', () => {
 
       expect(
         screen.getByText(
-          'Instrutor e operador de emergências, certificado Internacionalmente'
+          'Instrutor e operador de emergências, certificado internacionalmente'
         )
       ).toBeInTheDocument()
     })
