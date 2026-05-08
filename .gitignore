@@ -47,3 +47,8 @@ SEO-GUIDE.md
 playwright-report/
 test-results/
 coverage/
+
+# Stale compiled JS artifacts (source files are .ts)
+playwright.config.js
+vitest.config.js
+tests/**/*.spec.js
