@@ -17,10 +17,10 @@ export function FeaturePillars() {
           >
             <Icon className='w-5 h-5 sm:w-6 sm:h-6 text-white/80' />
           </div>
-          <span className='text-[10px] sm:text-xs font-bold tracking-widest text-white leading-tight'>
+          <span className='text-xs sm:text-sm font-bold tracking-widest text-white leading-tight'>
             {title}
           </span>
-          <span className='text-[10px] sm:text-xs text-white/55 leading-snug'>
+          <span className='text-xs sm:text-sm text-white/55 leading-snug'>
             {description}
           </span>
         </div>

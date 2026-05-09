@@ -4,7 +4,7 @@ export function SideAnnotations() {
   return (
     <div className='hidden lg:flex flex-col justify-center items-end gap-20'>
       {sideLabels.map(([first, second]) => (
-        <div key={first} className='flex items-center gap-3'>
+        <div key={`${first}-${second}`} className='flex items-center gap-3'>
           <div>
             <span className='block text-xs font-bold tracking-widest text-cta-500 uppercase text-right'>
               {first}
