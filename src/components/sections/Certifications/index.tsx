@@ -120,17 +120,12 @@ CarouselIndicators.displayName = 'CarouselIndicators'
 const CertificationsSectionHeader: React.FC = memo(() => {
   return (
     <header className='text-center mb-12'>
-      <div className='inline-block mb-4'>
-        <span
-          className='text-sm font-bold uppercase tracking-wider text-cta-500 py-2 px-4'
-          aria-hidden='true'
-        >
-          ACERVO DE CERTIFICAÇÕES INTERNACIONAIS
-        </span>
-      </div>
+      <span className='text-cta-500 font-semibold tracking-wider uppercase text-sm mb-2 block'>
+        ACERVO DE CERTIFICAÇÕES INTERNACIONAIS
+      </span>
       <h2
         id='certifications-heading'
-        className='text-3xl md:text-4xl lg:text-5xl text-black mb-4'
+        className='text-3xl md:text-4xl lg:text-5xl tracking-tight text-black mb-4'
       >
         <span className='font-capture-it'>Credenciamento</span> Internacional em{' '}
         <span lang='en'>Wilderness Medicine</span>
