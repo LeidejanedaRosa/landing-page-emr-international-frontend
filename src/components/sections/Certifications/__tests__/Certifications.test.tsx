@@ -109,27 +109,17 @@ describe('Certifications', () => {
     it('should render section subtitle badge', () => {
       render(<Certifications />)
 
-      expect(screen.getByText('Certificações')).toBeInTheDocument()
+      expect(
+        screen.getByText('ACERVO DE CERTIFICAÇÕES INTERNACIONAIS')
+      ).toBeInTheDocument()
     })
 
     it('should render description paragraph', () => {
       render(<Certifications />)
 
       expect(
-        screen.getByText(
-          /certificações reconhecidas mundialmente em aph tático/i
-        )
+        screen.getByText(/conheça nossas autorizações reconhecidas/i)
       ).toBeInTheDocument()
-    })
-
-    it('should render English terms with lang attribute', () => {
-      render(<Certifications />)
-
-      const description = screen.getByText(
-        /certificações reconhecidas mundialmente/i
-      )
-      const spanElements = description.querySelectorAll('span[lang="en"]')
-      expect(spanElements.length).toBeGreaterThan(0)
     })
   })
 
@@ -141,12 +131,14 @@ describe('Certifications', () => {
       expect(header).toBeInTheDocument()
     })
 
-    it('should render subtitle with decorative borders', () => {
+    it('should render subtitle with aria-hidden and cta color', () => {
       render(<Certifications />)
 
-      const subtitle = screen.getByText('Certificações')
+      const subtitle = screen.getByText(
+        'ACERVO DE CERTIFICAÇÕES INTERNACIONAIS'
+      )
       expect(subtitle).toHaveAttribute('aria-hidden', 'true')
-      expect(subtitle).toHaveClass('border-t-2', 'border-b-2')
+      expect(subtitle).toHaveClass('text-cta-500')
     })
   })
 
