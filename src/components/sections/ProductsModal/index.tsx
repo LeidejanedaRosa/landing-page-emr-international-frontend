@@ -92,9 +92,9 @@ export const ProductsModal: React.FC<ProductsModalProps> = memo(
     isOpen,
     onClose,
     products,
-    title = 'Conheça Nossos Equipamentos',
-    subtitle = 'Equipamentos profissionais para complementar seu treinamento',
-    ctaText = 'Falar com Especialista',
+    title = '',
+    subtitle = '',
+    ctaText = '',
     closeButtonLabel = 'Fechar modal',
   }) => {
     const previousActiveElement = useRef<Element | null>(null)
@@ -150,7 +150,7 @@ export const ProductsModal: React.FC<ProductsModalProps> = memo(
               closeButtonRef={closeButtonRef}
             />
             <div className='p-4 md:p-6'>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6'>
+              <div className='flex flex-wrap gap-4 mb-6 [&>*]:flex-1 [&>*]:min-w-[240px]'>
                 {products.map(product => (
                   <ProductCard key={product.id} product={product} />
                 ))}
