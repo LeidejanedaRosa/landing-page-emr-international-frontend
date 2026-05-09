@@ -78,8 +78,7 @@ describe('TestimonialSection', () => {
     it('deve conter o texto correto no título', () => {
       render(<TestimonialSection />)
 
-      expect(screen.getByText(/o que dizem sobre/i)).toBeInTheDocument()
-      expect(screen.getByText('nós')).toBeInTheDocument()
+      expect(screen.getByText(/o que dizem sobre nós/i)).toBeInTheDocument()
     })
 
     it('deve renderizar a descrição', () => {
