@@ -61,16 +61,17 @@ const TestimonialSection = memo(() => {
 
 const TestimonialHeader = memo(() => (
   <header className='text-center mb-8 md:mb-16'>
+    <span className='text-cta-500 font-semibold tracking-wider uppercase text-sm mb-2 block'>
+      O que dizem sobre nós
+    </span>
+
     <h2
       id='depoimentos-heading'
-      className='text-3xl md:text-5xl text-white mb-4'
+      className='text-3xl md:text-4xl lg:text-5xl tracking-tight text-white max-w-4xl mx-auto'
     >
-      O que dizem sobre <span className='font-capture-it'>nós</span>
+      <span className='font-capture-it'>Histórias</span> reais de empresas e
+      profissionais que se capacitaram conosco
     </h2>
-    <p className='text-primary-300 text-base md:text-lg max-w-2xl mx-auto'>
-      <span className='font-capture-it text-3xl'>Histórias</span> reais de
-      empresas e profissionais que se capacitaram conosco
-    </p>
   </header>
 ))
 
