@@ -52,13 +52,11 @@ describe('SectionHeader', () => {
       expect(screen.getByText(/o pior cenário\?/i)).toBeInTheDocument()
     })
 
-    it('deve ter gradiente no texto destacado', () => {
+    it('deve ter font-capture-it no texto destacado', () => {
       render(<SectionHeader {...defaultProps} />)
 
       const highlightedText = screen.getByText(/o pior cenário\?/i)
-      expect(highlightedText.className).toContain('bg-gradient-to-r')
-      expect(highlightedText.className).toContain('bg-clip-text')
-      expect(highlightedText.className).toContain('text-transparent')
+      expect(highlightedText.className).toContain('font-capture-it')
     })
   })
 
@@ -89,7 +87,7 @@ describe('SectionHeader', () => {
       const description = screen.getByText(
         /em operações táticas e em áreas remotas/i
       )
-      expect(description.className).toContain('max-w-2xl')
+      expect(description.className).toContain('max-w-4xl')
     })
 
     it('deve ter cor de texto secundária', () => {
@@ -120,11 +118,14 @@ describe('SectionHeader', () => {
       expect(header?.className).toContain('mb-4')
     })
 
-    it('deve ter fonte extrabold no título', () => {
+    it('deve ter tamanho de fonte responsivo e tracking-tight no título', () => {
       render(<SectionHeader {...defaultProps} />)
 
       const heading = screen.getByRole('heading', { level: 2 })
-      expect(heading.className).toContain('font-extrabold')
+      expect(heading.className).toContain('text-3xl')
+      expect(heading.className).toContain('md:text-4xl')
+      expect(heading.className).toContain('lg:text-5xl')
+      expect(heading.className).toContain('tracking-tight')
     })
   })
 
@@ -147,9 +148,10 @@ describe('SectionHeader', () => {
       const header = document.querySelector('header')
       const children = Array.from(header?.children || [])
 
-      // Primeiro deve ser o h2, depois a descrição (p)
-      expect(children[0].tagName).toBe('H2')
-      expect(children[1].tagName).toBe('P')
+      // eyebrow span → h2 → parágrafo de descrição
+      expect(children[0].tagName).toBe('SPAN')
+      expect(children[1].tagName).toBe('H2')
+      expect(children[2].tagName).toBe('P')
     })
   })
 })
