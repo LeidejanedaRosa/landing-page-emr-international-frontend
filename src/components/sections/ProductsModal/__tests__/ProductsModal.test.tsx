@@ -27,6 +27,9 @@ const defaultProps = {
   isOpen: true,
   onClose: vi.fn(),
   products: mockProducts,
+  title: 'Conheça Nossos Equipamentos',
+  subtitle: 'Equipamentos profissionais para complementar seu treinamento',
+  ctaText: 'Falar com Especialista',
 }
 
 vi.mock('react-focus-lock', () => ({
@@ -312,16 +315,12 @@ describe('ProductsModal', () => {
   })
 
   describe('Products Grid', () => {
-    it('should render products in a grid layout', () => {
+    it('should render products in a flex layout', () => {
       render(<ProductsModal {...defaultProps} />)
 
-      const grid = screen.getByRole('dialog').querySelector('.grid')
-      expect(grid).toBeInTheDocument()
-      expect(grid).toHaveClass(
-        'grid-cols-1',
-        'sm:grid-cols-2',
-        'md:grid-cols-3'
-      )
+      const container = screen.getByRole('dialog').querySelector('.flex-wrap')
+      expect(container).toBeInTheDocument()
+      expect(container).toHaveClass('flex', 'flex-wrap', 'gap-4')
     })
 
     it('should render correct number of products', () => {
@@ -331,11 +330,11 @@ describe('ProductsModal', () => {
       expect(productNames).toHaveLength(2)
     })
 
-    it('should render empty grid when no products', () => {
+    it('should render empty container when no products', () => {
       render(<ProductsModal {...defaultProps} products={[]} />)
 
-      const grid = screen.getByRole('dialog').querySelector('.grid')
-      expect(grid?.children).toHaveLength(0)
+      const container = screen.getByRole('dialog').querySelector('.flex-wrap')
+      expect(container?.children).toHaveLength(0)
     })
   })
 
@@ -409,7 +408,7 @@ describe('ProductsModal', () => {
 
       const content = screen
         .getByRole('dialog')
-        .querySelector('.grid')?.parentElement
+        .querySelector('.flex-wrap')?.parentElement
       expect(content).toHaveClass('p-4', 'md:p-6')
     })
   })
