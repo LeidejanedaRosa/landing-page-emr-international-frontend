@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
 
 import { render, screen } from '../../../../test/test-utils'
-import CallToAction from '../../CallToAction/CallToAction'
+import CallToAction from '../../CallToAction'
 
 vi.mock('../../../../utils/whatsapp', () => ({
   buildWhatsAppMessageUrl: vi.fn(
@@ -16,7 +16,7 @@ describe('CallToAction', () => {
       render(<CallToAction />)
 
       const section = screen.getByRole('region', {
-        name: /prepare-se para salvar vidas/i,
+        name: /conheça nosso método de treinamento/i,
       })
       expect(section).toBeInTheDocument()
       expect(section).toHaveAttribute('id', 'call-to-action')
@@ -26,7 +26,7 @@ describe('CallToAction', () => {
       render(<CallToAction />)
 
       const heading = screen.getByRole('heading', {
-        name: 'Prepare-se para salvar vidas',
+        name: /conheça nosso método de treinamento/i,
         level: 2,
       })
       expect(heading).toBeInTheDocument()
@@ -36,10 +36,15 @@ describe('CallToAction', () => {
       render(<CallToAction />)
 
       expect(
-        screen.getByText(
-          'Garanta sua vaga nos próximos treinamentos da EMR International'
-        )
+        screen.getByText(/É um sistema realístico voltado/i)
       ).toBeInTheDocument()
+    })
+
+    it('should render principle paragraph', () => {
+      render(<CallToAction />)
+
+      expect(screen.getByText(/BASEIA-SE NO PRINCÍPIO/i)).toBeInTheDocument()
+      expect(screen.getByText('ERROS CEIFAM VIDAS')).toBeInTheDocument()
     })
 
     it('should render WhatsApp link with correct text', () => {
@@ -49,7 +54,24 @@ describe('CallToAction', () => {
         name: /entrar em contato via whatsapp/i,
       })
       expect(link).toBeInTheDocument()
-      expect(link).toHaveTextContent('Quero me inscrever agora')
+      expect(link).toHaveTextContent('QUERO ME INSCREVER AGORA')
+    })
+
+    it('should render all four feature pillars', () => {
+      render(<CallToAction />)
+
+      expect(screen.getByText('REALÍSTICO')).toBeInTheDocument()
+      expect(screen.getByText('IMERSIVO')).toBeInTheDocument()
+      // OPERACIONAL appears in both pillars and side annotations
+      expect(screen.getAllByText('OPERACIONAL').length).toBeGreaterThan(0)
+      expect(screen.getByText('PRÁTICO')).toBeInTheDocument()
+    })
+
+    it('should render REAPER PROTOCOL heading text', () => {
+      render(<CallToAction />)
+
+      expect(screen.getByText('REAPER')).toBeInTheDocument()
+      expect(screen.getByText('PROTOCOL')).toBeInTheDocument()
     })
   })
 
@@ -58,7 +80,7 @@ describe('CallToAction', () => {
       render(<CallToAction />)
 
       const section = screen.getByRole('region', {
-        name: /prepare-se para salvar vidas/i,
+        name: /conheça nosso método de treinamento/i,
       })
       const labelledById = section.getAttribute('aria-labelledby')
 
@@ -66,7 +88,7 @@ describe('CallToAction', () => {
 
       const heading = document.getElementById(labelledById!)
       expect(heading).toBeInTheDocument()
-      expect(heading).toHaveTextContent('Prepare-se para salvar vidas')
+      expect(heading).toHaveTextContent(/CONHEÇA NOSSO MÉTODO DE TREINAMENTO/i)
     })
 
     it('should have unique ID for title', () => {
@@ -93,6 +115,14 @@ describe('CallToAction', () => {
       const link = screen.getByRole('link')
       expect(link.className).toContain('focus:outline-none')
       expect(link.className).toContain('focus:ring-2')
+    })
+
+    it('should have background image marked as decorative', () => {
+      render(<CallToAction />)
+
+      const img = document.querySelector('img')
+      expect(img).toHaveAttribute('aria-hidden', 'true')
+      expect(img).toHaveAttribute('alt', '')
     })
   })
 
@@ -121,33 +151,13 @@ describe('CallToAction', () => {
   })
 
   describe('Styling', () => {
-    it('should have correct background color class', () => {
+    it('should have dark background class', () => {
       render(<CallToAction />)
 
       const section = screen.getByRole('region', {
-        name: /prepare-se para salvar vidas/i,
+        name: /conheça nosso método de treinamento/i,
       })
-      expect(section.className).toContain('bg-cta-600')
-    })
-
-    it('should have centered text alignment', () => {
-      render(<CallToAction />)
-
-      const section = screen.getByRole('region', {
-        name: /prepare-se para salvar vidas/i,
-      })
-      const container = section.querySelector('.text-center')
-      expect(container).toBeInTheDocument()
-    })
-
-    it('should have responsive padding classes', () => {
-      render(<CallToAction />)
-
-      const section = screen.getByRole('region', {
-        name: /prepare-se para salvar vidas/i,
-      })
-      expect(section.className).toContain('py-20')
-      expect(section.className).toContain('md:py-24')
+      expect(section.className).toContain('bg-black')
     })
 
     it('should have transition classes on link for hover effects', () => {
@@ -171,7 +181,7 @@ describe('CallToAction', () => {
       render(<CallToAction />)
 
       const heading = screen.getByRole('heading', { level: 2 })
-      const description = screen.getByText(/garanta sua vaga/i)
+      const description = screen.getByText(/É um sistema realístico voltado/i)
 
       expect(heading.tagName).toBe('H2')
       expect(description.tagName).toBe('P')
