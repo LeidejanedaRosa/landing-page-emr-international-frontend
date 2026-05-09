@@ -283,7 +283,9 @@ describe('WhyItMattersSection', () => {
     it('deve ter texto correto no botão', () => {
       render(<WhyItMattersSection />)
 
-      expect(screen.getByText('TREINAMENTOS')).toBeInTheDocument()
+      expect(
+        screen.getByText('CONHEÇA NOSSOS TREINAMENTOS')
+      ).toBeInTheDocument()
     })
   })
 
