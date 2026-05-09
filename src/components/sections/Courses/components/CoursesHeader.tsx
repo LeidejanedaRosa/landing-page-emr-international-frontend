@@ -5,9 +5,9 @@ export const CoursesHeader = ({
   descriptionId,
 }: CoursesHeaderProps) => (
   <header className='text-center mb-12 md:mb-16'>
-    {/* <span className='text-cta-500 font-semibold tracking-wider uppercase text-sm mb-2 block'>
-      Formação de Operadores de Emergência Tática e de Áreas Remotas
-    </span> */}
+    <span className='text-cta-500 font-semibold tracking-wider uppercase text-sm mb-2 block'>
+      NOSSOS TREINAMENTOS
+    </span>
     <h2
       id={titleId}
       className='text-3xl md:text-4xl lg:text-5xl mb-6 text-white tracking-tight'
