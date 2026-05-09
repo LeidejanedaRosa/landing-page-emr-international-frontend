@@ -131,14 +131,16 @@ describe('Certifications', () => {
       expect(header).toBeInTheDocument()
     })
 
-    it('should render subtitle with aria-hidden and cta color', () => {
+    it('should render eyebrow subtitle with cta color and standard classes', () => {
       render(<Certifications />)
 
       const subtitle = screen.getByText(
         'ACERVO DE CERTIFICAÇÕES INTERNACIONAIS'
       )
-      expect(subtitle).toHaveAttribute('aria-hidden', 'true')
       expect(subtitle).toHaveClass('text-cta-500')
+      expect(subtitle).toHaveClass('font-semibold')
+      expect(subtitle).toHaveClass('tracking-wider')
+      expect(subtitle).toHaveClass('uppercase')
     })
   })
 
