@@ -1,35 +1,29 @@
 import placeholderImage1 from '../assets/testimonials/corpo-de-bombeiros.jpg'
 import placeholderImage2 from '../assets/testimonials/guia-turistico.jpg'
-import placeholderImage3 from '../assets/testimonials/mergulhadores.jpg'
 import { Product } from '../components/sections/ProductsModal/types'
 
 export const productsData: Product[] = [
   {
-    id: 'tourniquet',
-    name: 'Torniquete Tático',
-    description: 'Torniquete de uso profissional para controle de hemorragias',
+    id: 'kit1',
+    name: 'FAK-b (First Aid kit - Basic)',
+    description:
+      'Kit compacto e portátil com itens essenciais para atendimento de emergências básicas. Ideal para ambientes corporativos, eventos e uso individual.',
     price: 'Consulte',
     image: placeholderImage1,
   },
   {
-    id: 'hemostatic',
-    name: 'Agente Hemostático',
-    description: 'Agente para controle rápido de sangramento',
+    id: 'kit2',
+    name: 'FRK-a (First Responder Kit - Advanced)',
+    description:
+      'Kit completo para primeiros socorristas com equipamentos avançados de suporte à vida. Desenvolvido para profissionais de emergência em campo.',
     price: 'Consulte',
     image: placeholderImage2,
-  },
-  {
-    id: 'kit-ifak',
-    name: 'Kit IFAK',
-    description: 'Kit individual de primeiros socorros táticos',
-    price: 'Consulte',
-    image: placeholderImage3,
   },
 ]
 
 export const PRODUCTS_MODAL_CONFIG = {
-  title: 'Conheça Nossos Equipamentos',
-  subtitle: 'Equipamentos profissionais para complementar seu treinamento',
+  title: 'Adquira seu kit de emergência',
+  subtitle: 'Equipamentos profissionais para seu dia a dia',
   ctaText: 'Falar com Especialista',
   whatsappMessage:
     'Olá! Tenho interesse nos equipamentos médicos. Gostaria de mais informações.',
