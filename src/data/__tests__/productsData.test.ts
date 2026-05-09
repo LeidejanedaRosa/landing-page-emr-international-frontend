@@ -9,8 +9,8 @@ describe('productsData', () => {
       expect(Array.isArray(productsData)).toBe(true)
     })
 
-    it('should have 3 products', () => {
-      expect(productsData).toHaveLength(3)
+    it('should have 2 products', () => {
+      expect(productsData).toHaveLength(2)
     })
 
     it('should have correct structure for each product', () => {
@@ -49,25 +49,18 @@ describe('productsData', () => {
   })
 
   describe('individual products', () => {
-    it('should have tourniquet product', () => {
-      const tourniquet = productsData.find(p => p.id === 'tourniquet')
-      expect(tourniquet).toBeDefined()
-      expect(tourniquet?.name).toContain('Torniquete')
-      expect(tourniquet?.description).toContain('hemorragias')
+    it('should have FAK-b product', () => {
+      const fakBasic = productsData.find(p => p.id === 'kit1')
+      expect(fakBasic).toBeDefined()
+      expect(fakBasic?.name).toContain('FAK-b')
+      expect(fakBasic?.description).toContain('emergências básicas')
     })
 
-    it('should have hemostatic product', () => {
-      const hemostatic = productsData.find(p => p.id === 'hemostatic')
-      expect(hemostatic).toBeDefined()
-      expect(hemostatic?.name).toContain('Hemostático')
-      expect(hemostatic?.description).toContain('sangramento')
-    })
-
-    it('should have IFAK kit product', () => {
-      const ifak = productsData.find(p => p.id === 'kit-ifak')
-      expect(ifak).toBeDefined()
-      expect(ifak?.name).toContain('IFAK')
-      expect(ifak?.description).toContain('primeiros socorros')
+    it('should have FRK-a product', () => {
+      const frkAdvanced = productsData.find(p => p.id === 'kit2')
+      expect(frkAdvanced).toBeDefined()
+      expect(frkAdvanced?.name).toContain('FRK-a')
+      expect(frkAdvanced?.description).toContain('primeiros socorristas')
     })
   })
 
