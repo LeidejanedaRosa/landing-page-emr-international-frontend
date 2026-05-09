@@ -10,9 +10,9 @@ export interface ProductsModalProps {
   isOpen: boolean
   onClose: () => void
   products: Product[]
-  title?: string
-  subtitle?: string
-  ctaText?: string
+  title: string
+  subtitle: string
+  ctaText: string
   closeButtonLabel?: string
 }
 

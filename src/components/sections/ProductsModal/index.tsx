@@ -92,9 +92,9 @@ export const ProductsModal: React.FC<ProductsModalProps> = memo(
     isOpen,
     onClose,
     products,
-    title = '',
-    subtitle = '',
-    ctaText = '',
+    title,
+    subtitle,
+    ctaText,
     closeButtonLabel = 'Fechar modal',
   }) => {
     const previousActiveElement = useRef<Element | null>(null)
