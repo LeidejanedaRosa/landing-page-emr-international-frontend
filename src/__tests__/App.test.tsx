@@ -27,8 +27,8 @@ vi.mock('../components/sections/Testimonials', () => ({
   default: () => <div data-testid='testimonials'>Testimonials</div>,
 }))
 
-vi.mock('../components/sections/CallToAction', () => ({
-  default: () => <div data-testid='call-to-action'>CallToAction</div>,
+vi.mock('../components/sections/ReaperProtocol', () => ({
+  default: () => <div data-testid='reaper-protocol'>ReaperProtocol</div>,
 }))
 
 vi.mock('../components/layout/Footer/index', () => ({
@@ -129,9 +129,9 @@ describe('App', () => {
       expect(await screen.findByTestId('testimonials')).toBeInTheDocument()
     })
 
-    it('should render CallToAction section', async () => {
+    it('should render ReaperProtocol section', async () => {
       render(<App />)
-      expect(await screen.findByTestId('call-to-action')).toBeInTheDocument()
+      expect(await screen.findByTestId('reaper-protocol')).toBeInTheDocument()
     })
 
     it('should render Footer', async () => {
