@@ -12,15 +12,6 @@ export const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
     iconName: 'instagram',
   },
   {
-    id: 'linkedin',
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/juan-regenerati/',
-    ariaLabel: 'Conectar com EMR International no LinkedIn - Abre em nova aba',
-    bgColor: 'bg-[#0A66C2]',
-    hoverBgColor: 'hover:bg-[#004182]',
-    iconName: 'linkedin',
-  },
-  {
     id: 'whatsapp',
     name: 'WhatsApp',
     href: 'https://wa.me/5519971575640',

@@ -14,8 +14,7 @@ export const Copyright: React.FC = () => {
           <span>. Todos os direitos reservados.</span>
         </p>
         <p className='text-gray-400 text-sm mt-2'>
-          CNPJ: {COMPANY_LEGAL_INFO.cnpj} | Registro CREA:{' '}
-          {COMPANY_LEGAL_INFO.creaRegistration}
+          CNPJ: {COMPANY_LEGAL_INFO.cnpj}
         </p>
       </div>
     </div>
