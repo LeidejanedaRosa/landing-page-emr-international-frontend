@@ -51,10 +51,10 @@ describe('ReaperProtocol', () => {
       render(<ReaperProtocol />)
 
       const link = screen.getByRole('link', {
-        name: /entrar em contato via whatsapp/i,
+        name: /quero me inscrever agora/i,
       })
       expect(link).toBeInTheDocument()
-      expect(link).toHaveTextContent('QUERO ME INSCREVER AGORA')
+      expect(link).toHaveTextContent('Quero me inscrever agora')
     })
 
     it('should render all four feature pillars', () => {
@@ -105,7 +105,7 @@ describe('ReaperProtocol', () => {
       const link = screen.getByRole('link')
       expect(link).toHaveAttribute(
         'aria-label',
-        'Entrar em contato via WhatsApp para se inscrever nos treinamentos (abre em nova janela)'
+        'Quero me inscrever agora (abre em nova aba)'
       )
     })
 
