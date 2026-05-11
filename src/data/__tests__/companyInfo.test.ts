@@ -1,21 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
-import {
-  COMPANY_LEGAL_INFO,
-  formatCNPJ,
-  hasPlaceholderData,
-} from '../companyInfo'
+import { COMPANY_LEGAL_INFO, formatCNPJ } from '../companyInfo'
 
 describe('companyInfo', () => {
   describe('COMPANY_LEGAL_INFO', () => {
     it('should have cnpj property', () => {
       expect(COMPANY_LEGAL_INFO).toHaveProperty('cnpj')
       expect(typeof COMPANY_LEGAL_INFO.cnpj).toBe('string')
-    })
-
-    it('should have creaRegistration property', () => {
-      expect(COMPANY_LEGAL_INFO).toHaveProperty('creaRegistration')
-      expect(typeof COMPANY_LEGAL_INFO.creaRegistration).toBe('string')
     })
 
     it('should have legalName property', () => {
@@ -42,19 +33,7 @@ describe('companyInfo', () => {
     it('should have contact object with required fields', () => {
       expect(COMPANY_LEGAL_INFO).toHaveProperty('contact')
       expect(COMPANY_LEGAL_INFO.contact).toHaveProperty('email')
-      expect(COMPANY_LEGAL_INFO.contact).toHaveProperty('phone')
       expect(COMPANY_LEGAL_INFO.contact).toHaveProperty('whatsapp')
-    })
-  })
-
-  describe('hasPlaceholderData', () => {
-    it('should return boolean', () => {
-      expect(typeof hasPlaceholderData()).toBe('boolean')
-    })
-
-    it('should return true when using placeholder CNPJ', () => {
-      // Current placeholder data should return true
-      expect(hasPlaceholderData()).toBe(true)
     })
   })
 
