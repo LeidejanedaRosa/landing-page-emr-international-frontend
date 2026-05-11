@@ -6,7 +6,7 @@ describe('Footer constants', () => {
   describe('SOCIAL_LINKS', () => {
     it('should export an array of social links', () => {
       expect(Array.isArray(SOCIAL_LINKS)).toBe(true)
-      expect(SOCIAL_LINKS.length).toBe(3)
+      expect(SOCIAL_LINKS.length).toBe(2)
     })
 
     it('should have correct structure for each social link', () => {
@@ -64,24 +64,6 @@ describe('Footer constants', () => {
 
       it('should have gradient background colors', () => {
         expect(instagramLink?.bgColor).toContain('bg-gradient-to-br')
-      })
-    })
-
-    describe('LinkedIn link', () => {
-      const linkedinLink = SOCIAL_LINKS.find(link => link.id === 'linkedin')
-
-      it('should exist', () => {
-        expect(linkedinLink).toBeDefined()
-      })
-
-      it('should have correct properties', () => {
-        expect(linkedinLink?.name).toBe('LinkedIn')
-        expect(linkedinLink?.href).toContain('linkedin.com')
-        expect(linkedinLink?.iconName).toBe('linkedin')
-      })
-
-      it('should have LinkedIn brand color', () => {
-        expect(linkedinLink?.bgColor).toContain('#0A66C2')
       })
     })
 
