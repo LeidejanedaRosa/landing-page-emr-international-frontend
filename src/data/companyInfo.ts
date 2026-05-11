@@ -13,7 +13,6 @@ export const COMPANY_LEGAL_INFO = {
   },
   contact: {
     email: 'info@emr.international',
-    phone: '',
     whatsapp: '5519971575640',
   },
 } as const
