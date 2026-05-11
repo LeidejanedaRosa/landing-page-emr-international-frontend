@@ -10,12 +10,9 @@ export const BrandSection: React.FC = () => {
         alt='EMR International'
         width='160'
         height='128'
-        className='h-32 w-auto mb-4'
+        className='h-48 w-auto'
       />
-      <p className='text-cta-500 w-full bg-white px-6 py-4 rounded-xl font-bold text-xl uppercase tracking-wider mb-2 text-center'>
-        Emergência 24-7, 360°
-      </p>
-      <p className='text-white text-2xl my-2 font-bold text-right mx-3'>
+      <p className='text-black w-full bg-white px-6 py-4 rounded-xl font-bold text-xl uppercase tracking-wider mb-2 text-center'>
         Resposta à emergência que se adapta ao cenário
       </p>
       <div
