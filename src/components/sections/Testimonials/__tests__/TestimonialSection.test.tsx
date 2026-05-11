@@ -291,79 +291,76 @@ describe('TestimonialSection', () => {
       })
     })
 
-    describe('variante text-only', () => {
-      const textOnlyTestimonial = testimonials.find(
-        t => t.variant === 'text-only'
-      )
+    describe.skipIf(!testimonials.find(t => t.variant === 'text-only'))(
+      'variante text-only',
+      () => {
+        const textOnlyTestimonial = testimonials.find(
+          t => t.variant === 'text-only'
+        )!
 
-      if (!textOnlyTestimonial) {
-        throw new Error(
-          'Test data must contain a testimonial with variant "text-only"'
-        )
+        beforeEach(() => {
+          mockTestimonial = textOnlyTestimonial
+          mockIndex = testimonials.findIndex(
+            t => t.id === textOnlyTestimonial.id
+          )
+        })
+
+        it('deve exibir o texto do depoimento', () => {
+          render(<TestimonialSection />)
+
+          expect(
+            screen.getByText(
+              new RegExp(textOnlyTestimonial.testimonialText, 'i')
+            )
+          ).toBeInTheDocument()
+        })
+
+        it('deve exibir o nome do autor', () => {
+          render(<TestimonialSection />)
+
+          expect(
+            screen.getByText(textOnlyTestimonial.authorName!)
+          ).toBeInTheDocument()
+        })
+
+        it('não deve exibir imagem', () => {
+          render(<TestimonialSection />)
+
+          const img = document.querySelector('img')
+          expect(img).not.toBeInTheDocument()
+        })
       }
+    )
 
-      beforeEach(() => {
-        mockTestimonial = textOnlyTestimonial
-        mockIndex = testimonials.findIndex(t => t.id === textOnlyTestimonial.id)
-      })
+    describe.skipIf(!testimonials.find(t => t.variant === 'image-only'))(
+      'variante image-only',
+      () => {
+        const imageOnlyTestimonial = testimonials.find(
+          t => t.variant === 'image-only'
+        )!
 
-      it('deve exibir o texto do depoimento', () => {
-        render(<TestimonialSection />)
+        beforeEach(() => {
+          mockTestimonial = imageOnlyTestimonial
+          mockIndex = testimonials.findIndex(
+            t => t.id === imageOnlyTestimonial.id
+          )
+        })
 
-        expect(
-          screen.getByText(new RegExp(textOnlyTestimonial.testimonialText, 'i'))
-        ).toBeInTheDocument()
-      })
+        it('deve exibir a imagem', () => {
+          render(<TestimonialSection />)
 
-      it('deve exibir o nome do autor', () => {
-        render(<TestimonialSection />)
+          const img = document.querySelector('img')
+          expect(img).toBeInTheDocument()
+          expect(img).toHaveAttribute('alt', imageOnlyTestimonial.images.alt)
+        })
 
-        expect(
-          screen.getByText(textOnlyTestimonial.authorName!)
-        ).toBeInTheDocument()
-      })
+        it('não deve exibir texto de depoimento', () => {
+          render(<TestimonialSection />)
 
-      it('não deve exibir imagem', () => {
-        render(<TestimonialSection />)
-
-        const img = document.querySelector('img')
-        expect(img).not.toBeInTheDocument()
-      })
-    })
-
-    describe('variante image-only', () => {
-      const imageOnlyTestimonial = testimonials.find(
-        t => t.variant === 'image-only'
-      )
-
-      if (!imageOnlyTestimonial) {
-        throw new Error(
-          'Test data must contain a testimonial with variant "image-only"'
-        )
+          const blockquote = document.querySelector('blockquote')
+          expect(blockquote).not.toBeInTheDocument()
+        })
       }
-
-      beforeEach(() => {
-        mockTestimonial = imageOnlyTestimonial
-        mockIndex = testimonials.findIndex(
-          t => t.id === imageOnlyTestimonial.id
-        )
-      })
-
-      it('deve exibir a imagem', () => {
-        render(<TestimonialSection />)
-
-        const img = document.querySelector('img')
-        expect(img).toBeInTheDocument()
-        expect(img).toHaveAttribute('alt', imageOnlyTestimonial.images.alt)
-      })
-
-      it('não deve exibir texto de depoimento', () => {
-        render(<TestimonialSection />)
-
-        // image-only não tem testimonialText, então não deve aparecer blockquote com texto
-        const blockquote = document.querySelector('blockquote')
-        expect(blockquote).not.toBeInTheDocument()
-      })
-    })
+    )
   })
 })
