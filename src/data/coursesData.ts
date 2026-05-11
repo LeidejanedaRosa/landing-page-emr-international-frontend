@@ -72,7 +72,7 @@ const courses: Course[] = [
         skill: 5,
         description:
           'Planejado para indivíduos que necessitam de conhecimentos básicos em atendimento de emergência tática, aguardando suporte especializado.',
-        enrollmentStatus: 'open',
+        enrollmentStatus: 'interest',
       },
       {
         level: 'intermediate',
@@ -133,7 +133,7 @@ const courses: Course[] = [
         skill: 5,
         description:
           'Planejado para indivíduos não profissionais que necessitam de condições mínimas para atendimento inicial, aguardando chegada do serviço especializado.',
-        enrollmentStatus: 'open',
+        enrollmentStatus: 'interest',
       },
       {
         level: 'intermediate',

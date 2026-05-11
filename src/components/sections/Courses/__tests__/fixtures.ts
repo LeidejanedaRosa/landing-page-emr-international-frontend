@@ -15,7 +15,7 @@ export const mockEmergencyCourse: Course = {
       difficulty: 4,
       skill: 5,
       description: 'Descrição do nível básico TMR.',
-      enrollmentStatus: 'open',
+      enrollmentStatus: 'interest',
     },
     {
       level: 'intermediate',
@@ -74,7 +74,7 @@ export const mockWildernessCourse: Course = {
       difficulty: 4,
       skill: 5,
       description: 'Descrição do nível básico WMR.',
-      enrollmentStatus: 'open',
+      enrollmentStatus: 'interest',
     },
   ],
   metadata: {
