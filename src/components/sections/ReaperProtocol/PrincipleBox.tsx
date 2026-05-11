@@ -14,7 +14,6 @@ export function PrincipleBox() {
       <img
         src={skullIcon}
         alt=''
-        aria-hidden='true'
         className='relative z-20 flex-shrink-0 w-20 h-20'
       />
       <div className='relative'>

@@ -3,7 +3,7 @@ import { features } from './constants'
 export function FeaturePillars() {
   return (
     <div
-      className='grid grid-cols-4 gap-2 sm:gap-4 mb-10 max-w-lg'
+      className='grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-10 max-w-lg'
       aria-label='Pilares do método'
     >
       {features.map(({ Icon, title, description }) => (
