@@ -36,7 +36,7 @@ const ReaperProtocol = () => {
           <div className='flex flex-col justify-center'>
             <h2 id={titleId} className='mb-4'>
               <span className='block text-xs sm:text-sm font-medium tracking-[0.25em] text-white/60 uppercase mb-4'>
-                CONHEÇA NOSSO MÉTODO DE TREINAMENTO
+                Conheça nosso método de treinamento
               </span>
               <span className='flex items-start gap-3'>
                 <span className='block font-capture-it text-6xl sm:text-7xl lg:text-8xl tracking-wide text-white leading-none'>
@@ -67,10 +67,9 @@ const ReaperProtocol = () => {
               <AccessibleLink
                 href={whatsappUrl}
                 external
-                aria-label='Entrar em contato via WhatsApp para se inscrever nos treinamentos (abre em nova janela)'
                 className='inline-flex items-center gap-2 bg-cta-700 hover:bg-cta-600 text-white font-bold py-3 px-8 uppercase tracking-widest text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cta-500 focus:ring-offset-2 focus:ring-offset-black'
               >
-                QUERO ME INSCREVER AGORA
+                Quero me inscrever agora
               </AccessibleLink>
             </div>
           </div>
