@@ -92,11 +92,11 @@ describe('CourseCard', () => {
   })
 
   describe('CourseStatusBadge', () => {
-    it('should render "Inscrições Abertas" badge when status is open', () => {
+    it('should render "Avise-me" badge on default level', () => {
       render(<CourseCard course={mockEmergencyCourse} />)
       const badge = screen.getByRole('status')
       expect(badge).toBeInTheDocument()
-      expect(badge).toHaveTextContent('Inscrições Abertas')
+      expect(badge).toHaveTextContent('Avise-me')
     })
 
     it('should render "Avise-me" badge when status is interest', async () => {

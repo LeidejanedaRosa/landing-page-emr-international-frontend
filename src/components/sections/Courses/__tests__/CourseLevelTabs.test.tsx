@@ -168,7 +168,7 @@ describe('CourseActions', () => {
   it('should render enrollment link with accessible label', () => {
     render(<CourseCard course={mockEmergencyCourse} />)
     const enrollLink = screen.getByRole('link', {
-      name: /inscreva-se no curso.*via whatsapp/i,
+      name: /manifestar interesse.*via whatsapp/i,
     })
     expect(enrollLink).toBeInTheDocument()
     expect(enrollLink).toHaveAttribute('href')
