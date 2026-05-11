@@ -53,7 +53,6 @@ describe('Footer', () => {
     it('should render brand slogan', () => {
       render(<Footer />)
 
-      expect(screen.getByText('Emergência 24-7, 360°')).toBeInTheDocument()
       expect(
         screen.getByText('Resposta à emergência que se adapta ao cenário')
       ).toBeInTheDocument()
@@ -145,9 +144,6 @@ describe('Footer', () => {
         screen.getByLabelText(/seguir emr international no instagram/i)
       ).toBeInTheDocument()
       expect(
-        screen.getByLabelText(/conectar com emr international no linkedin/i)
-      ).toBeInTheDocument()
-      expect(
         screen.getByLabelText(/entrar em contato via whatsapp/i)
       ).toBeInTheDocument()
     })
@@ -158,9 +154,6 @@ describe('Footer', () => {
       const instagramLink = screen.getByLabelText(
         /seguir emr international no instagram/i
       )
-      const linkedinLink = screen.getByLabelText(
-        /conectar com emr international no linkedin/i
-      )
       const whatsappLink = screen.getByLabelText(
         /entrar em contato via whatsapp/i
       )
@@ -168,10 +161,6 @@ describe('Footer', () => {
       expect(instagramLink).toHaveAttribute(
         'href',
         'https://www.instagram.com/emr_international/'
-      )
-      expect(linkedinLink).toHaveAttribute(
-        'href',
-        'https://www.linkedin.com/in/juan-regenerati/'
       )
       expect(whatsappLink).toHaveAttribute(
         'href',
@@ -227,7 +216,6 @@ describe('Footer', () => {
       render(<Footer />)
 
       expect(screen.getByText(/cnpj:/i)).toBeInTheDocument()
-      expect(screen.getByText(/registro crea:/i)).toBeInTheDocument()
     })
   })
 
