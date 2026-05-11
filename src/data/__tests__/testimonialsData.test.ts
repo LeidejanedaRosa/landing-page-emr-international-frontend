@@ -74,64 +74,6 @@ describe('testimonialsData', () => {
     })
   })
 
-  describe.skip('text-only variant testimonials', () => {
-    const textOnlyTestimonials = testimonials.filter(
-      t => t.variant === 'text-only'
-    )
-
-    it('should have text-only testimonials', () => {
-      expect(textOnlyTestimonials.length).toBeGreaterThan(0)
-    })
-
-    it('should have required fields for text-only variant', () => {
-      textOnlyTestimonials.forEach((testimonial: Testimonial) => {
-        if (testimonial.variant === 'text-only') {
-          expect(testimonial.testimonialText).toBeDefined()
-          expect(testimonial.authorName).toBeDefined()
-          expect(testimonial.authorRole).toBeDefined()
-          expect(testimonial.rating).toBeDefined()
-        }
-      })
-    })
-
-    it('should not require images for text-only', () => {
-      textOnlyTestimonials.forEach((testimonial: Testimonial) => {
-        if (testimonial.variant === 'text-only') {
-          expect(testimonial.testimonialText).toBeDefined()
-          expect(testimonial.variant).toBe('text-only')
-        }
-      })
-    })
-  })
-
-  describe.skip('image-only variant testimonials', () => {
-    const imageOnlyTestimonials = testimonials.filter(
-      t => t.variant === 'image-only'
-    )
-
-    it('should have image-only testimonials', () => {
-      expect(imageOnlyTestimonials.length).toBeGreaterThan(0)
-    })
-
-    it('should have required fields for image-only variant', () => {
-      imageOnlyTestimonials.forEach((testimonial: Testimonial) => {
-        if (testimonial.variant === 'image-only') {
-          expect(testimonial.companyName).toBeDefined()
-          expect(testimonial.images).toBeDefined()
-        }
-      })
-    })
-
-    it('should have images with alt text for accessibility', () => {
-      imageOnlyTestimonials.forEach((testimonial: Testimonial) => {
-        if (testimonial.variant === 'image-only') {
-          expect(testimonial.images.alt).toBeDefined()
-          expect(testimonial.images.alt.length).toBeGreaterThan(0)
-        }
-      })
-    })
-  })
-
   describe('getTestimonials', () => {
     it('should return an array', () => {
       const result = getTestimonials()
