@@ -27,15 +27,15 @@ const Courses = React.lazy(() => import('./components/sections/Courses'))
 const Testimonials = React.lazy(
   () => import('./components/sections/Testimonials')
 )
-const CallToAction = React.lazy(
-  () => import('./components/sections/CallToAction')
+const ReaperProtocol = React.lazy(
+  () => import('./components/sections/ReaperProtocol')
 )
 const Footer = React.lazy(() => import('./components/layout/Footer/index'))
 
 function App() {
   const { hasTriggered: showProductsModal, resetTrigger: closeProductsModal } =
     useScrollTrigger({
-      targetSectionId: 'call-to-action',
+      targetSectionId: 'reaper-protocol',
       storageKey: 'productsModalShown',
     })
 
@@ -57,8 +57,8 @@ function App() {
           <LazySection sectionName='Treinamentos' component={Courses} />
           <LazySection sectionName='Depoimentos' component={Testimonials} />
           <LazySection
-            sectionName='Chamada para ação'
-            component={CallToAction}
+            sectionName='Reaper Protocol'
+            component={ReaperProtocol}
           />
         </main>
         <ErrorBoundary
