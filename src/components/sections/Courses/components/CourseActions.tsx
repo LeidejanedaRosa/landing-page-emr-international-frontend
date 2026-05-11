@@ -16,6 +16,7 @@ export const CourseActions = ({
     <div className='flex flex-col gap-3 pt-2'>
       <AccessibleLink
         href={whatsappUrl}
+        external
         target='_blank'
         rel='noopener noreferrer'
         className={`flex items-center justify-center w-full py-3.5 px-4 font-bold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 ${
