@@ -1,75 +1,22 @@
-/**
- * Company registration and legal information
- *
- * ⚠️ TODO: Update with actual company data before production deployment
- *
- * References:
- * - CNPJ: Cadastro Nacional da Pessoa Jurídica (Brazilian tax ID)
- * - CREA: Conselho Regional de Engenharia e Agronomia (Professional registration)
- *
- * @see https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/cadastros/cnpj
- * @see https://www.confea.org.br/
- *//**
- * Company legal registration data
- * Must be updated with actual values before production deployment
- */
 export const COMPANY_LEGAL_INFO = {
-  /**
-   * CNPJ - Brazilian National Registry of Legal Entities
-   * Format: XX.XXX.XXX/XXXX-XX
-   * TODO: Replace with actual CNPJ from company documentation
-   */
-  cnpj: '00.000.000/0000-00',
-
-  /**
-   * CREA - Regional Council of Engineering and Agronomy registration number
-   * TODO: Replace with actual CREA registration from professional credentials
-   * Note: Only required if company provides engineering services requiring CREA registration
-   */
-  creaRegistration: '000000',
-
-  /**
-   * Company legal name (Razão Social)
-   * TODO: Verify if this matches official company registration documents
-   */
+  cnpj: '31.347.059/0001-84',
   legalName: 'EMR International',
-
-  /**
-   * Full company address
-   * TODO: Add complete address for legal compliance
-   */
   address: {
-    street: '',
-    number: '',
-    complement: '',
-    neighborhood: '',
-    city: '',
-    state: '',
-    zipCode: '',
+    street: 'Avenida Irmãos Picarelli',
+    number: '245',
+    complement: 'Andar 2, Sala 24',
+    neighborhood: 'Centro',
+    city: 'Socorro',
+    state: 'SP',
+    zipCode: '13960-069',
     country: 'Brasil',
   },
-
-  /**
-   * Contact information for legal/administrative purposes
-   * TODO: Add official company contact details
-   */
   contact: {
-    email: '',
+    email: 'info@emr.international',
     phone: '',
-    whatsapp: '',
+    whatsapp: '5519971575640',
   },
 } as const
-
-/**
- * Validates if company legal info has been updated from placeholder values
- * @returns true if data appears to be placeholder values
- */
-export const hasPlaceholderData = (): boolean => {
-  return (
-    COMPANY_LEGAL_INFO.cnpj === '00.000.000/0000-00' ||
-    COMPANY_LEGAL_INFO.creaRegistration === '000000'
-  )
-}
 
 /**
  * Formats CNPJ for display
