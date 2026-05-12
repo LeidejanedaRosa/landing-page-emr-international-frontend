@@ -87,10 +87,15 @@ Todos os testes são baseados em:
 
 ## Quando os Testes São Executados
 
-- ✅ Em cada commit (via Husky)
-- ✅ Em cada pull request (via GitHub Actions)
-- ✅ Antes do deploy (via pre-deploy script)
-- ✅ Manualmente quando necessário
+| Evento                               | O que roda                                                        |
+| ------------------------------------ | ----------------------------------------------------------------- |
+| `git commit`                         | ESLint + Prettier (via Husky `pre-commit` + lint-staged)          |
+| `git push`                           | Testes unitários + TypeScript + build (via Husky `pre-push`)      |
+| Pull Request / push `main` ou `beta` | Pipeline completo de CI com testes E2E e SEO (via GitHub Actions) |
+| Antes do deploy                      | `npm run pre-deploy` (validação de dados da empresa)              |
+| Manualmente                          | `npm run test:seo` a qualquer momento                             |
+
+> Os testes E2E/SEO com Playwright **não rodam no commit** — eles são lentos demais para isso. Rodam no push (CI) e manualmente.
 
 ---
 

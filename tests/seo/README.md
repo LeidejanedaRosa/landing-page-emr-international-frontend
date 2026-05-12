@@ -51,9 +51,7 @@ Baseado em: [WCAG 2.1 Guidelines 1.3.1](https://www.w3.org/WAI/WCAG21/Understand
 
 ### 3. **accessibility.spec.ts** - Testes de Acessibilidade WCAG 2.1 AA (Powered by Axe-core)
 
-⚠️ **IMPORTANTE**: Testes agora usam [@axe-core/playwright](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright) - padrão da indústria para testes automatizados de acessibilidade.
-
-**📚 Documentação completa:** [docs/ACCESSIBILITY-TESTING.md](/docs/ACCESSIBILITY-TESTING.md)
+⚠️ **IMPORTANTE**: Testes usam [@axe-core/playwright](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright) - padrão da indústria para testes automatizados de acessibilidade.
 
 Baseado em: [WCAG 2.1 Quick Reference](https://www.w3.org/WAI/WCAG21/quickref/)
 
@@ -210,11 +208,14 @@ npx playwright show-report
 
 ## 🔄 Integração Contínua
 
-Os testes são executados automaticamente:
+| Evento                               | O que roda                                                        |
+| ------------------------------------ | ----------------------------------------------------------------- |
+| `git commit`                         | ESLint + Prettier apenas (via Husky `pre-commit` + lint-staged)   |
+| `git push`                           | Testes unitários + TypeScript + build (via Husky `pre-push`)      |
+| Pull Request / push `main` ou `beta` | Pipeline completo incluindo estes testes E2E (via GitHub Actions) |
+| Manualmente                          | `npm run test:seo`                                                |
 
-- ✅ Em cada commit (via Husky pre-commit hook)
-- ✅ Em cada pull request (via GitHub Actions)
-- ✅ Antes do deploy (via pre-deploy script)
+> Testes Playwright **não rodam no `git commit`** — são executados no push/CI para não impactar o fluxo de desenvolvimento.
 
 ---
 

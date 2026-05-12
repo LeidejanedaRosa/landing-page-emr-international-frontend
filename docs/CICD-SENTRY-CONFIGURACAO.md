@@ -257,7 +257,7 @@ Environments permitem adicionar proteções e aprovações antes do deploy.
 
 ### 2. Descomentar no CI/CD
 
-No arquivo `.github/workflows/ci-cd.yml` linha 304, descomente:
+No arquivo `.github/workflows/ci-cd.yml`, no job `deploy-production`, descomente:
 
 ```yaml
 environment: production
