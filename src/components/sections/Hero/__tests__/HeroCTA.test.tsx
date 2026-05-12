@@ -30,20 +30,11 @@ describe('HeroCTA', () => {
   })
 
   describe('Accessibility', () => {
-    it('should have default aria-label', () => {
+    it('should have accessible name from visible text', () => {
       render(<HeroCTA />)
 
       const button = screen.getByRole('button', {
-        name: HERO_CONTENT.cta.ariaLabel,
-      })
-      expect(button).toBeInTheDocument()
-    })
-
-    it('should accept custom aria-label', () => {
-      render(<HeroCTA ariaLabel='Custom accessibility label' />)
-
-      const button = screen.getByRole('button', {
-        name: 'Custom accessibility label',
+        name: HERO_CONTENT.cta.text,
       })
       expect(button).toBeInTheDocument()
     })

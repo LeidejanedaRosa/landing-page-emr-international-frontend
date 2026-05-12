@@ -94,10 +94,6 @@ describe('Hero constants', () => {
       it('should have text', () => {
         expect(HERO_CONTENT.cta.text).toBe('CONHEÇA NOSSOS TREINAMENTOS')
       })
-
-      it('should have ariaLabel', () => {
-        expect(HERO_CONTENT.cta.ariaLabel).toBeDefined()
-      })
     })
 
     describe('visual', () => {

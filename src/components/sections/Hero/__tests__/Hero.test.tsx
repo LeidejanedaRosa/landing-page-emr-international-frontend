@@ -96,7 +96,7 @@ describe('Hero', () => {
       render(<Hero />)
 
       const button = screen.getByRole('button', {
-        name: /ver treinamentos disponíveis/i,
+        name: /conheça nossos treinamentos/i,
       })
       expect(button).toBeInTheDocument()
       expect(
@@ -109,7 +109,7 @@ describe('Hero', () => {
       render(<Hero />)
 
       const button = screen.getByRole('button', {
-        name: /ver treinamentos disponíveis/i,
+        name: /conheça nossos treinamentos/i,
       })
       await user.click(button)
 
@@ -120,7 +120,7 @@ describe('Hero', () => {
       render(<Hero />)
 
       const button = screen.getByRole('button', {
-        name: /ver treinamentos disponíveis/i,
+        name: /conheça nossos treinamentos/i,
       })
       const svg = button.querySelector('svg')
       expect(svg).toHaveAttribute('aria-hidden', 'true')
