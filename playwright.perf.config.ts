@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { defineConfig, devices } from '@playwright/test'
 
 // Performance tests run against a production build (vite build + vite preview).
@@ -7,14 +8,13 @@ export default defineConfig({
   testMatch: '**/performance.spec.ts',
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: 1,
+  retries: 0,
   workers: 1,
   reporter: 'html',
   timeout: 120 * 1000,
 
   use: {
     baseURL: 'http://localhost:3000',
-    trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
 
