@@ -11,11 +11,14 @@ test.describe('Core Web Vitals', () => {
     const lcp = await page.evaluate(
       () =>
         new Promise<number>(resolve => {
+          let largestEntry: PerformanceEntry | null = null
           new PerformanceObserver(list => {
             const entries = list.getEntries()
-            resolve(entries[entries.length - 1].startTime)
+            if (entries.length > 0) {
+              largestEntry = entries[entries.length - 1]
+            }
           }).observe({ type: 'largest-contentful-paint', buffered: true })
-          setTimeout(() => resolve(0), 3000)
+          setTimeout(() => resolve(largestEntry?.startTime ?? 0), 3000)
         })
     )
 
@@ -37,7 +40,7 @@ test.describe('Core Web Vitals', () => {
       const fcpEntry = performance.getEntriesByName('first-contentful-paint')[0]
 
       return {
-        ttfb: nav.responseStart - nav.requestStart,
+        ttfb: nav.responseStart - nav.fetchStart,
         fcp: fcpEntry?.startTime ?? 0,
         domContentLoaded: nav.domContentLoadedEventEnd - nav.startTime,
         load: nav.loadEventEnd - nav.startTime,
@@ -49,6 +52,7 @@ test.describe('Core Web Vitals', () => {
       `TTFB foi ${timing.ttfb.toFixed(0)}ms — esperado < 800ms`
     ).toBeLessThan(800)
 
+    expect(timing.fcp, 'FCP não foi medido').toBeGreaterThan(0)
     expect(
       timing.fcp,
       `FCP foi ${timing.fcp.toFixed(0)}ms — esperado < 1800ms`
