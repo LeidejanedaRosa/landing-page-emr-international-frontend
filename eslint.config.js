@@ -51,9 +51,13 @@ export default [
       'prettier/prettier': 'error',
 
       // TypeScript
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': 'warn',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
 
       // Code Quality 🔍 (SonarJS)
       'sonarjs/cognitive-complexity': ['error', 10],
@@ -111,8 +115,8 @@ export default [
       ...js.configs.recommended.rules,
       ...prettierConfig.rules,
       'prettier/prettier': 'error',
-      '@typescript-eslint/no-unused-vars': 'off',
       'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': 'off',
       'no-duplicate-imports': 'error',
@@ -154,13 +158,13 @@ export default [
       ...js.configs.recommended.rules,
       ...prettierConfig.rules,
       'prettier/prettier': 'error',
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
-      'no-unused-vars': [
-        'error',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
       ],
-      'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': 'warn',
       'max-lines-per-function': 'off',
       'max-nested-callbacks': 'off',
       'sonarjs/no-duplicate-string': 'off',
@@ -206,9 +210,13 @@ export default [
       'prettier/prettier': 'error',
 
       // TypeScript
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': 'warn',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
 
       // React
       'react-refresh/only-export-components': [
@@ -283,9 +291,13 @@ export default [
       ...prettierConfig.rules,
       ...playwright.configs['flat/recommended'].rules,
       'prettier/prettier': 'error',
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': 'warn',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
       'max-lines-per-function': 'off',
       'max-nested-callbacks': 'off',
       'sonarjs/no-duplicate-string': 'off',
