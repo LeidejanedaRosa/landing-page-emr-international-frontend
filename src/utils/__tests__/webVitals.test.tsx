@@ -12,13 +12,17 @@ const mockFetch = vi.fn()
 vi.stubGlobal('fetch', mockFetch)
 
 describe('sendToGoogleAnalytics (via initWebVitals)', () => {
+  let originalDev: boolean | undefined
+
   beforeEach(() => {
     vi.clearAllMocks()
     mockFetch.mockResolvedValue({ ok: true })
+    originalDev = (import.meta.env as any).DEV
   })
 
   afterEach(() => {
     vi.resetModules()
+    ;(import.meta.env as any).DEV = originalDev
   })
 
   it('não quebra quando gtag não está disponível', async () => {
@@ -114,13 +118,17 @@ describe('sendToGoogleAnalytics (via initWebVitals)', () => {
 })
 
 describe('sendMetricToEndpoint (via initWebVitals)', () => {
+  let originalDev: boolean | undefined
+
   beforeEach(() => {
     vi.clearAllMocks()
     mockFetch.mockResolvedValue({ ok: true })
+    originalDev = (import.meta.env as any).DEV
   })
 
   afterEach(() => {
     vi.resetModules()
+    ;(import.meta.env as any).DEV = originalDev
   })
 
   it('envia POST para endpoint quando configurado', async () => {
@@ -207,13 +215,17 @@ describe('sendMetricToEndpoint (via initWebVitals)', () => {
 })
 
 describe('sendToSentry (via initWebVitals)', () => {
+  let originalDev: boolean | undefined
+
   beforeEach(() => {
     vi.clearAllMocks()
     mockFetch.mockResolvedValue({ ok: true })
+    originalDev = (import.meta.env as any).DEV
   })
 
   afterEach(() => {
     vi.resetModules()
+    ;(import.meta.env as any).DEV = originalDev
   })
 
   it('chama setMeasurement com unit millisecond para LCP', async () => {
@@ -325,8 +337,15 @@ describe('sendToSentry (via initWebVitals)', () => {
 })
 
 describe('initWebVitals - deduplicação de config', () => {
+  let originalDev: boolean | undefined
+
+  beforeEach(() => {
+    originalDev = (import.meta.env as any).DEV
+  })
+
   afterEach(() => {
     vi.resetModules()
+    ;(import.meta.env as any).DEV = originalDev
   })
 
   it('não reinicializa quando config é idêntica', async () => {
