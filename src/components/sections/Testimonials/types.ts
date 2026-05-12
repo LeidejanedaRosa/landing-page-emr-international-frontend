@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import type { KeyboardEvent, MutableRefObject } from 'react'
+import type { KeyboardEvent, RefObject } from 'react'
 
 export interface TestimonialImages {
   avif?: string
@@ -66,7 +65,7 @@ export interface TestimonialIndicatorsProps {
   currentIndex: number
   totalSlides: number
   onSelect: (n: number) => void
-  buttonsRef: MutableRefObject<(HTMLButtonElement | null)[]>
+  buttonsRef: RefObject<(HTMLButtonElement | null)[]>
   handleKeyDown: (e: KeyboardEvent<HTMLButtonElement>, n: number) => void
   isAutoPlaying?: boolean
   autoPlayDelay?: number

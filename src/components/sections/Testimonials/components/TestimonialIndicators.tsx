@@ -1,22 +1,20 @@
-import { type KeyboardEvent, memo, type MutableRefObject, useMemo } from 'react'
+import { type KeyboardEvent, memo, type RefObject, useMemo } from 'react'
 
 import { PROGRESS_KEYFRAMES, TESTIMONIALS_A11Y } from '../constants'
 import type { TestimonialIndicatorsProps } from '../types'
 
 const MAX_VISIBLE_DOTS = 7
 
-/* eslint-disable no-unused-vars */
 interface IndicatorButtonProps {
   slideIndex: number
   isActive: boolean
   isAutoPlaying: boolean
   autoPlayDelay: number
-  buttonsRef: MutableRefObject<(HTMLButtonElement | null)[]>
+  buttonsRef: RefObject<(HTMLButtonElement | null)[]>
   onSelect: (n: number) => void
   onKeyDown: (e: KeyboardEvent<HTMLButtonElement>, n: number) => void
   size?: 'small' | 'normal'
 }
-/* eslint-enable no-unused-vars */
 
 function getDotSize(isSmall: boolean, isActive: boolean): string {
   if (isSmall) return 'w-2 h-2'
