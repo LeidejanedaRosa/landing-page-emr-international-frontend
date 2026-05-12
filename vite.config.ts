@@ -166,15 +166,16 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, './src/assets'),
     },
   },
-  optimizeDeps: {
-    exclude: ['lucide-react'],
-  },
   build: {
     outDir: 'dist',
     sourcemap: process.env.NODE_ENV === 'production' ? 'hidden' : false,
     target: 'es2022',
     rollupOptions: {
       output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-sentry': ['@sentry/react'],
+        },
         assetFileNames: assetInfo => {
           if (!assetInfo.name) return `assets/[name]-[hash][extname]`
           const info = assetInfo.name.split('.')
