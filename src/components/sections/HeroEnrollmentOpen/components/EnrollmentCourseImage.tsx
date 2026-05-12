@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface CourseImageProps {
+interface EnrollmentCourseImageProps {
   imageAvif?: string
   imageWebp?: string
   imageJpg: string
@@ -9,7 +9,7 @@ interface CourseImageProps {
   priority?: boolean
 }
 
-export const CourseImage: React.FC<CourseImageProps> = ({
+export const EnrollmentCourseImage: React.FC<EnrollmentCourseImageProps> = ({
   imageAvif,
   imageWebp,
   imageJpg,

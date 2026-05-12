@@ -2,7 +2,7 @@ import React from 'react'
 
 import type { CourseCardProps } from '../types'
 import { CourseContent } from './CourseContent'
-import { CourseImage } from './CourseImage'
+import { EnrollmentCourseImage } from './EnrollmentCourseImage'
 
 export const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -39,7 +39,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
       aria-label={subtitle ? `Curso ${title}: ${subtitle}` : `Curso ${title}`}
     >
       <div className='relative min-h-[160px] sm:min-h-[200px] landscape-mobile:absolute landscape-mobile:inset-0 landscape-mobile:h-full md:absolute md:inset-0 md:h-full'>
-        <CourseImage
+        <EnrollmentCourseImage
           imageAvif={imageAvif}
           imageWebp={imageWebp}
           imageJpg={imageJpg}
