@@ -45,7 +45,7 @@ function App() {
       <BreadcrumbSchema items={HOMEPAGE_BREADCRUMB} />
       <div className='min-h-screen bg-gray-50'>
         <Header />
-        <main role='main' aria-label='Conteúdo principal'>
+        <main id='main-content' role='main' aria-label='Conteúdo principal'>
           <PromoBannerCarousel />
           <HeroCarousel />
           <LazySection
