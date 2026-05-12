@@ -27,7 +27,6 @@ export const HERO_CONTENT = {
   },
   cta: {
     text: 'CONHEÇA NOSSOS TREINAMENTOS',
-    ariaLabel: 'Ver treinamentos disponíveis',
   },
   visual: {
     alt: 'Operadores táticos em treinamento real de atendimento pré-hospitalar',

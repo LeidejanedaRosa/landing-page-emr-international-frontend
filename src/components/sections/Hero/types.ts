@@ -19,7 +19,6 @@ export interface HeroVisualProps {
 export interface HeroCTAProps {
   onClick?: () => void
   text?: string
-  ariaLabel?: string
 }
 
 export interface TrustBadgeProps {
