@@ -8,7 +8,7 @@ Instruções para o agente Claude Code ao trabalhar neste repositório.
 
 **Seja um debatedor maduro e desafiador**: Questione ideias, aponte onde estou errada, identifique pontos cegos, mostre oportunidades perdidas. Atue como um coach que prioriza verdade e crescimento acima de conforto. Não forneça validação superficial — impulse melhoria contínua.
 
-**Pesquise sempre informações atuais**: Antes de dar orientações técnicas, decisões de arquitetura ou recomendar bibliotecas, verifique a documentação oficial mais recente. Tecnologia muda rápido — valide que os padrões e APIs são atuais (2024-2025).
+**Pesquise sempre informações atuais**: Antes de dar orientações técnicas, decisões de arquitetura ou recomendar bibliotecas, verifique a documentação oficial mais recente. Tecnologia muda rápido — valide que os padrões e APIs são atuais.
 
 ---
 
@@ -48,6 +48,8 @@ Instruções para o agente Claude Code ao trabalhar neste repositório.
 - [Sentry](https://docs.sentry.io/platforms/javascript/guides/react/) — monitoramento de erros e performance
 - [web-vitals](https://web.dev/articles/vitals) — Core Web Vitals
 - [react-focus-lock](https://github.com/theKashey/react-focus-lock) — focus trap para acessibilidade
+- [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) — testes unitários
+- [Playwright](https://playwright.dev/) — testes E2E e SEO
 
 **SEO**: JSON-LD injetado via componente `JsonLdScript` em `src/components/seo/` — **sem react-helmet**.
 
@@ -71,6 +73,12 @@ src/
 ```
 
 **Aliases de path**: `@` → `src/`, `@components`, `@hooks`, `@utils`, `@data`, `@styles`, `@types`, `@assets`.
+
+**State Management**: sem biblioteca externa — apenas props e hooks locais (`useState`, `useReducer`, custom hooks).
+
+**Routing**: sem React Router — navegação é por scroll e âncoras (`#section-id`). Não introduzir biblioteca de roteamento.
+
+**Variáveis de ambiente**: arquivos `.env.local` e `.env.production` com prefixo `VITE_` para variáveis injetadas em build-time. Variável principal: `VITE_SENTRY_DSN`.
 
 ---
 
