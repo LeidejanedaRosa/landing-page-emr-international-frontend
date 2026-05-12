@@ -2,7 +2,7 @@ import React from 'react'
 
 import { CarouselItem } from './CarouselItem'
 
-const REPEAT_COUNT = 20
+const REPEAT_COUNT = 10
 
 interface CarouselContentProps {
   text: string
