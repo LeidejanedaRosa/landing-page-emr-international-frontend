@@ -240,10 +240,11 @@ export const generateAriaLabel = (
 
   if (target) {
     label += ` ${target}`
-  }
-
-  if (context) {
-    label += ` - ${context}`
+    if (context) {
+      label += ` - ${context}`
+    }
+  } else if (context) {
+    label += ` ${context}`
   }
 
   return label

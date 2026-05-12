@@ -372,8 +372,8 @@ describe('generateAriaLabel', () => {
     )
   })
 
-  it('ignora context quando target não é informado', () => {
-    expect(generateAriaLabel('Abrir', undefined, 'menu')).toBe('Abrir - menu')
+  it('usa context como target quando target não é informado', () => {
+    expect(generateAriaLabel('Abrir', undefined, 'menu')).toBe('Abrir menu')
   })
 })
 
