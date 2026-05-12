@@ -241,7 +241,7 @@ landing-page-emr-international-frontend/
 
 ```bash
 # Clone o repositório
-git clone <repository-url>
+git clone git@github.com:LeidejanedaRosa/landing-page-emr-internacional-frontend.git
 cd landing-page-emr-international-frontend
 
 # Instale as dependências
@@ -485,7 +485,7 @@ Imagens fornecidas em três formatos com `<picture>` para máxima compatibilidad
 - **WebP** — compatibilidade ampla
 - **JPEG/PNG** — fallback universal
 
-Scripts de conversão: `./scripts/convert-images.sh`
+Scripts de conversão: executar manualmente via ferramentas como `sharp-cli`, `squoosh-cli` ou `ffmpeg`.
 
 ### Segurança (Headers HTTP)
 
@@ -538,10 +538,16 @@ Formatação automática com `@trivago/prettier-plugin-sort-imports` para ordena
 
 ### Git Hooks (Husky + lint-staged)
 
-Executados automaticamente no `git commit`:
+**`git commit`** — lint-staged:
 
 - **`.ts`/`.tsx`**: ESLint --fix + Prettier
 - **`.js`/`.jsx`/`.json`/`.css`/`.md`**: Prettier
+
+**`git push`** — validações adicionais:
+
+- Testes unitários (`npm run test:run`)
+- Verificação de tipos TypeScript (`tsc -b`)
+- Build de produção (`npm run build`)
 
 ### Padrões de código
 
