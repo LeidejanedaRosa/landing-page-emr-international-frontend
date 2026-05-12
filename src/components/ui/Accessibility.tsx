@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ExternalLink } from 'lucide-react'
 
 import type {
   AccessibilityProps,
@@ -307,7 +307,9 @@ export const AccessibleLink = forwardRef<
         aria-label={computedAriaLabel}
       >
         {children}
-        {external && <ArrowRight className='w-4 h-4 ml-2' aria-hidden='true' />}
+        {external && (
+          <ExternalLink className='w-4 h-4 ml-2' aria-hidden='true' />
+        )}
       </a>
     )
   }
