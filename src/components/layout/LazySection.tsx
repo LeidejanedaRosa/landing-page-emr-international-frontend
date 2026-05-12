@@ -46,7 +46,11 @@ export const LazySection = ({
   }, [rootMargin])
 
   if (!isVisible) {
-    return <div ref={placeholderRef} aria-hidden='true' />
+    return (
+      <div ref={placeholderRef} aria-hidden='true'>
+        {fallback}
+      </div>
+    )
   }
 
   return (
