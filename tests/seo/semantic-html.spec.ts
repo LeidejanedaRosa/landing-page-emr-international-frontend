@@ -40,6 +40,10 @@ test.describe('Semantic HTML Structure Tests', () => {
     test('should use section elements for content grouping', async ({
       page,
     }) => {
+      await page
+        .locator('section')
+        .nth(2)
+        .waitFor({ state: 'attached', timeout: 15000 })
       const sectionCount = await page.locator('section').count()
       expect(sectionCount).toBeGreaterThanOrEqual(3)
     })
@@ -302,11 +306,11 @@ test.describe('Semantic HTML Structure Tests', () => {
     })
 
     test('should use button elements for actions', async ({ page }) => {
-      const buttons = await page
-        .locator('button, [type="button"], [type="submit"]')
-        .all()
+      const selector = 'button, [type="button"], [type="submit"]'
+      const buttonCount = await page.locator(selector).count()
 
-      for (const button of buttons) {
+      for (let i = 0; i < buttonCount; i++) {
+        const button = page.locator(selector).nth(i)
         const text = await button.textContent()
         const ariaLabel = await button.getAttribute('aria-label')
         expect(text?.trim() || ariaLabel).toBeTruthy()
