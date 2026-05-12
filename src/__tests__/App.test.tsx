@@ -62,6 +62,17 @@ vi.mock('../components/error/ErrorBoundary', () => ({
   ),
 }))
 
+vi.mock('../components/layout/LazySection', async () => {
+  const { Suspense } = await import('react')
+  return {
+    LazySection: ({ component: Component }: { component: () => null }) => (
+      <Suspense fallback={null}>
+        <Component />
+      </Suspense>
+    ),
+  }
+})
+
 vi.mock('../hooks/useScrollTrigger', () => ({
   useScrollTrigger: () => ({
     hasTriggered: false,
