@@ -141,13 +141,15 @@ test.describe('Mobile Responsiveness', () => {
 
 test.describe('Performance Tests', () => {
   test('should load within acceptable time', async ({ page }) => {
-    const startTime = Date.now()
-
     await page.goto('/')
-
     await page.waitForLoadState('load')
 
-    const loadTime = Date.now() - startTime
+    const loadTime = await page.evaluate(() => {
+      const [nav] = performance.getEntriesByType(
+        'navigation'
+      ) as PerformanceNavigationTiming[]
+      return nav.loadEventEnd - nav.startTime
+    })
 
     expect(loadTime).toBeLessThan(10000)
   })
