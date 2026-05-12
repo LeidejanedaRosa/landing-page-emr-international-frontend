@@ -1,5 +1,3 @@
-import { ArrowRight } from 'lucide-react'
-
 import { AccessibleLink } from '../../../ui/Accessibility'
 import type { CourseActionsProps } from '../types'
 
@@ -17,8 +15,6 @@ export const CourseActions = ({
       <AccessibleLink
         href={whatsappUrl}
         external
-        target='_blank'
-        rel='noopener noreferrer'
         className={`flex items-center justify-center w-full py-3.5 px-4 font-bold rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 ${
           isOpen
             ? `${styles.primary} ${styles.primaryHover} ${styles.primaryText}`
@@ -31,7 +27,6 @@ export const CourseActions = ({
         }
       >
         {isOpen ? 'Inscreva-se' : 'Tenho Interesse'}
-        <ArrowRight className='w-5 h-5 ml-2' aria-hidden='true' />
       </AccessibleLink>
     </div>
   )
