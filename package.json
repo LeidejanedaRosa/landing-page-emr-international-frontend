@@ -23,6 +23,7 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:prod": "dotenv -e .env.production -- playwright test",
     "test:e2e:prod:ui": "dotenv -e .env.production -- playwright test --ui",
+    "test:e2e:perf": "playwright test --config=playwright.perf.config.ts",
     "test:seo": "playwright test tests/seo --reporter=html",
     "test:seo:prod": "dotenv -e .env.production -- playwright test tests/seo --reporter=html",
     "test:seo:metadata": "playwright test tests/seo/metadata.spec.ts",
