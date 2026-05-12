@@ -1,5 +1,7 @@
 import React, { forwardRef } from 'react'
 
+import { ArrowRight } from 'lucide-react'
+
 import type {
   AccessibilityProps,
   SkipLinkProps,
@@ -70,7 +72,56 @@ interface AccessibleButtonProps extends Omit<
   loading?: boolean
   loadingText?: string
   disabled?: boolean
+  showArrow?: boolean
+  arrowClassName?: string
 }
+
+const BUTTON_BASE_CLASSES = [
+  'inline-flex items-center justify-center font-medium rounded-lg',
+  'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
+  'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+]
+
+const BUTTON_VARIANT_CLASSES = {
+  primary: 'bg-cta hover:bg-cta-800 text-secondary focus:ring-cta-500',
+  secondary:
+    'bg-secondary hover:bg-gray-50 text-primary border-2 border-primary focus:ring-primary',
+  ghost: 'bg-transparent hover:bg-gray-100 text-primary focus:ring-primary',
+}
+
+const BUTTON_SIZE_CLASSES = {
+  sm: 'px-3 py-2 text-sm',
+  md: 'px-4 py-3 text-base',
+  lg: 'px-6 py-4 text-lg',
+}
+
+interface ButtonBodyProps {
+  loading: boolean
+  loadingText: string
+  children: React.ReactNode
+  showArrow: boolean
+  arrowClassName: string
+}
+
+const ButtonBody = ({
+  loading,
+  loadingText,
+  children,
+  showArrow,
+  arrowClassName,
+}: ButtonBodyProps) => (
+  <>
+    {loading && (
+      <span className='mr-2' aria-hidden='true'>
+        <LoadingSpinner />
+      </span>
+    )}
+    {loading ? loadingText : children}
+    {showArrow && !loading && (
+      <ArrowRight className={arrowClassName} aria-hidden='true' />
+    )}
+  </>
+)
 
 export const AccessibleButton = forwardRef<
   HTMLButtonElement,
@@ -84,6 +135,8 @@ export const AccessibleButton = forwardRef<
       loading = false,
       loadingText = 'Carregando...',
       disabled,
+      showArrow = false,
+      arrowClassName = 'w-4 h-4 ml-2',
       'aria-label': ariaLabel,
       className = '',
       onClick,
@@ -92,62 +145,33 @@ export const AccessibleButton = forwardRef<
     },
     ref
   ) => {
-    const baseClasses = [
-      'inline-flex items-center justify-center font-medium rounded-lg',
-      'transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2',
-      'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
-    ]
-
-    const variantClasses = {
-      primary: 'bg-cta hover:bg-cta-800 text-secondary focus:ring-cta-500',
-      secondary:
-        'bg-secondary hover:bg-gray-50 text-primary border-2 border-primary focus:ring-primary',
-      ghost: 'bg-transparent hover:bg-gray-100 text-primary focus:ring-primary',
-    }
-
-    const sizeClasses = {
-      sm: 'px-3 py-2 text-sm',
-      md: 'px-4 py-3 text-base',
-      lg: 'px-6 py-4 text-lg',
-    }
-
     const isDisabled = disabled || loading
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (!isDisabled && onClick) {
-        onClick(event)
-      }
-    }
-
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
-      if (onKeyDown) {
-        onKeyDown(event)
-      }
-    }
 
     return (
       <button
         ref={ref}
         type='button'
         className={[
-          ...baseClasses,
-          variantClasses[variant],
-          sizeClasses[size],
+          ...BUTTON_BASE_CLASSES,
+          BUTTON_VARIANT_CLASSES[variant],
+          BUTTON_SIZE_CLASSES[size],
           className,
         ].join(' ')}
         disabled={isDisabled}
         aria-label={loading ? loadingText : ariaLabel}
         aria-disabled={isDisabled}
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
+        onClick={onClick}
+        onKeyDown={onKeyDown}
         {...props}
       >
-        {loading && (
-          <span className='mr-2' aria-hidden='true'>
-            <LoadingSpinner />
-          </span>
-        )}
-        {loading ? loadingText : children}
+        <ButtonBody
+          loading={loading}
+          loadingText={loadingText}
+          showArrow={showArrow}
+          arrowClassName={arrowClassName}
+        >
+          {children}
+        </ButtonBody>
       </button>
     )
   }
@@ -283,27 +307,10 @@ export const AccessibleLink = forwardRef<
         aria-label={computedAriaLabel}
       >
         {children}
-        {external && (
-          <span className='ml-1' aria-hidden='true'>
-            <ExternalLinkIcon />
-          </span>
-        )}
+        {external && <ArrowRight className='w-4 h-4 ml-2' aria-hidden='true' />}
       </a>
     )
   }
 )
 
 AccessibleLink.displayName = 'AccessibleLink'
-
-const ExternalLinkIcon = () => (
-  <svg
-    className='h-4 w-4'
-    xmlns='http://www.w3.org/2000/svg'
-    viewBox='0 0 20 20'
-    fill='currentColor'
-    aria-hidden='true'
-  >
-    <path d='M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z' />
-    <path d='M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z' />
-  </svg>
-)
