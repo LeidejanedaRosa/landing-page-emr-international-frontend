@@ -5,7 +5,7 @@ import type { CourseCardProps } from '../types'
 import { CourseCardContent } from './CourseCardContent'
 import { CourseCardFooter } from './CourseCardFooter'
 import { CourseCardHeader } from './CourseCardHeader'
-import { CourseImage } from './CourseImage'
+import { CourseCardImage } from './CourseCardImage'
 
 export const CourseCard = ({ course }: CourseCardProps) => {
   const { id, abbreviation, title, levels, metadata, images, variant } = course
@@ -22,7 +22,7 @@ export const CourseCard = ({ course }: CourseCardProps) => {
       aria-labelledby={`${cardId}-title`}
     >
       <div className='relative h-[75%] w-full overflow-hidden'>
-        <CourseImage images={images} />
+        <CourseCardImage images={images} />
         <div className='absolute top-4 right-4 bg-primary-900/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-capture-it text-white border border-primary-700 shadow-sm'>
           {abbreviation}
         </div>

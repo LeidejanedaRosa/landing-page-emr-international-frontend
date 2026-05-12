@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import type {
   Course,
   CourseLevel,
@@ -25,7 +24,7 @@ export interface CoursesHeaderProps {
   descriptionId: string
 }
 
-export interface CourseImageProps {
+export interface CourseCardImageProps {
   images: Course['images']
 }
 

@@ -1,6 +1,6 @@
-import type { CourseImageProps } from '../types'
+import type { CourseCardImageProps } from '../types'
 
-export const CourseImage = ({ images }: CourseImageProps) => (
+export const CourseCardImage = ({ images }: CourseCardImageProps) => (
   <picture className='w-full h-full'>
     {images.avif && (
       <source

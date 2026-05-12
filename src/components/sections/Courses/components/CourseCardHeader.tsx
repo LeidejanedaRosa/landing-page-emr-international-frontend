@@ -2,7 +2,6 @@ import type { CourseLevel, CourseLevelData } from '../../../../data/coursesData'
 import type { CourseStyleConfig } from '../types'
 import { CourseLevelTabs } from './CourseLevelTabs'
 
-/* eslint-disable no-unused-vars */
 interface CourseCardHeaderProps {
   abbreviation: string
   courseTitle: string
