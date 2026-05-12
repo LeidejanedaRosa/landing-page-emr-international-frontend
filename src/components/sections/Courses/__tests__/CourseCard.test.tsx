@@ -65,7 +65,7 @@ describe('CourseCard', () => {
     })
   })
 
-  describe('CourseImage', () => {
+  describe('EnrollmentCourseImage', () => {
     it('should render picture element with multiple sources', () => {
       render(<CourseCard course={mockEmergencyCourse} />)
       const picture = document.querySelector('picture')
