@@ -1,11 +1,9 @@
 import { type KeyboardEvent, useCallback, useRef } from 'react'
 
-/* eslint-disable no-unused-vars */
 interface UseIndicatorKeyboardOptions {
   totalSlides: number
   goToSlide: (index: number) => void
 }
-/* eslint-enable no-unused-vars */
 
 /**
  * Hook para navegação por teclado em indicadores de carrossel

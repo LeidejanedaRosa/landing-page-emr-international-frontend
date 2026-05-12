@@ -10,7 +10,6 @@ interface UseCarouselOptions {
   itemsVisible?: number
 }
 
-/* eslint-disable no-unused-vars */
 interface UseCarouselReturn {
   currentIndex: number
   isAutoPlaying: boolean
@@ -23,7 +22,6 @@ interface UseCarouselReturn {
   maxIndex: number
   hasMultiplePages: boolean
 }
-/* eslint-enable no-unused-vars */
 
 // eslint-disable-next-line max-lines-per-function
 export const useCarousel = ({

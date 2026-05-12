@@ -8,7 +8,6 @@ interface ErrorBoundaryState {
   errorInfo?: ErrorInfo
 }
 
-// eslint-disable-next-line no-unused-vars
 type ErrorHandler = (error: Error, errorInfo: ErrorInfo) => void
 
 interface FallbackProps {
@@ -18,7 +17,6 @@ interface FallbackProps {
 
 interface ErrorBoundaryProps {
   children: ReactNode
-  // eslint-disable-next-line no-unused-vars
   fallback?: ReactNode | ((fallbackProps: FallbackProps) => ReactNode)
   onError?: ErrorHandler
 }

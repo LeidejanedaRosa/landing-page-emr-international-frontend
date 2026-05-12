@@ -2,14 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 
 const TRANSITION_DURATION = 500
 
-/* eslint-disable no-unused-vars */
 interface UseSlideTransitionReturn {
   previousSlide: number | null
   isTransitioning: boolean
   shouldRenderSlide: (slideIndex: number) => boolean
   getSlideClassName: (slideIndex: number) => string
 }
-/* eslint-enable no-unused-vars */
 
 export const useSlideTransition = (
   currentSlide: number

@@ -4,7 +4,6 @@ import { AccessibleButton } from '../../ui/Accessibility'
 interface TabSwitcherProps {
   tabs: TabData[]
   activeTabId: string
-  // eslint-disable-next-line no-unused-vars
   onTabChange: (id: string) => void
   tabListId: string
 }

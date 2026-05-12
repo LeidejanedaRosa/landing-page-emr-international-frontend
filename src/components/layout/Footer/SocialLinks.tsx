@@ -12,7 +12,6 @@ const ICON_MAP = {
 
 interface SocialLinkButtonProps {
   social: SocialLink
-  // eslint-disable-next-line no-unused-vars
   onNavigate: (socialName: string) => void
 }
 

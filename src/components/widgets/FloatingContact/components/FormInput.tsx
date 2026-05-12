@@ -12,7 +12,6 @@ interface FormInputProps {
   error?: string
   min?: string
   Icon: LucideIcon
-  // eslint-disable-next-line no-unused-vars
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 

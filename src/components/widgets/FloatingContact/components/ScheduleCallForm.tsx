@@ -8,11 +8,8 @@ import FormInput from './FormInput'
 interface ScheduleCallFormProps {
   formData: ScheduleCallFormData
   errors: Partial<ScheduleCallFormData>
-  // eslint-disable-next-line no-unused-vars
   onSubmit: (e: React.FormEvent) => void
-  // eslint-disable-next-line no-unused-vars
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  // eslint-disable-next-line no-unused-vars
   onPhoneChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 

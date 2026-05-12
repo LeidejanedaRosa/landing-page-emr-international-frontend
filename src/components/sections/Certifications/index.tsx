@@ -84,7 +84,7 @@ CarouselNavigation.displayName = 'CarouselNavigation'
 interface CarouselIndicatorsProps {
   total: number
   current: number
-  onSelect: (arg: number) => void // eslint-disable-line no-unused-vars
+  onSelect: (arg: number) => void
 }
 
 const CarouselIndicators: React.FC<CarouselIndicatorsProps> = memo(
@@ -184,7 +184,7 @@ interface CertificationsHandlersParams {
   announce: ReturnType<typeof useScreenReaderAnnouncement>['announce']
   nextSlide: () => void
   previousSlide: () => void
-  goToSlide: (arg: number) => void // eslint-disable-line no-unused-vars
+  goToSlide: (arg: number) => void
   currentIndex: number
   maxIndex: number
 }
@@ -246,7 +246,6 @@ interface CertificationsSectionContentProps {
   handleNext: () => void
   realCurrentIndex: number
   totalItems: number
-  // eslint-disable-next-line no-unused-vars
   handleGoToSlide: (arg: number) => void
   touchHandlers: React.DOMAttributes<HTMLElement>
 }

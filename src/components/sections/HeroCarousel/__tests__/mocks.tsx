@@ -52,7 +52,6 @@ interface CarouselContainerMockProps {
   totalSlides: number
   onPrev: () => void
   onNext: () => void
-  // eslint-disable-next-line no-unused-vars
   onSelect: (index: number) => void
   onPause: () => void
   onResume: () => void

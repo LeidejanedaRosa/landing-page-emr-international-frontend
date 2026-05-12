@@ -5,7 +5,6 @@ import { type Metric } from 'web-vitals'
 
 export interface WebVitalsConfig {
   endpoint?: string
-  // eslint-disable-next-line no-unused-vars
   onMetric?: (_metric: Metric) => void
 
   debug?: boolean
