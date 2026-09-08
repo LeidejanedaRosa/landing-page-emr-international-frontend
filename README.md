@@ -263,14 +263,15 @@ Verifique os dados da empresa em [src/data/companyInfo.ts](src/data/companyInfo.
 
 Copie `.env.example` para `.env.local` e preencha conforme necessário.
 
-| Variável              | Obrigatória | Descrição                                                        |
-| --------------------- | ----------- | ---------------------------------------------------------------- |
-| `PLAYWRIGHT_BASE_URL` | Não         | URL base para testes E2E. Padrão: `http://localhost:3000`        |
-| `VITE_SENTRY_DSN`     | Produção    | DSN do projeto no Sentry para monitoramento de erros             |
-| `SENTRY_AUTH_TOKEN`   | CI/CD       | Token de autenticação para upload de source maps                 |
-| `SENTRY_ORG`          | CI/CD       | Slug da organização no Sentry                                    |
-| `SENTRY_PROJECT`      | CI/CD       | Nome do projeto no Sentry                                        |
-| `VITE_APP_VERSION`    | CI/CD       | Versão da release (obrigatória em builds de produção com Sentry) |
+| Variável              | Obrigatória | Descrição                                                          |
+| --------------------- | ----------- | ------------------------------------------------------------------ |
+| `VITE_SITE_URL`       | Recomendada | Origem do site nas meta tags (canonical/OG/Twitter). Ver seção SEO |
+| `PLAYWRIGHT_BASE_URL` | Não         | URL base para testes E2E. Padrão: `http://localhost:3000`          |
+| `VITE_SENTRY_DSN`     | Produção    | DSN do projeto no Sentry para monitoramento de erros               |
+| `SENTRY_AUTH_TOKEN`   | CI/CD       | Token de autenticação para upload de source maps                   |
+| `SENTRY_ORG`          | CI/CD       | Slug da organização no Sentry                                      |
+| `SENTRY_PROJECT`      | CI/CD       | Nome do projeto no Sentry                                          |
+| `VITE_APP_VERSION`    | CI/CD       | Versão da release (obrigatória em builds de produção com Sentry)   |
 
 Consulte [docs/CICD-SENTRY-CONFIGURACAO.md](docs/CICD-SENTRY-CONFIGURACAO.md) para o guia completo de configuração do Sentry em CI/CD.
 
@@ -286,6 +287,7 @@ Consulte [docs/CICD-SENTRY-CONFIGURACAO.md](docs/CICD-SENTRY-CONFIGURACAO.md) pa
 | `npm run build`         | Build de produção com TypeScript + Vite                 |
 | `npm run build:analyze` | Build + abre visualizador de bundle no browser          |
 | `npm run preview`       | Serve a build de produção localmente                    |
+| `npm run og:image`      | Regenera `public/social-image.jpg` (prévia social)      |
 
 ### Qualidade de Código
 
@@ -441,6 +443,34 @@ O projeto segue a **WCAG 2.1 Nível AA** como padrão mínimo.
 ### Meta tags
 
 Gerenciadas diretamente no `index.html` com Open Graph e Twitter Cards configurados.
+
+A origem do site (`canonical`, `og:url`, `og:image`, `twitter:image`) usa o token
+`%SITE_URL%`, substituído no build pelo plugin `src/plugins/html-site-url.ts` com o
+valor de `VITE_SITE_URL`. Fonte única da verdade: cada ambiente resolve para a
+própria origem sem editar as meta tags.
+
+- **Produção**: defina `VITE_SITE_URL=https://emr.international` no painel da Vercel.
+- **Preview deploys**: defina para a URL do preview, senão as tags apontam para o
+  domínio de produção (fallback).
+- **Local / CI**: sem a variável, o plugin usa `https://emr.international` — o build
+  nunca emite um `%SITE_URL%` não resolvido.
+
+### Imagem social (Open Graph / Twitter card)
+
+`public/social-image.jpg` (1200×630, proporção 1.91:1) é o que aparece ao
+compartilhar o link no LinkedIn, Facebook e WhatsApp. É gerada por script a partir
+dos assets da marca:
+
+```bash
+npm run og:image   # regenera public/social-image.jpg
+```
+
+Edite `scripts/generate-og-image.mjs` (título, subtítulo, recorte) e rode o script
+novamente; commite o arquivo gerado.
+
+> Após publicar, force o recache no [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/)
+> e no [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) —
+> essas plataformas mantêm cache agressivo da prévia anterior.
 
 ### JSON-LD (Dados Estruturados)
 

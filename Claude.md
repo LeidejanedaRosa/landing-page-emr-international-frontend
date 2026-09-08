@@ -78,7 +78,9 @@ src/
 
 **Routing**: sem React Router — navegação é por scroll e âncoras (`#section-id`). Não introduzir biblioteca de roteamento.
 
-**Variáveis de ambiente**: arquivos `.env.local` e `.env.production` com prefixo `VITE_` para variáveis injetadas em build-time. Variável principal: `VITE_SENTRY_DSN`.
+**Variáveis de ambiente**: arquivos `.env.local` e `.env.production` com prefixo `VITE_` para variáveis injetadas em build-time. Principais: `VITE_SENTRY_DSN` (Sentry) e `VITE_SITE_URL` (origem do site nas meta tags — ver abaixo).
+
+**Origem do site nas meta tags**: `index.html` usa o token `%SITE_URL%` em `canonical`, `og:url`, `og:image` e `twitter:image`. O plugin `src/plugins/html-site-url.ts` substitui pelo valor de `VITE_SITE_URL` no build (padrão: `https://emr.international`). Não hardcodar domínio nas meta tags. A imagem social (`public/social-image.jpg`, 1200×630) é gerada por `npm run og:image` (`scripts/generate-og-image.mjs`).
 
 ---
 
