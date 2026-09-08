@@ -64,6 +64,54 @@ test.describe('SEO Metadata Tests', () => {
       expect(content).toMatch(/\.(jpg|jpeg|png|webp|avif)(\?[^?]*)?$/i)
     })
 
+    test('og:image must be an absolute URL (crawlers do not resolve relative paths)', async ({
+      page,
+    }) => {
+      const content = await page
+        .locator('meta[property="og:image"]')
+        .getAttribute('content')
+      expect(content).toMatch(/^https?:\/\//)
+    })
+
+    test('og:image shares the same origin as og:url', async ({ page }) => {
+      const image = await page
+        .locator('meta[property="og:image"]')
+        .getAttribute('content')
+      const url = await page
+        .locator('meta[property="og:url"]')
+        .getAttribute('content')
+      expect(new URL(image!).origin).toBe(new URL(url!).origin)
+    })
+
+    test('og:image resolves to a real image on the deployed site', async ({
+      page,
+      request,
+    }) => {
+      const image = await page
+        .locator('meta[property="og:image"]')
+        .getAttribute('content')
+      // Fetch by path against the site under test, so the assertion is
+      // hermetic (no dependency on the hardcoded production origin).
+      const response = await request.get(new URL(image!).pathname)
+      expect(response.status()).toBe(200)
+      expect(response.headers()['content-type']).toMatch(/^image\//)
+    })
+
+    test('og:image declares dimensions and descriptive alt text', async ({
+      page,
+    }) => {
+      await expect(
+        page.locator('meta[property="og:image:width"]')
+      ).toHaveAttribute('content', '1200')
+      await expect(
+        page.locator('meta[property="og:image:height"]')
+      ).toHaveAttribute('content', '630')
+
+      await expect(
+        page.locator('meta[property="og:image:alt"]')
+      ).toHaveAttribute('content', /.{20,}/)
+    })
+
     test('should have og:url', async ({ page }) => {
       const ogUrl = page.locator('meta[property="og:url"]')
       await expect(ogUrl).toHaveAttribute('content')
@@ -105,6 +153,21 @@ test.describe('SEO Metadata Tests', () => {
     test('should have twitter:image', async ({ page }) => {
       const twitterImage = page.locator('meta[name="twitter:image"]')
       await expect(twitterImage).toHaveAttribute('content')
+    })
+
+    test('twitter:image matches og:image and has alt text', async ({
+      page,
+    }) => {
+      const ogImage = await page
+        .locator('meta[property="og:image"]')
+        .getAttribute('content')
+      await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+        'content',
+        ogImage!
+      )
+      await expect(
+        page.locator('meta[name="twitter:image:alt"]')
+      ).toHaveAttribute('content', /.{20,}/)
     })
   })
 
