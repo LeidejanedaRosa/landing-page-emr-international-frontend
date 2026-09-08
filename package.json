@@ -12,6 +12,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "preview": "vite preview",
+    "og:image": "node scripts/generate-og-image.mjs",
     "prepare": "husky",
     "test": "vitest",
     "test:ui": "vitest --ui",
