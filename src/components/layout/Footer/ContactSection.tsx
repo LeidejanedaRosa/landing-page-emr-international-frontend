@@ -6,7 +6,7 @@ import { SocialLinks } from './SocialLinks'
 export const ContactSection: React.FC = () => {
   return (
     <address className='flex flex-col items-start not-italic'>
-      <h3 className='text-lg font-semibold mb-4 text-white'>Contato</h3>
+      <h2 className='text-lg font-semibold mb-4 text-white'>Contato</h2>
       <p className='text-gray-300 text-sm mb-6'>
         Fale conosco pelas redes sociais
       </p>
