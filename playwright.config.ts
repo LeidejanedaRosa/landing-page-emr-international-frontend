@@ -72,11 +72,17 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+  /*
+   * Run the local dev server before the tests — unless PLAYWRIGHT_BASE_URL is
+   * set, in which case the tests target that URL and the caller owns the server
+   * (e.g. the SEO workflow serves the production build itself).
+   */
+  webServer: process.env.PLAYWRIGHT_BASE_URL
+    ? undefined
+    : {
+        command: 'npm run dev',
+        url: 'http://localhost:3000',
+        reuseExistingServer: !process.env.CI,
+        timeout: 120 * 1000,
+      },
 })
