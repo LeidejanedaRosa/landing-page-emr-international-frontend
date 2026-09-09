@@ -6,6 +6,13 @@ import { defineConfig, devices } from '@playwright/test'
  */
 export default defineConfig({
   testDir: './tests',
+  /*
+   * performance.spec.ts measures Core Web Vitals and must run against a
+   * production build on Chromium only — that is playwright.perf.config.ts
+   * (`npm run test:e2e:perf`). Running it here (dev server, every browser)
+   * produces meaningless, flaky timings.
+   */
+  testIgnore: '**/performance.spec.ts',
   /* Run tests in files in parallel (serial on CI to conserve resources) */
   fullyParallel: !process.env.CI,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
