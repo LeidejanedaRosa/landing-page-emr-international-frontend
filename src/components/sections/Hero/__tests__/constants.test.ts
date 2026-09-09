@@ -102,10 +102,6 @@ describe('Hero constants', () => {
         expect(HERO_CONTENT.visual.alt.length).toBeGreaterThan(0)
       })
 
-      it('should have ariaLabel', () => {
-        expect(HERO_CONTENT.visual.ariaLabel).toBeDefined()
-      })
-
       it('should have badge with label and ariaLabel', () => {
         expect(HERO_CONTENT.visual.badge.label).toBe('Simulação realística')
         expect(HERO_CONTENT.visual.badge.ariaLabel).toBeDefined()

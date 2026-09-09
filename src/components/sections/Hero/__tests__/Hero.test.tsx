@@ -161,13 +161,13 @@ describe('Hero', () => {
       expect(badge).toBeInTheDocument()
     })
 
-    it('should render visual aside with correct aria-label', () => {
+    it('renders the visual as a plain container, not a complementary landmark', () => {
       render(<Hero />)
 
-      const aside = screen.getByRole('complementary', {
-        name: /imagem ilustrativa de treinamento tático/i,
-      })
-      expect(aside).toBeInTheDocument()
+      expect(
+        screen.queryByRole('complementary', { name: /imagem ilustrativa/i })
+      ).not.toBeInTheDocument()
+      expect(screen.getByTestId('hero-visual')).toBeInTheDocument()
     })
   })
 
@@ -271,10 +271,9 @@ describe('Hero', () => {
     it('should have landscape mobile classes for visual', () => {
       render(<Hero />)
 
-      const aside = screen.getByRole('complementary', {
-        name: /imagem ilustrativa/i,
-      })
-      expect(aside).toHaveClass('landscape-mobile:w-1/2')
+      expect(screen.getByTestId('hero-visual')).toHaveClass(
+        'landscape-mobile:w-1/2'
+      )
     })
   })
 })
