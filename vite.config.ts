@@ -5,10 +5,12 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
+import { htmlSiteUrl } from './src/plugins/html-site-url'
 import { securityHeaders } from './src/plugins/security-headers'
 
 export default defineConfig({
   plugins: [
+    htmlSiteUrl(),
     react(),
     ...(process.env.NODE_ENV === 'production'
       ? [

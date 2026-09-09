@@ -81,6 +81,21 @@ else
     echo "   CI / Vercel: set the variables in the platform environment instead."
 fi
 
+# Check 2b: Validate social share image and site origin
+echo ""
+echo "🖼️  Checking social share image (Open Graph / Twitter card)..."
+if [ -f public/social-image.jpg ]; then
+    report_success "Social share image found (public/social-image.jpg)"
+else
+    report_error "Missing public/social-image.jpg — social preview (LinkedIn/Facebook/WhatsApp) will break"
+    echo "   Run 'npm run og:image' to generate it, then commit the file"
+fi
+
+if [ -f .env.production ] && ! grep -qE '^VITE_SITE_URL=[[:space:]]*[^[:space:]]' .env.production; then
+    report_warning "VITE_SITE_URL not set (or blank) in .env.production — canonical/OG tags fall back to the default origin"
+    echo "   Also configure it in the Vercel dashboard (Production and Preview environments)"
+fi
+
 # Check 3: Check for TODO comments in production code
 echo ""
 echo "📝 Checking for TODO comments in production code..."
