@@ -30,7 +30,6 @@ export const HERO_CONTENT = {
   },
   visual: {
     alt: 'Operadores táticos em treinamento real de atendimento pré-hospitalar',
-    ariaLabel: 'Imagem ilustrativa de treinamento tático',
     badge: {
       label: 'Simulação realística',
       ariaLabel: 'Indicador de treinamento em ambiente real',

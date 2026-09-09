@@ -114,7 +114,7 @@ describe('Footer', () => {
 
       const contactHeading = screen.getByRole('heading', {
         name: 'Contato',
-        level: 3,
+        level: 2,
       })
       expect(contactHeading).toBeInTheDocument()
       expect(
@@ -228,10 +228,10 @@ describe('Footer', () => {
       expect(divider).toBeInTheDocument()
     })
 
-    it('should have proper heading hierarchy', () => {
+    it('uses level-2 headings so the page outline has no skipped levels', () => {
       render(<Footer />)
 
-      const headings = screen.getAllByRole('heading', { level: 3 })
+      const headings = screen.getAllByRole('heading', { level: 2 })
       expect(headings.length).toBeGreaterThanOrEqual(2)
       expect(headings[0]).toHaveTextContent('Links Rápidos')
       expect(headings[1]).toHaveTextContent('Contato')

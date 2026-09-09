@@ -8,7 +8,7 @@ test.describe('EMR International - Homepage', () => {
   test('should load homepage with correct title', async ({ page }) => {
     await expect(page).toHaveTitle(/EMR International/)
 
-    const logo = page.getByAltText(/EMR International/i)
+    const logo = page.getByRole('banner').getByAltText(/EMR International/i)
     await expect(logo).toBeVisible()
   })
 
@@ -16,14 +16,20 @@ test.describe('EMR International - Homepage', () => {
     const nav = page.getByRole('navigation', { name: 'Navegação principal' })
     await expect(nav).toBeVisible()
 
-    await expect(page.getByRole('link', { name: /sobre/i })).toBeVisible()
-    await expect(
-      page.getByRole('link', { name: /certificações/i })
-    ).toBeVisible()
-    await expect(
-      page.getByRole('link', { name: /treinamentos/i })
-    ).toBeVisible()
-    await expect(page.getByRole('link', { name: /contato/i })).toBeVisible()
+    const isMobile = (page.viewportSize()?.width ?? 1280) < 768
+    if (isMobile) {
+      await page.getByRole('button', { name: /menu/i }).click()
+      await page.getByTestId('mobile-menu').waitFor({ state: 'visible' })
+    }
+
+    for (const name of [
+      /sobre/i,
+      /certificações/i,
+      /treinamentos/i,
+      /contato/i,
+    ]) {
+      await expect(nav.getByRole('link', { name })).toBeVisible()
+    }
   })
 
   test('should navigate to sections via menu', async ({ page }) => {

@@ -10,6 +10,7 @@ import {
 import ErrorBoundary from '../error/ErrorBoundary'
 import { SectionErrorFallback } from '../error/SectionErrorFallback'
 import { SectionSkeleton } from '../ui/Loading'
+import { LAZY_SECTION_REVEAL_EVENT } from './lazySectionReveal'
 
 interface LazySectionProps {
   sectionName: string
@@ -29,20 +30,29 @@ export const LazySection = ({
 
   useEffect(() => {
     const el = placeholderRef.current
-    if (!el) return
+    let observer: IntersectionObserver | undefined
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect()
-        }
-      },
-      { rootMargin }
-    )
+    const reveal = () => {
+      setIsVisible(true)
+      observer?.disconnect()
+    }
 
-    observer.observe(el)
-    return () => observer.disconnect()
+    window.addEventListener(LAZY_SECTION_REVEAL_EVENT, reveal)
+
+    if (el) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) reveal()
+        },
+        { rootMargin }
+      )
+      observer.observe(el)
+    }
+
+    return () => {
+      window.removeEventListener(LAZY_SECTION_REVEAL_EVENT, reveal)
+      observer?.disconnect()
+    }
   }, [rootMargin])
 
   if (!isVisible) {
