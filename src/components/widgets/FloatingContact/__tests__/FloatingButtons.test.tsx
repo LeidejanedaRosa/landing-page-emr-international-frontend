@@ -22,6 +22,14 @@ describe('FloatingButtons', () => {
     ).toBeInTheDocument()
   })
 
+  it('is a labelled complementary landmark so the buttons sit inside a region', () => {
+    render(<FloatingButtons onPhoneClick={vi.fn()} />)
+
+    expect(
+      screen.getByRole('complementary', { name: 'Contato rápido' })
+    ).toBeInTheDocument()
+  })
+
   it('should call onPhoneClick when phone button is clicked', async () => {
     const mockOnPhoneClick = vi.fn()
     const { user } = setupTest(mockOnPhoneClick)
