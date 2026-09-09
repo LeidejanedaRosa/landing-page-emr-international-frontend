@@ -360,6 +360,20 @@ test.describe('SEO Content Quality Tests', () => {
     test('main content should have substantial text', async ({ page }) => {
       await page.waitForLoadState('load', { timeout: 30000 })
 
+      // Sections below the fold mount lazily on scroll (IntersectionObserver);
+      // walk the page so their content is rendered before it is measured.
+      await page.evaluate(async () => {
+        for (
+          let y = 0;
+          y < document.body.scrollHeight;
+          y += window.innerHeight
+        ) {
+          window.scrollTo(0, y)
+          await new Promise(resolve => setTimeout(resolve, 300))
+        }
+        window.scrollTo(0, 0)
+      })
+
       const sections = page.locator('main section')
       await sections.first().waitFor({
         state: 'visible',
