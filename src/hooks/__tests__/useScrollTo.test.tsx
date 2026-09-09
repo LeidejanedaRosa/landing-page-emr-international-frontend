@@ -149,58 +149,68 @@ describe('useScrollTo - scroll por data-section', () => {
   })
 })
 
-describe('useScrollTo - tratamento de erros', () => {
-  let mockElement: HTMLElement
-  let mockScrollIntoView: ReturnType<typeof vi.fn>
+describe('useScrollTo - alvo ainda não montado (lazy section)', () => {
   let mockConsoleWarn: ReturnType<typeof vi.fn>
 
   beforeEach(() => {
-    mockScrollIntoView = vi.fn()
-    mockElement = document.createElement('div')
-    mockElement.id = TEST_SECTION_ID
-    mockElement.scrollIntoView = mockScrollIntoView as any
-    document.body.appendChild(mockElement)
-
+    vi.useFakeTimers()
     mockConsoleWarn = vi.spyOn(console, 'warn').mockImplementation(() => {})
-
-    vi.stubGlobal('history', {
-      replaceState: vi.fn(),
-    })
+    vi.stubGlobal('history', { replaceState: vi.fn() })
   })
 
   afterEach(() => {
-    document.body.removeChild(mockElement)
+    vi.runOnlyPendingTimers()
+    vi.useRealTimers()
     mockConsoleWarn.mockRestore()
     vi.unstubAllGlobals()
+    document.body.innerHTML = ''
   })
 
-  it('deve avisar quando elemento não for encontrado', () => {
+  it('pede para revelar as lazy sections quando o alvo não está no DOM', () => {
+    const dispatchSpy = vi.spyOn(window, 'dispatchEvent')
     const { result } = renderHook(() => useScrollTo())
 
     result.current.scrollTo(NON_EXISTENT_ID)
+
+    expect(dispatchSpy).toHaveBeenCalledWith(
+      expect.objectContaining({ type: 'lazysection:reveal' })
+    )
+    dispatchSpy.mockRestore()
+  })
+
+  it('faz scroll assim que a seção aparece no DOM (snap, sem animação)', () => {
+    const { result } = renderHook(() => useScrollTo())
+    result.current.scrollTo(NON_EXISTENT_ID)
+
+    const section = document.createElement('section')
+    section.id = NON_EXISTENT_ID
+    const scrollIntoView = vi.fn()
+    section.scrollIntoView =
+      scrollIntoView as unknown as HTMLElement['scrollIntoView']
+    document.body.appendChild(section)
+
+    vi.advanceTimersByTime(120)
+
+    expect(scrollIntoView).toHaveBeenCalledWith({
+      behavior: 'auto',
+      block: 'start',
+    })
+    expect(window.history.replaceState).toHaveBeenCalledWith(
+      null,
+      '',
+      `#${NON_EXISTENT_ID}`
+    )
+  })
+
+  it('avisa e não atualiza a URL se a seção nunca montar', () => {
+    const { result } = renderHook(() => useScrollTo())
+    result.current.scrollTo(NON_EXISTENT_ID)
+
+    vi.advanceTimersByTime(5000)
 
     expect(mockConsoleWarn).toHaveBeenCalledWith(
-      'Scroll target not found:',
-      NON_EXISTENT_ID
+      `Scroll target not found: ${NON_EXISTENT_ID}`
     )
-    expect(mockScrollIntoView).not.toHaveBeenCalled()
-  })
-
-  it('deve avisar quando elemento com data-section não for encontrado', () => {
-    const { result } = renderHook(() => useScrollTo())
-
-    result.current.scrollTo({ dataSection: NON_EXISTENT_ID })
-
-    expect(mockConsoleWarn).toHaveBeenCalledWith('Scroll target not found:', {
-      dataSection: NON_EXISTENT_ID,
-    })
-  })
-
-  it('não deve atualizar URL se elemento não for encontrado', () => {
-    const { result } = renderHook(() => useScrollTo())
-
-    result.current.scrollTo(NON_EXISTENT_ID)
-
     expect(window.history.replaceState).not.toHaveBeenCalled()
   })
 })
