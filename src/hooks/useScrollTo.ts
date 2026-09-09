@@ -1,5 +1,7 @@
 import { useCallback } from 'react'
 
+import { scrollToSection } from '../utils/scrollToSection'
+
 type ScrollTarget = { id: string } | { dataSection: string }
 
 interface UseScrollToOptions {
@@ -7,9 +9,15 @@ interface UseScrollToOptions {
   block?: ScrollLogicalPosition
 }
 
-const DEFAULT_OPTIONS: UseScrollToOptions = {
+const DEFAULT_OPTIONS: Required<UseScrollToOptions> = {
   behavior: 'smooth',
   block: 'start',
+}
+
+const resolveId = (target: ScrollTarget | string): string => {
+  if (typeof target === 'string') return target
+  if ('id' in target) return target.id
+  return target.dataSection
 }
 
 export function useScrollTo(options: UseScrollToOptions = {}) {
@@ -17,35 +25,7 @@ export function useScrollTo(options: UseScrollToOptions = {}) {
 
   const scrollTo = useCallback(
     (target: ScrollTarget | string) => {
-      let element: Element | null = null
-      let sectionId = ''
-
-      if (typeof target === 'string') {
-        element =
-          document.getElementById(target) ||
-          document.querySelector(`[data-section="${CSS.escape(target)}"]`)
-        sectionId = target
-      } else if ('id' in target) {
-        element = document.getElementById(target.id)
-        sectionId = target.id
-      } else if ('dataSection' in target) {
-        element = document.querySelector(
-          `[data-section="${CSS.escape(target.dataSection)}"]`
-        )
-        sectionId = target.dataSection
-      }
-
-      if (!element) {
-        // eslint-disable-next-line no-console
-        console.warn(`Scroll target not found:`, target)
-        return
-      }
-
-      element.scrollIntoView({ behavior, block })
-
-      if (sectionId && window.history.replaceState) {
-        window.history.replaceState(null, '', `#${sectionId}`)
-      }
+      scrollToSection(resolveId(target), { behavior, block, updateHash: true })
     },
     [behavior, block]
   )

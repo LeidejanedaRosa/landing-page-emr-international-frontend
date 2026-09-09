@@ -14,6 +14,7 @@ import { BreadcrumbSchema } from './components/seo/schemas/BreadcrumbSchema'
 import { LoadingSpinner } from './components/ui/Loading'
 import FloatingContact from './components/widgets/FloatingContact'
 import { PRODUCTS_MODAL_CONFIG, productsData } from './data/productsData'
+import { useHashNavigation } from './hooks/useHashNavigation'
 import { useScrollTrigger } from './hooks/useScrollTrigger'
 
 const WhyItMattersSection = React.lazy(
@@ -33,6 +34,8 @@ const ReaperProtocol = React.lazy(
 const Footer = React.lazy(() => import('./components/layout/Footer/index'))
 
 function App() {
+  useHashNavigation()
+
   const { hasTriggered: showProductsModal, resetTrigger: closeProductsModal } =
     useScrollTrigger({
       targetSectionId: 'reaper-protocol',

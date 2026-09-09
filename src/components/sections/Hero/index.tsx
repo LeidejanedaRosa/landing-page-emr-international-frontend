@@ -30,14 +30,14 @@ const Hero = () => {
                         landscape-mobile:flex-row
                         md:grid md:grid-cols-2'
       >
-        <aside
+        <div
           className='relative min-h-[45vh] flex-shrink-0 w-full order-1
                         landscape-mobile:min-h-full landscape-mobile:w-1/2 landscape-mobile:order-2
                         md:h-full md:order-2'
-          aria-label={HERO_CONTENT.visual.ariaLabel}
+          data-testid='hero-visual'
         >
           <HeroVisual images={heroImages} alt={HERO_CONTENT.visual.alt} />
-        </aside>
+        </div>
         <div
           className='flex-1 min-h-0 relative z-20 flex flex-col justify-around gap-2 px-4 py-3 order-2
                         landscape-mobile:w-1/2 landscape-mobile:gap-3 landscape-mobile:py-8 landscape-mobile:px-8 landscape-mobile:order-1

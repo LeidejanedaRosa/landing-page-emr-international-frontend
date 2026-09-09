@@ -24,12 +24,12 @@ export const QuickLinks: React.FC<QuickLinksProps> = ({ navigationLinks }) => {
       aria-labelledby={`${quickLinksId}-heading`}
       className='text-left lg:ml-20 lg:mb-8'
     >
-      <h3
+      <h2
         id={`${quickLinksId}-heading`}
         className='text-lg font-semibold mb-4 text-white'
       >
         Links Rápidos
-      </h3>
+      </h2>
       <ul className='space-y-3'>
         {navigationLinks.map(link => (
           <li key={link.id}>
