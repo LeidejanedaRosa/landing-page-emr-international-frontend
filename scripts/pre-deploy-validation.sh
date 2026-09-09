@@ -18,15 +18,18 @@ ERRORS=0
 WARNINGS=0
 
 # Function to report error
+# Note: ERRORS=$((...)) (not ((ERRORS++))) — the latter returns exit 1 when the
+# result is 0, which `set -e` treats as fatal and aborts the script on the first
+# error instead of collecting them all.
 report_error() {
     echo -e "${RED}❌ ERROR: $1${NC}"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
 }
 
 # Function to report warning
 report_warning() {
     echo -e "${YELLOW}⚠️  WARNING: $1${NC}"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
 }
 
 # Function to report success
@@ -70,13 +73,12 @@ if [ -f .env.production ]; then
         fi
     fi
 else
-    report_error "No .env.production file found"
-    echo "   Production environment configuration is required for deployment"
-    if [ -f .env.production.example ]; then
-        echo "   Copy .env.production.example to .env.production and configure with production values"
-    else
-        echo "   Create .env.production with production environment variables"
-    fi
+    # Not an error: CI and fresh clones have no .env.production — production
+    # secrets come from the platform (Vercel / GitHub Secrets), not a committed
+    # file. Warn so a local deploy still gets nudged.
+    report_warning "No .env.production file found"
+    echo "   Local deploys: copy .env.production.example to .env.production."
+    echo "   CI / Vercel: set the variables in the platform environment instead."
 fi
 
 # Check 3: Check for TODO comments in production code
