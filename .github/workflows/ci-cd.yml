@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main, beta]
+    branches: [main]
   pull_request:
     branches: [main]
 
@@ -180,40 +180,6 @@ jobs:
           retention-days: 30
 
   # ========================================
-  # ACCESSIBILITY TESTS
-  # ========================================
-  accessibility:
-    name: Accessibility Tests
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node Environment
-        uses: ./.github/actions/setup-node-env
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: Serve application
-        run: |
-          npx serve -s dist -p 3000 > /dev/null 2>&1 &
-          SERVER_PID=$!
-          sleep 5
-          trap "kill $SERVER_PID" EXIT
-
-      - name: Run axe accessibility tests
-        run: |
-          npx @axe-core/cli http://localhost:3000 --exit
-
-  # ========================================
   # PERFORMANCE TESTS (STRICT - No continue-on-error)
   # ========================================
   performance:
@@ -299,74 +265,3 @@ jobs:
               repo: context.repo.repo,
               body: body
             });
-
-  # ========================================
-  # DEPLOYMENT
-  # ========================================
-  deploy-staging:
-    name: Deploy to Staging
-    runs-on: ubuntu-latest
-    needs: [static-analysis, unit-tests, build, e2e, accessibility]
-    if: github.ref == 'refs/heads/beta'
-    environment: staging
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: Deploy to Staging
-        run: |
-          echo "🚀 Deploying to staging environment..."
-          # Aqui você adicionaria os comandos específicos do seu provedor de hosting
-          # Exemplos: Vercel, Netlify, AWS S3, etc.
-
-  deploy-production:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: [static-analysis, unit-tests, build, e2e, accessibility, performance]
-    if: github.ref == 'refs/heads/main'
-    # environment: production  # Descomente após criar o environment no GitHub
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: Deploy to Production
-        run: |
-          echo "🚀 Deploying to production environment..."
-          # Aqui você adicionaria os comandos específicos do seu provedor de hosting
-          # Para releases, crie um workflow separado que seja acionado por tags
-
-  # ========================================
-  # NOTIFICATIONS
-  # ========================================
-  notify:
-    name: Notify Team
-    runs-on: ubuntu-latest
-    needs: [deploy-production]
-    if: always()
-
-    steps:
-      - name: Notify on success
-        if: needs.deploy-production.result == 'success'
-        run: |
-          echo "✅ Deployment successful!"
-          # Adicione aqui notificações para Slack, Discord, etc.
-
-      - name: Notify on failure
-        if: needs.deploy-production.result == 'failure'
-        run: |
-          echo "❌ Deployment failed!"
-          # Adicione aqui notificações de falha
