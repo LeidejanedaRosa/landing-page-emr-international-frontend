@@ -41,9 +41,7 @@ export interface ImageOnlyTestimonial extends BaseTestimonial {
 }
 
 export type Testimonial =
-  | FullTestimonial
-  | TextOnlyTestimonial
-  | ImageOnlyTestimonial
+  FullTestimonial | TextOnlyTestimonial | ImageOnlyTestimonial
 
 export interface UseTestimonialsCarouselOptions {
   totalSlides: number

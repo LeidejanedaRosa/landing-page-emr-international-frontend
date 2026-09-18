@@ -104,11 +104,28 @@ jobs:
           VITE_APP_VERSION: ${{ github.sha }}
 
       - name: Run security audit (production dependencies only)
-        # Only the production dependency tree ships in the bundle. Dev-tool
-        # advisories are tracked separately (Dependabot / periodic `npm audit
-        # fix`) rather than blocking every PR — and `npm audit fix --force`
-        # would downgrade @lhci/cli to a broken 0.x.
+        # Only the production dependency tree ships in the bundle — kept as
+        # its own gate so a real regression here is never masked by the
+        # dev-dependency baseline check below.
         run: npm audit --omit=dev --audit-level high
+
+      - name: Run security audit (all dependencies)
+        # `npm audit fix --force` would downgrade @lhci/cli to a broken 0.x
+        # (see docs/DECISIONS.md), so this compares against a known baseline
+        # instead of requiring a clean report. Baseline: 6 high-severity
+        # findings, all extract-zip (GHSA-jmr9-qjv8-65gv, GHSA-7pqw-9j4j-h8q3)
+        # via @lhci/cli's lighthouse/puppeteer-core chain — no fix published
+        # (`npm view extract-zip versions` confirms 2.0.1 is the latest
+        # release). Fails only if new high/critical findings appear beyond
+        # this documented residual.
+        run: |
+          npm audit --audit-level high --json > audit.json || true
+          COUNT=$(jq '.metadata.vulnerabilities.high + .metadata.vulnerabilities.critical' audit.json)
+          echo "High+critical vulnerabilities: $COUNT (documented baseline: 6)"
+          if [ "$COUNT" -gt 6 ]; then
+            echo "::error::New high/critical vulnerabilities beyond the documented extract-zip residual — run 'npm audit' and update docs/DECISIONS.md"
+            exit 1
+          fi
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4

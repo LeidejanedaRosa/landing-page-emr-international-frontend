@@ -12,8 +12,7 @@ interface TestimonialsSchemaProps {
 }
 
 type TestimonialWithRating =
-  | FullTestimonial
-  | (TextOnlyTestimonial & { rating: number })
+  FullTestimonial | (TextOnlyTestimonial & { rating: number })
 
 function hasRatingAndText(t: Testimonial): t is TestimonialWithRating {
   return (
