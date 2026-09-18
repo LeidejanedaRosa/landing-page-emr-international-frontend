@@ -4,6 +4,33 @@ Registro de decisões de tooling, configuração e arquitetura com contexto, alt
 
 ---
 
+## 2026-09-18 — Repositório tornado público + branch protection em `main`
+
+**Contexto**: repositório privado no plano free do GitHub — `gh api PUT .../branches/main/protection`
+retornava 403 (`"Upgrade to GitHub Pro or make this repository public to enable this feature"`).
+Sem branch protection de verdade, nada além de revisão manual impedia um push direto (ou merge)
+com CI vermelho. Mesmo achado e mesma solução já aplicados no `faladoria-web`.
+
+**Decisão**: `gh repo edit --visibility public --accept-visibility-change-consequences` — é só o
+frontend estático da EMR International (landing page institucional), sem segredo commitado nem
+lógica de negócio sensível (confirmado nas explorações iniciais desta rodada). Confirmado
+explicitamente com a usuária no momento exato da execução, apesar de já decidido no plano —
+mudança de visibilidade é difícil de desfazer de verdade (histórico exposto não some ao voltar
+pra privado).
+
+Branch protection em `main` configurada via `gh api PUT .../branches/main/protection`:
+`enforce_admins: true`, sem revisão obrigatória de PR, `required_status_checks.contexts` com os
+7 checks reais confirmados passando limpo na `main` antes de configurar:
+`Static Analysis (Lint, Format, TypeScript)`, `Unit Tests & Coverage`, `Build & Security Scan`,
+`E2E Tests`, `Performance Tests`, `lighthouse`, `Run SEO & Accessibility Tests` — cobertura
+completa (lint/type-check/format, testes unitários, audit de dependências, E2E, Lighthouse,
+SEO/acessibilidade), não só os 5 jobs do `ci-cd.yml`.
+
+**Validação**: `gh repo view --json visibility` confirma `PUBLIC`. Resposta da API de proteção
+confirma os 7 contexts configurados exatamente como pretendido.
+
+---
+
 ## 2026-09-18 — `aggregationMethod: median` no Lighthouse CI (achado durante o PR #27)
 
 **Contexto**: o job `lighthouse` (workflow `lighthouse.yml`) falhou duas vezes seguidas no PR de
