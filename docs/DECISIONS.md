@@ -4,6 +4,27 @@ Registro de decisões de tooling, configuração e arquitetura com contexto, alt
 
 ---
 
+## 2026-09-18 — Commitlint valida Conventional Commits no hook `commit-msg`
+
+**Contexto**: `Claude.md` documenta Conventional Commits como política obrigatória, mas nada
+forçava isso — `.husky/` só tinha `pre-commit` (lint-staged) e `pre-push` (testes/build), sem
+`commit-msg`. Mesmo gap já identificado e corrigido no `faladoria-web`/`faladoria-backend`.
+
+**Decisão**: `@commitlint/cli` + `@commitlint/config-conventional`, instalados diretamente na
+versão `20.5.3` (não `latest`) — a série `21.x` inteira declara `engines.node >= 22.12.0`,
+incompatível com o Node 20 que este projeto usa de propósito (`NODE_VERSION: '20'` no
+`ci-cd.yml`), achado já conhecido do `faladoria-web` aplicado aqui direto, sem precisar
+redescobrir o problema. `commitlint.config.cjs` (extensão `.cjs` explícita — o projeto usa
+`"type": "module"`, então um `.js` seria interpretado como ESM) estendendo
+`@commitlint/config-conventional`. Novo hook `.husky/commit-msg` rodando `npx commitlint --edit
+"$1"`.
+
+**Validação**: testado empiricamente antes de confiar — `git commit -m "bad message no type"`
+foi rejeitado (`subject may not be empty`, `type may not be empty`), sem criar commit; o commit
+real desta mudança, com mensagem no formato correto, passou normalmente pelo próprio hook.
+
+---
+
 ## 2026-09-16 — Remoção de jobs mortos/redundantes do `ci-cd.yml`
 
 **Contexto**: `deploy-staging`, `deploy-production` e `notify` eram placeholders (`echo`, sem

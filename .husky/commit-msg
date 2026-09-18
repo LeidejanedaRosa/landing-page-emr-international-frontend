@@ -1,0 +1,3 @@
+echo "📋 Checando padrão de commit (Conventional Commits)..."
+
+npx commitlint --edit "$1"
