@@ -22,13 +22,7 @@ export interface NavigationItem {
   href: string
   isCurrent?: boolean
   ariaCurrent?:
-    | boolean
-    | 'page'
-    | 'step'
-    | 'location'
-    | 'date'
-    | 'time'
-    | 'true'
+    boolean | 'page' | 'step' | 'location' | 'date' | 'time' | 'true'
   children?: NavigationItem[]
 }
 
