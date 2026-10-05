@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test'
 
+const STACKED_LAYOUT_MAX_WIDTH = 767
+const PHOTO_ASPECT_RATIO = 3 / 2
+
 const CONSTRAINED_VIEWPORTS = [
   { name: 'smallest supported phone', width: 320, height: 568 },
   { name: 'short embed such as a portfolio iframe', width: 375, height: 440 },
@@ -65,6 +68,22 @@ for (const { name, width, height } of CONSTRAINED_VIEWPORTS) {
 
       expect(clipped.hiddenOverflow).toBeLessThanOrEqual(0)
       expect(clipped.outside).toEqual([])
+    })
+
+    test('should keep the photo tall enough to show it uncropped vertically', async ({
+      page,
+    }) => {
+      test.skip(
+        width > STACKED_LAYOUT_MAX_WIDTH,
+        'photo fills a side column instead of a stacked band'
+      )
+
+      const photo = await page.getByTestId('hero-visual').boundingBox()
+
+      expect(photo).not.toBeNull()
+      expect(photo!.height).toBeGreaterThanOrEqual(
+        photo!.width / PHOTO_ASPECT_RATIO - 1
+      )
     })
 
     test('should not scroll horizontally', async ({ page }) => {
