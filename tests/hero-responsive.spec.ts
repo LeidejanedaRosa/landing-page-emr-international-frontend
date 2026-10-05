@@ -53,6 +53,7 @@ for (const { name, width, height } of CONSTRAINED_VIEWPORTS) {
             .filter(element => {
               const box = element.getBoundingClientRect()
               return (
+                box.top < bounds.top - 1 ||
                 box.bottom > bounds.bottom + 1 ||
                 box.right > bounds.right + 1 ||
                 box.left < bounds.left - 1
