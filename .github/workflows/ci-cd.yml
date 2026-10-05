@@ -110,20 +110,35 @@ jobs:
         run: npm audit --omit=dev --audit-level high
 
       - name: Run security audit (all dependencies)
-        # `npm audit fix --force` would downgrade @lhci/cli to a broken 0.x
-        # (see docs/DECISIONS.md), so this compares against a known baseline
-        # instead of requiring a clean report. Baseline: 6 high-severity
-        # findings, all extract-zip (GHSA-jmr9-qjv8-65gv, GHSA-7pqw-9j4j-h8q3)
-        # via @lhci/cli's lighthouse/puppeteer-core chain — no fix published
-        # (`npm view extract-zip versions` confirms 2.0.1 is the latest
-        # release). Fails only if new high/critical findings appear beyond
-        # this documented residual.
+        # Dev-only findings with no published fix are accepted one advisory at
+        # a time (rationale for each in docs/DECISIONS.md). Any high/critical
+        # advisory outside this list fails the build. npm's own totals count
+        # every package on the dependency path, not advisories, so a single
+        # advisory in a widely shared package inflates them — hence the IDs.
+        env:
+          ACCEPTED_ADVISORIES: >-
+            GHSA-jmr9-qjv8-65gv
+            GHSA-7pqw-9j4j-h8q3
+            GHSA-vfj7-8cjw-p6xm
         run: |
-          npm audit --audit-level high --json > audit.json || true
-          COUNT=$(jq '.metadata.vulnerabilities.high + .metadata.vulnerabilities.critical' audit.json)
-          echo "High+critical vulnerabilities: $COUNT (documented baseline: 6)"
-          if [ "$COUNT" -gt 6 ]; then
-            echo "::error::New high/critical vulnerabilities beyond the documented extract-zip residual — run 'npm audit' and update docs/DECISIONS.md"
+          npm audit --json > audit.json || true
+          FOUND=$(jq -r '[.vulnerabilities[].via[] | objects | select(.severity == "high" or .severity == "critical") | .url | split("/") | last] | unique | .[]' audit.json)
+          UNEXPECTED=""
+          for id in $FOUND; do
+            case " $ACCEPTED_ADVISORIES " in
+              *" $id "*) ;;
+              *) UNEXPECTED="$UNEXPECTED $id" ;;
+            esac
+          done
+          for id in $ACCEPTED_ADVISORIES; do
+            case " $(echo $FOUND) " in
+              *" $id "*) ;;
+              *) echo "::warning::$id is accepted but no longer reported — remove it from ACCEPTED_ADVISORIES" ;;
+            esac
+          done
+          echo "High/critical advisories found: $(echo $FOUND)"
+          if [ -n "$UNEXPECTED" ]; then
+            echo "::error::Unaccepted high/critical advisories:$UNEXPECTED — fix them or document the acceptance in docs/DECISIONS.md"
             exit 1
           fi
 
