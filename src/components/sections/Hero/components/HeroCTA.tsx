@@ -11,7 +11,7 @@ export const HeroCTA = memo<HeroCTAProps>(
         onClick={onClick}
         showArrow
         arrowClassName='w-4 h-4 sm:w-5 sm:h-5 relative z-10 transition-transform group-hover:translate-x-1'
-        className='group relative inline-flex items-center justify-center text-nowrap gap-2 rounded-lg sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-base transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] uppercase tracking-wide overflow-hidden w-full sm:w-auto'
+        className='group relative inline-flex items-center justify-center text-balance gap-2 rounded-lg sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 bg-red-600 hover:bg-red-700 text-white font-bold text-base transition-all duration-300 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] uppercase tracking-wide overflow-hidden w-full max-w-full sm:w-auto'
       >
         <span className='relative z-10 font-bold'>{text}</span>
 

@@ -56,6 +56,47 @@ não passa em silêncio.
 
 ---
 
+## 2026-10-05 — Hero dimensionado por altura mínima + CTA com quebra de linha
+
+**Contexto**: dois cortes de conteúdo no hero, ambos reproduzidos e medidos antes da correção:
+
+1. **CTA** (`HeroCTA`): `text-nowrap` + `overflow-hidden` no botão. O rótulo "CONHEÇA NOSSOS
+   TREINAMENTOS" precisa de ~368px (texto 296 + seta + padding) e o botão tem 288px em uma
+   tela de 320px — o texto vazava e era cortado. Não era só 320px: até ~380px a seta já
+   ficava cortada.
+2. **Hero** (`HeroCarousel`): o wrapper tinha altura **fixa** (`h-[100svh]`) e o hero usa
+   `overflow-hidden`. Quando a viewport é baixa, o conteúdo não cabe e é cortado sem scroll.
+   Caso real: o portfólio embute a página em um `<iframe>` de 375×440 — o conteúdo precisava
+   de 484px, o hero tinha 440px, e a prova social sumia.
+
+**Decisão**:
+
+- Wrapper do hero passa de `h-[...]` para `grid min-h-[...]`. Altura fixa é um teto; altura
+  mínima é um piso — em telas altas o hero continua ocupando a tela, em telas baixas ele
+  cresce com o conteúdo. O `grid` existe para o `h-full` do `Hero` continuar resolvendo: um
+  filho com `height: 100%` não resolve contra um pai que só tem `min-height`, mas resolve
+  contra a área de um grid item.
+- CTA: `text-nowrap` removido, `text-balance` + `max-w-full` adicionados. O rótulo quebra em
+  duas linhas quando não cabe, em vez de ser cortado. Também atende WCAG 1.4.10 (Reflow) e
+  1.4.4 (Resize Text): quem aumenta a fonte do navegador não perde o texto.
+
+**Alternativas descartadas**: reduzir a fonte do CTA (nem `text-sm` cabe em 320px, e `text-xs`
+fica ilegível e frágil a troca de fonte); encurtar o rótulo (muda copy, decisão de negócio);
+detectar iframe via JS (`window.self !== window.top`) e trocar o layout (trata o sintoma — o
+bug é qualquer viewport baixa, não o iframe em si).
+
+**Validação**: `tests/hero-responsive.spec.ts` mede o DOM real (rótulo dentro do botão, nenhum
+elemento do hero fora da área visível, sem scroll horizontal) em 320×568, 375×440, 768×1024 e
+1024×500, nos 4 projetos do Playwright. Rodado contra o código antigo, 4 dos 12 testes falham
+no Chromium — o teste pega a regressão de verdade, não só nome de classe.
+
+**Pendência conhecida**: `CarouselContainer` (caminho com matrículas abertas, hoje inativo
+porque `COURSES_DATA` está vazio) ainda usa `h-[100svh]` fixo. Lá os slides são posicionados
+de forma absoluta para a transição, então a mesma troca não se aplica direto — precisa ser
+tratado quando as turmas forem reativadas.
+
+---
+
 ## 2026-09-18 — Repositório tornado público + branch protection em `main`
 
 **Contexto**: repositório privado no plano free do GitHub — `gh api PUT .../branches/main/protection`
