@@ -4,6 +4,58 @@ Registro de decisões de tooling, configuração e arquitetura com contexto, alt
 
 ---
 
+## 2026-10-05 — Audit de dependências: allowlist por advisory (GHSA) no lugar da contagem
+
+**Contexto**: o step "Run security audit (all dependencies)" do `ci-cd.yml` quebrou no PR #29
+com `High+critical vulnerabilities: 20 (documented baseline: 6)`. O PR não tocava em
+dependência nenhuma — duas advisories novas foram publicadas contra pacotes já instalados:
+
+| Pacote            | Advisory                  | Correção publicada?                        |
+| ----------------- | ------------------------- | ------------------------------------------ |
+| `basic-ftp` 5.3.1 | GHSA-c475-qrg2-pj4r (DoS) | Sim — `6.2.2`                              |
+| `braces` 3.0.3    | GHSA-vfj7-8cjw-p6xm (DoS) | Não — `3.0.3` é a última versão que existe |
+
+`npm audit --omit=dev` continuou limpo: nada disso entra no bundle de produção.
+
+**Correção sobre a entrada de 2026-09-18**: o baseline "6" foi explicado lá como "2 advisories
+× 3 caminhos". Não é isso. `.metadata.vulnerabilities` do `npm audit` conta **pacotes
+afetados** — o pacote vulnerável mais cada pacote que depende dele até a raiz. Os 6 eram a
+cadeia `extract-zip` → `@puppeteer/browsers` → `puppeteer-core` → `lighthouse` → `@lhci/utils`
+→ `@lhci/cli`. Por isso uma única advisory no `braces` (dependência de `micromatch`,
+`chokidar`, `fast-glob`, `globby`, `unplugin`, `tailwindcss`, `rollup-plugin-copy`,
+`@sentry/vite-plugin`...) somou 10 de uma vez. A contagem mede o tamanho da árvore, não o
+número de problemas.
+
+**Decisão**:
+
+1. `basic-ftp` forçado para `>=6.2.2` via `overrides` — mesmo padrão de `tmp`/`uuid`. Só é
+   carregado por `get-uri` para URLs `ftp://` de PAC proxy, caminho que o Lighthouse CI não
+   exercita.
+2. O step deixa de comparar uma contagem e passa a comparar **IDs**: extrai com `jq` as
+   advisories high/critical reportadas e falha se alguma estiver fora de
+   `ACCEPTED_ADVISORIES`. É a revisão que a entrada de 2026-09-18 deixou prevista ("revisitar
+   se precisar de allowlist por advisory individual") — sem dependência nova, só `jq`.
+3. Advisories aceitas, todas dev-only e sem correção publicada:
+   - `GHSA-jmr9-qjv8-65gv`, `GHSA-7pqw-9j4j-h8q3` — `extract-zip` (já aceitas em 2026-09-18).
+   - `GHSA-vfj7-8cjw-p6xm` — `braces`. DoS por padrão glob profundamente aninhado. Aqui os
+     padrões vêm da nossa própria configuração (`content` do Tailwind, alvos do
+     `rollup-plugin-copy`), em tempo de build — não existe entrada de terceiros chegando até
+     ele.
+4. Se uma advisory aceita deixar de ser reportada (correção publicada e adotada), o step emite
+   `::warning::` pedindo a remoção — a lista não acumula exceção morta.
+
+**Alternativa rejeitada**: subir o baseline de 6 para 16. Uma linha de mudança, mas o número
+continuaria opaco (não diz _o que_ foi aceito) e voltaria a saltar na próxima advisory em
+pacote muito compartilhado.
+
+**Validação**: script do step extraído do YAML e rodado localmente com `jq` 1.7.1 contra o
+`npm audit --json` real: estado atual passa; removendo o GHSA do `braces` da lista, falha
+apontando o ID; um ID aceito que não aparece mais gera o warning sem falhar; `audit.json`
+inválido (ex.: erro de rede do `npm audit`) faz o `jq` falhar e o step quebra — falha fechada,
+não passa em silêncio.
+
+---
+
 ## 2026-10-05 — Hero dimensionado por altura mínima + CTA com quebra de linha
 
 **Contexto**: dois cortes de conteúdo no hero, ambos reproduzidos e medidos antes da correção:
