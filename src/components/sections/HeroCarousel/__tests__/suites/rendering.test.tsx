@@ -86,14 +86,15 @@ describe('HeroCarousel - Rendering', () => {
       expect(screen.queryByTestId('carousel-container')).not.toBeInTheDocument()
     })
 
-    it('should apply correct height classes without courses', () => {
+    it('should size the hero by minimum height so content is never clipped', () => {
       const { container } = render(<HeroCarousel />)
       const wrapper = container.firstChild as HTMLElement
 
-      expect(wrapper).toHaveClass('h-[100svh]')
-      expect(wrapper).toHaveClass('landscape-mobile:h-auto')
+      expect(wrapper).toHaveClass('grid')
+      expect(wrapper).toHaveClass('min-h-[100svh]')
       expect(wrapper).toHaveClass('landscape-mobile:min-h-[150vh]')
-      expect(wrapper).toHaveClass('md:h-[calc(100svh-150px)]')
+      expect(wrapper).toHaveClass('md:min-h-[calc(100svh-150px)]')
+      expect(wrapper.className).not.toMatch(/(^|\s|:)h-\[/)
     })
 
     it('should not initialize useCarousel with autoPlay when no courses', () => {
