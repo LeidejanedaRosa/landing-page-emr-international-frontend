@@ -31,9 +31,9 @@ const Hero = () => {
                         md:grid md:grid-cols-2'
       >
         <div
-          className='relative min-h-[45vh] flex-shrink-0 w-full order-1
+          className='relative min-h-[max(45vh,66.67vw)] flex-shrink-0 w-full order-1
                         landscape-mobile:min-h-full landscape-mobile:w-1/2 landscape-mobile:order-2
-                        md:h-full md:order-2'
+                        md:min-h-[45vh] md:h-full md:order-2'
           data-testid='hero-visual'
         >
           <HeroVisual images={heroImages} alt={HERO_CONTENT.visual.alt} />
