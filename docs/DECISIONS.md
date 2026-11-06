@@ -45,6 +45,9 @@ de saber em qual versão um erro começou.
 
 - release = `VITE_APP_VERSION` (se definida) ou `VERCEL_GIT_COMMIT_SHA`, a variável de sistema
   que o Vercel já fornece no build; sem nenhuma das duas, o plugin detecta o commit pelo git.
+- `VITE_APP_VERSION` com uma referência `$VAR`/`${VAR}` não expandida conta como ausente: o
+  defeito original voltaria se alguém cadastrasse a variável assim de novo (achado do CodeRabbit
+  na `faladoria-web`, generalizado para qualquer referência, não só `$VERCEL_GIT_COMMIT_SHA`).
 - `VERCEL_ENV === 'preview'` não cria release nem envia source maps.
 - source maps só são gerados quando vão ser enviados — o plugin apaga os `.map` depois do
   upload, então um build sem Sentry publicaria esses arquivos.

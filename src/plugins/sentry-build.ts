@@ -17,6 +17,17 @@ export interface SentryBuildConfig {
   release?: string
 }
 
+// Vercel does not expand `$VAR` references inside dashboard values: setting
+// VITE_APP_VERSION to "$VERCEL_GIT_COMMIT_SHA" shipped that literal text as the
+// release name, so any unexpanded reference counts as unset.
+const UNEXPANDED_REFERENCE = /^\${?\w+}?$/
+
+const explicitVersion = (value: string | undefined): string | undefined => {
+  const version = value?.trim()
+  if (!version || UNEXPANDED_REFERENCE.test(version)) return undefined
+  return version
+}
+
 /**
  * Returns the Sentry release settings for this build, or `null` when the build
  * must not create a release nor upload source maps.
@@ -38,11 +49,10 @@ export const resolveSentryBuild = (
   } = env
   if (!authToken || !org || !project) return null
 
-  // Vercel does not expand `$VAR` references inside dashboard values: setting
-  // VITE_APP_VERSION to "$VERCEL_GIT_COMMIT_SHA" shipped that literal text as
-  // the release name. The commit SHA is read from Vercel's own variable.
   const release =
-    env.VITE_APP_VERSION?.trim() || env.VERCEL_GIT_COMMIT_SHA || undefined
+    explicitVersion(env.VITE_APP_VERSION) ||
+    env.VERCEL_GIT_COMMIT_SHA ||
+    undefined
 
   return { org, project, authToken, release }
 }
