@@ -4,6 +4,23 @@ Registro de decisões de tooling, configuração e arquitetura com contexto, alt
 
 ---
 
+## 2026-11-06 — Limite de cobertura de 80% passa a ser cobrado
+
+**Contexto**: o `vitest.config.ts` declarava o limite em `thresholds: { global: { ... } }`, formato
+do Jest. No Vitest, toda chave de `thresholds` que não é métrica é lida como glob de arquivos;
+`global` não casa com nenhum arquivo, então o limite de 80% nunca foi cobrado — sem erro nem
+aviso. Achado ao corrigir o mesmo formato no `react-vite-template` (PR #4).
+
+**Decisão**: métricas movidas para `thresholds` direto. A cobertura atual já passa (statements
+92,91%, branches 84,25%, functions 92,69%, lines 93,77%), então nada quebra hoje; a diferença é que
+uma queda abaixo de 80% passa a falhar o CI.
+
+**Validação**: suíte completa com o limite de branches temporariamente em 90% — o formato antigo
+passa (limite ignorado); o novo falha com `Coverage for branches (84.25%) does not meet global
+threshold (90%)`.
+
+---
+
 ## 2026-10-05 — Foto do hero com altura mínima na proporção da própria imagem
 
 **Contexto**: depois da correção do corte do hero (entrada abaixo), sobrou um defeito visível
