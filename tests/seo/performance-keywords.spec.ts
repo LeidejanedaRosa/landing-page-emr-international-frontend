@@ -1,4 +1,17 @@
-import { expect, test } from '@playwright/test'
+import { expect, type Page, test } from '@playwright/test'
+
+// Sections below the fold mount lazily on scroll (IntersectionObserver); walk
+// the page so everything is rendered before it is measured.
+const mountLazySections = async (page: Page) => {
+  await page.waitForLoadState('load', { timeout: 30000 })
+  await page.evaluate(async () => {
+    for (let y = 0; y < document.body.scrollHeight; y += window.innerHeight) {
+      window.scrollTo(0, y)
+      await new Promise(resolve => setTimeout(resolve, 300))
+    }
+    window.scrollTo(0, 0)
+  })
+}
 
 test.describe('Performance & Core Web Vitals Tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -147,47 +160,36 @@ test.describe('Performance & Core Web Vitals Tests', () => {
     })
 
     test('images should use modern formats (WebP, AVIF)', async ({ page }) => {
-      const allImages = await page.locator('img').all()
-      const images = allImages.slice(0, 15)
-      let modernFormatCount = 0
+      await mountLazySections(page)
 
-      for (const img of images) {
-        const src = await img.getAttribute('src')
-
-        if (src && (src.includes('.webp') || src.includes('.avif'))) {
-          modernFormatCount++
-          continue
-        }
-
-        const parent = await img.evaluateHandle(el => el.parentElement)
-        try {
-          const parentTagName = await parent.evaluate(el =>
-            el?.tagName.toLowerCase()
-          )
-
-          if (parentTagName === 'picture') {
-            const sources = await parent.evaluate(el => {
-              const sourceElements = el?.querySelectorAll('source')
-              return Array.from(sourceElements || []).map(
-                s => s.getAttribute('type') || ''
-              )
-            })
-
-            if (
-              sources.some(
-                type => type.includes('webp') || type.includes('avif')
-              )
-            ) {
-              modernFormatCount++
+      // SVG is vector and already the right format for logos; like
+      // Lighthouse's "modern image formats" audit, only raster images count.
+      const rasterImages = await page.locator('img').evaluateAll(images =>
+        images
+          .map(img => {
+            const picture =
+              img.parentElement?.tagName === 'PICTURE'
+                ? img.parentElement
+                : null
+            return {
+              src: img.getAttribute('src') ?? '',
+              sourceTypes: Array.from(
+                picture?.querySelectorAll('source') ?? []
+              ).map(source => source.getAttribute('type') ?? ''),
             }
-          }
-        } finally {
-          await parent.dispose()
-        }
-      }
+          })
+          .filter(
+            ({ src }) => !/\.svg(\?|$)/i.test(src) && !src.startsWith('data:')
+          )
+      )
 
-      expect(images.length).toBeGreaterThan(0)
-      const modernFormatPercentage = (modernFormatCount / images.length) * 100
+      const isModern = ({ src, sourceTypes }: (typeof rasterImages)[number]) =>
+        /\.(webp|avif)(\?|$)/i.test(src) ||
+        sourceTypes.some(type => /webp|avif/.test(type))
+
+      expect(rasterImages.length).toBeGreaterThan(0)
+      const modernFormatPercentage =
+        (rasterImages.filter(isModern).length / rasterImages.length) * 100
       expect(modernFormatPercentage).toBeGreaterThanOrEqual(50)
     })
 
@@ -358,21 +360,7 @@ test.describe('SEO Content Quality Tests', () => {
 
   test.describe('Content Depth and Quality', () => {
     test('main content should have substantial text', async ({ page }) => {
-      await page.waitForLoadState('load', { timeout: 30000 })
-
-      // Sections below the fold mount lazily on scroll (IntersectionObserver);
-      // walk the page so their content is rendered before it is measured.
-      await page.evaluate(async () => {
-        for (
-          let y = 0;
-          y < document.body.scrollHeight;
-          y += window.innerHeight
-        ) {
-          window.scrollTo(0, y)
-          await new Promise(resolve => setTimeout(resolve, 300))
-        }
-        window.scrollTo(0, 0)
-      })
+      await mountLazySections(page)
 
       const sections = page.locator('main section')
       await sections.first().waitFor({
