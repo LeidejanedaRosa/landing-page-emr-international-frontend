@@ -119,7 +119,6 @@ jobs:
           ACCEPTED_ADVISORIES: >-
             GHSA-jmr9-qjv8-65gv
             GHSA-7pqw-9j4j-h8q3
-            GHSA-vfj7-8cjw-p6xm
         run: |
           npm audit --json > audit.json || true
           FOUND=$(jq -r '[.vulnerabilities[].via[] | objects | select(.severity == "high" or .severity == "critical") | .url | split("/") | last] | unique | .[]' audit.json)
