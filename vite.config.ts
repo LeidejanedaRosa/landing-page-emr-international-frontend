@@ -7,6 +7,9 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 import { htmlSiteUrl } from './src/plugins/html-site-url'
 import { securityHeaders } from './src/plugins/security-headers'
+import { resolveSentryBuild } from './src/plugins/sentry-build'
+
+const sentryBuild = resolveSentryBuild(process.env)
 
 export default defineConfig({
   plugins: [
@@ -113,29 +116,19 @@ export default defineConfig({
           }),
         ]
       : []),
-    ...(process.env.NODE_ENV === 'production' &&
-    process.env.SENTRY_AUTH_TOKEN &&
-    process.env.SENTRY_ORG &&
-    process.env.SENTRY_PROJECT
+    ...(sentryBuild
       ? [
           sentryVitePlugin({
-            org: process.env.SENTRY_ORG,
-            project: process.env.SENTRY_PROJECT,
-            authToken: process.env.SENTRY_AUTH_TOKEN,
+            org: sentryBuild.org,
+            project: sentryBuild.project,
+            authToken: sentryBuild.authToken,
             sourcemaps: {
               assets: './dist/**',
               ignore: ['node_modules'],
               filesToDeleteAfterUpload: ['./dist/**/*.map'],
             },
             release: {
-              name: (() => {
-                if (!process.env.VITE_APP_VERSION) {
-                  throw new Error(
-                    'VITE_APP_VERSION environment variable must be set for production builds with Sentry tracking'
-                  )
-                }
-                return process.env.VITE_APP_VERSION
-              })(),
+              name: sentryBuild.release,
               setCommits: {
                 auto: true,
                 ignoreMissing: true,
@@ -170,7 +163,9 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: process.env.NODE_ENV === 'production' ? 'hidden' : false,
+    // Generated only when uploaded: the plugin deletes them after upload, so a
+    // build without Sentry would otherwise publish its .map files.
+    sourcemap: sentryBuild ? 'hidden' : false,
     target: 'es2022',
     rollupOptions: {
       output: {

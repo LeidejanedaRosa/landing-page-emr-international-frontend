@@ -31,6 +31,64 @@ código antigo ele falha em 375×440.
 
 ---
 
+## 2026-11-05 — Release do Sentry: commit real e só em produção
+
+**Contexto**: o Sentry passou a mandar e-mail de "deploy" a cada build de preview do Vercel
+(inclusive os PRs do Dependabot), com a release chamada literalmente `$VERCEL_GIT_COMMIT_SHA`.
+A variável `VITE_APP_VERSION` tinha sido cadastrada no painel do Vercel com esse texto, mas o
+Vercel não expande `$VAR` dentro do valor de outra variável. Resultado: todo build, preview ou
+produção, caía na mesma release — source maps de builds diferentes misturados e nenhum jeito
+de saber em qual versão um erro começou.
+
+**Decisão**: a regra saiu do `vite.config.ts` para uma função pura,
+`resolveSentryBuild` (`src/plugins/sentry-build.ts`), coberta por testes:
+
+- release = `VITE_APP_VERSION` (se definida) ou `VERCEL_GIT_COMMIT_SHA`, a variável de sistema
+  que o Vercel já fornece no build; sem nenhuma das duas, o plugin detecta o commit pelo git.
+- `VERCEL_ENV === 'preview'` não cria release nem envia source maps.
+- source maps só são gerados quando vão ser enviados — o plugin apaga os `.map` depois do
+  upload, então um build sem Sentry publicaria esses arquivos.
+- removido o `throw` que exigia `VITE_APP_VERSION`: com a variável apagada do Vercel, ele
+  quebraria o próximo build de produção.
+
+**Exceção de tier registrada**: pelo padrão da Leidejane, Sentry entra só em projetos Tier 2/3,
+para não gastar a cota gratuita compartilhada da conta. Este é um site Tier 1, mas fica com o
+Sentry porque é site de cliente em produção, onde erro precisa ser visto.
+
+---
+
+## 2026-11-05 — Audit: 11 advisories novas em dependências de desenvolvimento
+
+**Contexto**: o step "Run security audit (all dependencies)" passou a falhar em todo PR, sem que
+nenhum PR mudasse dependência: 11 advisories high/critical foram publicadas desde 2026-10-05,
+todas em ferramentas de desenvolvimento. `npm audit --omit=dev` continuou limpo.
+
+| Pacote (via)                            | Advisories                                            | Correção          |
+| --------------------------------------- | ----------------------------------------------------- | ----------------- |
+| `storybook`                             | GHSA-f2ph-cmg5-wxc8 (crítica), GHSA-px85-f4q5-jh77    | `10.6.6`          |
+| `vite`                                  | GHSA-587h-7wmj-h5pm                                   | `7.3.7`           |
+| `sharp`                                 | GHSA-wq5f-xc86-pv6w                                   | `0.35.5`          |
+| `follow-redirects`                      | GHSA-q3jh-wrc6-jgq8, -8r9p-f939-6h3c, -mrwp-f3q8-3g9p | lockfile          |
+| `body-parser`, `joi`, `source-map-js`   | GHSA-27r3-jxmh-p828, -4528-x5fx-h6hg, -68fv-2mgg-jv7q | lockfile          |
+| `zod` 3 (`@lhci/cli` → `chromium-bidi`) | GHSA-mrhx-c7xc-m3w5                                   | override `^4.6.6` |
+
+**Decisão**:
+
+1. `npm audit fix` (sem `--force`): todas as correções acima, exceto a do `zod`, cabem nas faixas
+   do `package.json` — só o lockfile muda.
+2. `zod` forçado para `^4.6.6` só dentro do `chromium-bidi` (`overrides`), o mesmo usado na
+   `faladoria-web`. A alternativa do npm era subir o `@lhci/cli` de major.
+3. `GHSA-vfj7-8cjw-p6xm` (`braces`) saiu de `ACCEPTED_ADVISORIES`: a correção foi publicada e
+   adotada, e o step já avisava que a exceção estava morta.
+
+Seguem aceitas só as duas do `extract-zip` (sem correção publicada, ver 2026-09-18).
+
+**Validação**: `npm audit` reporta apenas as duas aceitas; testes unitários, lint, tipos e build
+de produção passam com Vite e Storybook novos; o Lighthouse CI do PR confirma o `chromium-bidi`
+com zod 4.
+
+---
+
 ## 2026-10-05 — Audit de dependências: allowlist por advisory (GHSA) no lugar da contagem
 
 **Contexto**: o step "Run security audit (all dependencies)" do `ci-cd.yml` quebrou no PR #29
