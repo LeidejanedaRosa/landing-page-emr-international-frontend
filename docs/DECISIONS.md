@@ -31,6 +31,32 @@ código antigo ele falha em 375×440.
 
 ---
 
+## 2026-11-05 — Release do Sentry: commit real e só em produção
+
+**Contexto**: o Sentry passou a mandar e-mail de "deploy" a cada build de preview do Vercel
+(inclusive os PRs do Dependabot), com a release chamada literalmente `$VERCEL_GIT_COMMIT_SHA`.
+A variável `VITE_APP_VERSION` tinha sido cadastrada no painel do Vercel com esse texto, mas o
+Vercel não expande `$VAR` dentro do valor de outra variável. Resultado: todo build, preview ou
+produção, caía na mesma release — source maps de builds diferentes misturados e nenhum jeito
+de saber em qual versão um erro começou.
+
+**Decisão**: a regra saiu do `vite.config.ts` para uma função pura,
+`resolveSentryBuild` (`src/plugins/sentry-build.ts`), coberta por testes:
+
+- release = `VITE_APP_VERSION` (se definida) ou `VERCEL_GIT_COMMIT_SHA`, a variável de sistema
+  que o Vercel já fornece no build; sem nenhuma das duas, o plugin detecta o commit pelo git.
+- `VERCEL_ENV === 'preview'` não cria release nem envia source maps.
+- source maps só são gerados quando vão ser enviados — o plugin apaga os `.map` depois do
+  upload, então um build sem Sentry publicaria esses arquivos.
+- removido o `throw` que exigia `VITE_APP_VERSION`: com a variável apagada do Vercel, ele
+  quebraria o próximo build de produção.
+
+**Exceção de tier registrada**: pelo padrão da Leidejane, Sentry entra só em projetos Tier 2/3,
+para não gastar a cota gratuita compartilhada da conta. Este é um site Tier 1, mas fica com o
+Sentry porque é site de cliente em produção, onde erro precisa ser visto.
+
+---
+
 ## 2026-11-05 — Audit: 11 advisories novas em dependências de desenvolvimento
 
 **Contexto**: o step "Run security audit (all dependencies)" passou a falhar em todo PR, sem que

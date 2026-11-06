@@ -271,7 +271,7 @@ Copie `.env.example` para `.env.local` e preencha conforme necessário.
 | `SENTRY_AUTH_TOKEN`   | CI/CD       | Token de autenticação para upload de source maps                   |
 | `SENTRY_ORG`          | CI/CD       | Slug da organização no Sentry                                      |
 | `SENTRY_PROJECT`      | CI/CD       | Nome do projeto no Sentry                                          |
-| `VITE_APP_VERSION`    | CI/CD       | Versão da release (obrigatória em builds de produção com Sentry)   |
+| `VITE_APP_VERSION`    | Não         | Nome da release no Sentry. Padrão: o commit do deploy (Vercel)     |
 
 Consulte [docs/CICD-SENTRY-CONFIGURACAO.md](docs/CICD-SENTRY-CONFIGURACAO.md) para o guia completo de configuração do Sentry em CI/CD.
 
