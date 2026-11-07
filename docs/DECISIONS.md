@@ -21,33 +21,6 @@ threshold (90%)`.
 
 ---
 
-## 2026-10-05 — Foto do hero com altura mínima na proporção da própria imagem
-
-**Contexto**: depois da correção do corte do hero (entrada abaixo), sobrou um defeito visível
-no iframe do portfólio: a faixa da foto ficava baixa demais. A altura dela era só
-`min-h-[45vh]` — proporcional à **altura** da viewport. Em uma viewport baixa (355×380 no
-iframe) isso dá 171px para 355px de largura, proporção 2,08:1, enquanto a foto é 3:2 (1,5:1).
-O `object-cover` cortava em cima e embaixo: o rosto dela ia parar no escuro do gradiente do
-topo e o selo "Simulação realística" caía sobre o rosto dele.
-
-**Decisão**: `min-h-[max(45vh,66.67vw)]` no layout empilhado (abaixo de `md`). 66,67vw é a
-altura que a foto 3:2 precisa para aparecer inteira na largura da tela. Em telefone normal
-(alto) os 45vh continuam ganhando e nada muda; em viewport baixa a largura passa a mandar e a
-foto nunca fica mais achatada que a própria proporção. A partir de `md` a foto ocupa uma
-coluna lateral, então o piso volta a ser `md:min-h-[45vh]` — sem isso, 66,67vw em desktop
-inflaria o hero.
-
-**Alternativa descartada**: mexer só no `object-position` para "mirar" nos rostos. Resolve
-uma altura específica e quebra em outra — com 171px não cabem os dois rostos, não importa
-para onde o corte aponte.
-
-**Validação**: medido antes/depois em 355×380 (171px → 237px) e 375×440 (198px → 250px);
-320×568, 390×844, 768×1024, 1440×900 e paisagem 568×320 ficaram idênticos. Teste novo em
-`tests/hero-responsive.spec.ts` exige altura ≥ largura ÷ 1,5 no layout empilhado; contra o
-código antigo ele falha em 375×440.
-
----
-
 ## 2026-11-05 — Release do Sentry: commit real e só em produção
 
 **Contexto**: o Sentry passou a mandar e-mail de "deploy" a cada build de preview do Vercel
@@ -106,6 +79,33 @@ Seguem aceitas só as duas do `extract-zip` (sem correção publicada, ver 2026-
 **Validação**: `npm audit` reporta apenas as duas aceitas; testes unitários, lint, tipos e build
 de produção passam com Vite e Storybook novos; o Lighthouse CI do PR confirma o `chromium-bidi`
 com zod 4.
+
+---
+
+## 2026-10-05 — Foto do hero com altura mínima na proporção da própria imagem
+
+**Contexto**: depois da correção do corte do hero (entrada abaixo), sobrou um defeito visível
+no iframe do portfólio: a faixa da foto ficava baixa demais. A altura dela era só
+`min-h-[45vh]` — proporcional à **altura** da viewport. Em uma viewport baixa (355×380 no
+iframe) isso dá 171px para 355px de largura, proporção 2,08:1, enquanto a foto é 3:2 (1,5:1).
+O `object-cover` cortava em cima e embaixo: o rosto dela ia parar no escuro do gradiente do
+topo e o selo "Simulação realística" caía sobre o rosto dele.
+
+**Decisão**: `min-h-[max(45vh,66.67vw)]` no layout empilhado (abaixo de `md`). 66,67vw é a
+altura que a foto 3:2 precisa para aparecer inteira na largura da tela. Em telefone normal
+(alto) os 45vh continuam ganhando e nada muda; em viewport baixa a largura passa a mandar e a
+foto nunca fica mais achatada que a própria proporção. A partir de `md` a foto ocupa uma
+coluna lateral, então o piso volta a ser `md:min-h-[45vh]` — sem isso, 66,67vw em desktop
+inflaria o hero.
+
+**Alternativa descartada**: mexer só no `object-position` para "mirar" nos rostos. Resolve
+uma altura específica e quebra em outra — com 171px não cabem os dois rostos, não importa
+para onde o corte aponte.
+
+**Validação**: medido antes/depois em 355×380 (171px → 237px) e 375×440 (198px → 250px);
+320×568, 390×844, 768×1024, 1440×900 e paisagem 568×320 ficaram idênticos. Teste novo em
+`tests/hero-responsive.spec.ts` exige altura ≥ largura ÷ 1,5 no layout empilhado; contra o
+código antigo ele falha em 375×440.
 
 ---
 
